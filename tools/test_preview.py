@@ -82,7 +82,7 @@ class PreviewTest(unittest.TestCase):
     @unittest.skipUnless(shutil.which('node'), 'Node.js is unavailable for JavaScript syntax validation')
     def test_preview_javascript_parses(self):
         html=(ROOT/'preview/index.html').read_text()
-        script=re.search(r'<script\b[^>]*>(.*?)</script\s*>', html, re.S | re.I).group(1)
+        script=re.search(r'<script\b[^>]*>(.*?)</script\b[^>]*>', html, re.S | re.I).group(1)
         with tempfile.NamedTemporaryFile('w', suffix='.js', encoding='utf-8') as source:
             source.write(script); source.flush()
             result=subprocess.run(['node', '--check', source.name], capture_output=True, text=True)
@@ -91,7 +91,7 @@ class PreviewTest(unittest.TestCase):
     @unittest.skipUnless(shutil.which('node'), 'Node.js is unavailable for preview interaction checks')
     def test_style_switch_and_cycle_preserve_scene_selection_and_rotation(self):
         html=(ROOT/'preview/index.html').read_text()
-        script=re.search(r'<script\b[^>]*>(.*?)</script\s*>', html, re.S | re.I).group(1)
+        script=re.search(r'<script\b[^>]*>(.*?)</script\b[^>]*>', html, re.S | re.I).group(1)
         harness=r'''const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
