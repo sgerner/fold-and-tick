@@ -13,6 +13,9 @@ def build(output):
     target = output / 'index.html'
     if source.resolve() != target.resolve():
         shutil.copy2(source, target)
+    favicon = ROOT / 'preview/favicon.svg'
+    if favicon.resolve() != (output / 'favicon.svg').resolve():
+        shutil.copy2(favicon, output / 'favicon.svg')
     assets = output / 'assets'
     assets.mkdir(exist_ok=True)
     sources = list((ROOT / 'watchface/src/main/res/drawable-nodpi').glob('*.png'))

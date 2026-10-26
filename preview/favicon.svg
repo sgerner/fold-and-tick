@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="19" fill="#172544"/>
+  <path d="M44 0h20v20L51 15z" fill="#eb7057"/>
+  <path d="m44 0 7 15 13 5V0z" fill="#e4b448"/>
+  <text x="29" y="43" fill="#fff8eb" font-family="Georgia,serif" font-size="25" font-weight="700" letter-spacing="-2.6" text-anchor="middle">F&amp;T</text>
+</svg>
