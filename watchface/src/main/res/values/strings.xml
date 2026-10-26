@@ -2,6 +2,12 @@
 <resources>
     <string name="app_name">Fold &amp; Tick</string>
 
+    <string name="style_setting_title">Art style</string>
+    <string name="style_setting_description">Choose the visual style for the scenes.</string>
+    <string name="style_origami">Origami</string>
+    <string name="style_woodblock">Woodblock</string>
+    <string name="style_risograph">Risograph</string>
+
     <string name="scene_setting_title">Scene</string>
     <string name="scene_setting_description">Choose a fixed scene, or the starting point of automatic rotation.</string>
     <string name="scene_bicycle">Bicycle</string>

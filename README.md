@@ -4,13 +4,29 @@
 [![Release](https://img.shields.io/github/v/release/sgerner/fold-and-tick)](https://github.com/sgerner/fold-and-tick/releases/latest)
 [![License: 0BSD](https://img.shields.io/badge/license-0BSD-brightgreen.svg)](LICENSE)
 
-**Tiny paper worlds. Big, readable time.** An animated origami watch face for **Pixel Watch 3 (41 mm and 45 mm)** and other **Wear OS 5+** watches.
+**Tiny art worlds. Big, readable time.** An animated watch face with three art styles for **Pixel Watch 3 (41 mm and 45 mm)** and other **Wear OS 5+** watches.
 
 [**Download the latest APK**](https://github.com/sgerner/fold-and-tick/releases/latest/download/Fold-and-Tick.apk) · [**Try the live preview**](https://sgerner.github.io/fold-and-tick/) · [**Install on your watch**](#install-on-your-watch)
 
 ![Eight Fold & Tick scenes: bicycle, green forest, coding, kitten and yarn, landscape, space, ocean and warm aurora](preview/contact-sheet.png)
 
 ## A little world for every mood
+
+Choose **Art style** first, then select a scene and rotation interval. Each pack has eight designs, including bicycle, coding, and kitten scenes. Automatic rotation stays within your chosen style; it never switches packs. Origami remains the default, preserving existing settings.
+
+| Art style | Character | All eight designs |
+| --- | --- | --- |
+| Origami | Bright folded paper and faceted shapes | [Original pack](preview/contact-sheet.png) |
+| Woodblock | Carved ink lines, washi grain, indigo and vermilion | [Woodblock pack](preview/styles/woodblock.png) |
+| Risograph | Bright spot colors, grainy ink, print overlap | [Risograph pack](preview/styles/risograph.png) |
+
+![Two new art styles, with eight labeled watch face designs in each](preview/styles/all-packs.png)
+
+Every style uses independent character and detail layers, with scenes tailored to its visual language. Bicycles cross solid road surfaces, kittens move separately from mice, and rockets fly diagonally with sparks. Woodblock Coding focuses on one laptop with a blinking typing cursor. Risograph has new graphic scenes: a city ride, mushroom forest, retro terminal, houseplant kitten, desert city, orbital transit, jellyfish aquarium, and neon weather. Other scenes gently pan their background artwork; bicycle roads and the Woodblock laptop keep a fixed camera so their animated layers stay aligned. All motion can be paused, and always-on mode hides the artwork.
+
+[Compare the new packs in motion](preview/styles/motion.gif) · Render the same proof with `tools/.venv/bin/python tools/render_style_motion.py`.
+
+The original Origami pack includes:
 
 | Scene | What moves |
 | --- | --- |
@@ -64,7 +80,7 @@ You need a **Wear OS 5+ watch**, a computer with [Android platform tools](https:
    adb -s WATCH_IP:DEBUG_PORT install -r Fold-and-Tick.apk
    ```
 
-6. Long-press the current face, choose **Add new**, find **Fold & Tick**, and select it. Open its editor to choose scenes, rotation, motion, and complication providers.
+6. Long-press the current face, choose **Add new**, find **Fold & Tick**, and select it. Open its editor to choose **Art style**, scene, rotation, motion, and complication providers.
 7. You can turn wireless debugging off after installation.
 
 There is no launcher icon to tap. The face is selected through the watch-face picker. The preview website uses sample complication data; its controls do not configure the watch.
@@ -94,7 +110,7 @@ adb install Fold-and-Tick.apk
 
 ## Build and contribute
 
-This is a resource-only **Watch Face Format 2** package. Wear OS renders the XML and images; the APK contains no application bytecode. Original artwork is deterministic polygon geometry, not a downloaded asset pack.
+This is a resource-only **Watch Face Format 2** package. Wear OS renders the XML and images; the APK contains no application bytecode. Origami artwork uses deterministic polygon geometry. The two additional packs use original AI-generated paintings and transparent sprite sheets, with checked-in sources and prompts under [`artwork/packs`](artwork/packs).
 
 Requirements: **Java 21**, **Android SDK platform 36/build tools 36.0.0**, and Python 3. The Gradle wrapper is included. Point `ANDROID_HOME` at your SDK, or create an ignored `local.properties` with `sdk.dir=/path/to/Android/Sdk`.
 
@@ -114,10 +130,13 @@ uv venv --python 3.13 tools/.venv
 uv pip install --python tools/.venv/bin/python -r tools/requirements.txt
 tools/.venv/bin/python tools/generate_clock.py
 tools/.venv/bin/python tools/generate_art.py
+tools/.venv/bin/python tools/import_style_packs.py
 python3 tools/build_preview.py --output preview
 python3 -m http.server 8080
 # http://localhost:8080/preview/
 ```
+
+`import_style_packs.py` deterministically resizes the saved artwork, slices the transparent 4×4 sprite sheets, and builds background, actor, detail, glass, and thumbnail resources plus labeled pack proofs. It does not call an image service; ordinary builds work offline. Each pack retains the original sources, generation prompts, and actor-free background edits. New creative artwork was produced with the built-in image generation tool.
 
 `generate_clock.py --font /path/to/DejaVuSans-Bold.ttf` supports other font locations. Building a standalone preview for any static host is just:
 
@@ -143,4 +162,4 @@ To cut a release, update Android `versionName`/`versionCode`, regenerate changed
 
 Original code and scene artwork use **[0BSD](LICENSE)**: use, modify, and redistribute them for any purpose, with or without a fee. See [NOTICE.md](NOTICE.md) for the DejaVu glyph and Gradle wrapper notices.
 
-The face has been exercised in a round Wear OS 5 emulator, including all scenes, 12/24-hour time, editor options, visible motion, and always-on mode. It has also been installed and visually checked on a physical Pixel Watch 3, including native date formatting, provider icons, complication spacing, and adaptive glass. The browser demo uses sample battery/step data; it does not read or configure your watch.
+The original Origami face has been exercised in a round Wear OS 5 emulator and on a physical Pixel Watch 3, including date formatting, provider icons, complication spacing, adaptive glass, visible motion, and always-on mode. The additional art packs have passed WFF validation, build/lint, scene/style selection and motion tests, and active/ambient memory checks; their new artwork has been reviewed in the browser and labeled proofs. They have not yet been visually checked on a physical watch. The browser demo uses sample battery/step data; it does not read or configure your watch.

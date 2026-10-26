@@ -5,6 +5,15 @@
 
     <UserConfigurations>
         <ListConfiguration
+            id="art_style"
+            displayName="style_setting_title"
+            screenReaderText="style_setting_description"
+            defaultValue="origami">
+            <ListOption id="origami" displayName="style_origami" screenReaderText="style_origami" icon="icon_scene_cosmos" />
+            <ListOption id="woodblock" displayName="style_woodblock" screenReaderText="style_woodblock" icon="icon_scene_woodblock_cosmos" />
+            <ListOption id="risograph" displayName="style_risograph" screenReaderText="style_risograph" icon="icon_scene_risograph_cosmos" />
+        </ListConfiguration>
+        <ListConfiguration
             id="scene"
             displayName="scene_setting_title"
             screenReaderText="scene_setting_description"
@@ -68,179 +77,615 @@
                 <Expression name="show_aurora"><![CDATA[[CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.scene] == "7" : (([CONFIGURATION.scene] * 1 + floor((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period]))) % 8) == 7]]></Expression>
             </Expressions>
             <Compare expression="show_bicycle">
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="scene_bicycle" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="motion_bicycle" />
-                    <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? ((([SECOND_MILLISECOND] % 10) / 10) * 720 - 300) : 0' mode="TO" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="drift_bicycle" />
-                    <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 15 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
-                    <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 10 * cos(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="glass_bicycle" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
+                <Condition>
+                    <Expressions>
+                        <Expression name="style_origami"><![CDATA[[CONFIGURATION.art_style] == "origami"]]></Expression>
+                        <Expression name="style_woodblock"><![CDATA[[CONFIGURATION.art_style] == "woodblock"]]></Expression>
+                        <Expression name="style_risograph"><![CDATA[[CONFIGURATION.art_style] == "risograph"]]></Expression>
+                    </Expressions>
+                    <Compare expression="style_origami">
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="scene_bicycle" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="motion_bicycle" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? ((([SECOND_MILLISECOND] % 10) / 10) * 720 - 300) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="drift_bicycle" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 15 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 10 * cos(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="glass_bicycle" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                    </Compare>
+                    <Compare expression="style_woodblock">
+                        <PartImage x="-25" y="-25" width="500" height="500">
+                            <Image resource="scene_woodblock_bicycle" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="motion_woodblock_bicycle" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? ((([SECOND_MILLISECOND] % 10) / 10) * 720 - 300) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="drift_woodblock_bicycle" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 15 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 10 * cos(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="glass_woodblock_bicycle" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                    </Compare>
+                    <Compare expression="style_risograph">
+                        <PartImage x="-25" y="-25" width="500" height="500">
+                            <Image resource="scene_risograph_bicycle" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="motion_risograph_bicycle" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? ((([SECOND_MILLISECOND] % 10) / 10) * 720 - 300) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="drift_risograph_bicycle" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 15 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 10 * cos(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="glass_risograph_bicycle" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                    </Compare>
+                </Condition>
             </Compare>
             <Compare expression="show_forest">
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="scene_forest" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="motion_forest" />
-                    <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="drift_forest" />
-                    <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 20 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
-                    <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * cos(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
-                    <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (40 + 215 * ((sin(rad(360 * ([SECOND_MILLISECOND] % 1))) + 1) / 2)) : 255' mode="TO" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="glass_forest" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
+                <Condition>
+                    <Expressions>
+                        <Expression name="style_origami"><![CDATA[[CONFIGURATION.art_style] == "origami"]]></Expression>
+                        <Expression name="style_woodblock"><![CDATA[[CONFIGURATION.art_style] == "woodblock"]]></Expression>
+                        <Expression name="style_risograph"><![CDATA[[CONFIGURATION.art_style] == "risograph"]]></Expression>
+                    </Expressions>
+                    <Compare expression="style_origami">
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="scene_forest" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="motion_forest" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="drift_forest" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 20 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * cos(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                            <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (40 + 215 * ((sin(rad(360 * ([SECOND_MILLISECOND] % 1))) + 1) / 2)) : 255' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="glass_forest" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                    </Compare>
+                    <Compare expression="style_woodblock">
+                        <PartImage x="-25" y="-25" width="500" height="500">
+                            <Image resource="scene_woodblock_forest" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 14) / 14))) : -25' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * cos(rad(360 * ([SECOND_MILLISECOND] % 18) / 18))) : -25' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="motion_woodblock_forest" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="drift_woodblock_forest" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 20 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * cos(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                            <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (40 + 215 * ((sin(rad(360 * ([SECOND_MILLISECOND] % 1))) + 1) / 2)) : 255' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="glass_woodblock_forest" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                    </Compare>
+                    <Compare expression="style_risograph">
+                        <PartImage x="-25" y="-25" width="500" height="500">
+                            <Image resource="scene_risograph_forest" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 14) / 14))) : -25' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * cos(rad(360 * ([SECOND_MILLISECOND] % 18) / 18))) : -25' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="motion_risograph_forest" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="drift_risograph_forest" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 20 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * cos(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                            <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (40 + 215 * ((sin(rad(360 * ([SECOND_MILLISECOND] % 1))) + 1) / 2)) : 255' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="glass_risograph_forest" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                    </Compare>
+                </Condition>
             </Compare>
             <Compare expression="show_coding">
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="scene_coding" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="motion_coding" />
-                    <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 10 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="drift_coding" />
-                    <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 15 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
-                    <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 10 * cos(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="blink_coding" />
-                    <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" ? ([SECOND_MILLISECOND] % 1.2 &lt; 0.6 ? 255 : 0) : 255' mode="TO" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="glass_coding" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
+                <Condition>
+                    <Expressions>
+                        <Expression name="style_origami"><![CDATA[[CONFIGURATION.art_style] == "origami"]]></Expression>
+                        <Expression name="style_woodblock"><![CDATA[[CONFIGURATION.art_style] == "woodblock"]]></Expression>
+                        <Expression name="style_risograph"><![CDATA[[CONFIGURATION.art_style] == "risograph"]]></Expression>
+                    </Expressions>
+                    <Compare expression="style_origami">
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="scene_coding" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="motion_coding" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 10 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="drift_coding" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 15 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 10 * cos(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="blink_coding" />
+                            <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" ? ([SECOND_MILLISECOND] % 1.2 &lt; 0.6 ? 255 : 0) : 255' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="glass_coding" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                    </Compare>
+                    <Compare expression="style_woodblock">
+                        <PartImage x="-25" y="-25" width="500" height="500">
+                            <Image resource="scene_woodblock_coding" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="motion_woodblock_coding" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="drift_woodblock_coding" />
+                            <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 255 * (floor([SECOND_MILLISECOND] * 2) % 2) : 255' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="glass_woodblock_coding" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                    </Compare>
+                    <Compare expression="style_risograph">
+                        <PartImage x="-25" y="-25" width="500" height="500">
+                            <Image resource="scene_risograph_coding" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 14) / 14))) : -25' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * cos(rad(360 * ([SECOND_MILLISECOND] % 18) / 18))) : -25' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="motion_risograph_coding" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 10 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="drift_risograph_coding" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 10 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
+                            <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 255 * (floor([SECOND_MILLISECOND] * 2) % 2) : 255' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="glass_risograph_coding" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                    </Compare>
+                </Condition>
             </Compare>
             <Compare expression="show_kitten">
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="scene_kitten" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="motion_kitten" />
-                    <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 18 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
-                    <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 8 * sin(rad(360 * ([SECOND_MILLISECOND] % 3) / 3)) : 0' mode="TO" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="drift_kitten" />
-                    <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-350 + 720 * ([SECOND_MILLISECOND] % 8) / 8) : 0' mode="TO" />
-                    <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-15 + 20 * sin(rad(180 * ([SECOND_MILLISECOND] % 8) / 8))) : 0' mode="TO" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="glass_kitten" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
+                <Condition>
+                    <Expressions>
+                        <Expression name="style_origami"><![CDATA[[CONFIGURATION.art_style] == "origami"]]></Expression>
+                        <Expression name="style_woodblock"><![CDATA[[CONFIGURATION.art_style] == "woodblock"]]></Expression>
+                        <Expression name="style_risograph"><![CDATA[[CONFIGURATION.art_style] == "risograph"]]></Expression>
+                    </Expressions>
+                    <Compare expression="style_origami">
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="scene_kitten" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="motion_kitten" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 18 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 8 * sin(rad(360 * ([SECOND_MILLISECOND] % 3) / 3)) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="drift_kitten" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-350 + 720 * ([SECOND_MILLISECOND] % 8) / 8) : 0' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-15 + 20 * sin(rad(180 * ([SECOND_MILLISECOND] % 8) / 8))) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="glass_kitten" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                    </Compare>
+                    <Compare expression="style_woodblock">
+                        <PartImage x="-25" y="-25" width="500" height="500">
+                            <Image resource="scene_woodblock_kitten" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 14) / 14))) : -25' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * cos(rad(360 * ([SECOND_MILLISECOND] % 18) / 18))) : -25' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="motion_woodblock_kitten" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 18 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 8 * sin(rad(360 * ([SECOND_MILLISECOND] % 3) / 3)) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="drift_woodblock_kitten" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-350 + 720 * ([SECOND_MILLISECOND] % 8) / 8) : 0' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-15 + 20 * sin(rad(180 * ([SECOND_MILLISECOND] % 8) / 8))) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="glass_woodblock_kitten" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                    </Compare>
+                    <Compare expression="style_risograph">
+                        <PartImage x="-25" y="-25" width="500" height="500">
+                            <Image resource="scene_risograph_kitten" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 14) / 14))) : -25' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * cos(rad(360 * ([SECOND_MILLISECOND] % 18) / 18))) : -25' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="motion_risograph_kitten" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 18 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 8 * sin(rad(360 * ([SECOND_MILLISECOND] % 3) / 3)) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="drift_risograph_kitten" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-350 + 720 * ([SECOND_MILLISECOND] % 8) / 8) : 0' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-15 + 20 * sin(rad(180 * ([SECOND_MILLISECOND] % 8) / 8))) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="glass_risograph_kitten" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                    </Compare>
+                </Condition>
             </Compare>
             <Compare expression="show_landscape">
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="scene_landscape" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="motion_landscape" />
-                    <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="drift_landscape" />
-                    <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 15 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
-                    <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 10 * cos(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="glass_landscape" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
+                <Condition>
+                    <Expressions>
+                        <Expression name="style_origami"><![CDATA[[CONFIGURATION.art_style] == "origami"]]></Expression>
+                        <Expression name="style_woodblock"><![CDATA[[CONFIGURATION.art_style] == "woodblock"]]></Expression>
+                        <Expression name="style_risograph"><![CDATA[[CONFIGURATION.art_style] == "risograph"]]></Expression>
+                    </Expressions>
+                    <Compare expression="style_origami">
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="scene_landscape" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="motion_landscape" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="drift_landscape" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 15 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 10 * cos(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="glass_landscape" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                    </Compare>
+                    <Compare expression="style_woodblock">
+                        <PartImage x="-25" y="-25" width="500" height="500">
+                            <Image resource="scene_woodblock_landscape" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 14) / 14))) : -25' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * cos(rad(360 * ([SECOND_MILLISECOND] % 18) / 18))) : -25' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="motion_woodblock_landscape" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="drift_woodblock_landscape" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 15 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 10 * cos(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="glass_woodblock_landscape" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                    </Compare>
+                    <Compare expression="style_risograph">
+                        <PartImage x="-25" y="-25" width="500" height="500">
+                            <Image resource="scene_risograph_landscape" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 14) / 14))) : -25' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * cos(rad(360 * ([SECOND_MILLISECOND] % 18) / 18))) : -25' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="motion_risograph_landscape" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="drift_risograph_landscape" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 15 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 10 * cos(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="glass_risograph_landscape" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                    </Compare>
+                </Condition>
             </Compare>
             <Compare expression="show_cosmos">
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="scene_cosmos" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="drift_cosmos" />
-                    <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-320 + 740 * ([SECOND_MILLISECOND] % 10) / 10) : 0' mode="TO" />
-                    <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (320 - 740 * ([SECOND_MILLISECOND] % 10) / 10) : 0' mode="TO" />
-                    <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (40 + 215 * ((sin(rad(360 * ([SECOND_MILLISECOND] % 1))) + 1) / 2)) : 255' mode="TO" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="motion_cosmos" />
-                    <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-320 + 740 * ([SECOND_MILLISECOND] % 10) / 10) : 0' mode="TO" />
-                    <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (320 - 740 * ([SECOND_MILLISECOND] % 10) / 10) : 0' mode="TO" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="glass_cosmos" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
+                <Condition>
+                    <Expressions>
+                        <Expression name="style_origami"><![CDATA[[CONFIGURATION.art_style] == "origami"]]></Expression>
+                        <Expression name="style_woodblock"><![CDATA[[CONFIGURATION.art_style] == "woodblock"]]></Expression>
+                        <Expression name="style_risograph"><![CDATA[[CONFIGURATION.art_style] == "risograph"]]></Expression>
+                    </Expressions>
+                    <Compare expression="style_origami">
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="scene_cosmos" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="drift_cosmos" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-320 + 740 * ([SECOND_MILLISECOND] % 10) / 10) : 0' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (320 - 740 * ([SECOND_MILLISECOND] % 10) / 10) : 0' mode="TO" />
+                            <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (40 + 215 * ((sin(rad(360 * ([SECOND_MILLISECOND] % 1))) + 1) / 2)) : 255' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="motion_cosmos" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-320 + 740 * ([SECOND_MILLISECOND] % 10) / 10) : 0' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (320 - 740 * ([SECOND_MILLISECOND] % 10) / 10) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="glass_cosmos" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                    </Compare>
+                    <Compare expression="style_woodblock">
+                        <PartImage x="-25" y="-25" width="500" height="500">
+                            <Image resource="scene_woodblock_cosmos" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 14) / 14))) : -25' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * cos(rad(360 * ([SECOND_MILLISECOND] % 18) / 18))) : -25' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="drift_woodblock_cosmos" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-320 + 740 * ([SECOND_MILLISECOND] % 10) / 10) : 0' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (320 - 740 * ([SECOND_MILLISECOND] % 10) / 10) : 0' mode="TO" />
+                            <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (40 + 215 * ((sin(rad(360 * ([SECOND_MILLISECOND] % 1))) + 1) / 2)) : 255' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="motion_woodblock_cosmos" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-320 + 740 * ([SECOND_MILLISECOND] % 10) / 10) : 0' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (320 - 740 * ([SECOND_MILLISECOND] % 10) / 10) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="glass_woodblock_cosmos" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                    </Compare>
+                    <Compare expression="style_risograph">
+                        <PartImage x="-25" y="-25" width="500" height="500">
+                            <Image resource="scene_risograph_cosmos" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 14) / 14))) : -25' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * cos(rad(360 * ([SECOND_MILLISECOND] % 18) / 18))) : -25' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="drift_risograph_cosmos" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-320 + 740 * ([SECOND_MILLISECOND] % 10) / 10) : 0' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (320 - 740 * ([SECOND_MILLISECOND] % 10) / 10) : 0' mode="TO" />
+                            <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (40 + 215 * ((sin(rad(360 * ([SECOND_MILLISECOND] % 1))) + 1) / 2)) : 255' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="motion_risograph_cosmos" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-320 + 740 * ([SECOND_MILLISECOND] % 10) / 10) : 0' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (320 - 740 * ([SECOND_MILLISECOND] % 10) / 10) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="glass_risograph_cosmos" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                    </Compare>
+                </Condition>
             </Compare>
             <Compare expression="show_ocean">
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="scene_ocean" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="motion_ocean" />
-                    <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 25 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="drift_ocean" />
-                    <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="glass_ocean" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
+                <Condition>
+                    <Expressions>
+                        <Expression name="style_origami"><![CDATA[[CONFIGURATION.art_style] == "origami"]]></Expression>
+                        <Expression name="style_woodblock"><![CDATA[[CONFIGURATION.art_style] == "woodblock"]]></Expression>
+                        <Expression name="style_risograph"><![CDATA[[CONFIGURATION.art_style] == "risograph"]]></Expression>
+                    </Expressions>
+                    <Compare expression="style_origami">
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="scene_ocean" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="motion_ocean" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 25 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="drift_ocean" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="glass_ocean" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                    </Compare>
+                    <Compare expression="style_woodblock">
+                        <PartImage x="-25" y="-25" width="500" height="500">
+                            <Image resource="scene_woodblock_ocean" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 14) / 14))) : -25' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * cos(rad(360 * ([SECOND_MILLISECOND] % 18) / 18))) : -25' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="motion_woodblock_ocean" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 25 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="drift_woodblock_ocean" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="glass_woodblock_ocean" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                    </Compare>
+                    <Compare expression="style_risograph">
+                        <PartImage x="-25" y="-25" width="500" height="500">
+                            <Image resource="scene_risograph_ocean" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 14) / 14))) : -25' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * cos(rad(360 * ([SECOND_MILLISECOND] % 18) / 18))) : -25' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="motion_risograph_ocean" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 25 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="drift_risograph_ocean" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="glass_risograph_ocean" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                    </Compare>
+                </Condition>
             </Compare>
             <Compare expression="show_aurora">
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="scene_aurora" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="drift_aurora" />
-                    <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 20 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="motion_aurora" />
-                    <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
-                <PartImage x="0" y="0" width="450" height="450">
-                    <Image resource="glass_aurora" />
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                </PartImage>
+                <Condition>
+                    <Expressions>
+                        <Expression name="style_origami"><![CDATA[[CONFIGURATION.art_style] == "origami"]]></Expression>
+                        <Expression name="style_woodblock"><![CDATA[[CONFIGURATION.art_style] == "woodblock"]]></Expression>
+                        <Expression name="style_risograph"><![CDATA[[CONFIGURATION.art_style] == "risograph"]]></Expression>
+                    </Expressions>
+                    <Compare expression="style_origami">
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="scene_aurora" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="drift_aurora" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 20 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="motion_aurora" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="glass_aurora" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                    </Compare>
+                    <Compare expression="style_woodblock">
+                        <PartImage x="-25" y="-25" width="500" height="500">
+                            <Image resource="scene_woodblock_aurora" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 14) / 14))) : -25' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * cos(rad(360 * ([SECOND_MILLISECOND] % 18) / 18))) : -25' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="drift_woodblock_aurora" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 20 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="motion_woodblock_aurora" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="glass_woodblock_aurora" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                    </Compare>
+                    <Compare expression="style_risograph">
+                        <PartImage x="-25" y="-25" width="500" height="500">
+                            <Image resource="scene_risograph_aurora" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 14) / 14))) : -25' mode="TO" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * cos(rad(360 * ([SECOND_MILLISECOND] % 18) / 18))) : -25' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="drift_risograph_aurora" />
+                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 20 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="motion_risograph_aurora" />
+                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                        <PartImage x="0" y="0" width="450" height="450">
+                            <Image resource="glass_risograph_aurora" />
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                        </PartImage>
+                    </Compare>
+                </Condition>
             </Compare>
         </Condition>
 

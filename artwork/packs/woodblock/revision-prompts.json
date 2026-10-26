@@ -1,0 +1,15 @@
+{
+  "tool": "Built-in image_gen",
+  "scenes": [
+    {
+      "scene": "bicycle-background",
+      "prompt": "Use case: stylized-concept. Production full-bleed square background for round smartwatch450px. No clock, digits, UI, text, letters, watermark or border. Do not draw circle mask. Clear simple large forms at watch scale. Keep central horizontal band relatively dark for white time without a rectangular hole. Japanese woodblock print in indigo, vermilion and parchment gold, carved ink shapes with washi grain. A coastal cycling causeway with a straight horizontal dark road across the full width at 82 percent of image height, continuous and level all the way across, road top at y=82% and road shoulder below. No bicycle or rider (animated separately). Ocean and graphic distant cliffs ABOVE the road, a red sun near top, a few carved clouds. The road must read unambiguously as solid dry land, no bridge and no river under route. Road occupies bottom18%, clean horizontal topedge.",
+      "generated_source": "/home/steven/.codex/generated_images/01a17558-67d8-7401-abae-76199bd4bff3/exec-25bb3293-da21-490a-bc34-16757d644f81.png"
+    },
+    {
+      "scene": "coding",
+      "prompt": "Use case: stylized-concept. Production full-bleed square background for round smartwatch450px. No clock, digits, UI, text, letters, watermark or border. Do not draw circle mask. Clear simple large forms at watch scale. Keep central horizontal band relatively dark for white time without a rectangular hole. Japanese woodblock print, carvedink shapes, indigo vermilion and parchmentgold finewashigrain. Mainfocus a single large beautiful open laptop sitting on a simple low wooden desk. Laptop occupies lower42 percent; screen clearly visible in lowerhalf, keyboard/desk integrated naturally. Laptop screen shows just 3 or4 short abstract amber/cyan horizontal code-like strokes, NO curlybraces or letters. Calm deepindigo upperhalf with verysubtle inkgrain. Only one small red mug beside laptop. No landscape, mountain, window, vegetation, otherlaptops, floatingbrackets or decorative code shapes. Cohesive restrained still-life composition.",
+      "generated_source": "/home/steven/.codex/generated_images/01a17558-67d8-7401-abae-76199bd4bff3/exec-37194bcd-319f-4947-b7d5-33b63e82be89.png"
+    }
+  ]
+}

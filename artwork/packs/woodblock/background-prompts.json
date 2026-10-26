@@ -1,0 +1,25 @@
+{
+  "tool": "Built-in image_gen",
+  "edits": [
+    {
+      "scene": "bicycle",
+      "prompt": "Use case: precise-object-edit. Prepare a static animation background from this reference image. Remove the bicycle and the rider entirely, preserving the bridge, flowers, landscape and composition. Match the exact Japanese woodblock ink/paper style and palette. The removed character will be animated as a separate overlay later, so leave NO duplicate or silhouette. Keep the scene dark and calm across middle for white time digits. Extend surrounding artwork seamlessly into all four square corners, removing any plain circular outside matte. No interface or lettering.",
+      "generated_source": "/home/steven/.codex/generated_images/01a17558-67d8-7401-abae-76199bd4bff3/exec-10980f7d-fd73-4541-aa12-a96742a29d7c.png"
+    },
+    {
+      "scene": "kitten",
+      "prompt": "Use case: precise-object-edit. Prepare a static animation background from this reference image. Remove the kitten entirely. Keep the yarn balls, fabric ribbons, blossoms and landscape; fill former kitten area naturally with dark ink and textile setting. Match the exact Japanese woodblock ink/paper style and palette. The removed character will be animated as a separate overlay later, so leave NO duplicate or silhouette. Keep the scene dark and calm across middle for white time digits. Extend surrounding artwork seamlessly into all four square corners, removing any plain circular outside matte. No interface or lettering.",
+      "generated_source": "/home/steven/.codex/generated_images/01a17558-67d8-7401-abae-76199bd4bff3/exec-c7a77293-bb93-4f69-acaa-de9d5fb82876.png"
+    },
+    {
+      "scene": "cosmos",
+      "prompt": "Use case: precise-object-edit. Prepare a static animation background from this reference image. Remove the rocket and its flame/exhaust trail entirely. Keep the ringed planet, stars and nebula. Match the exact Japanese woodblock ink/paper style and palette. The removed character will be animated as a separate overlay later, so leave NO duplicate or silhouette. Keep the scene dark and calm across middle for white time digits. Extend surrounding artwork seamlessly into all four square corners, removing any plain circular outside matte. No interface or lettering.",
+      "generated_source": "/home/steven/.codex/generated_images/01a17558-67d8-7401-abae-76199bd4bff3/exec-47100951-2ecb-4f0b-af9a-9128de2cbe54.png"
+    },
+    {
+      "scene": "ocean",
+      "prompt": "Use case: precise-object-edit. Prepare a static animation background from this reference image. Remove the large whale entirely. Preserve waves, foam, sun, tiny fish and undersea environment. Match the exact Japanese woodblock ink/paper style and palette. The removed character will be animated as a separate overlay later, so leave NO duplicate or silhouette. Keep the scene dark and calm across middle for white time digits. Extend surrounding artwork seamlessly into all four square corners, removing any plain circular outside matte. No interface or lettering.",
+      "generated_source": "/home/steven/.codex/generated_images/01a17558-67d8-7401-abae-76199bd4bff3/exec-020a48f5-a3c5-4d4e-a749-7f3235420c7f.png"
+    }
+  ]
+}
