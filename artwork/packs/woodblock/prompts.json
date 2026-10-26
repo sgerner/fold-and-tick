@@ -1,0 +1,46 @@
+{
+  "tool": "Built-in image_gen",
+  "style": "woodblock",
+  "scenes": [
+    {
+      "scene": "bicycle",
+      "prompt": "Use case: stylized-concept. Production square background for a round smartwatch, crop-safe circle. Full coherent beautiful scene with large recognizable subjects visible at watch size and scene detail flowing around perimeter. Keep middle horizontal clock band subdued dark indigo for legible white time, without an empty rectangular hole. No clocks, digits, lettering, UI, borders, logos or watermark. Japanese woodblock print: carved ink contours, broad flat ink shapes, subtle washi grain, elegant indigo/vermilion/teal/parchment gold palette. A beautiful vermilion bicycle with basket crossing an arched bridge over a teal river; rising golden sun and layered hills, curved clouds.",
+      "generated_source": "/home/steven/.codex/generated_images/01a17558-67d8-7401-abae-76199bd4bff3/exec-0f5089cb-99cb-4f25-bdae-09125cb69c8d.png"
+    },
+    {
+      "scene": "forest",
+      "prompt": "Use case: stylized-concept. Production square background for a round smartwatch, crop-safe circle. Coherent whole composition with bold recognizable subjects at watch size, scene detail flowing around perimeter. Keep middle horizontal clock band subdued dark indigo for white time, no empty rectangle. No clocks, digits, lettering, UI, borders or watermark. Japanese woodblock print style: carved ink contours, broad flat ink shapes, subtle washi grain, indigo/vermilion/teal/parchment gold palette. A tranquil bamboo grove with an emerald frog perched on a curling leaf and gold fireflies above a dark pond, graphic moonlight filtering between trunks.",
+      "generated_source": "/home/steven/.codex/generated_images/01a17558-67d8-7401-abae-76199bd4bff3/exec-76661aa3-0d2e-43f3-ba3e-cca890530667.png"
+    },
+    {
+      "scene": "coding",
+      "prompt": "Use case: stylized-concept. Production square background for a round smartwatch, crop-safe circle. Full coherent beautiful scene with large recognizable subjects visible at watch size and scene detail flowing around perimeter. Keep middle horizontal clock band subdued dark indigo for legible white time, without an empty rectangular hole. No clocks, digits, lettering, UI, borders, logos or watermark. Japanese woodblock print: carved ink contours, broad flat ink shapes, subtle washi grain, elegant indigo/vermilion/teal/parchment gold palette. A glowing retro laptop and expressive clear curly-brace code symbols, surrounded by flowing circuit paths and tiny geometric leaves; inventive nocturnal coding garden. No actual text.",
+      "generated_source": "/home/steven/.codex/generated_images/01a17558-67d8-7401-abae-76199bd4bff3/exec-c057392c-7cbc-4e28-9109-b38e6b871d9f.png"
+    },
+    {
+      "scene": "kitten",
+      "prompt": "Use case: stylized-concept. Production square background for a round smartwatch, crop-safe circle. Full coherent beautiful scene with large recognizable subjects visible at watch size and scene detail flowing around perimeter. Keep middle horizontal clock band subdued dark indigo for legible white time, without an empty rectangular hole. No clocks, digits, lettering, UI, borders, logos or watermark. Japanese woodblock print: carved ink contours, broad flat ink shapes, subtle washi grain, elegant indigo/vermilion/teal/parchment gold palette. An adorable large round-eyed cream kitten playing with a red yarn ball among curled textile ribbons; whimsical tiny moon and petal shapes, cozy and charming.",
+      "generated_source": "/home/steven/.codex/generated_images/01a17558-67d8-7401-abae-76199bd4bff3/exec-c953697e-847f-47c3-9fe6-0cfef786755d.png"
+    },
+    {
+      "scene": "landscape",
+      "prompt": "Use case: stylized-concept. Production square background for a round smartwatch, crop-safe circle. Coherent whole composition with bold recognizable subjects at watch size, scene detail flowing around perimeter. Keep middle horizontal clock band subdued dark indigo for white time, no empty rectangle. No clocks, digits, lettering, UI, borders or watermark. Japanese woodblock print style: carved ink contours, broad flat ink shapes, subtle washi grain, indigo/vermilion/teal/parchment gold palette. Dramatic snow-capped volcanic peak with vermilion sunset and teal terraced foothills reflected in an indigo lake, expressive carved clouds, a small sailboat.",
+      "generated_source": "/home/steven/.codex/generated_images/01a17558-67d8-7401-abae-76199bd4bff3/exec-c2e5795f-c2ab-42c0-b71d-3c2ae0f25aeb.png"
+    },
+    {
+      "scene": "cosmos",
+      "prompt": "Previously approved Japanese woodblock Cosmos concept reused.",
+      "generated_source": "/home/steven/.codex/generated_images/01a17558-67d8-7401-abae-76199bd4bff3/exec-0f6a6a3b-4585-47e3-8c7c-14d2753f3226.png"
+    },
+    {
+      "scene": "ocean",
+      "prompt": "Use case: stylized-concept. Production square background for a round smartwatch, crop-safe circle. Coherent whole composition with bold recognizable subjects at watch size, scene detail flowing around perimeter. Keep middle horizontal clock band subdued dark indigo for white time, no empty rectangle. No clocks, digits, lettering, UI, borders or watermark. Japanese woodblock print style: carved ink contours, broad flat ink shapes, subtle washi grain, indigo/vermilion/teal/parchment gold palette. An immense graceful teal whale diving through curling cobalt waves and gold foam, an orange sun reflected through ocean currents, dark deep-water center.",
+      "generated_source": "/home/steven/.codex/generated_images/01a17558-67d8-7401-abae-76199bd4bff3/exec-bd9f2296-238a-45d1-89fb-2517103f17f1.png"
+    },
+    {
+      "scene": "aurora",
+      "prompt": "Use case: stylized-concept. Production square full-bleed background for a round smartwatch, crop-safe circle. Coherent whole scene, large recognizable subjects legible at watch size. Keep middle horizontal clock band comparatively dark and calm so big white digits can be overlaid, without cutting an empty rectangle. Flowing composition fills face. No clocks/digits/UI/lettering/frames/logos/watermarks. Japanese woodblock print, carved ink contours, broad flat ink shapes and washi texture, indigo/vermilion/parchment gold. A tiny red fox curls beneath sweeping orange, yellow and scarlet aurora curtains reflected in a midnight lake, golden stars, dramatic beautiful sky.",
+      "generated_source": "/home/steven/.codex/generated_images/01a17558-67d8-7401-abae-76199bd4bff3/exec-b69f341b-8c07-4beb-a2e3-8ec1199f2d10.png"
+    }
+  ]
+}

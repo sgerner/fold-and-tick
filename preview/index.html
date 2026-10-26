@@ -260,12 +260,19 @@
     .scene-layer .scene-cursor { z-index: 2; }
     .scene-layer .scene-drift { z-index: 3; transform-origin: center; }
     .scene-layer .scene-glass { z-index: 4; }
+    .scene-layer [hidden] { display: none !important; }
     .scene-layer[data-scene="cosmos"] .scene-motion-wrap,
     .scene-layer[data-scene="aurora"] .scene-motion-wrap { z-index: 2; }
     .scene-layer[data-scene="cosmos"] .scene-drift,
     .scene-layer[data-scene="aurora"] .scene-drift { z-index: 1; }
     .scene-layer img[hidden] { display: none; }
     .scene-layer.asset-missing .scene-background { display: none; }
+
+    .scene-layer[data-style]:not([data-style="origami"]) .scene-background {
+      inset: -5.556%;
+      width: 111.111%;
+      height: 111.111%;
+    }
 
     .watch-screen.motion-on:not(.ambient) .scene-layer .scene-motion {
       animation: var(--actor-animation) var(--actor-duration) var(--actor-easing) infinite;
@@ -277,10 +284,17 @@
       will-change: transform;
     }
 
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style]:not([data-style="origami"]) .scene-background {
+      animation: scene-pan 24s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+
     .watch-screen.motion-on:not(.ambient) .scene-layer[data-scene="coding"] .scene-cursor {
       animation: cursor-blink 1.2s steps(2, end) infinite;
       filter: brightness(1.6) drop-shadow(0 0 8px rgba(161, 220, 255, .9));
     }
+
+    .scene-layer[data-style]:not([data-style="origami"]) .scene-cursor { display: none; }
 
     .scene-layer[data-scene="bicycle"] { --scene-light: #f2ad66; --scene-dark: #604a70; }
     .scene-layer[data-scene="forest"] { --scene-light: #a8ce8d; --scene-dark: #426b58; --actor-animation: frog-hop; --actor-duration: 6s; }
@@ -319,9 +333,28 @@
       animation: aurora-curtains 8s ease-in-out infinite alternate;
     }
 
+    /* Fixed camera keeps bicycle tires aligned with the painted road. */
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style]:not([data-style="origami"])[data-scene="bicycle"] .scene-background,
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="woodblock"][data-scene="coding"] .scene-background,
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="woodblock"][data-scene="coding"] .scene-motion {
+      animation: none;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="woodblock"][data-scene="coding"] .scene-drift {
+      animation: cursor-blink 1s steps(2, end) infinite;
+    }
+
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="risograph"][data-scene="coding"] .scene-drift {
+      animation: coding-cursor 1.6s ease-in-out infinite, cursor-blink 1s steps(2, end) infinite;
+    }
+
     @keyframes actor-float {
       from { transform: translate3d(0, -2.667cqw, 0); }
       to { transform: translate3d(0, 2.667cqw, 0); }
+    }
+
+    @keyframes scene-pan {
+      from { transform: translate3d(-2.4%, -2.4%, 0); }
+      to { transform: translate3d(2.4%, 2.4%, 0); }
     }
 
     @keyframes bicycle-ride {
@@ -821,6 +854,39 @@
       gap: 8px;
     }
 
+    .style-picker {
+      display: grid;
+      gap: 8px;
+    }
+
+    .style-picker label {
+      color: #34415b;
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: .01em;
+    }
+
+    .style-picker select {
+      width: 100%;
+      min-height: 39px;
+      padding: 0 12px;
+      border: 1px solid #e3ddd1;
+      border-radius: 10px;
+      background: #fffdf8;
+      color: #35415a;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .style-description {
+      min-height: 15px;
+      margin: 0;
+      color: #8c94a1;
+      font-size: 10px;
+      line-height: 1.45;
+    }
+
     .scene-card {
       display: flex;
       min-width: 0;
@@ -1086,7 +1152,7 @@
         <div class="watch-wrap">
           <div class="watch-case" id="watchCase" data-size="45" aria-label="45 millimeter watch preview">
             <div class="watch-screen motion-on" id="watchScreen" aria-label="Fold and Tick watch face">
-              <div class="scene-layer" data-scene="bicycle" id="sceneArt" aria-hidden="true">
+              <div class="scene-layer" data-style="origami" data-scene="bicycle" id="sceneArt" aria-hidden="true">
                 <img class="scene-background" src="./assets/scene_bicycle.png" alt="">
                 <div class="scene-motion-wrap"><img class="scene-motion" src="./assets/motion_bicycle.png" alt=""></div>
                 <img class="scene-cursor" src="./assets/blink_coding.png" alt="" hidden>
@@ -1127,6 +1193,16 @@
             <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4.5 7.5A6 6 0 1 1 4 11m.5-7v3.5H8"/></svg>
             Reset
           </button>
+        </div>
+
+        <div class="control-group style-picker">
+          <label for="styleSelect">Art style</label>
+          <select id="styleSelect" aria-describedby="styleDescription">
+            <option value="origami">Origami</option>
+            <option value="woodblock">Woodblock</option>
+            <option value="risograph">Risograph</option>
+          </select>
+          <p class="style-description" id="styleDescription" aria-live="polite">Layered folded paper with the original gentle character motion.</p>
         </div>
 
         <div class="control-group">
@@ -1274,11 +1350,29 @@
         { id: "ocean", label: "Ocean" },
         { id: "aurora", label: "Aurora" }
       ];
+      var artStyles = {
+        origami: { label: "Origami", description: "Layered folded paper with the original gentle character motion." },
+        woodblock: { label: "Woodblock", description: "Bold carved lines, flat color, and visible print texture." },
+        risograph: { label: "Risograph", description: "Fresh graphic worlds in bold spot inks, halftone, and playful geometric shapes." }
+      };
+
+      var sceneAssetPaths = Object.create(null);
+      Object.keys(artStyles).forEach(function (style) {
+        scenes.forEach(function (scene) {
+          ["scene", "glass", "motion", "drift", "icon_scene"].forEach(function (kind) {
+            var name = style === "origami"
+              ? kind + "_" + scene.id
+              : kind + "_" + style + "_" + scene.id;
+            sceneAssetPaths[style + ":" + kind + ":" + scene.id] = "./assets/" + name + ".png";
+          });
+        });
+      });
       var storageKey = "fold-and-tick-preview-v1";
       var motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
       var defaults = {
         mode: "auto",
         scene: 0,
+        style: "origami",
         rotation: 60,
         ambient: false,
         motion: !motionPreference.matches,
@@ -1289,7 +1383,7 @@
       if (motionPreference.matches) state.motion = false;
       var autoSlot = getRotationSlot(new Date());
       var previewOffset = 0;
-      var activeSceneId = "";
+      var activeSceneArtKey = "";
       var renderedClock = "";
 
       var watchCase = document.getElementById("watchCase");
@@ -1301,6 +1395,8 @@
       var rotationStatus = document.getElementById("rotationStatus");
       var modeBadge = document.getElementById("modeBadge");
       var modeNote = document.getElementById("modeNote");
+      var styleSelect = document.getElementById("styleSelect");
+      var styleDescription = document.getElementById("styleDescription");
       var rotationSelect = document.getElementById("rotationSelect");
       var ambientToggle = document.getElementById("ambientToggle");
       var motionToggle = document.getElementById("motionToggle");
@@ -1312,6 +1408,7 @@
           var saved = JSON.parse(raw);
           var next = Object.assign({}, defaults);
           if (saved.mode === "auto" || saved.mode === "manual") next.mode = saved.mode;
+          if (Object.prototype.hasOwnProperty.call(artStyles, saved.style)) next.style = saved.style;
           if (Number.isInteger(saved.scene) && saved.scene >= 0 && saved.scene < scenes.length) {
             next.scene = saved.scene;
           } else {
@@ -1354,24 +1451,43 @@
         return (getScheduledScene(now) + previewOffset) % scenes.length;
       }
 
+      function getSceneAssetPath(kind, style, sceneId) {
+        var key = style + ":" + kind + ":" + sceneId;
+        return Object.prototype.hasOwnProperty.call(sceneAssetPaths, key)
+          ? sceneAssetPaths[key]
+          : sceneAssetPaths["origami:scene:bicycle"];
+      }
+
       function setSceneArt(sceneId) {
-        if (activeSceneId === sceneId) return;
-        activeSceneId = sceneId;
+        var artKey = state.style + ":" + sceneId;
+        if (activeSceneArtKey === artKey) return;
+        activeSceneArtKey = artKey;
+        var isOrigami = state.style === "origami";
+        sceneArt.setAttribute("data-style", state.style);
         sceneArt.setAttribute("data-scene", sceneId);
         sceneArt.classList.remove("asset-missing");
         [
-          [".scene-background", "scene_" + sceneId],
-          [".scene-motion", "motion_" + sceneId],
-          [".scene-drift", "drift_" + sceneId],
-          [".scene-glass", "glass_" + sceneId]
+          [".scene-background", "scene"],
+          [".scene-glass", "glass"]
         ].forEach(function (asset) {
           var image = sceneArt.querySelector(asset[0]);
           image.hidden = false;
-          image.src = "./assets/" + asset[1] + ".png";
+          image.src = getSceneAssetPath(asset[1], state.style, sceneId);
         });
+        var motionWrap = sceneArt.querySelector(".scene-motion-wrap");
+        var motion = sceneArt.querySelector(".scene-motion");
+        var drift = sceneArt.querySelector(".scene-drift");
+        motionWrap.hidden = false;
+        motion.hidden = false;
+        drift.hidden = false;
+        motion.src = getSceneAssetPath("motion", state.style, sceneId);
+        drift.src = getSceneAssetPath("drift", state.style, sceneId);
         var cursor = sceneArt.querySelector(".scene-cursor");
-        cursor.hidden = sceneId !== "coding";
-        if (sceneId === "coding") cursor.src = "./assets/blink_coding.png";
+        cursor.hidden = !isOrigami || sceneId !== "coding";
+        if (isOrigami && sceneId === "coding") {
+          cursor.hidden = false;
+          cursor.src = "./assets/blink_coding.png";
+        }
       }
 
       function updateClock(now) {
@@ -1424,7 +1540,15 @@
         document.querySelectorAll(".scene-card").forEach(function (button, index) {
           var selected = state.mode === "manual" && index === state.scene;
           button.setAttribute("aria-pressed", String(selected));
+          var thumbnail = button.querySelector(".scene-thumb img");
+          var thumbnailPath = getSceneAssetPath("icon_scene", state.style, scenes[index].id);
+          if (thumbnail.getAttribute("src") !== thumbnailPath) {
+            thumbnail.hidden = false;
+            thumbnail.src = thumbnailPath;
+          }
         });
+        styleSelect.value = state.style;
+        styleDescription.textContent = artStyles[state.style].description;
         rotationSelect.value = String(state.rotation);
         rotationSelect.disabled = state.mode !== "auto";
         modeBadge.textContent = state.mode === "auto" ? "Automatic" : "Manual";
@@ -1471,6 +1595,14 @@
         saveState();
         render();
       }
+
+      styleSelect.addEventListener("change", function () {
+        if (!Object.prototype.hasOwnProperty.call(artStyles, styleSelect.value)) return;
+        state.style = styleSelect.value;
+        previewOffset = 0;
+        saveState();
+        render();
+      });
 
       document.querySelectorAll(".scene-card").forEach(function (button, index) {
         button.addEventListener("click", function () { chooseManualScene(index); });
