@@ -20,7 +20,11 @@ Choose **Art style** first, then select a scene and rotation interval. Each pack
 | Woodblock | Carved ink lines, washi grain, indigo and vermilion | [Woodblock pack](preview/styles/woodblock.png) |
 | Risograph | Bright spot colors, grainy ink, print overlap | [Risograph pack](preview/styles/risograph.png) |
 
-![Two new art styles, with eight labeled watch face designs in each](preview/styles/all-packs.png)
+| **Woodblock · 8 scenes** | **Risograph · 8 scenes** |
+| --- | --- |
+| ![Woodblock watch-face previews: bicycle on a coastal road, forest frog, laptop, kitten, landscape, cosmos, ocean, and aurora](preview/styles/woodblock.png) | ![Risograph watch-face previews: city bicycle, mushroom forest, retro terminal, kitten among houseplants, desert landscape, orbital transit, jellyfish ocean, and neon aurora](preview/styles/risograph.png) |
+
+[View both packs together](preview/styles/all-packs.png) · [Compare them in motion](preview/styles/motion.gif)
 
 Every style uses independent character and detail layers, with scenes tailored to its visual language. Bicycles cross solid road surfaces, kittens move separately from mice, and rockets fly diagonally with sparks. Woodblock Coding focuses on one laptop with a blinking typing cursor. Risograph has new graphic scenes: a city ride, mushroom forest, retro terminal, houseplant kitten, desert city, orbital transit, jellyfish aquarium, and neon weather. Other scenes gently pan their background artwork; bicycle roads and the Woodblock laptop keep a fixed camera so their animated layers stay aligned. All motion can be paused, and always-on mode hides the artwork.
 
