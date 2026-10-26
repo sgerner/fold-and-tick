@@ -839,19 +839,16 @@ def feathered_glass(scene):
     """Scene-aware translucent blur plates with feathered edges and no borders."""
     blurred = scene.convert("RGB").filter(ImageFilter.GaussianBlur(6))
     layer = Image.new("RGBA", (SIZE, SIZE), (0, 0, 0, 0))
-    # Date and time dissolve beyond their text bounds; small lower plates stay
-    # lightly tinted so the scene color remains visible around their icons.
-    plates = [((35, 117, 415, 149), 18, 110, 0.40, 13.0),
-              ((50, 145, 400, 267), 42, 154, 0.48, 19.0),
-              ((50, 273, 195, 315), 14, 112, 0.30, 4.0),
-              ((255, 273, 400, 315), 14, 112, 0.30, 4.0)]
+    # Only the broad time backing is preblurred; complication glass is dynamic.
+    plates = [((35, 143, 415, 270), 42, 154, 0.48, 19.0)]
     for box, radius, alpha, tint, feather in plates:
         mask = Image.new("L", (SIZE, SIZE), 0)
         ImageDraw.Draw(mask).rounded_rectangle(box, radius=radius, fill=255)
         mask = mask.filter(ImageFilter.GaussianBlur(feather))
         patch = blurred.copy()
         navy = Image.new("RGB", patch.size, (13, 20, 43))
-        patch = Image.blend(patch, navy, tint).convert("RGBA")
+        patch = Image.blend(patch, navy, tint)
+        patch = patch.convert("RGBA")
         patch.putalpha(mask.point(lambda a: round(a * alpha / 255)))
         layer = Image.alpha_composite(layer, patch)
     return layer
@@ -881,35 +878,43 @@ def native_clock():
     for glyph in glyphs:
         clock.alpha_composite(glyph, (cursor, 0))
         cursor += glyph.width
-    return clock
+    return clock.resize((round(clock.width * 112 / 96), 112), Image.Resampling.LANCZOS)
 
 
 def draw_complications(draw):
-    # Native-sized 24px battery and walking-person icons, with values only.
-    draw.rounded_rectangle((52, 286, 69, 302), radius=3,
-                           outline=(255, 225, 162, 255), width=2)
-    draw.rectangle((57, 283, 64, 286), fill=(255, 225, 162, 255))
-    draw.rounded_rectangle((55, 289, 66, 299), radius=2,
-                           fill=(255, 211, 105, 255))
-    # Person silhouette: head, body, one arm and a walking stride.
-    draw.ellipse((267, 282, 273, 288), fill=(119, 236, 222, 255))
-    draw.line([(270, 289), (268, 297), (263, 302)], fill=(119, 236, 222, 255), width=3)
-    draw.line([(269, 292), (276, 297), (281, 297)], fill=(119, 236, 222, 255), width=3)
-    draw.line([(269, 296), (275, 302), (275, 307)], fill=(119, 236, 222, 255), width=3)
-    draw.line([(268, 297), (264, 304), (260, 306)], fill=(119, 236, 222, 255), width=3)
-    draw.text((136.5, 294), "82%", font=font(28, True),
-              fill=(255, 232, 173, 255), anchor="mm")
-    draw.text((341.5, 294), "6,248", font=font(28, True),
-              fill=(166, 236, 230, 255), anchor="mm")
+    for center, value, icon_color in [(122.5, "82%", (164, 209, 188, 255)),
+                                      (327.5, "6,248", (166, 236, 230, 255))]:
+        label_font = font(28, True)
+        label_width = max(16.5, min(len(value) * 16.5, 97))
+        row_width = 24 + 8 + label_width
+        left = center - row_width / 2
+        plate_width = min(145, row_width + 16)
+        draw.rounded_rectangle((center - plate_width / 2, 273,
+                                center + plate_width / 2, 315), radius=14,
+                               fill=(223, 235, 247, 48))
+        if value == "82%":
+            draw.rounded_rectangle((left+3, 286, left+20, 302), radius=3,
+                                   outline=icon_color, width=2)
+            draw.rectangle((left+8, 283, left+15, 286), fill=icon_color)
+        else:
+            draw.ellipse((left+9, 282, left+15, 288), fill=icon_color)
+            draw.line([(left+12, 289), (left+10, 297), (left+4, 305)], fill=icon_color, width=3)
+            draw.line([(left+11, 293), (left+20, 298)], fill=icon_color, width=3)
+            draw.line([(left+10, 297), (left+18, 306)], fill=icon_color, width=3)
+        draw.text((left + 32 + label_width / 2, 294), value, font=label_font,
+                  fill=(255, 244, 232, 255), anchor="mm")
 
 
 def add_watch_content(face, glass, clock):
     overlay = glass.copy()
     d = ImageDraw.Draw(overlay)
-    d.text((225, 133), "SUN  ·  OCT 25", font=font(28, True),
+    date = "SUN OCT 25"
+    date_width = max(58, min(24 + len(date) * 17, 380))
+    d.rounded_rectangle((225-date_width/2, 112, 225+date_width/2, 154), radius=14, fill=(223, 235, 247, 48))
+    d.text((225, 133), date, font=font(28, True),
            fill=(239, 243, 255, 255), anchor="mm")
     if clock is not None:
-        overlay.alpha_composite(clock, (95, 158))
+        overlay.alpha_composite(clock, ((450-clock.width)//2, 152))
     else:
         d.text((225, 206), "10:08", font=font(68, True), fill=(255, 240, 221, 255), anchor="mm")
     draw_complications(d)

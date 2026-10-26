@@ -244,10 +244,10 @@
             </Compare>
         </Condition>
 
-        <DigitalClock x="0" y="155" width="450" height="102">
-            <TimeText x="0" y="0" width="450" height="102" format="hh:mm" hourFormat="SYNC_TO_DEVICE" align="CENTER">
+        <DigitalClock x="0" y="149" width="450" height="118">
+            <TimeText x="0" y="0" width="450" height="118" format="hh:mm" hourFormat="SYNC_TO_DEVICE" align="CENTER">
                 <Variant target="tintColor" value="#FFF6EB" mode="AMBIENT" />
-                <BitmapFont family="fold_time" size="96" />
+                <BitmapFont family="fold_time" size="112" />
             </TimeText>
         </DigitalClock>
 
@@ -264,22 +264,42 @@
                 <Parameter expression="[COMPLICATION.TEXT]" />
             </ScreenReader>
             <Complication type="LONG_TEXT">
+                <PartDraw x="0" y="0" width="380" height="42">
+                    <Variant target="alpha" value="0" mode="AMBIENT" />
+                    <RoundRectangle x="0" y="0" width="380" height="42" cornerRadiusX="14" cornerRadiusY="14">
+                        <Transform target="x" value="(380 - (clamp(24 + (textLength([COMPLICATION.TEXT])) * 17, 58, 380))) / 2" mode="TO" />
+                        <Transform target="width" value="clamp(24 + (textLength([COMPLICATION.TEXT])) * 17, 58, 380)" mode="TO" />
+                        <Fill color="#30DFEBF7">
+                            <LinearGradient startX="0" startY="0" endX="0" endY="42" colors="#38DFEBF7 #24B8CCE4" positions="0 1" />
+                        </Fill>
+                    </RoundRectangle>
+                </PartDraw>
                 <PartText x="0" y="0" width="380" height="42">
                     <Text align="CENTER" maxLines="1" ellipsis="TRUE">
                         <Font family="SYNC_TO_DEVICE" size="28" weight="SEMI_BOLD" color="#FFF4E8">
                             <Shadow color="#CC11182E" offsetY="1" radius="2.5">
-                                <Template><![CDATA[%s]]><Parameter expression='[COMPLICATION.TEXT] == "" ? "—" : [COMPLICATION.TEXT]' /></Template>
+                                <Upper><Template><![CDATA[%s]]><Parameter expression='[COMPLICATION.TEXT] == "" ? "—" : [COMPLICATION.TEXT]' /></Template></Upper>
                             </Shadow>
                         </Font>
                     </Text>
                 </PartText>
             </Complication>
             <Complication type="SHORT_TEXT">
+                <PartDraw x="0" y="0" width="380" height="42">
+                    <Variant target="alpha" value="0" mode="AMBIENT" />
+                    <RoundRectangle x="0" y="0" width="380" height="42" cornerRadiusX="14" cornerRadiusY="14">
+                        <Transform target="x" value="(380 - (clamp(24 + (textLength([COMPLICATION.TITLE]) + 1 + textLength([COMPLICATION.TEXT])) * 17, 58, 380))) / 2" mode="TO" />
+                        <Transform target="width" value="clamp(24 + (textLength([COMPLICATION.TITLE]) + 1 + textLength([COMPLICATION.TEXT])) * 17, 58, 380)" mode="TO" />
+                        <Fill color="#30DFEBF7">
+                            <LinearGradient startX="0" startY="0" endX="0" endY="42" colors="#38DFEBF7 #24B8CCE4" positions="0 1" />
+                        </Fill>
+                    </RoundRectangle>
+                </PartDraw>
                 <PartText x="0" y="0" width="380" height="42">
                     <Text align="CENTER" maxLines="1" ellipsis="TRUE">
                         <Font family="SYNC_TO_DEVICE" size="28" weight="SEMI_BOLD" color="#FFF4E8">
                             <Shadow color="#CC11182E" offsetY="1" radius="2.5">
-                                <Template><![CDATA[%s %s]]><Parameter expression="[COMPLICATION.TITLE]" /><Parameter expression='[COMPLICATION.TEXT] == "" ? "—" : [COMPLICATION.TEXT]' /></Template>
+                                <Upper><Template><![CDATA[%s %s]]><Parameter expression="[COMPLICATION.TITLE]" /><Parameter expression='[COMPLICATION.TEXT] == "" ? "—" : [COMPLICATION.TEXT]' /></Template></Upper>
                             </Shadow>
                         </Font>
                     </Text>
@@ -300,15 +320,27 @@
                 <Parameter expression="[COMPLICATION.TEXT]" />
             </ScreenReader>
             <Complication type="SHORT_TEXT">
-                <PartImage x="2" y="9" width="24" height="24" tintColor="#FFF4E8">
+                <!-- WFF 2 has no measured text width: keep padding around a capped estimate. -->
+                <PartDraw x="0" y="0" width="145" height="42">
+                    <Variant target="alpha" value="0" mode="AMBIENT" />
+                    <RoundRectangle x="0" y="0" width="145" height="42" cornerRadiusX="14" cornerRadiusY="14">
+                        <Transform target="x" value="(145 - (48 + clamp(textLength([COMPLICATION.TEXT]) * 16.5, 16.5, 97))) / 2" mode="TO" />
+                        <Transform target="width" value="48 + clamp(textLength([COMPLICATION.TEXT]) * 16.5, 16.5, 97)" mode="TO" />
+                        <Fill color="#30DFEBF7">
+                            <LinearGradient startX="0" startY="0" endX="0" endY="42" colors="#38DFEBF7 #24B8CCE4" positions="0 1" />
+                        </Fill>
+                    </RoundRectangle>
+                </PartDraw>
+                <PartImage x="0" y="9" width="24" height="24" tintColor="#FFF4E8">
+                    <Transform target="x" value="(145 - (32 + clamp(textLength([COMPLICATION.TEXT]) * 16.5, 16.5, 97))) / 2" mode="TO" />
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
-                <PartText x="30" y="0" width="113" height="42">
+                <PartText x="0" y="0" width="97" height="42">
+                    <Transform target="x" value="((145 - (32 + clamp(textLength([COMPLICATION.TEXT]) * 16.5, 16.5, 97))) / 2) + 32" mode="TO" />
+                    <Transform target="width" value="clamp(textLength([COMPLICATION.TEXT]) * 16.5, 16.5, 97)" mode="TO" />
                     <Text align="CENTER" maxLines="1" ellipsis="TRUE">
                         <Font family="SYNC_TO_DEVICE" size="28" weight="BOLD" color="#FFF4E8">
-                            <Shadow color="#CC11182E" offsetY="1" radius="2.5">
-                                <Template><![CDATA[%s]]><Parameter expression='[COMPLICATION.TEXT] == "" ? "—" : [COMPLICATION.TEXT]' /></Template>
-                            </Shadow>
+                            <Shadow color="#CC11182E" offsetY="1" radius="2.5"><Template><![CDATA[%s]]><Parameter expression='[COMPLICATION.TEXT] == "" ? "—" : [COMPLICATION.TEXT]' /></Template></Shadow>
                         </Font>
                     </Text>
                 </PartText>
@@ -328,15 +360,27 @@
                 <Parameter expression="[COMPLICATION.TEXT]" />
             </ScreenReader>
             <Complication type="SHORT_TEXT">
-                <PartImage x="2" y="9" width="24" height="24" tintColor="#FFF4E8">
+                <!-- WFF 2 has no measured text width: keep padding around a capped estimate. -->
+                <PartDraw x="0" y="0" width="145" height="42">
+                    <Variant target="alpha" value="0" mode="AMBIENT" />
+                    <RoundRectangle x="0" y="0" width="145" height="42" cornerRadiusX="14" cornerRadiusY="14">
+                        <Transform target="x" value="(145 - (48 + clamp(textLength([COMPLICATION.TEXT]) * 16.5, 16.5, 97))) / 2" mode="TO" />
+                        <Transform target="width" value="48 + clamp(textLength([COMPLICATION.TEXT]) * 16.5, 16.5, 97)" mode="TO" />
+                        <Fill color="#30DFEBF7">
+                            <LinearGradient startX="0" startY="0" endX="0" endY="42" colors="#38DFEBF7 #24B8CCE4" positions="0 1" />
+                        </Fill>
+                    </RoundRectangle>
+                </PartDraw>
+                <PartImage x="0" y="9" width="24" height="24" tintColor="#FFF4E8">
+                    <Transform target="x" value="(145 - (32 + clamp(textLength([COMPLICATION.TEXT]) * 16.5, 16.5, 97))) / 2" mode="TO" />
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
-                <PartText x="30" y="0" width="113" height="42">
+                <PartText x="0" y="0" width="97" height="42">
+                    <Transform target="x" value="((145 - (32 + clamp(textLength([COMPLICATION.TEXT]) * 16.5, 16.5, 97))) / 2) + 32" mode="TO" />
+                    <Transform target="width" value="clamp(textLength([COMPLICATION.TEXT]) * 16.5, 16.5, 97)" mode="TO" />
                     <Text align="CENTER" maxLines="1" ellipsis="TRUE">
                         <Font family="SYNC_TO_DEVICE" size="28" weight="BOLD" color="#FFF4E8">
-                            <Shadow color="#CC11182E" offsetY="1" radius="2.5">
-                                <Template><![CDATA[%s]]><Parameter expression='[COMPLICATION.TEXT] == "" ? "—" : [COMPLICATION.TEXT]' /></Template>
-                            </Shadow>
+                            <Shadow color="#CC11182E" offsetY="1" radius="2.5"><Template><![CDATA[%s]]><Parameter expression='[COMPLICATION.TEXT] == "" ? "—" : [COMPLICATION.TEXT]' /></Template></Shadow>
                         </Font>
                     </Text>
                 </PartText>
