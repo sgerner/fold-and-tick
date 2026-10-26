@@ -63,7 +63,9 @@ class PreviewTest(unittest.TestCase):
         self.assertIn('label for="styleSelect">Art style</label>', html)
         self.assertIn('style: "origami"', html)
         self.assertIn('hasOwnProperty.call(artStyles, saved.style)', html)
-        self.assertIn('kind + "_" + style + "_" + sceneId', html)
+        self.assertIn('kind + "_" + style + "_" + scene.id', html)
+        self.assertIn('sceneAssetPaths[style + ":" + kind + ":" + scene.id]', html)
+        self.assertIn('hasOwnProperty.call(sceneAssetPaths, key)', html)
         self.assertIn('getSceneAssetPath("icon_scene", state.style, scenes[index].id)', html)
         self.assertIn('return (getScheduledScene(now) + previewOffset) % scenes.length;', html)
         self.assertIn('state.scene = (state.scene + 1) % scenes.length;', html)
@@ -80,7 +82,7 @@ class PreviewTest(unittest.TestCase):
     @unittest.skipUnless(shutil.which('node'), 'Node.js is unavailable for JavaScript syntax validation')
     def test_preview_javascript_parses(self):
         html=(ROOT/'preview/index.html').read_text()
-        script=re.search(r'<script>(.*?)</script>', html, re.S).group(1)
+        script=re.search(r'<script\b[^>]*>(.*?)</script\s*>', html, re.S | re.I).group(1)
         with tempfile.NamedTemporaryFile('w', suffix='.js', encoding='utf-8') as source:
             source.write(script); source.flush()
             result=subprocess.run(['node', '--check', source.name], capture_output=True, text=True)
@@ -89,7 +91,7 @@ class PreviewTest(unittest.TestCase):
     @unittest.skipUnless(shutil.which('node'), 'Node.js is unavailable for preview interaction checks')
     def test_style_switch_and_cycle_preserve_scene_selection_and_rotation(self):
         html=(ROOT/'preview/index.html').read_text()
-        script=re.search(r'<script>(.*?)</script>', html, re.S).group(1)
+        script=re.search(r'<script\b[^>]*>(.*?)</script\s*>', html, re.S | re.I).group(1)
         harness=r'''const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');

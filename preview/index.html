@@ -1355,6 +1355,18 @@
         woodblock: { label: "Woodblock", description: "Bold carved lines, flat color, and visible print texture." },
         risograph: { label: "Risograph", description: "Fresh graphic worlds in bold spot inks, halftone, and playful geometric shapes." }
       };
+
+      var sceneAssetPaths = Object.create(null);
+      Object.keys(artStyles).forEach(function (style) {
+        scenes.forEach(function (scene) {
+          ["scene", "glass", "motion", "drift", "icon_scene"].forEach(function (kind) {
+            var name = style === "origami"
+              ? kind + "_" + scene.id
+              : kind + "_" + style + "_" + scene.id;
+            sceneAssetPaths[style + ":" + kind + ":" + scene.id] = "./assets/" + name + ".png";
+          });
+        });
+      });
       var storageKey = "fold-and-tick-preview-v1";
       var motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
       var defaults = {
@@ -1440,10 +1452,10 @@
       }
 
       function getSceneAssetPath(kind, style, sceneId) {
-        var name = style === "origami"
-          ? kind + "_" + sceneId
-          : kind + "_" + style + "_" + sceneId;
-        return "./assets/" + name + ".png";
+        var key = style + ":" + kind + ":" + sceneId;
+        return Object.prototype.hasOwnProperty.call(sceneAssetPaths, key)
+          ? sceneAssetPaths[key]
+          : sceneAssetPaths["origami:scene:bicycle"];
       }
 
       function setSceneArt(sceneId) {
