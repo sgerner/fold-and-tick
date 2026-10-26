@@ -133,6 +133,49 @@ class RotationTest(unittest.TestCase):
         self.assertEqual(rotation.attrib['defaultValue'], '60')
         self.assertEqual({o.attrib['id'] for o in rotation}, {'FIXED', *map(str, PERIODS)})
 
+    def test_complication_rows_stay_centered_with_adaptive_padding(self):
+        # Evaluate the expressions using WFF-supported functions only: Python's
+        # min/max are deliberately unavailable (WFF provides clamp instead).
+        for slot_id in (1, 2):
+            complication = FACE.find(f'.//ComplicationSlot[@slotId="{slot_id}"]/Complication[@type="SHORT_TEXT"]')
+            icon = complication.find('PartImage')
+            text = complication.find('PartText')
+            plate = complication.find('PartDraw/RoundRectangle')
+            def attribute(element, name, value):
+                transform = element.find(f'Transform[@target="{name}"]')
+                if transform is None:
+                    return float(element.attrib[name])
+                expression = transform.attrib['value'].replace('[COMPLICATION.TEXT]', repr(value))
+                return eval(expression, {'__builtins__': {}, 'textLength': len,
+                                        'clamp': lambda x, lo, hi: max(lo, min(x, hi))})
+            previous_width = 0
+            for value in ('', '8', '80', '67°', '100%', '6,248', '1234567890'):
+                ix, tx = attribute(icon, 'x', value), attribute(text, 'x', value)
+                tw, px, pw = (attribute(text, 'width', value),
+                              attribute(plate, 'x', value), attribute(plate, 'width', value))
+                self.assertAlmostEqual(tx - ix - 24, 8)
+                self.assertAlmostEqual((ix + tx + tw) / 2, 72.5)
+                self.assertAlmostEqual(ix - px, 8)
+                self.assertAlmostEqual(px + pw - tx - tw, 8)
+                self.assertLessEqual(pw, 145)
+                self.assertGreaterEqual(pw, previous_width)
+                previous_width = pw
+
+    def test_date_glass_stays_centered_and_caps_long_provider_text(self):
+        for kind in ('SHORT_TEXT', 'LONG_TEXT'):
+            plate = FACE.find(f'.//ComplicationSlot[@slotId="0"]/Complication[@type="{kind}"]/PartDraw/RoundRectangle')
+            for title, value in [('', ''), ('SUN', 'OCT 25'), ('WED', 'SEPT 30'), ('', 'A'*100)]:
+                def evaluate(target):
+                    code = plate.find(f'Transform[@target="{target}"]').attrib['value']
+                    code = code.replace('[COMPLICATION.TITLE]', repr(title)).replace('[COMPLICATION.TEXT]', repr(value))
+                    return eval(code, {'__builtins__': {}, 'textLength': len,
+                                       'clamp': lambda x, lo, hi: max(lo, min(x, hi))})
+                width, x = evaluate('width'), evaluate('x')
+                self.assertTrue(58 <= width <= 380)
+                self.assertAlmostEqual(x + width / 2, 190)
+                if len(value) == 100:
+                    self.assertEqual(width, 380)
+
 
 if __name__ == '__main__':
     unittest.main()

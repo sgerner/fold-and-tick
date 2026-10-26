@@ -86,7 +86,7 @@
 
     .topbar-note, .eyebrow, .section-label, .mini-label {
       font-size: 10px;
-      font-weight: 760;
+      font-weight: 700;
       letter-spacing: .14em;
       text-transform: uppercase;
     }
@@ -139,7 +139,7 @@
       background: rgba(255, 253, 247, .65);
       color: #4f5b73;
       font-size: 10px;
-      font-weight: 760;
+      font-weight: 700;
       letter-spacing: .105em;
       text-transform: uppercase;
     }
@@ -258,6 +258,7 @@
     .scene-layer .scene-motion { z-index: 1; transform-origin: center; }
     .scene-layer .scene-cursor { z-index: 2; }
     .scene-layer .scene-drift { z-index: 3; transform-origin: center; }
+    .scene-layer .scene-glass { z-index: 4; }
     .scene-layer[data-scene="cosmos"] .scene-motion-wrap,
     .scene-layer[data-scene="aurora"] .scene-motion-wrap { z-index: 2; }
     .scene-layer[data-scene="cosmos"] .scene-drift,
@@ -407,45 +408,34 @@
       position: absolute;
       z-index: 3;
       top: 24.889%;
-      left: 7.778%;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
-      width: 84.444%;
+      max-width: 84.444%;
       height: 9.333%;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      padding: 3px 4px;
       border: 0;
-      border-radius: 99px;
-      background: rgba(247, 226, 208, .12);
-      color: #fff3e1;
-      backdrop-filter: blur(12px) saturate(135%);
-      -webkit-backdrop-filter: blur(12px) saturate(135%);
+      border-radius: 3.111cqw;
+      background: linear-gradient(rgba(223, 235, 247, .2196), rgba(184, 204, 228, .1412));
+      color: #fff4e8;
       font-size: 6.222cqw;
-      font-weight: 720;
-      letter-spacing: .06em;
+      font-weight: 600;
       text-transform: uppercase;
       white-space: nowrap;
-    }
-
-    .day-chip::before {
-      width: 4px;
-      height: 4px;
-      flex: 0 0 auto;
-      border-radius: 50%;
-      background: #f0a777;
-      content: "";
-      box-shadow: 0 0 10px rgba(240, 167, 119, .8);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-shadow: 0 .222cqw .556cqw #11182ecc;
     }
 
     .clock-display {
       position: absolute;
       z-index: 3;
-      top: 34.444%;
+      top: 33.778%;
       left: 0;
       display: flex;
       width: 100%;
-      height: 21.333%;
+      height: 24.889%;
       align-items: center;
       justify-content: center;
       gap: 0;
@@ -467,13 +457,13 @@
 
     .time img {
       display: block;
-      width: 13.333cqw;
+      width: 15.556cqw;
       height: 100%;
       object-fit: fill;
     }
 
     .time img.clock-colon {
-      width: 4.444cqw;
+      width: 5.185cqw;
     }
 
     .complications {
@@ -481,7 +471,8 @@
       z-index: 3;
       top: 60.667%;
       left: 50%;
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(2, 41.429%);
       width: 77.778%;
       height: 9.333%;
       align-items: stretch;
@@ -494,21 +485,19 @@
       min-width: 0;
       align-items: center;
       justify-content: center;
-      gap: 5px;
-      padding: 0 3px;
+      gap: 1.778cqw;
+      padding: 0 1.778cqw;
       border: 0;
-      border-radius: 2.6cqw;
-      background: rgba(9, 17, 38, .3);
+      border-radius: 3.111cqw;
+      background: linear-gradient(rgba(223, 235, 247, .2196), rgba(184, 204, 228, .1412));
       color: #fff1df;
-      backdrop-filter: blur(12px) saturate(135%);
-      -webkit-backdrop-filter: blur(12px) saturate(135%);
     }
 
-    .battery-chip, .steps-chip { flex: 0 0 41.429%; }
+    .battery-chip, .steps-chip { width: max-content; max-width: 100%; justify-self: center; }
 
     .complication svg {
-      width: 3.556cqw;
-      height: 3.556cqw;
+      width: 5.333cqw;
+      height: 5.333cqw;
       flex: 0 0 auto;
       fill: none;
       stroke: #f1bd8c;
@@ -523,16 +512,16 @@
       display: flex;
       min-width: 0;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
       justify-content: center;
       gap: 1px;
       line-height: 1;
     }
 
     .chip-value {
-      font-size: 5.556cqw;
-      font-weight: 760;
-      letter-spacing: -.015em;
+      font-size: 6.222cqw;
+      font-weight: 700;
+      letter-spacing: 0;
       font-variant-numeric: tabular-nums;
       white-space: nowrap;
     }
@@ -550,7 +539,6 @@
       -webkit-backdrop-filter: none;
     }
 
-    .ambient .day-chip::before { opacity: .42; }
     .ambient .complication { background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; }
     .ambient .complication svg { stroke: #8d98a8; }
     .ambient .chip-value { color: #c2c8d1; }
@@ -606,7 +594,7 @@
       margin: 0 0 7px;
       color: #687691;
       font-size: 10px;
-      font-weight: 760;
+      font-weight: 700;
       letter-spacing: .14em;
       text-transform: uppercase;
     }
@@ -631,7 +619,7 @@
       box-shadow: 0 5px 14px rgba(23, 37, 68, .16);
       color: #fff8eb;
       font-size: 14px;
-      font-weight: 760;
+      font-weight: 700;
       text-decoration: none;
       transition: transform .15s ease, background .15s ease;
     }
@@ -651,7 +639,7 @@
       margin: 0 0 10px;
       color: #33425f;
       font-size: 13px;
-      font-weight: 760;
+      font-weight: 700;
     }
 
     .install-compat p {
@@ -1102,8 +1090,9 @@
                 <div class="scene-motion-wrap"><img class="scene-motion" src="./assets/motion_bicycle.png" alt=""></div>
                 <img class="scene-cursor" src="./assets/blink_coding.png" alt="" hidden>
                 <img class="scene-drift" src="./assets/drift_bicycle.png" alt="">
+                <img class="scene-glass" src="./assets/glass_bicycle.png" alt="">
               </div>
-              <div class="day-chip" id="dateText">Wednesday, Oct 25</div>
+              <div class="day-chip" id="dateText">SUN OCT 25</div>
               <div class="clock-display">
                 <span class="time" id="timeText" role="img" aria-label="08:41"></span>
               </div>
@@ -1372,7 +1361,8 @@
         [
           [".scene-background", "scene_" + sceneId],
           [".scene-motion", "motion_" + sceneId],
-          [".scene-drift", "drift_" + sceneId]
+          [".scene-drift", "drift_" + sceneId],
+          [".scene-glass", "glass_" + sceneId]
         ].forEach(function (asset) {
           var image = sceneArt.querySelector(asset[0]);
           image.hidden = false;
@@ -1405,11 +1395,19 @@
           renderedClock = timeValue;
         }
         timeText.setAttribute("aria-label", timeValue);
-        dateText.textContent = new Intl.DateTimeFormat(undefined, {
-          weekday: "long",
-          month: "short",
-          day: "numeric"
-        }).format(now);
+        var date = new Intl.DateTimeFormat(undefined, {
+          weekday: "short", month: "short", day: "numeric"
+        }).formatToParts(now).filter(function (part) {
+          return part.type !== "literal";
+        }).map(function (part) { return part.value; }).join(" ").toLocaleUpperCase();
+        dateText.textContent = date;
+        // Match native WFF's capped character-width estimate, not CSS auto sizing.
+        dateText.style.width = (Math.min(380, Math.max(58, 24 + date.length * 17)) / 4.5) + "cqw";
+        document.querySelectorAll(".complication").forEach(function (chip) {
+          var valueWidth = Math.min(97, Math.max(16.5, chip.querySelector(".chip-value").textContent.length * 16.5));
+          chip.style.width = ((48 + valueWidth) / 4.5) + "cqw";
+          chip.querySelector(".chip-copy").style.width = (valueWidth / 4.5) + "cqw";
+        });
       }
 
       function updateControls() {

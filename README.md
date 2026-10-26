@@ -23,9 +23,10 @@
 | Ocean | A folded whale swims through layered blue water and bubbles. |
 | Aurora | Amber, yellow, orange, and red light curtains above a paper fox. |
 
-- Bold ombré time follows your device's 12/24-hour preference, without AM/PM clutter.
+- Oversized ombré time follows your device's 12/24-hour preference, without AM/PM clutter.
 - Three configurable complication slots: a wide date/long-text row and two compact icon-and-value readouts.
-- Borderless frosted glass keeps data readable over the artwork.
+- Borderless glass sizes to the date and complication values. Icon/value pairs stay centered with a small gap.
+- The default date uses a short uppercase weekday and month, such as **SUN OCT 25**, without a comma. Custom providers supply their own text.
 - Rotate scenes every **15 minutes, 30 minutes, 1 hour, 3 hours, 6 hours, or daily**, or keep one selected.
 - Pause motion when you want a still composition. Always-on mode hides the scenes and glass, leaving time and complications on black.
 - The installed face works offline, with no companion app or account.
@@ -79,6 +80,15 @@ adb install Fold-and-Tick.apk
 
 - **`INSTALL_FAILED_UPDATE_INCOMPATIBLE`**: the installed build has a different signing certificate; see the debug-build note above.
 - **Watch not listed by `adb devices`**: reconnect using the debugging port, not the pairing port, and accept any watch-side prompt.
+- **Face missing from the picker after sideloading**: long-press the current face and open **Add new**. If it still does not appear, [Google documents a direct selection command](https://developer.android.com/codelabs/watch-face-format) that selects the installed face and adds it to favorites:
+
+  ```sh
+  adb -s WATCH_IP:DEBUG_PORT shell am broadcast \
+    -a com.google.android.wearable.app.DEBUG_SURFACE \
+    --es operation set-watchface \
+    --es watchFaceId com.foldandtick.watchface
+  ```
+
 - **Missing complication value**: pick an available provider in the face editor. Unavailable text displays an em dash.
 - **APK verification**: each release includes `SHA256SUMS` and the public signing-certificate fingerprint.
 
@@ -115,7 +125,7 @@ python3 -m http.server 8080
 python3 tools/build_preview.py --output site
 ```
 
-The output has relative asset paths and works under GitHub Pages' `/fold-and-tick/` project path. Native glass uses preblurred scene-only textures; the browser preview uses live backdrop blur.
+The output has relative asset paths and works under GitHub Pages' `/fold-and-tick/` project path. The demo matches the native clock scale, short date format, and complication glass gradients and geometry. Both use capped character-width estimates to size complication backgrounds because WFF 2 does not expose measured text width. System fonts, provider icons, and provider text can vary between devices. The broad time backing uses the same preblurred scene texture in the watch face and demo; complication glass is a translucent gradient, without a live blur filter.
 
 ### Releases and automation
 
@@ -133,4 +143,4 @@ To cut a release, update Android `versionName`/`versionCode`, regenerate changed
 
 Original code and scene artwork use **[0BSD](LICENSE)**: use, modify, and redistribute them for any purpose, with or without a fee. See [NOTICE.md](NOTICE.md) for the DejaVu glyph and Gradle wrapper notices.
 
-The face has been exercised in a round Wear OS 5 emulator, including all scenes, 12/24-hour time, editor options, visible motion, and always-on mode. Pixel Watch 3 hardware has not been connected for direct testing.
+The face has been exercised in a round Wear OS 5 emulator, including all scenes, 12/24-hour time, editor options, visible motion, and always-on mode. It has also been installed and visually checked on a physical Pixel Watch 3, including native date formatting, provider icons, complication spacing, and adaptive glass. The browser demo uses sample battery/step data; it does not read or configure your watch.
