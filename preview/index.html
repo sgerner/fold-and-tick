@@ -1,0 +1,1557 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f0e6">
+  <title>Fold &amp; Tick — Design preview</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f5f0e6;
+      --paper-light: #fbf8f1;
+      --ink: #172544;
+      --muted: #727b8b;
+      --line: #e4dece;
+      --coral: #eb7057;
+      --blue: #567de4;
+      --mint: #72b7a2;
+      --gold: #e4b448;
+      --watch: #0c1731;
+      --serif: Georgia, "Times New Roman", serif;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 78% 6%, rgba(244, 212, 181, .38), transparent 31rem),
+        radial-gradient(ellipse at 5% 76%, rgba(211, 223, 227, .35), transparent 28rem),
+        var(--paper);
+    }
+
+    button, select { font: inherit; }
+    button { color: inherit; }
+    button:focus-visible, select:focus-visible {
+      outline: 3px solid rgba(86, 125, 228, .65);
+      outline-offset: 3px;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 24px 0 42px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 3px 0 28px;
+      border-bottom: 1px solid rgba(23, 37, 68, .12);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 780;
+      letter-spacing: .025em;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 31px;
+      height: 31px;
+      place-items: center;
+      border-radius: 11px;
+      background: var(--ink);
+      color: #fff8eb;
+      font-family: var(--serif);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: -.08em;
+    }
+
+    .topbar-note, .eyebrow, .section-label, .mini-label {
+      font-size: 10px;
+      font-weight: 760;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .topbar-note { color: var(--muted); }
+
+    .intro {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 30px;
+      padding: 37px 0 31px;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 14px;
+      color: #687691;
+    }
+
+    .eyebrow::before {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--coral);
+      content: "";
+      box-shadow: 0 0 0 4px rgba(235, 112, 87, .12);
+    }
+
+    h1 {
+      max-width: 640px;
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(39px, 5.6vw, 64px);
+      font-weight: 500;
+      letter-spacing: -.055em;
+      line-height: .99;
+    }
+
+    .preview-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 18px;
+      padding: 9px 12px;
+      border: 1px solid rgba(23, 37, 68, .11);
+      border-radius: 999px;
+      background: rgba(255, 253, 247, .65);
+      color: #4f5b73;
+      font-size: 10px;
+      font-weight: 760;
+      letter-spacing: .105em;
+      text-transform: uppercase;
+    }
+
+    .preview-label::before {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--mint);
+      content: "";
+    }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: minmax(360px, 1.03fr) minmax(390px, .97fr);
+      align-items: start;
+      gap: clamp(34px, 7vw, 86px);
+    }
+
+    .preview-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 6px 0 0;
+    }
+
+    .watch-wrap {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .watch-case {
+      position: relative;
+      width: min(100%, 392px);
+      aspect-ratio: 1;
+      padding: 9px;
+      border: 1px solid rgba(255, 255, 255, .42);
+      border-radius: 50%;
+      background:
+        linear-gradient(145deg, #223251 1%, #101b34 35%, #070e20 76%, #263957 100%);
+      box-shadow:
+        0 32px 56px rgba(24, 34, 53, .19),
+        0 7px 17px rgba(24, 34, 53, .13),
+        inset 0 1px 2px rgba(255, 255, 255, .36),
+        inset 0 -3px 5px rgba(0, 0, 0, .56);
+      transition: width .25s ease;
+    }
+
+    .watch-case[data-size="41"] { width: min(92%, 362px); }
+
+    .watch-case::before {
+      position: absolute;
+      inset: 4px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: inherit;
+      content: "";
+      pointer-events: none;
+    }
+
+    .watch-screen {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 50%;
+      background: #0b1530;
+      container-type: inline-size;
+      isolation: isolate;
+    }
+
+    .watch-screen::after {
+      position: absolute;
+      z-index: 2;
+      inset: 0;
+      border-radius: inherit;
+      background:
+        linear-gradient(180deg, rgba(5, 12, 30, .14), rgba(5, 12, 30, .28)),
+        radial-gradient(ellipse at center, transparent 57%, rgba(2, 7, 19, .28) 100%);
+      content: "";
+      pointer-events: none;
+    }
+
+    .scene-layer {
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      --actor-animation: actor-float;
+      --actor-duration: 7s;
+      --actor-easing: ease-in-out;
+    }
+
+    .scene-layer::before {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 20%, var(--scene-light), transparent 62%),
+        linear-gradient(155deg, var(--scene-dark), var(--scene-light));
+      content: "";
+      opacity: .92;
+    }
+
+    .scene-layer img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .scene-layer .scene-background { z-index: 0; }
+    .scene-layer .scene-motion-wrap { position: absolute; inset: 0; z-index: 1; transform-origin: center; }
+    .scene-layer .scene-motion { z-index: 1; transform-origin: center; }
+    .scene-layer .scene-cursor { z-index: 2; }
+    .scene-layer .scene-drift { z-index: 3; transform-origin: center; }
+    .scene-layer[data-scene="cosmos"] .scene-motion-wrap,
+    .scene-layer[data-scene="aurora"] .scene-motion-wrap { z-index: 2; }
+    .scene-layer[data-scene="cosmos"] .scene-drift,
+    .scene-layer[data-scene="aurora"] .scene-drift { z-index: 1; }
+    .scene-layer img[hidden] { display: none; }
+    .scene-layer.asset-missing .scene-background { display: none; }
+
+    .watch-screen.motion-on:not(.ambient) .scene-layer .scene-motion {
+      animation: var(--actor-animation) var(--actor-duration) var(--actor-easing) infinite;
+      will-change: transform, filter, opacity;
+    }
+
+    .watch-screen.motion-on:not(.ambient) .scene-layer .scene-drift {
+      animation: parallax-drift 8s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-scene="coding"] .scene-cursor {
+      animation: cursor-blink 1.2s steps(2, end) infinite;
+      filter: brightness(1.6) drop-shadow(0 0 8px rgba(161, 220, 255, .9));
+    }
+
+    .scene-layer[data-scene="bicycle"] { --scene-light: #f2ad66; --scene-dark: #604a70; }
+    .scene-layer[data-scene="forest"] { --scene-light: #a8ce8d; --scene-dark: #426b58; --actor-animation: frog-hop; --actor-duration: 6s; }
+    .scene-layer[data-scene="coding"] { --scene-light: #7c91df; --scene-dark: #3c496e; }
+    .scene-layer[data-scene="kitten"] { --scene-light: #e6a3a5; --scene-dark: #6d6b91; --actor-animation: kitten-pounce; --actor-duration: 3s; }
+    .scene-layer[data-scene="landscape"] { --scene-light: #a5c68a; --scene-dark: #526a65; --actor-animation: landscape-sun; }
+    .scene-layer[data-scene="cosmos"] { --scene-light: #8e8ad2; --scene-dark: #292c61; }
+    .scene-layer[data-scene="ocean"] { --scene-light: #83d8d1; --scene-dark: #245879; --actor-animation: ocean-whale; --actor-duration: 6s; }
+    .scene-layer[data-scene="aurora"] { --scene-light: #b2e6d2; --scene-dark: #355678; --actor-animation: aurora-comet; }
+
+    .scene-layer[data-scene="bicycle"] { --actor-animation: bicycle-ride; --actor-duration: 10s; --actor-easing: linear; }
+    .scene-layer[data-scene="coding"] { --actor-animation: coding-cursor; --actor-duration: 1.6s; --actor-easing: ease-in-out; }
+    .scene-layer[data-scene="cosmos"] { --actor-animation: cosmos-flight; --actor-duration: 10s; --actor-easing: linear; }
+
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-scene="forest"] .scene-drift {
+      animation: firefly-drift 10s ease-in-out infinite;
+    }
+
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-scene="kitten"] .scene-motion-wrap {
+      animation: kitten-run 6s linear infinite;
+    }
+
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-scene="kitten"] .scene-drift {
+      animation: mouse-run 8s linear infinite;
+    }
+
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-scene="cosmos"] .scene-drift {
+      animation: cosmos-flight 10s linear infinite, spark-pulse 1.3s ease-in-out infinite alternate;
+    }
+
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-scene="ocean"] .scene-drift {
+      animation: ocean-bubbles 6s ease-in-out infinite alternate;
+    }
+
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-scene="aurora"] .scene-drift {
+      animation: aurora-curtains 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes actor-float {
+      from { transform: translate3d(0, -2.667cqw, 0); }
+      to { transform: translate3d(0, 2.667cqw, 0); }
+    }
+
+    @keyframes bicycle-ride {
+      from { transform: translateX(-67%); }
+      to { transform: translateX(93%); }
+    }
+
+    @keyframes frog-hop {
+      0%, 100% { transform: translateY(2.667cqw); }
+      50% { transform: translateY(-2.667cqw); }
+    }
+
+    @keyframes coding-cursor {
+      0%, 100% { transform: translate3d(0, 2.222cqw, 0); filter: brightness(1.2) drop-shadow(0 0 2px rgba(161, 220, 255, .5)); }
+      50% { transform: translate3d(0, -2.222cqw, 0); filter: brightness(1.55) drop-shadow(0 0 8px rgba(161, 220, 255, .9)); }
+    }
+
+    @keyframes firefly-drift {
+      0%, 100% { transform: translate3d(-4.444cqw, -2.667cqw, 0); opacity: .45; }
+      50% { transform: translate3d(4.444cqw, 2.667cqw, 0); opacity: 1; }
+    }
+
+    @keyframes kitten-run {
+      0%, 100% { transform: translateX(-4cqw); }
+      50% { transform: translateX(4cqw); }
+    }
+
+    @keyframes kitten-pounce {
+      0%, 100% { transform: translateY(1.778cqw); }
+      50% { transform: translateY(-1.778cqw); }
+    }
+
+    @keyframes mouse-run {
+      0% { transform: translate3d(-77.778%, -3.333%, 0); }
+      50% { transform: translate3d(2.222%, 1.111%, 0); }
+      100% { transform: translate3d(82.222%, -3.333%, 0); }
+    }
+
+    @keyframes landscape-sun {
+      from { transform: translate3d(0, 2.667cqw, 0); }
+      to { transform: translate3d(0, -2.667cqw, 0); }
+    }
+
+    @keyframes cosmos-flight {
+      from { transform: translate3d(-71.111%, 71.111%, 0); }
+      to { transform: translate3d(93.333%, -93.333%, 0); }
+    }
+
+    @keyframes spark-pulse {
+      from { opacity: .45; }
+      to { opacity: 1; }
+    }
+
+    @keyframes ocean-whale {
+      from { transform: translateX(-5.556cqw); }
+      to { transform: translateX(5.556cqw); }
+    }
+
+    @keyframes ocean-bubbles {
+      from { transform: translateY(-2.667cqw); }
+      to { transform: translateY(2.667cqw); }
+    }
+
+    @keyframes aurora-comet {
+      from { transform: translateY(2.667cqw); }
+      to { transform: translateY(-2.667cqw); }
+    }
+
+    @keyframes aurora-curtains {
+      from { transform: translateX(-4.444cqw); }
+      to { transform: translateX(4.444cqw); }
+    }
+
+    @keyframes cursor-blink {
+      from { opacity: 1; }
+      to { opacity: .2; }
+    }
+
+    @keyframes parallax-drift {
+      from { transform: translate3d(-3.333cqw, -2.222cqw, 0); }
+      to { transform: translate3d(3.333cqw, 2.222cqw, 0); }
+    }
+
+    .day-chip {
+      position: absolute;
+      z-index: 3;
+      top: 24.889%;
+      left: 7.778%;
+      display: flex;
+      width: 84.444%;
+      height: 9.333%;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 3px 4px;
+      border: 0;
+      border-radius: 99px;
+      background: rgba(247, 226, 208, .12);
+      color: #fff3e1;
+      backdrop-filter: blur(12px) saturate(135%);
+      -webkit-backdrop-filter: blur(12px) saturate(135%);
+      font-size: 6.222cqw;
+      font-weight: 720;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .day-chip::before {
+      width: 4px;
+      height: 4px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: #f0a777;
+      content: "";
+      box-shadow: 0 0 10px rgba(240, 167, 119, .8);
+    }
+
+    .clock-display {
+      position: absolute;
+      z-index: 3;
+      top: 34.444%;
+      left: 0;
+      display: flex;
+      width: 100%;
+      height: 21.333%;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      color: #fff1e3;
+      text-shadow: 0 4px 22px rgba(0, 0, 0, .17);
+    }
+
+    .time {
+      display: inline-flex;
+      height: 100%;
+      align-items: center;
+      gap: 0;
+      flex: 0 0 auto;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+    }
+
+    .time img {
+      display: block;
+      width: 13.333cqw;
+      height: 100%;
+      object-fit: fill;
+    }
+
+    .time img.clock-colon {
+      width: 4.444cqw;
+    }
+
+    .complications {
+      position: absolute;
+      z-index: 3;
+      top: 60.667%;
+      left: 50%;
+      display: flex;
+      width: 77.778%;
+      height: 9.333%;
+      align-items: stretch;
+      justify-content: space-between;
+      transform: translateX(-50%);
+    }
+
+    .complication {
+      display: flex;
+      min-width: 0;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 0 3px;
+      border: 0;
+      border-radius: 2.6cqw;
+      background: rgba(9, 17, 38, .3);
+      color: #fff1df;
+      backdrop-filter: blur(12px) saturate(135%);
+      -webkit-backdrop-filter: blur(12px) saturate(135%);
+    }
+
+    .battery-chip, .steps-chip { flex: 0 0 41.429%; }
+
+    .complication svg {
+      width: 3.556cqw;
+      height: 3.556cqw;
+      flex: 0 0 auto;
+      fill: none;
+      stroke: #f1bd8c;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.8;
+    }
+
+    .battery-chip svg { stroke: #a4d1bc; }
+
+    .chip-copy {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 1px;
+      line-height: 1;
+    }
+
+    .chip-value {
+      font-size: 5.556cqw;
+      font-weight: 760;
+      letter-spacing: -.015em;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .ambient .scene-layer { opacity: 0; }
+    .ambient.watch-screen {
+      background: #050b17;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08);
+    }
+
+    .ambient .day-chip {
+      background: transparent;
+      color: #d8dbe1;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
+    .ambient .day-chip::before { opacity: .42; }
+    .ambient .complication { background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; }
+    .ambient .complication svg { stroke: #8d98a8; }
+    .ambient .chip-value { color: #c2c8d1; }
+    .ambient.watch-screen::after { background: radial-gradient(ellipse at center, transparent 54%, rgba(0, 0, 0, .42) 100%); }
+
+    .watch-foot {
+      display: flex;
+      width: min(392px, 100%);
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-top: 21px;
+      color: #737d90;
+      font-size: 11px;
+    }
+
+    .watch-foot strong {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: #43516c;
+      font-weight: 680;
+    }
+
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--mint);
+      box-shadow: 0 0 0 3px rgba(114, 183, 162, .17);
+    }
+
+    .watch-caption {
+      margin: 10px 0 0;
+      color: #81899a;
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .install-section {
+      margin-top: 42px;
+      padding: clamp(20px, 3.5vw, 32px);
+      border: 1px solid rgba(37, 47, 68, .09);
+      border-radius: 22px;
+      background: rgba(255, 253, 247, .74);
+      box-shadow: 0 18px 42px rgba(52, 54, 61, .045), inset 0 1px 0 rgba(255, 255, 255, .75);
+      backdrop-filter: blur(12px);
+    }
+
+    .install-heading { margin-bottom: 24px; }
+
+    .install-kicker {
+      margin: 0 0 7px;
+      color: #687691;
+      font-size: 10px;
+      font-weight: 760;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .install-heading h2 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 500;
+    }
+
+    .download-button {
+      display: inline-flex;
+      min-height: 50px;
+      flex: 0 0 auto;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 20px;
+      border-radius: 12px;
+      background: var(--ink);
+      box-shadow: 0 5px 14px rgba(23, 37, 68, .16);
+      color: #fff8eb;
+      font-size: 14px;
+      font-weight: 760;
+      text-decoration: none;
+      transition: transform .15s ease, background .15s ease;
+    }
+
+    .download-button:hover { transform: translateY(-1px); background: #263b66; }
+    .download-button:focus-visible { outline: 3px solid rgba(86, 125, 228, .65); outline-offset: 3px; }
+    .download-button svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; }
+
+    .install-grid {
+      display: grid;
+      grid-template-columns: minmax(190px, .75fr) minmax(0, 1.6fr);
+      gap: 30px;
+      align-items: start;
+    }
+
+    .install-compat h3, .install-steps h3 {
+      margin: 0 0 10px;
+      color: #33425f;
+      font-size: 13px;
+      font-weight: 760;
+    }
+
+    .install-compat p {
+      margin: 0;
+      color: #687286;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .source-link {
+      display: inline-flex;
+      margin-top: 13px;
+      color: #526caa;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    .install-steps ol {
+      margin: 0;
+      padding-left: 19px;
+      color: #59657a;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .install-steps li + li { margin-top: 10px; }
+
+    .install-steps code {
+      display: inline-block;
+      margin: 4px 4px 0 0;
+      padding: 3px 7px;
+      border: 1px solid rgba(23, 37, 68, .08);
+      border-radius: 6px;
+      background: rgba(23, 37, 68, .045);
+      color: #34415b;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .controls-card {
+      padding: 22px 23px 20px;
+      border: 1px solid rgba(37, 47, 68, .09);
+      border-radius: 21px;
+      background: rgba(255, 253, 247, .72);
+      box-shadow: 0 18px 42px rgba(52, 54, 61, .045), inset 0 1px 0 rgba(255, 255, 255, .75);
+      backdrop-filter: blur(12px);
+    }
+
+    .controls-heading {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 21px;
+    }
+
+    .controls-heading h2 {
+      margin: 4px 0 0;
+      font-family: var(--serif);
+      font-size: 27px;
+      font-weight: 500;
+      letter-spacing: -.035em;
+    }
+
+    .section-label { color: #8490a0; }
+
+    .settings-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fffdf8;
+      color: #59657b;
+      font-size: 10px;
+      font-weight: 720;
+      cursor: pointer;
+      transition: background .15s ease, border-color .15s ease;
+    }
+
+    .settings-button:hover { border-color: #d4cdbc; background: #f8f3e9; }
+    .settings-button svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+
+    .control-group + .control-group {
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(23, 37, 68, .085);
+    }
+
+    .group-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .group-head h3 {
+      margin: 0;
+      color: #34415b;
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: .01em;
+    }
+
+    .group-hint {
+      margin: 0;
+      color: #9097a4;
+      font-size: 10px;
+      line-height: 1.4;
+    }
+
+    .mode-row, .choice-row {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .segmented {
+      display: inline-flex;
+      gap: 3px;
+      padding: 3px;
+      border: 1px solid #e8e2d7;
+      border-radius: 11px;
+      background: #f2eee6;
+    }
+
+    .segment {
+      min-height: 30px;
+      padding: 0 11px;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      color: #7e8795;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .15s ease, color .15s ease, box-shadow .15s ease;
+    }
+
+    .segment[aria-pressed="true"] {
+      background: #fffdf7;
+      color: var(--ink);
+      box-shadow: 0 1px 4px rgba(34, 42, 56, .12);
+    }
+
+    .rotation-control {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-left: auto;
+      color: #697589;
+      font-size: 10px;
+      font-weight: 680;
+    }
+
+    .rotation-control select {
+      min-height: 35px;
+      padding: 0 26px 0 10px;
+      border: 1px solid #e3ddd1;
+      border-radius: 9px;
+      background-color: #fffdf8;
+      color: #35415a;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .rotation-control select:disabled { opacity: .5; cursor: not-allowed; }
+
+    .scene-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .scene-card {
+      display: flex;
+      min-width: 0;
+      align-items: center;
+      gap: 8px;
+      padding: 6px;
+      border: 1px solid #e8e2d7;
+      border-radius: 11px;
+      background: rgba(255, 255, 255, .51);
+      color: #576277;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color .15s ease, background .15s ease, transform .15s ease, box-shadow .15s ease;
+    }
+
+    .scene-card:hover { border-color: #c5ccdc; background: #fffdf8; transform: translateY(-1px); }
+    .scene-card[aria-pressed="true"] {
+      border-color: #687fcc;
+      background: #fffdf8;
+      color: #1a2a4b;
+      box-shadow: 0 0 0 2px rgba(86, 125, 228, .12);
+    }
+
+    .scene-thumb {
+      position: relative;
+      display: block;
+      width: 34px;
+      height: 34px;
+      flex: 0 0 auto;
+      overflow: hidden;
+      border-radius: 8px;
+      background:
+        radial-gradient(circle at 70% 20%, rgba(255, 255, 255, .55), transparent 35%),
+        linear-gradient(145deg, var(--scene-light), var(--scene-dark));
+    }
+
+    .scene-thumb img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .scene-name {
+      overflow: hidden;
+      font-size: 10px;
+      font-weight: 730;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .scene-card[data-scene="bicycle"] .scene-thumb { --scene-light: #f2ad66; --scene-dark: #604a70; }
+    .scene-card[data-scene="forest"] .scene-thumb { --scene-light: #a8ce8d; --scene-dark: #426b58; }
+    .scene-card[data-scene="coding"] .scene-thumb { --scene-light: #7c91df; --scene-dark: #3c496e; }
+    .scene-card[data-scene="kitten"] .scene-thumb { --scene-light: #e6a3a5; --scene-dark: #6d6b91; }
+    .scene-card[data-scene="landscape"] .scene-thumb { --scene-light: #a5c68a; --scene-dark: #526a65; }
+    .scene-card[data-scene="cosmos"] .scene-thumb { --scene-light: #8e8ad2; --scene-dark: #292c61; }
+    .scene-card[data-scene="ocean"] .scene-thumb { --scene-light: #83d8d1; --scene-dark: #245879; }
+    .scene-card[data-scene="aurora"] .scene-thumb { --scene-light: #b2e6d2; --scene-dark: #355678; }
+
+    .mode-note {
+      min-height: 15px;
+      margin: 9px 1px 0;
+      color: #8c94a1;
+      font-size: 10px;
+      line-height: 1.45;
+    }
+
+    .secondary-controls {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 20px;
+    }
+
+    .setting-row {
+      display: flex;
+      min-width: 0;
+      align-items: center;
+      justify-content: space-between;
+      gap: 9px;
+    }
+
+    .setting-copy { min-width: 0; }
+
+    .setting-title {
+      display: block;
+      color: #3e4a62;
+      font-size: 11px;
+      font-weight: 740;
+    }
+
+    .setting-subtitle {
+      display: block;
+      margin-top: 3px;
+      color: #9299a6;
+      font-size: 9px;
+      line-height: 1.35;
+    }
+
+    .switch {
+      position: relative;
+      width: 35px;
+      height: 20px;
+      flex: 0 0 auto;
+      padding: 0;
+      border: 0;
+      border-radius: 999px;
+      background: #d7d9da;
+      cursor: pointer;
+      transition: background .18s ease;
+    }
+
+    .switch::after {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #fffef9;
+      box-shadow: 0 1px 2px rgba(20, 31, 47, .22);
+      content: "";
+      transition: transform .18s ease;
+    }
+
+    .switch[aria-checked="true"] { background: #607dd0; }
+    .switch[aria-checked="true"]::after { transform: translateX(15px); }
+    .ambient-switch[aria-checked="true"] { background: #45536f; }
+    .switch:disabled { cursor: not-allowed; opacity: .56; }
+
+    .cycle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .cycle-button {
+      display: inline-flex;
+      min-height: 36px;
+      flex: 0 0 auto;
+      align-items: center;
+      gap: 8px;
+      padding: 0 12px;
+      border: 1px solid #d9deec;
+      border-radius: 10px;
+      background: #f2f4fb;
+      color: #3b528f;
+      font-size: 11px;
+      font-weight: 740;
+      cursor: pointer;
+      transition: background .15s ease, transform .15s ease;
+    }
+
+    .cycle-button:hover { background: #e9edfa; transform: translateY(-1px); }
+    .cycle-button svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; }
+
+    .size-control .segment { min-width: 53px; }
+
+    .device-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 15px 1px 0;
+      padding: 12px 13px;
+      border: 1px solid rgba(228, 180, 72, .25);
+      border-radius: 12px;
+      background: rgba(244, 221, 161, .15);
+      color: #6d654e;
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    .device-note svg {
+      width: 15px;
+      height: 15px;
+      flex: 0 0 auto;
+      margin-top: 1px;
+      fill: none;
+      stroke: #b48726;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.7;
+    }
+
+    .device-note strong { color: #554a2e; }
+
+    @media (max-width: 820px) {
+      .workspace { grid-template-columns: minmax(0, 1fr); gap: 34px; }
+      .preview-column { padding-top: 0; }
+      .watch-case { width: min(76vw, 390px); }
+      .watch-case[data-size="41"] { width: min(70vw, 360px); }
+      .controls-card { width: min(560px, 100%); margin: 0 auto; }
+      .intro { align-items: flex-start; flex-direction: column; gap: 18px; padding-top: 30px; }
+      .install-grid { grid-template-columns: 1fr; gap: 22px; }
+      .download-button { align-self: flex-start; }
+    }
+
+    @media (max-width: 520px) {
+      .page { width: min(100% - 28px, 440px); padding-top: 16px; }
+      .topbar { padding-bottom: 18px; }
+      .topbar-note { max-width: 130px; text-align: right; line-height: 1.45; }
+      .intro { padding: 27px 0 23px; }
+      h1 { font-size: clamp(38px, 12vw, 54px); }
+      .preview-label { margin-bottom: 15px; font-size: 9px; }
+      .watch-case { width: min(90vw, 380px); }
+      .watch-case[data-size="41"] { width: min(82vw, 350px); }
+      .controls-card { padding: 19px 15px 16px; border-radius: 17px; }
+      .scene-grid { gap: 6px; }
+      .scene-card { gap: 6px; padding: 5px; }
+      .scene-thumb { width: 29px; height: 29px; }
+      .scene-name { font-size: 9px; }
+      .rotation-control { gap: 6px; }
+      .rotation-control select { padding-left: 8px; padding-right: 20px; }
+      .secondary-controls { gap: 11px 12px; }
+      .setting-title { font-size: 10px; }
+      .setting-subtitle { font-size: 8px; }
+      .watch-foot { width: min(90vw, 380px); }
+    }
+
+    @media (max-width: 370px) {
+      .mode-row { align-items: flex-start; flex-direction: column; }
+      .rotation-control { width: 100%; justify-content: space-between; margin-left: 0; }
+      .scene-name { font-size: 8px; }
+      .scene-thumb { width: 26px; height: 26px; }
+      .secondary-controls { grid-template-columns: 1fr; }
+      .watch-foot { font-size: 10px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">F&amp;T</span><span>Fold &amp; Tick</span></div>
+      <div class="topbar-note">A small world on your wrist</div>
+    </header>
+
+    <section class="intro" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Wear OS · watch face</p>
+        <h1 id="page-title">A little art<br>for every hour.</h1>
+      </div>
+      <a class="download-button" href="https://github.com/sgerner/fold-and-tick/releases/latest/download/Fold-and-Tick.apk" target="_blank" rel="noreferrer">
+        Download latest APK
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9m0 0 3.5-3.5M10 12.5 6.5 9M4 15.5v1h12v-1"/></svg>
+      </a>
+    </section>
+
+    <p class="preview-label">Design preview · sample complication data</p>
+
+    <section class="workspace" aria-label="Watch face preview and controls">
+      <div class="preview-column">
+        <div class="watch-wrap">
+          <div class="watch-case" id="watchCase" data-size="45" aria-label="45 millimeter watch preview">
+            <div class="watch-screen motion-on" id="watchScreen" aria-label="Fold and Tick watch face">
+              <div class="scene-layer" data-scene="bicycle" id="sceneArt" aria-hidden="true">
+                <img class="scene-background" src="./assets/scene_bicycle.png" alt="">
+                <div class="scene-motion-wrap"><img class="scene-motion" src="./assets/motion_bicycle.png" alt=""></div>
+                <img class="scene-cursor" src="./assets/blink_coding.png" alt="" hidden>
+                <img class="scene-drift" src="./assets/drift_bicycle.png" alt="">
+              </div>
+              <div class="day-chip" id="dateText">Wednesday, Oct 25</div>
+              <div class="clock-display">
+                <span class="time" id="timeText" role="img" aria-label="08:41"></span>
+              </div>
+              <div class="complications" role="group" aria-label="Sample complications">
+                <div class="complication battery-chip" role="img" aria-label="Sample battery, 82 percent">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="7" width="16" height="10" rx="2"/><path d="M21 10v4M6.5 10v4m3-4v4m3-4v4"/></svg>
+                  <span class="chip-copy"><span class="chip-value">82%</span></span>
+                </div>
+                <div class="complication steps-chip" role="img" aria-label="Sample step count, 6,248 steps">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.7c1.1.4 1.8 1.5 1.8 2.7 0 .8-.3 1.4-.8 2.1L6.3 12c-.6.9-.9 1.7-.9 2.7 0 2.2 1.8 4 4 4 1 0 1.8-.3 2.7-.9l2.8-1.8c.7-.5 1.3-.8 2.1-.8 1.2 0 2.3.7 2.7 1.8"/><path d="m9.3 7.5 2.1 1.1m-5.1 5.8 2.1.1m4.3 2.1.8-2"/></svg>
+                  <span class="chip-copy"><span class="chip-value">6,248</span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="watch-foot">
+          <strong><span class="live-dot" aria-hidden="true"></span><span id="activeSceneLabel">Bicycle</span></strong>
+          <span id="rotationStatus">AUTO · EVERY 60 MIN</span>
+        </div>
+        <p class="watch-caption">Time follows your device clock · 6,248 steps and 82% are examples</p>
+      </div>
+
+      <section class="controls-card" aria-labelledby="controls-title">
+        <div class="controls-heading">
+          <div>
+            <span class="section-label">01 / Personalize</span>
+            <h2 id="controls-title">Make it yours</h2>
+          </div>
+          <button class="settings-button" id="resetButton" type="button" title="Restore preview defaults">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4.5 7.5A6 6 0 1 1 4 11m.5-7v3.5H8"/></svg>
+            Reset
+          </button>
+        </div>
+
+        <div class="control-group">
+          <div class="group-head">
+            <h3>Scene selection</h3>
+            <span class="mini-label" id="modeBadge" style="color:#687fcc">Automatic</span>
+          </div>
+          <div class="mode-row">
+            <div class="segmented" role="group" aria-label="Scene mode">
+              <button class="segment mode-option" data-mode="auto" type="button" aria-pressed="true">Automatic</button>
+              <button class="segment mode-option" data-mode="manual" type="button" aria-pressed="false">Manual</button>
+            </div>
+            <label class="rotation-control" for="rotationSelect">
+              <span>Rotate every</span>
+              <select id="rotationSelect" aria-label="Rotate scene every">
+                <option value="15">15 min</option>
+                <option value="30">30 min</option>
+                <option value="60" selected>60 min</option>
+                <option value="180">3 hours</option>
+                <option value="360">6 hours</option>
+                <option value="1440">Daily</option>
+              </select>
+            </label>
+          </div>
+          <p class="mode-note" id="modeNote">Automatic rotation follows your local calendar, including midnight.</p>
+          <div class="scene-grid" role="group" aria-label="Choose a scene">
+            <button class="scene-card" data-scene="bicycle" type="button" aria-pressed="true">
+              <span class="scene-thumb" aria-hidden="true"><img src="./assets/icon_scene_bicycle.png" alt=""></span><span class="scene-name">Bicycle</span>
+            </button>
+            <button class="scene-card" data-scene="forest" type="button" aria-pressed="false">
+              <span class="scene-thumb" aria-hidden="true"><img src="./assets/icon_scene_forest.png" alt=""></span><span class="scene-name">Forest</span>
+            </button>
+            <button class="scene-card" data-scene="coding" type="button" aria-pressed="false">
+              <span class="scene-thumb" aria-hidden="true"><img src="./assets/icon_scene_coding.png" alt=""></span><span class="scene-name">Coding</span>
+            </button>
+            <button class="scene-card" data-scene="kitten" type="button" aria-pressed="false">
+              <span class="scene-thumb" aria-hidden="true"><img src="./assets/icon_scene_kitten.png" alt=""></span><span class="scene-name">Kitten</span>
+            </button>
+            <button class="scene-card" data-scene="landscape" type="button" aria-pressed="false">
+              <span class="scene-thumb" aria-hidden="true"><img src="./assets/icon_scene_landscape.png" alt=""></span><span class="scene-name">Landscape</span>
+            </button>
+            <button class="scene-card" data-scene="cosmos" type="button" aria-pressed="false">
+              <span class="scene-thumb" aria-hidden="true"><img src="./assets/icon_scene_cosmos.png" alt=""></span><span class="scene-name">Cosmos</span>
+            </button>
+            <button class="scene-card" data-scene="ocean" type="button" aria-pressed="false">
+              <span class="scene-thumb" aria-hidden="true"><img src="./assets/icon_scene_ocean.png" alt=""></span><span class="scene-name">Ocean</span>
+            </button>
+            <button class="scene-card" data-scene="aurora" type="button" aria-pressed="false">
+              <span class="scene-thumb" aria-hidden="true"><img src="./assets/icon_scene_aurora.png" alt=""></span><span class="scene-name">Aurora</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="cycle-row">
+            <div class="setting-copy">
+              <span class="setting-title">Try the next scene</span>
+              <span class="setting-subtitle">Preview it now, without waiting</span>
+            </div>
+            <button class="cycle-button" id="cycleButton" type="button">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 7V3.8l-2 2A6.3 6.3 0 0 0 3.9 8m.1 5v3.2l2-2A6.3 6.3 0 0 0 16.1 12"/></svg>
+              Cycle now
+            </button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="group-head">
+            <h3>Display</h3>
+            <span class="group-hint">Saved in this browser</span>
+          </div>
+          <div class="secondary-controls">
+            <div class="setting-row">
+              <span class="setting-copy"><span class="setting-title">Ambient mode</span><span class="setting-subtitle">Dim, always-on look</span></span>
+              <button class="switch ambient-switch" id="ambientToggle" type="button" role="switch" aria-checked="false" aria-label="Ambient mode"></button>
+            </div>
+            <div class="setting-row">
+              <span class="setting-copy"><span class="setting-title">Scene motion</span><span class="setting-subtitle">Art and parallax move</span></span>
+              <button class="switch" id="motionToggle" type="button" role="switch" aria-checked="true" aria-label="Scene motion"></button>
+            </div>
+            <div class="setting-row">
+              <span class="setting-copy"><span class="setting-title">Time format</span></span>
+              <div class="segmented" role="group" aria-label="Time format">
+                <button class="segment hour-option" data-hours="12" type="button" aria-pressed="true">12h</button>
+                <button class="segment hour-option" data-hours="24" type="button" aria-pressed="false">24h</button>
+              </div>
+            </div>
+            <div class="setting-row">
+              <span class="setting-copy"><span class="setting-title">Case size</span></span>
+              <div class="segmented size-control" role="group" aria-label="Watch case size">
+                <button class="segment size-option" data-size="41" type="button" aria-pressed="false">41 mm</button>
+                <button class="segment size-option" data-size="45" type="button" aria-pressed="true">45 mm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="device-note">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.2"/><path d="M10 9v4m0-6.1h.01"/></svg>
+          <span><strong>Preview only.</strong> These browser controls help explore the design; they do not configure a watch device.</span>
+        </div>
+      </section>
+    </section>
+
+    <section class="install-section" aria-labelledby="install-title">
+      <div class="install-heading">
+        <div>
+          <p class="install-kicker">Install Fold &amp; Tick</p>
+          <h2 id="install-title">Take it to your watch.</h2>
+        </div>
+      </div>
+      <div class="install-grid">
+        <div class="install-compat">
+          <h3>Compatibility</h3>
+          <p>Wear OS 5 or newer. Supports both 41 mm and 45 mm Google Pixel Watch 3 models.</p>
+          <a class="source-link" href="https://github.com/sgerner/fold-and-tick" target="_blank" rel="noreferrer">View source on GitHub</a>
+        </div>
+        <div class="install-steps">
+          <h3>Install over Wi-Fi</h3>
+          <ol>
+            <li>On the watch, open <strong>Settings → System → About → Versions → Build number</strong>, then tap Build number seven times to enable Developer options.</li>
+            <li>In Developer options, enable <strong>ADB debugging</strong> and <strong>Wireless debugging</strong>. Connect the watch and computer to the same Wi-Fi network.</li>
+            <li>On the watch’s Wireless debugging screen, choose Pair new device. Run <code>adb pair WATCH_IP:PAIRING_PORT</code> and enter the pairing code shown on the watch. The pairing port and debug port are different.</li>
+            <li>Connect with the separate debug port, then install the downloaded APK:<br><code>adb connect WATCH_IP:DEBUG_PORT</code><br><code>adb install -r Fold-and-Tick.apk</code></li>
+            <li>On the watch, long-press the current face, choose <strong>Add new</strong>, then select <strong>Fold &amp; Tick</strong>.</li>
+          </ol>
+          <p>Previously installed a local debug build? Uninstall it once before switching to public releases because the signing key differs. This resets this face’s customization. Future public releases update with <code>adb install -r</code>.</p>
+          <p>Install on the watch, not the phone. You can turn wireless debugging off afterward.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var scenes = [
+        { id: "bicycle", label: "Bicycle" },
+        { id: "forest", label: "Forest" },
+        { id: "coding", label: "Coding" },
+        { id: "kitten", label: "Kitten" },
+        { id: "landscape", label: "Landscape" },
+        { id: "cosmos", label: "Cosmos" },
+        { id: "ocean", label: "Ocean" },
+        { id: "aurora", label: "Aurora" }
+      ];
+      var storageKey = "fold-and-tick-preview-v1";
+      var motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+      var defaults = {
+        mode: "auto",
+        scene: 0,
+        rotation: 60,
+        ambient: false,
+        motion: !motionPreference.matches,
+        hours: 12,
+        size: 45
+      };
+      var state = readState();
+      if (motionPreference.matches) state.motion = false;
+      var autoSlot = getRotationSlot(new Date());
+      var previewOffset = 0;
+      var activeSceneId = "";
+      var renderedClock = "";
+
+      var watchCase = document.getElementById("watchCase");
+      var watchScreen = document.getElementById("watchScreen");
+      var sceneArt = document.getElementById("sceneArt");
+      var timeText = document.getElementById("timeText");
+      var dateText = document.getElementById("dateText");
+      var activeSceneLabel = document.getElementById("activeSceneLabel");
+      var rotationStatus = document.getElementById("rotationStatus");
+      var modeBadge = document.getElementById("modeBadge");
+      var modeNote = document.getElementById("modeNote");
+      var rotationSelect = document.getElementById("rotationSelect");
+      var ambientToggle = document.getElementById("ambientToggle");
+      var motionToggle = document.getElementById("motionToggle");
+
+      function readState() {
+        try {
+          var raw = window.localStorage.getItem(storageKey);
+          if (!raw) return Object.assign({}, defaults);
+          var saved = JSON.parse(raw);
+          var next = Object.assign({}, defaults);
+          if (saved.mode === "auto" || saved.mode === "manual") next.mode = saved.mode;
+          if (Number.isInteger(saved.scene) && saved.scene >= 0 && saved.scene < scenes.length) {
+            next.scene = saved.scene;
+          } else {
+            var savedSceneId = typeof saved.scene === "string" ? saved.scene : saved.sceneId;
+            if (savedSceneId === "baking") savedSceneId = "forest";
+            if (savedSceneId === "garden") savedSceneId = "landscape";
+            var savedSceneIndex = scenes.findIndex(function (scene) { return scene.id === savedSceneId; });
+            if (savedSceneIndex !== -1) next.scene = savedSceneIndex;
+          }
+          if ([15, 30, 60, 180, 360, 1440].indexOf(Number(saved.rotation)) !== -1) next.rotation = Number(saved.rotation);
+          if (typeof saved.ambient === "boolean") next.ambient = saved.ambient;
+          if (typeof saved.motion === "boolean") next.motion = saved.motion;
+          if (saved.hours === 12 || saved.hours === 24) next.hours = saved.hours;
+          if (saved.size === 41 || saved.size === 45) next.size = saved.size;
+          return next;
+        } catch (error) {
+          return Object.assign({}, defaults);
+        }
+      }
+
+      function saveState() {
+        try { window.localStorage.setItem(storageKey, JSON.stringify(state)); } catch (error) { /* Storage can be unavailable for file previews. */ }
+      }
+
+      function getAbsoluteLocalMinute(now) {
+        var localEpochDay = Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86400000);
+        return localEpochDay * 1440 + now.getHours() * 60 + now.getMinutes();
+      }
+
+      function getRotationSlot(now) {
+        return Math.floor(getAbsoluteLocalMinute(now) / Number(state.rotation));
+      }
+
+      function getScheduledScene(now) {
+        return getRotationSlot(now) % scenes.length;
+      }
+
+      function getActiveScene(now) {
+        if (state.mode === "manual") return state.scene;
+        return (getScheduledScene(now) + previewOffset) % scenes.length;
+      }
+
+      function setSceneArt(sceneId) {
+        if (activeSceneId === sceneId) return;
+        activeSceneId = sceneId;
+        sceneArt.setAttribute("data-scene", sceneId);
+        sceneArt.classList.remove("asset-missing");
+        [
+          [".scene-background", "scene_" + sceneId],
+          [".scene-motion", "motion_" + sceneId],
+          [".scene-drift", "drift_" + sceneId]
+        ].forEach(function (asset) {
+          var image = sceneArt.querySelector(asset[0]);
+          image.hidden = false;
+          image.src = "./assets/" + asset[1] + ".png";
+        });
+        var cursor = sceneArt.querySelector(".scene-cursor");
+        cursor.hidden = sceneId !== "coding";
+        if (sceneId === "coding") cursor.src = "./assets/blink_coding.png";
+      }
+
+      function updateClock(now) {
+        var deviceHour = now.getHours();
+        var displayHour = state.hours === 12 ? ((deviceHour + 11) % 12) + 1 : deviceHour;
+        var hour = String(displayHour).padStart(2, "0");
+        var minute = String(now.getMinutes()).padStart(2, "0");
+        var timeValue = hour + ":" + minute;
+        if (timeValue !== renderedClock) {
+          timeText.replaceChildren();
+          timeValue.split("").forEach(function (character) {
+            var glyph = document.createElement("img");
+            glyph.alt = "";
+            if (character === ":") {
+              glyph.className = "clock-colon";
+              glyph.src = "./assets/clock_colon.png";
+            } else {
+              glyph.src = "./assets/clock_" + character + ".png";
+            }
+            timeText.appendChild(glyph);
+          });
+          renderedClock = timeValue;
+        }
+        timeText.setAttribute("aria-label", timeValue);
+        dateText.textContent = new Intl.DateTimeFormat(undefined, {
+          weekday: "long",
+          month: "short",
+          day: "numeric"
+        }).format(now);
+      }
+
+      function updateControls() {
+        document.querySelectorAll(".mode-option").forEach(function (button) {
+          button.setAttribute("aria-pressed", String(button.getAttribute("data-mode") === state.mode));
+        });
+        document.querySelectorAll(".hour-option").forEach(function (button) {
+          button.setAttribute("aria-pressed", String(Number(button.getAttribute("data-hours")) === state.hours));
+        });
+        document.querySelectorAll(".size-option").forEach(function (button) {
+          button.setAttribute("aria-pressed", String(Number(button.getAttribute("data-size")) === state.size));
+        });
+        document.querySelectorAll(".scene-card").forEach(function (button, index) {
+          var selected = state.mode === "manual" && index === state.scene;
+          button.setAttribute("aria-pressed", String(selected));
+        });
+        rotationSelect.value = String(state.rotation);
+        rotationSelect.disabled = state.mode !== "auto";
+        modeBadge.textContent = state.mode === "auto" ? "Automatic" : "Manual";
+        modeBadge.style.color = state.mode === "auto" ? "#687fcc" : "#cd7259";
+        modeNote.textContent = state.mode === "auto"
+          ? "Automatic rotation follows your local calendar, including midnight."
+          : "Choose a scene below or use Cycle now to step through them.";
+        ambientToggle.setAttribute("aria-checked", String(state.ambient));
+        motionToggle.setAttribute("aria-checked", String(state.motion && !motionPreference.matches));
+        motionToggle.disabled = motionPreference.matches;
+        watchCase.setAttribute("data-size", String(state.size));
+        watchCase.setAttribute("aria-label", state.size + " millimeter watch preview");
+        watchScreen.classList.toggle("ambient", state.ambient);
+        watchScreen.classList.toggle("motion-on", state.motion && !motionPreference.matches);
+        document.querySelector(".preview-column").setAttribute("aria-label", state.size + " millimeter watch preview");
+      }
+
+      function updateScene(now) {
+        var active = getActiveScene(now);
+        var scene = scenes[active];
+        setSceneArt(scene.id);
+        activeSceneLabel.textContent = scene.label;
+        if (state.mode === "auto") {
+          rotationStatus.textContent = "AUTO · EVERY " + (Number(state.rotation) === 1440 ? "DAY" : state.rotation + " MIN");
+        } else {
+          rotationStatus.textContent = "MANUAL SCENE";
+        }
+      }
+
+      function render() {
+        var now = new Date();
+        var nextSlot = getRotationSlot(now);
+        if (state.mode === "auto" && nextSlot !== autoSlot) previewOffset = 0;
+        autoSlot = nextSlot;
+        updateClock(now);
+        updateControls();
+        updateScene(now);
+      }
+
+      function chooseManualScene(index) {
+        state.mode = "manual";
+        state.scene = index;
+        previewOffset = 0;
+        saveState();
+        render();
+      }
+
+      document.querySelectorAll(".scene-card").forEach(function (button, index) {
+        button.addEventListener("click", function () { chooseManualScene(index); });
+      });
+
+      document.querySelectorAll(".mode-option").forEach(function (button) {
+        button.addEventListener("click", function () {
+          state.mode = button.getAttribute("data-mode");
+          previewOffset = 0;
+          autoSlot = getRotationSlot(new Date());
+          saveState();
+          render();
+        });
+      });
+
+      rotationSelect.addEventListener("change", function () {
+        state.rotation = Number(rotationSelect.value);
+        previewOffset = 0;
+        autoSlot = getRotationSlot(new Date());
+        saveState();
+        render();
+      });
+
+      document.getElementById("cycleButton").addEventListener("click", function () {
+        if (state.mode === "manual") {
+          state.scene = (state.scene + 1) % scenes.length;
+        } else {
+          previewOffset = (previewOffset + 1) % scenes.length;
+        }
+        saveState();
+        render();
+      });
+
+      ambientToggle.addEventListener("click", function () {
+        state.ambient = !state.ambient;
+        saveState();
+        render();
+      });
+
+      motionToggle.addEventListener("click", function () {
+        if (motionPreference.matches) return;
+        state.motion = !state.motion;
+        saveState();
+        render();
+      });
+
+      document.querySelectorAll(".hour-option").forEach(function (button) {
+        button.addEventListener("click", function () {
+          state.hours = Number(button.getAttribute("data-hours"));
+          saveState();
+          render();
+        });
+      });
+
+      document.querySelectorAll(".size-option").forEach(function (button) {
+        button.addEventListener("click", function () {
+          state.size = Number(button.getAttribute("data-size"));
+          saveState();
+          render();
+        });
+      });
+
+      document.getElementById("resetButton").addEventListener("click", function () {
+        state = Object.assign({}, defaults);
+        previewOffset = 0;
+        autoSlot = getRotationSlot(new Date());
+        saveState();
+        render();
+      });
+
+      document.querySelectorAll(".scene-layer img, .scene-thumb img").forEach(function (image) {
+        image.addEventListener("error", function () {
+          if (image.classList.contains("scene-background")) image.closest(".scene-layer").classList.add("asset-missing");
+          image.hidden = true;
+        });
+      });
+
+      render();
+      window.setInterval(render, 1000);
+    }());
+  </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Fold &amp; Tick</string>
+
+    <string name="scene_setting_title">Scene</string>
+    <string name="scene_setting_description">Choose a fixed scene, or the starting point of automatic rotation.</string>
+    <string name="scene_bicycle">Bicycle</string>
+    <string name="scene_forest">Forest</string>
+    <string name="scene_coding">Coding</string>
+    <string name="scene_kitten">Kitten</string>
+    <string name="scene_landscape">Landscape</string>
+    <string name="scene_cosmos">Cosmos</string>
+    <string name="scene_ocean">Ocean</string>
+    <string name="scene_aurora">Aurora</string>
+
+    <string name="rotation_setting_title">Scene rotation</string>
+    <string name="rotation_setting_description">Set how often Fold &amp; Tick changes scenes, or keep one scene selected.</string>
+    <string name="motion_setting_title">Scene motion</string>
+    <string name="motion_setting_description">Turn scene movement on or off.</string>
+    <string name="motion_enabled">On</string>
+    <string name="motion_disabled">Off</string>
+    <string name="rotation_fixed">Keep selected scene</string>
+    <string name="rotation_15">Every 15 minutes</string>
+    <string name="rotation_30">Every 30 minutes</string>
+    <string name="rotation_60">Every hour</string>
+    <string name="rotation_180">Every 3 hours</string>
+    <string name="rotation_360">Every 6 hours</string>
+    <string name="rotation_1440">Every day</string>
+
+    <string name="date_slot_label">Date</string>
+    <string name="left_slot_label">Left complication</string>
+    <string name="right_slot_label">Right complication</string>
+    <string name="date_screen_reader">Date complication: %1$s %2$s</string>
+    <string name="left_screen_reader">Left complication: %1$s %2$s</string>
+    <string name="right_screen_reader">Right complication: %1$s %2$s</string>
+</resources>
