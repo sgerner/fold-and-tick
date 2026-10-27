@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rebuild the condensed, warm ombré bitmap clock (Pillow, DejaVu Sans Bold)."""
+"""Rebuild the ombré clock and its Origami and Woodblock variants."""
 from pathlib import Path
 import argparse
 from PIL import Image, ImageDraw, ImageFont
@@ -37,7 +37,39 @@ def main():
             draw.line((0,y,width*scale,y),fill=(*color,255))
         image.putalpha(mask)
         image.resize((width,height),Image.Resampling.LANCZOS).save(OUT / f'clock_{"colon" if char == ":" else char}.png')
-    print(f'Generated 11 clock glyphs in {OUT}')
+
+        paper = Image.new('RGBA', mask.size)
+        paper_draw = ImageDraw.Draw(paper)
+        paper_stops = [(255,248,225),(255,225,178),(255,195,153)]
+        for y in range(height*scale):
+            t=y/(height*scale-1)*2; k=min(int(t),1);f=t-k
+            color=tuple(round(paper_stops[k][i]*(1-f)+paper_stops[k+1][i]*f) for i in range(3))
+            paper_draw.line((0,y,width*scale,y),fill=(*color,255))
+        crease = Image.new('RGBA', mask.size)
+        crease_draw = ImageDraw.Draw(crease)
+        crease_draw.polygon([(0,44*scale),(width*scale,34*scale),
+                             (width*scale,38*scale),(0,48*scale)], fill=(113,65,39,22))
+        crease_draw.line([(0,44*scale),(width*scale,34*scale)],
+                         fill=(255,255,241,105),width=2*scale)
+        paper = Image.alpha_composite(paper, crease)
+        paper.putalpha(mask)
+        paper.resize((width,height),Image.Resampling.LANCZOS).save(OUT / f'clock_origami_{"colon" if char == ":" else char}.png')
+
+        wood = Image.new('RGBA', mask.size)
+        wood_draw = ImageDraw.Draw(wood)
+        wood_stops = [(255,249,229),(246,233,204),(222,218,199)]
+        for y in range(height*scale):
+            t=y/(height*scale-1)*2; k=min(int(t),1);f=t-k
+            color=tuple(round(wood_stops[k][i]*(1-f)+wood_stops[k+1][i]*f) for i in range(3))
+            wood_draw.line((0,y,width*scale,y),fill=(*color,255))
+        grain = Image.new('RGBA', mask.size)
+        grain_draw = ImageDraw.Draw(grain)
+        for y in range(12 + ord(char) % 7, height, 16):
+            grain_draw.line((0,y*scale,width*scale,(y-2)*scale),fill=(98,78,51,22),width=scale)
+        wood = Image.alpha_composite(wood, grain)
+        wood.putalpha(mask)
+        wood.resize((width,height),Image.Resampling.LANCZOS).save(OUT / f'clock_woodblock_{"colon" if char == ":" else char}.png')
+    print(f'Generated 33 clock glyphs in {OUT}')
 
 if __name__ == '__main__':
     main()

@@ -11,8 +11,8 @@ android {
         applicationId = "com.foldandtick.watchface"
         minSdk = 34
         targetSdk = 36
-        versionCode = 9
-        versionName = "1.5.0"
+        versionCode = 11
+        versionName = "1.7.0-review"
     }
 
     val releaseStore = providers.environmentVariable("FOLD_TICK_KEYSTORE_PATH").orNull

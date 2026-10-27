@@ -4,13 +4,14 @@
     <Metadata key="PREVIEW_TIME" value="10:08:00" />
 
     <UserConfigurations>
+        <!-- WFF2 allows 20 settings; the per-scene Boolean favorites fit that limit. -->
         <ListConfiguration
             id="art_style"
             displayName="style_setting_title"
             screenReaderText="style_setting_description"
             defaultValue="origami">
             <ListOption id="origami" displayName="style_origami" screenReaderText="style_origami" icon="icon_scene_cosmos" />
-            <ListOption id="woodblock" displayName="style_woodblock" screenReaderText="style_woodblock" icon="icon_scene_woodblock_cosmos" />
+            <ListOption id="woodblock" displayName="style_woodblock" screenReaderText="style_woodblock" icon="icon_scene_woodblock_bicycle" />
             <ListOption id="risograph" displayName="style_risograph" screenReaderText="style_risograph" icon="icon_scene_risograph_cosmos" />
         </ListConfiguration>
         <ListConfiguration
@@ -26,6 +27,19 @@
             <ListOption id="5" displayName="scene_cosmos" screenReaderText="scene_cosmos" icon="icon_scene_cosmos" />
             <ListOption id="6" displayName="scene_ocean" screenReaderText="scene_ocean" icon="icon_scene_ocean" />
             <ListOption id="7" displayName="scene_aurora" screenReaderText="scene_aurora" icon="icon_scene_aurora" />
+        </ListConfiguration>
+        <ListConfiguration
+            id="woodblock_scene"
+            displayName="woodblock_scene_setting_title"
+            screenReaderText="woodblock_scene_setting_description"
+            defaultValue="0">
+            <ListOption id="0" displayName="woodblock_scene_bicycle" screenReaderText="woodblock_scene_bicycle" icon="icon_scene_woodblock_bicycle" />
+            <ListOption id="1" displayName="woodblock_scene_crane" screenReaderText="woodblock_scene_crane" icon="icon_scene_woodblock_crane" />
+            <ListOption id="2" displayName="woodblock_scene_kitten" screenReaderText="woodblock_scene_kitten" icon="icon_scene_woodblock_kitten" />
+            <ListOption id="3" displayName="woodblock_scene_torii" screenReaderText="woodblock_scene_torii" icon="icon_scene_woodblock_torii" />
+            <ListOption id="4" displayName="woodblock_scene_lanterns" screenReaderText="woodblock_scene_lanterns" icon="icon_scene_woodblock_lanterns" />
+            <ListOption id="5" displayName="woodblock_scene_sailboat" screenReaderText="woodblock_scene_sailboat" icon="icon_scene_woodblock_sailboat" />
+            <ListOption id="6" displayName="woodblock_scene_moon_rabbit" screenReaderText="woodblock_scene_moon_rabbit" icon="icon_scene_woodblock_moon_rabbit" />
         </ListConfiguration>
         <ListConfiguration
             id="rotation_period"
@@ -45,6 +59,81 @@
             displayName="motion_setting_title"
             screenReaderText="motion_setting_description"
             defaultValue="TRUE" />
+        <BooleanConfiguration
+            id="favorite_bicycle"
+            displayName="favorite_bicycle_label"
+            screenReaderText="favorite_bicycle_description"
+            defaultValue="TRUE" />
+        <BooleanConfiguration
+            id="favorite_forest"
+            displayName="favorite_forest_label"
+            screenReaderText="favorite_forest_description"
+            defaultValue="TRUE" />
+        <BooleanConfiguration
+            id="favorite_coding"
+            displayName="favorite_coding_label"
+            screenReaderText="favorite_coding_description"
+            defaultValue="TRUE" />
+        <BooleanConfiguration
+            id="favorite_kitten"
+            displayName="favorite_kitten_label"
+            screenReaderText="favorite_kitten_description"
+            defaultValue="TRUE" />
+        <BooleanConfiguration
+            id="favorite_landscape"
+            displayName="favorite_landscape_label"
+            screenReaderText="favorite_landscape_description"
+            defaultValue="TRUE" />
+        <BooleanConfiguration
+            id="favorite_cosmos"
+            displayName="favorite_cosmos_label"
+            screenReaderText="favorite_cosmos_description"
+            defaultValue="TRUE" />
+        <BooleanConfiguration
+            id="favorite_ocean"
+            displayName="favorite_ocean_label"
+            screenReaderText="favorite_ocean_description"
+            defaultValue="TRUE" />
+        <BooleanConfiguration
+            id="favorite_aurora"
+            displayName="favorite_aurora_label"
+            screenReaderText="favorite_aurora_description"
+            defaultValue="TRUE" />
+        <BooleanConfiguration
+            id="favorite_woodblock_bicycle"
+            displayName="favorite_woodblock_bicycle_label"
+            screenReaderText="favorite_woodblock_bicycle_description"
+            defaultValue="TRUE" />
+        <BooleanConfiguration
+            id="favorite_woodblock_crane"
+            displayName="favorite_woodblock_crane_label"
+            screenReaderText="favorite_woodblock_crane_description"
+            defaultValue="TRUE" />
+        <BooleanConfiguration
+            id="favorite_woodblock_kitten"
+            displayName="favorite_woodblock_kitten_label"
+            screenReaderText="favorite_woodblock_kitten_description"
+            defaultValue="TRUE" />
+        <BooleanConfiguration
+            id="favorite_woodblock_torii"
+            displayName="favorite_woodblock_torii_label"
+            screenReaderText="favorite_woodblock_torii_description"
+            defaultValue="TRUE" />
+        <BooleanConfiguration
+            id="favorite_woodblock_lanterns"
+            displayName="favorite_woodblock_lanterns_label"
+            screenReaderText="favorite_woodblock_lanterns_description"
+            defaultValue="TRUE" />
+        <BooleanConfiguration
+            id="favorite_woodblock_sailboat"
+            displayName="favorite_woodblock_sailboat_label"
+            screenReaderText="favorite_woodblock_sailboat_description"
+            defaultValue="TRUE" />
+        <BooleanConfiguration
+            id="favorite_woodblock_moon_rabbit"
+            displayName="favorite_woodblock_moon_rabbit_label"
+            screenReaderText="favorite_woodblock_moon_rabbit_description"
+            defaultValue="TRUE" />
     </UserConfigurations>
 
     <BitmapFonts>
@@ -61,20 +150,47 @@
             <Character name="9" resource="clock_9" width="60" height="96" />
             <Character name=":" resource="clock_colon" width="20" height="96" />
         </BitmapFont>
+        <BitmapFont name="fold_time_origami">
+            <Character name="0" resource="clock_origami_0" width="60" height="96" />
+            <Character name="1" resource="clock_origami_1" width="60" height="96" />
+            <Character name="2" resource="clock_origami_2" width="60" height="96" />
+            <Character name="3" resource="clock_origami_3" width="60" height="96" />
+            <Character name="4" resource="clock_origami_4" width="60" height="96" />
+            <Character name="5" resource="clock_origami_5" width="60" height="96" />
+            <Character name="6" resource="clock_origami_6" width="60" height="96" />
+            <Character name="7" resource="clock_origami_7" width="60" height="96" />
+            <Character name="8" resource="clock_origami_8" width="60" height="96" />
+            <Character name="9" resource="clock_origami_9" width="60" height="96" />
+            <Character name=":" resource="clock_origami_colon" width="20" height="96" />
+        </BitmapFont>
+        <BitmapFont name="fold_time_woodblock">
+            <Character name="0" resource="clock_woodblock_0" width="60" height="96" />
+            <Character name="1" resource="clock_woodblock_1" width="60" height="96" />
+            <Character name="2" resource="clock_woodblock_2" width="60" height="96" />
+            <Character name="3" resource="clock_woodblock_3" width="60" height="96" />
+            <Character name="4" resource="clock_woodblock_4" width="60" height="96" />
+            <Character name="5" resource="clock_woodblock_5" width="60" height="96" />
+            <Character name="6" resource="clock_woodblock_6" width="60" height="96" />
+            <Character name="7" resource="clock_woodblock_7" width="60" height="96" />
+            <Character name="8" resource="clock_woodblock_8" width="60" height="96" />
+            <Character name="9" resource="clock_woodblock_9" width="60" height="96" />
+            <Character name=":" resource="clock_woodblock_colon" width="20" height="96" />
+        </BitmapFont>
     </BitmapFonts>
 
     <Scene>
         <!-- Rotation uses local date/time and changes only on interval boundaries. -->
+        <!-- The eight show_* expressions are shared slot gates; Woodblock uses seven scenes and leaves the coding slot empty. -->
         <Condition>
             <Expressions>
-                <Expression name="show_bicycle"><![CDATA[[CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.scene] == "0" : (([CONFIGURATION.scene] * 1 + floor((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period]))) % 8) == 0]]></Expression>
-                <Expression name="show_forest"><![CDATA[[CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.scene] == "1" : (([CONFIGURATION.scene] * 1 + floor((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period]))) % 8) == 1]]></Expression>
-                <Expression name="show_coding"><![CDATA[[CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.scene] == "2" : (([CONFIGURATION.scene] * 1 + floor((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period]))) % 8) == 2]]></Expression>
-                <Expression name="show_kitten"><![CDATA[[CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.scene] == "3" : (([CONFIGURATION.scene] * 1 + floor((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period]))) % 8) == 3]]></Expression>
-                <Expression name="show_landscape"><![CDATA[[CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.scene] == "4" : (([CONFIGURATION.scene] * 1 + floor((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period]))) % 8) == 4]]></Expression>
-                <Expression name="show_cosmos"><![CDATA[[CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.scene] == "5" : (([CONFIGURATION.scene] * 1 + floor((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period]))) % 8) == 5]]></Expression>
-                <Expression name="show_ocean"><![CDATA[[CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.scene] == "6" : (([CONFIGURATION.scene] * 1 + floor((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period]))) % 8) == 6]]></Expression>
-                <Expression name="show_aurora"><![CDATA[[CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.scene] == "7" : (([CONFIGURATION.scene] * 1 + floor((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period]))) % 8) == 7]]></Expression>
+                <Expression name="show_bicycle"><![CDATA[[CONFIGURATION.art_style] == "origami" ? (([CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.scene] == "0" : ((([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) == 0 ? [CONFIGURATION.scene] == "0" : [CONFIGURATION.favorite_bicycle] == "TRUE" && ((floor((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period])) + ((([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 0 ? 1 : 0)) + (([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 1 ? 1 : 0)) + (([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 2 ? 1 : 0)) + (([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 3 ? 1 : 0)) + (([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 4 ? 1 : 0)) + (([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 5 ? 1 : 0)) + (([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 6 ? 1 : 0)) + (([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 7 ? 1 : 0)))) % ((([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) > 0 ? (([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) : 1) == (0))))) : ([CONFIGURATION.art_style] == "woodblock" ?(([CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.woodblock_scene] == "0" : ((([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_sailboat] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_moon_rabbit] == "TRUE" ? 1 : 0)) == 0 ? [CONFIGURATION.woodblock_scene] == "0" : ([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" && ((floor(((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period]) + ((([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 0 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 1 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 2 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 3 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 4 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_sailboat] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 5 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_moon_rabbit] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 6 ? 1 : 0)))) % (([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_sailboat] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_moon_rabbit] == "TRUE" ? 1 : 0))) == (0))))): (([CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.scene] == "0" : (([CONFIGURATION.scene] * 1 + floor((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period]))) % 8) == 0)))]]></Expression>
+                <Expression name="show_forest"><![CDATA[[CONFIGURATION.art_style] == "origami" ? (([CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.scene] == "1" : ((([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) == 0 ? [CONFIGURATION.scene] == "1" : [CONFIGURATION.favorite_forest] == "TRUE" && ((floor((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period])) + ((([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 0 ? 1 : 0)) + (([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 1 ? 1 : 0)) + (([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 2 ? 1 : 0)) + (([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 3 ? 1 : 0)) + (([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 4 ? 1 : 0)) + (([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 5 ? 1 : 0)) + (([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 6 ? 1 : 0)) + (([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 7 ? 1 : 0)))) % ((([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) > 0 ? (([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) : 1) == (([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0)))))) : ([CONFIGURATION.art_style] == "woodblock" ?(([CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.woodblock_scene] == "1" : ((([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_sailboat] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_moon_rabbit] == "TRUE" ? 1 : 0)) == 0 ? [CONFIGURATION.woodblock_scene] == "1" : ([CONFIGURATION.favorite_woodblock_crane] == "TRUE" && ((floor(((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period]) + ((([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 0 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 1 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 2 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 3 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 4 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_sailboat] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 5 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_moon_rabbit] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 6 ? 1 : 0)))) % (([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_sailboat] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_moon_rabbit] == "TRUE" ? 1 : 0))) == (([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0)))))): (([CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.scene] == "1" : (([CONFIGURATION.scene] * 1 + floor((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period]))) % 8) == 1)))]]></Expression>
+                <Expression name="show_coding"><![CDATA[[CONFIGURATION.art_style] == "origami" ? (([CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.scene] == "2" : ((([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) == 0 ? [CONFIGURATION.scene] == "2" : [CONFIGURATION.favorite_coding] == "TRUE" && ((floor((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period])) + ((([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 0 ? 1 : 0)) + (([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 1 ? 1 : 0)) + (([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 2 ? 1 : 0)) + (([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 3 ? 1 : 0)) + (([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 4 ? 1 : 0)) + (([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 5 ? 1 : 0)) + (([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 6 ? 1 : 0)) + (([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 7 ? 1 : 0)))) % ((([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) > 0 ? (([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) : 1) == (([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0)))))) : ([CONFIGURATION.art_style] == "woodblock" ?(0 == 1): (([CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.scene] == "2" : (([CONFIGURATION.scene] * 1 + floor((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period]))) % 8) == 2)))]]></Expression>
+                <Expression name="show_kitten"><![CDATA[[CONFIGURATION.art_style] == "origami" ? (([CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.scene] == "3" : ((([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) == 0 ? [CONFIGURATION.scene] == "3" : [CONFIGURATION.favorite_kitten] == "TRUE" && ((floor((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period])) + ((([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 0 ? 1 : 0)) + (([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 1 ? 1 : 0)) + (([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 2 ? 1 : 0)) + (([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 3 ? 1 : 0)) + (([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 4 ? 1 : 0)) + (([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 5 ? 1 : 0)) + (([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 6 ? 1 : 0)) + (([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 7 ? 1 : 0)))) % ((([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) > 0 ? (([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) : 1) == (([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0)))))) : ([CONFIGURATION.art_style] == "woodblock" ?(([CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.woodblock_scene] == "2" : ((([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_sailboat] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_moon_rabbit] == "TRUE" ? 1 : 0)) == 0 ? [CONFIGURATION.woodblock_scene] == "2" : ([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" && ((floor(((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period]) + ((([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 0 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 1 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 2 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 3 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 4 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_sailboat] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 5 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_moon_rabbit] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 6 ? 1 : 0)))) % (([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_sailboat] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_moon_rabbit] == "TRUE" ? 1 : 0))) == (([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0)))))): (([CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.scene] == "3" : (([CONFIGURATION.scene] * 1 + floor((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period]))) % 8) == 3)))]]></Expression>
+                <Expression name="show_landscape"><![CDATA[[CONFIGURATION.art_style] == "origami" ? (([CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.scene] == "4" : ((([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) == 0 ? [CONFIGURATION.scene] == "4" : [CONFIGURATION.favorite_landscape] == "TRUE" && ((floor((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period])) + ((([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 0 ? 1 : 0)) + (([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 1 ? 1 : 0)) + (([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 2 ? 1 : 0)) + (([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 3 ? 1 : 0)) + (([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 4 ? 1 : 0)) + (([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 5 ? 1 : 0)) + (([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 6 ? 1 : 0)) + (([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 7 ? 1 : 0)))) % ((([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) > 0 ? (([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) : 1) == (([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0)))))) : ([CONFIGURATION.art_style] == "woodblock" ?(([CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.woodblock_scene] == "3" : ((([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_sailboat] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_moon_rabbit] == "TRUE" ? 1 : 0)) == 0 ? [CONFIGURATION.woodblock_scene] == "3" : ([CONFIGURATION.favorite_woodblock_torii] == "TRUE" && ((floor(((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period]) + ((([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 0 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 1 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 2 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 3 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 4 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_sailboat] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 5 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_moon_rabbit] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 6 ? 1 : 0)))) % (([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_sailboat] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_moon_rabbit] == "TRUE" ? 1 : 0))) == (([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0)))))): (([CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.scene] == "4" : (([CONFIGURATION.scene] * 1 + floor((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period]))) % 8) == 4)))]]></Expression>
+                <Expression name="show_cosmos"><![CDATA[[CONFIGURATION.art_style] == "origami" ? (([CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.scene] == "5" : ((([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) == 0 ? [CONFIGURATION.scene] == "5" : [CONFIGURATION.favorite_cosmos] == "TRUE" && ((floor((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period])) + ((([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 0 ? 1 : 0)) + (([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 1 ? 1 : 0)) + (([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 2 ? 1 : 0)) + (([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 3 ? 1 : 0)) + (([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 4 ? 1 : 0)) + (([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 5 ? 1 : 0)) + (([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 6 ? 1 : 0)) + (([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 7 ? 1 : 0)))) % ((([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) > 0 ? (([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) : 1) == (([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0)))))) : ([CONFIGURATION.art_style] == "woodblock" ?(([CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.woodblock_scene] == "4" : ((([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_sailboat] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_moon_rabbit] == "TRUE" ? 1 : 0)) == 0 ? [CONFIGURATION.woodblock_scene] == "4" : ([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" && ((floor(((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period]) + ((([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 0 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 1 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 2 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 3 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 4 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_sailboat] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 5 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_moon_rabbit] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 6 ? 1 : 0)))) % (([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_sailboat] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_moon_rabbit] == "TRUE" ? 1 : 0))) == (([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0)))))): (([CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.scene] == "5" : (([CONFIGURATION.scene] * 1 + floor((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period]))) % 8) == 5)))]]></Expression>
+                <Expression name="show_ocean"><![CDATA[[CONFIGURATION.art_style] == "origami" ? (([CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.scene] == "6" : ((([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) == 0 ? [CONFIGURATION.scene] == "6" : [CONFIGURATION.favorite_ocean] == "TRUE" && ((floor((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period])) + ((([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 0 ? 1 : 0)) + (([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 1 ? 1 : 0)) + (([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 2 ? 1 : 0)) + (([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 3 ? 1 : 0)) + (([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 4 ? 1 : 0)) + (([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 5 ? 1 : 0)) + (([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 6 ? 1 : 0)) + (([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 7 ? 1 : 0)))) % ((([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) > 0 ? (([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) : 1) == (([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0)))))) : ([CONFIGURATION.art_style] == "woodblock" ?(([CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.woodblock_scene] == "5" : ((([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_sailboat] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_moon_rabbit] == "TRUE" ? 1 : 0)) == 0 ? [CONFIGURATION.woodblock_scene] == "5" : ([CONFIGURATION.favorite_woodblock_sailboat] == "TRUE" && ((floor(((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period]) + ((([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 0 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 1 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 2 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 3 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 4 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_sailboat] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 5 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_moon_rabbit] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 6 ? 1 : 0)))) % (([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_sailboat] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_moon_rabbit] == "TRUE" ? 1 : 0))) == (([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" ? 1 : 0)))))): (([CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.scene] == "6" : (([CONFIGURATION.scene] * 1 + floor((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period]))) % 8) == 6)))]]></Expression>
+                <Expression name="show_aurora"><![CDATA[[CONFIGURATION.art_style] == "origami" ? (([CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.scene] == "7" : ((([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) == 0 ? [CONFIGURATION.scene] == "7" : [CONFIGURATION.favorite_aurora] == "TRUE" && ((floor((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period])) + ((([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 0 ? 1 : 0)) + (([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 1 ? 1 : 0)) + (([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 2 ? 1 : 0)) + (([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 3 ? 1 : 0)) + (([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 4 ? 1 : 0)) + (([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 5 ? 1 : 0)) + (([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 6 ? 1 : 0)) + (([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0) * ([CONFIGURATION.scene] * 1 > 7 ? 1 : 0)))) % ((([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) > 0 ? (([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) : 1) == (([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0)))))) : ([CONFIGURATION.art_style] == "woodblock" ?(([CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.woodblock_scene] == "6" : ((([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_sailboat] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_moon_rabbit] == "TRUE" ? 1 : 0)) == 0 ? [CONFIGURATION.woodblock_scene] == "6" : ([CONFIGURATION.favorite_woodblock_moon_rabbit] == "TRUE" && ((floor(((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period]) + ((([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 0 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 1 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 2 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 3 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 4 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_sailboat] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 5 ? 1 : 0)) + (([CONFIGURATION.favorite_woodblock_moon_rabbit] == "TRUE" ? 1 : 0) * ([CONFIGURATION.woodblock_scene] * 1 > 6 ? 1 : 0)))) % (([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_sailboat] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_moon_rabbit] == "TRUE" ? 1 : 0))) == (([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_sailboat] == "TRUE" ? 1 : 0)))))): (([CONFIGURATION.rotation_period] == "FIXED" ? [CONFIGURATION.scene] == "7" : (([CONFIGURATION.scene] * 1 + floor((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE]) / [CONFIGURATION.rotation_period]))) % 8) == 7)))]]></Expression>
             </Expressions>
             <Compare expression="show_bicycle">
                 <Condition>
@@ -84,45 +200,61 @@
                         <Expression name="style_risograph"><![CDATA[[CONFIGURATION.art_style] == "risograph"]]></Expression>
                     </Expressions>
                     <Compare expression="style_origami">
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="scene_bicycle" />
+                        <Group name="origami_bicycle" x="0" y="0" width="450" height="450" alpha="255">
                             <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="motion_bicycle" />
-                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? ((([SECOND_MILLISECOND] % 10) / 10) * 720 - 300) : 0' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="drift_bicycle" />
-                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 15 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
-                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 10 * cos(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="glass_bicycle" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
+                            <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" &amp;&amp; [CONFIGURATION.rotation_period] != "FIXED" &amp;&amp; (([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) > 1 ? ((((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE])) % [CONFIGURATION.rotation_period]) * 60 + ([SECOND_MILLISECOND] % 60)) &lt; 0.8 ? clamp((((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE])) % [CONFIGURATION.rotation_period]) * 60 + ([SECOND_MILLISECOND] % 60)) / 0.8 * 255, 0, 255) : 255) : 255' mode="TO" />
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="scene_bicycle" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="motion_bicycle" />
+                                <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? ((([SECOND_MILLISECOND] % 10) / 10) * 720 - 300) : 0' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="drift_bicycle" />
+                                <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 15 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                                <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 10 * cos(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="glass_bicycle" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                        </Group>
+                            <PartImage x="0" y="0" width="450" height="450" alpha="0">
+                                <Image resource="origami_ambient" />
+                                <Variant target="alpha" value="255" mode="AMBIENT" />
+                            </PartImage>
                     </Compare>
                     <Compare expression="style_woodblock">
-                        <PartImage x="-25" y="-25" width="500" height="500">
-                            <Image resource="scene_woodblock_bicycle" />
+                        <Group name="woodblock_bicycle" x="0" y="0" width="450" height="450" alpha="255">
                             <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="motion_woodblock_bicycle" />
-                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? ((([SECOND_MILLISECOND] % 10) / 10) * 720 - 300) : 0' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="drift_woodblock_bicycle" />
-                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 15 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
-                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 10 * cos(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="glass_woodblock_bicycle" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                            <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" &amp;&amp; [CONFIGURATION.rotation_period] != "FIXED" &amp;&amp; (([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_sailboat] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_moon_rabbit] == "TRUE" ? 1 : 0)) > 1 ? ((((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE])) % [CONFIGURATION.rotation_period]) * 60 + ([SECOND_MILLISECOND] % 60)) &lt; 0.8 ? clamp((((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE])) % [CONFIGURATION.rotation_period]) * 60 + ([SECOND_MILLISECOND] % 60)) / 0.8 * 255, 0, 255) : 255) : 255' mode="TO" />
+                            <PartImage x="-25" y="-25" width="500" height="500">
+                                <Image resource="scene_woodblock_bicycle" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="motion_woodblock_bicycle" />
+                                <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? ((([SECOND_MILLISECOND] % 10) / 10) * 720 - 300) : 0' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="drift_woodblock_bicycle" />
+                                <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 15 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                                <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 10 * cos(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="glass_woodblock_bicycle" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                        </Group>
+                        <PartImage x="0" y="0" width="450" height="450" alpha="0">
+                            <Image resource="woodblock_ambient" />
+                            <Variant target="alpha" value="255" mode="AMBIENT" />
                         </PartImage>
                     </Compare>
                     <Compare expression="style_risograph">
@@ -156,49 +288,62 @@
                         <Expression name="style_risograph"><![CDATA[[CONFIGURATION.art_style] == "risograph"]]></Expression>
                     </Expressions>
                     <Compare expression="style_origami">
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="scene_forest" />
+                        <Group name="origami_forest" x="0" y="0" width="450" height="450" alpha="255">
                             <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="motion_forest" />
-                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="drift_forest" />
-                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 20 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
-                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * cos(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
-                            <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (40 + 215 * ((sin(rad(360 * ([SECOND_MILLISECOND] % 1))) + 1) / 2)) : 255' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="glass_forest" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
+                            <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" &amp;&amp; [CONFIGURATION.rotation_period] != "FIXED" &amp;&amp; (([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) > 1 ? ((((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE])) % [CONFIGURATION.rotation_period]) * 60 + ([SECOND_MILLISECOND] % 60)) &lt; 0.8 ? clamp((((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE])) % [CONFIGURATION.rotation_period]) * 60 + ([SECOND_MILLISECOND] % 60)) / 0.8 * 255, 0, 255) : 255) : 255' mode="TO" />
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="scene_forest" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="motion_forest" />
+                                <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? ([SECOND_MILLISECOND] % 3 &lt; 1.2 ? -18 * abs(sin(rad(180 * ([SECOND_MILLISECOND] % 3) / 1.2))) : 0) : 0' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="drift_forest" />
+                                <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 20 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                                <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * cos(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                                <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (40 + 215 * ((sin(rad(360 * ([SECOND_MILLISECOND] % 1))) + 1) / 2)) : 255' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="glass_forest" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                        </Group>
+                            <PartImage x="0" y="0" width="450" height="450" alpha="0">
+                                <Image resource="origami_ambient" />
+                                <Variant target="alpha" value="255" mode="AMBIENT" />
+                            </PartImage>
                     </Compare>
                     <Compare expression="style_woodblock">
-                        <PartImage x="-25" y="-25" width="500" height="500">
-                            <Image resource="scene_woodblock_forest" />
-                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 14) / 14))) : -25' mode="TO" />
-                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * cos(rad(360 * ([SECOND_MILLISECOND] % 18) / 18))) : -25' mode="TO" />
+                        <Group name="woodblock_crane" x="0" y="0" width="450" height="450" alpha="255">
                             <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="motion_woodblock_forest" />
-                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="drift_woodblock_forest" />
-                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 20 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
-                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * cos(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
-                            <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (40 + 215 * ((sin(rad(360 * ([SECOND_MILLISECOND] % 1))) + 1) / 2)) : 255' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="glass_woodblock_forest" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                            <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" &amp;&amp; [CONFIGURATION.rotation_period] != "FIXED" &amp;&amp; (([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_sailboat] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_moon_rabbit] == "TRUE" ? 1 : 0)) > 1 ? ((((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE])) % [CONFIGURATION.rotation_period]) * 60 + ([SECOND_MILLISECOND] % 60)) &lt; 0.8 ? clamp((((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE])) % [CONFIGURATION.rotation_period]) * 60 + ([SECOND_MILLISECOND] % 60)) / 0.8 * 255, 0, 255) : 255) : 255' mode="TO" />
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="scene_woodblock_crane" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="motion_woodblock_crane" />
+                                <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 52 * sin(rad(360 * ([SECOND_MILLISECOND] % 12) / 12)) : 0' mode="TO" />
+                                <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 8 * sin(rad(360 * ([SECOND_MILLISECOND] % 12) / 12)) : 0' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="drift_woodblock_crane" />
+                                <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 18 * sin(rad(360 * ([SECOND_MILLISECOND] % 9) / 9)) : 0' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="glass_woodblock_crane" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                        </Group>
+                        <PartImage x="0" y="0" width="450" height="450" alpha="0">
+                            <Image resource="woodblock_ambient" />
+                            <Variant target="alpha" value="255" mode="AMBIENT" />
                         </PartImage>
                     </Compare>
                     <Compare expression="style_risograph">
@@ -235,49 +380,38 @@
                         <Expression name="style_risograph"><![CDATA[[CONFIGURATION.art_style] == "risograph"]]></Expression>
                     </Expressions>
                     <Compare expression="style_origami">
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="scene_coding" />
+                        <Group name="origami_coding" x="0" y="0" width="450" height="450" alpha="255">
                             <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="motion_coding" />
-                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 10 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="drift_coding" />
-                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 15 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
-                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 10 * cos(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="blink_coding" />
-                            <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" ? ([SECOND_MILLISECOND] % 1.2 &lt; 0.6 ? 255 : 0) : 255' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="glass_coding" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                    </Compare>
-                    <Compare expression="style_woodblock">
-                        <PartImage x="-25" y="-25" width="500" height="500">
-                            <Image resource="scene_woodblock_coding" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="motion_woodblock_coding" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="drift_woodblock_coding" />
-                            <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 255 * (floor([SECOND_MILLISECOND] * 2) % 2) : 255' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="glass_woodblock_coding" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
+                            <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" &amp;&amp; [CONFIGURATION.rotation_period] != "FIXED" &amp;&amp; (([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) > 1 ? ((((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE])) % [CONFIGURATION.rotation_period]) * 60 + ([SECOND_MILLISECOND] % 60)) &lt; 0.8 ? clamp((((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE])) % [CONFIGURATION.rotation_period]) * 60 + ([SECOND_MILLISECOND] % 60)) / 0.8 * 255, 0, 255) : 255) : 255' mode="TO" />
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="scene_coding" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="motion_coding" />
+                                <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 10 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="drift_coding" />
+                                <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 15 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                                <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 10 * cos(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="blink_coding" />
+                                <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" ? ([SECOND_MILLISECOND] % 1.2 &lt; 0.6 ? 255 : 0) : 255' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="glass_coding" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                        </Group>
+                            <PartImage x="0" y="0" width="450" height="450" alpha="0">
+                                <Image resource="origami_ambient" />
+                                <Variant target="alpha" value="255" mode="AMBIENT" />
+                            </PartImage>
                     </Compare>
                     <Compare expression="style_risograph">
                         <PartImage x="-25" y="-25" width="500" height="500">
@@ -312,49 +446,65 @@
                         <Expression name="style_risograph"><![CDATA[[CONFIGURATION.art_style] == "risograph"]]></Expression>
                     </Expressions>
                     <Compare expression="style_origami">
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="scene_kitten" />
+                        <Group name="origami_kitten" x="0" y="0" width="450" height="450" alpha="255">
                             <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="motion_kitten" />
-                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 18 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
-                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 8 * sin(rad(360 * ([SECOND_MILLISECOND] % 3) / 3)) : 0' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="drift_kitten" />
-                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-350 + 720 * ([SECOND_MILLISECOND] % 8) / 8) : 0' mode="TO" />
-                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-15 + 20 * sin(rad(180 * ([SECOND_MILLISECOND] % 8) / 8))) : 0' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="glass_kitten" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
+                            <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" &amp;&amp; [CONFIGURATION.rotation_period] != "FIXED" &amp;&amp; (([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) > 1 ? ((((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE])) % [CONFIGURATION.rotation_period]) * 60 + ([SECOND_MILLISECOND] % 60)) &lt; 0.8 ? clamp((((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE])) % [CONFIGURATION.rotation_period]) * 60 + ([SECOND_MILLISECOND] % 60)) / 0.8 * 255, 0, 255) : 255) : 255' mode="TO" />
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="scene_kitten" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="motion_kitten" />
+                                <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (([SECOND_MILLISECOND] % 3) &lt; 0.5 ? 20 * ([SECOND_MILLISECOND] % 3) : (([SECOND_MILLISECOND] % 3) &lt; 1 ? 10 : (([SECOND_MILLISECOND] % 3) &lt; 2 ? 10 * (2 - ([SECOND_MILLISECOND] % 3)) : 0))) : 0' mode="TO" />
+                                <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (([SECOND_MILLISECOND] % 3) &lt; 0.5 ? -10 * ([SECOND_MILLISECOND] % 3) : (([SECOND_MILLISECOND] % 3) &lt; 1 ? -5 : (([SECOND_MILLISECOND] % 3) &lt; 2 ? -5 * (2 - ([SECOND_MILLISECOND] % 3)) : 0))) : 0' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="drift_kitten" />
+                                <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-350 + 720 * ([SECOND_MILLISECOND] % 8) / 8) : 0' mode="TO" />
+                                <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 7 * sin(rad(360 * ([SECOND_MILLISECOND] % 8) / 8)) : 0' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="glass_kitten" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                        </Group>
+                            <PartImage x="0" y="0" width="450" height="450" alpha="0">
+                                <Image resource="origami_ambient" />
+                                <Variant target="alpha" value="255" mode="AMBIENT" />
+                            </PartImage>
                     </Compare>
                     <Compare expression="style_woodblock">
-                        <PartImage x="-25" y="-25" width="500" height="500">
-                            <Image resource="scene_woodblock_kitten" />
-                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 14) / 14))) : -25' mode="TO" />
-                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * cos(rad(360 * ([SECOND_MILLISECOND] % 18) / 18))) : -25' mode="TO" />
+                        <Group name="woodblock_kitten" x="0" y="0" width="450" height="450" alpha="255">
                             <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="motion_woodblock_kitten" />
-                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 18 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
-                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 8 * sin(rad(360 * ([SECOND_MILLISECOND] % 3) / 3)) : 0' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="drift_woodblock_kitten" />
-                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-350 + 720 * ([SECOND_MILLISECOND] % 8) / 8) : 0' mode="TO" />
-                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-15 + 20 * sin(rad(180 * ([SECOND_MILLISECOND] % 8) / 8))) : 0' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="glass_woodblock_kitten" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                            <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" &amp;&amp; [CONFIGURATION.rotation_period] != "FIXED" &amp;&amp; (([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_sailboat] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_moon_rabbit] == "TRUE" ? 1 : 0)) > 1 ? ((((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE])) % [CONFIGURATION.rotation_period]) * 60 + ([SECOND_MILLISECOND] % 60)) &lt; 0.8 ? clamp((((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE])) % [CONFIGURATION.rotation_period]) * 60 + ([SECOND_MILLISECOND] % 60)) / 0.8 * 255, 0, 255) : 255) : 255' mode="TO" />
+                            <PartImage x="-25" y="-25" width="500" height="500">
+                                <Image resource="scene_woodblock_kitten" />
+                                <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 14) / 14))) : -25' mode="TO" />
+                                <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * cos(rad(360 * ([SECOND_MILLISECOND] % 18) / 18))) : -25' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="motion_woodblock_kitten" />
+                                <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 18 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
+                                <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 8 * sin(rad(360 * ([SECOND_MILLISECOND] % 3) / 3)) : 0' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="drift_woodblock_kitten" />
+                                <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-350 + 720 * ([SECOND_MILLISECOND] % 8) / 8) : 0' mode="TO" />
+                                <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-15 + 20 * sin(rad(180 * ([SECOND_MILLISECOND] % 8) / 8))) : 0' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="glass_woodblock_kitten" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                        </Group>
+                        <PartImage x="0" y="0" width="450" height="450" alpha="0">
+                            <Image resource="woodblock_ambient" />
+                            <Variant target="alpha" value="255" mode="AMBIENT" />
                         </PartImage>
                     </Compare>
                     <Compare expression="style_risograph">
@@ -391,47 +541,61 @@
                         <Expression name="style_risograph"><![CDATA[[CONFIGURATION.art_style] == "risograph"]]></Expression>
                     </Expressions>
                     <Compare expression="style_origami">
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="scene_landscape" />
+                        <Group name="origami_landscape" x="0" y="0" width="450" height="450" alpha="255">
                             <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="motion_landscape" />
-                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="drift_landscape" />
-                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 15 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
-                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 10 * cos(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="glass_landscape" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
+                            <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" &amp;&amp; [CONFIGURATION.rotation_period] != "FIXED" &amp;&amp; (([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) > 1 ? ((((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE])) % [CONFIGURATION.rotation_period]) * 60 + ([SECOND_MILLISECOND] % 60)) &lt; 0.8 ? clamp((((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE])) % [CONFIGURATION.rotation_period]) * 60 + ([SECOND_MILLISECOND] % 60)) / 0.8 * 255, 0, 255) : 255) : 255' mode="TO" />
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="scene_landscape" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="motion_landscape" />
+                                <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="drift_landscape" />
+                                <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 40 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                                <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 10 * cos(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="glass_landscape" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                        </Group>
+                            <PartImage x="0" y="0" width="450" height="450" alpha="0">
+                                <Image resource="origami_ambient" />
+                                <Variant target="alpha" value="255" mode="AMBIENT" />
+                            </PartImage>
                     </Compare>
                     <Compare expression="style_woodblock">
-                        <PartImage x="-25" y="-25" width="500" height="500">
-                            <Image resource="scene_woodblock_landscape" />
-                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 14) / 14))) : -25' mode="TO" />
-                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * cos(rad(360 * ([SECOND_MILLISECOND] % 18) / 18))) : -25' mode="TO" />
+                        <Group name="woodblock_torii" x="0" y="0" width="450" height="450" alpha="255">
                             <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="motion_woodblock_landscape" />
-                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="drift_woodblock_landscape" />
-                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 15 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
-                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 10 * cos(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="glass_woodblock_landscape" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                            <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" &amp;&amp; [CONFIGURATION.rotation_period] != "FIXED" &amp;&amp; (([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_sailboat] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_moon_rabbit] == "TRUE" ? 1 : 0)) > 1 ? ((((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE])) % [CONFIGURATION.rotation_period]) * 60 + ([SECOND_MILLISECOND] % 60)) &lt; 0.8 ? clamp((((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE])) % [CONFIGURATION.rotation_period]) * 60 + ([SECOND_MILLISECOND] % 60)) / 0.8 * 255, 0, 255) : 255) : 255' mode="TO" />
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="scene_woodblock_torii" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="motion_woodblock_torii" />
+                                <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 30 * sin(rad(360 * ([SECOND_MILLISECOND] % 11) / 11)) : 0' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="drift_woodblock_torii" />
+                                <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 17 * sin(rad(360 * ([SECOND_MILLISECOND] % 8) / 8)) : 0' mode="TO" />
+                                <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 9 * cos(rad(360 * ([SECOND_MILLISECOND] % 8) / 8)) : 0' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="glass_woodblock_torii" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                        </Group>
+                        <PartImage x="0" y="0" width="450" height="450" alpha="0">
+                            <Image resource="woodblock_ambient" />
+                            <Variant target="alpha" value="255" mode="AMBIENT" />
                         </PartImage>
                     </Compare>
                     <Compare expression="style_risograph">
@@ -467,51 +631,63 @@
                         <Expression name="style_risograph"><![CDATA[[CONFIGURATION.art_style] == "risograph"]]></Expression>
                     </Expressions>
                     <Compare expression="style_origami">
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="scene_cosmos" />
+                        <Group name="origami_cosmos" x="0" y="0" width="450" height="450" alpha="255">
                             <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="drift_cosmos" />
-                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-320 + 740 * ([SECOND_MILLISECOND] % 10) / 10) : 0' mode="TO" />
-                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (320 - 740 * ([SECOND_MILLISECOND] % 10) / 10) : 0' mode="TO" />
-                            <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (40 + 215 * ((sin(rad(360 * ([SECOND_MILLISECOND] % 1))) + 1) / 2)) : 255' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="motion_cosmos" />
-                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-320 + 740 * ([SECOND_MILLISECOND] % 10) / 10) : 0' mode="TO" />
-                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (320 - 740 * ([SECOND_MILLISECOND] % 10) / 10) : 0' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="glass_cosmos" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
+                            <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" &amp;&amp; [CONFIGURATION.rotation_period] != "FIXED" &amp;&amp; (([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) > 1 ? ((((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE])) % [CONFIGURATION.rotation_period]) * 60 + ([SECOND_MILLISECOND] % 60)) &lt; 0.8 ? clamp((((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE])) % [CONFIGURATION.rotation_period]) * 60 + ([SECOND_MILLISECOND] % 60)) / 0.8 * 255, 0, 255) : 255) : 255' mode="TO" />
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="scene_cosmos" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="drift_cosmos" />
+                                <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-320 + 740 * ([SECOND_MILLISECOND] % 10) / 10) : 0' mode="TO" />
+                                <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (180 - 740 * ([SECOND_MILLISECOND] % 10) / 10) : 0' mode="TO" />
+                                <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (40 + 215 * ((sin(rad(360 * ([SECOND_MILLISECOND] % 1))) + 1) / 2)) : 255' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="motion_cosmos" />
+                                <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-320 + 740 * ([SECOND_MILLISECOND] % 10) / 10) : 0' mode="TO" />
+                                <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (180 - 740 * ([SECOND_MILLISECOND] % 10) / 10) : 0' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="glass_cosmos" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                        </Group>
+                            <PartImage x="0" y="0" width="450" height="450" alpha="0">
+                                <Image resource="origami_ambient" />
+                                <Variant target="alpha" value="255" mode="AMBIENT" />
+                            </PartImage>
                     </Compare>
                     <Compare expression="style_woodblock">
-                        <PartImage x="-25" y="-25" width="500" height="500">
-                            <Image resource="scene_woodblock_cosmos" />
-                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 14) / 14))) : -25' mode="TO" />
-                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * cos(rad(360 * ([SECOND_MILLISECOND] % 18) / 18))) : -25' mode="TO" />
+                        <Group name="woodblock_lanterns" x="0" y="0" width="450" height="450" alpha="255">
                             <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="drift_woodblock_cosmos" />
-                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-320 + 740 * ([SECOND_MILLISECOND] % 10) / 10) : 0' mode="TO" />
-                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (320 - 740 * ([SECOND_MILLISECOND] % 10) / 10) : 0' mode="TO" />
-                            <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (40 + 215 * ((sin(rad(360 * ([SECOND_MILLISECOND] % 1))) + 1) / 2)) : 255' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="motion_woodblock_cosmos" />
-                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-320 + 740 * ([SECOND_MILLISECOND] % 10) / 10) : 0' mode="TO" />
-                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (320 - 740 * ([SECOND_MILLISECOND] % 10) / 10) : 0' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="glass_woodblock_cosmos" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                            <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" &amp;&amp; [CONFIGURATION.rotation_period] != "FIXED" &amp;&amp; (([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_sailboat] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_moon_rabbit] == "TRUE" ? 1 : 0)) > 1 ? ((((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE])) % [CONFIGURATION.rotation_period]) * 60 + ([SECOND_MILLISECOND] % 60)) &lt; 0.8 ? clamp((((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE])) % [CONFIGURATION.rotation_period]) * 60 + ([SECOND_MILLISECOND] % 60)) / 0.8 * 255, 0, 255) : 255) : 255' mode="TO" />
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="scene_woodblock_lanterns" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="motion_woodblock_lanterns" />
+                                <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 18 * sin(rad(360 * ([SECOND_MILLISECOND] % 9) / 9)) : 0' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="drift_woodblock_lanterns" />
+                                <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? -28 * abs(sin(rad(180 * ([SECOND_MILLISECOND] % 5) / 5))) : 0' mode="TO" />
+                                <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (50 + 205 * ((sin(rad(180 * ([SECOND_MILLISECOND] % 2))) + 1) / 2)) : 255' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="glass_woodblock_lanterns" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                        </Group>
+                        <PartImage x="0" y="0" width="450" height="450" alpha="0">
+                            <Image resource="woodblock_ambient" />
+                            <Variant target="alpha" value="255" mode="AMBIENT" />
                         </PartImage>
                     </Compare>
                     <Compare expression="style_risograph">
@@ -549,45 +725,61 @@
                         <Expression name="style_risograph"><![CDATA[[CONFIGURATION.art_style] == "risograph"]]></Expression>
                     </Expressions>
                     <Compare expression="style_origami">
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="scene_ocean" />
+                        <Group name="origami_ocean" x="0" y="0" width="450" height="450" alpha="255">
                             <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="motion_ocean" />
-                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 25 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="drift_ocean" />
-                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="glass_ocean" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
+                            <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" &amp;&amp; [CONFIGURATION.rotation_period] != "FIXED" &amp;&amp; (([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) > 1 ? ((((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE])) % [CONFIGURATION.rotation_period]) * 60 + ([SECOND_MILLISECOND] % 60)) &lt; 0.8 ? clamp((((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE])) % [CONFIGURATION.rotation_period]) * 60 + ([SECOND_MILLISECOND] % 60)) / 0.8 * 255, 0, 255) : 255) : 255' mode="TO" />
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="scene_ocean" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="motion_ocean" />
+                                <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-320 + 740 * ([SECOND_MILLISECOND] % 14) / 14) : 0' mode="TO" />
+                                <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 8 * sin(rad(360 * ([SECOND_MILLISECOND] % 14) / 14)) : 0' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="drift_ocean" />
+                                <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="glass_ocean" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                        </Group>
+                            <PartImage x="0" y="0" width="450" height="450" alpha="0">
+                                <Image resource="origami_ambient" />
+                                <Variant target="alpha" value="255" mode="AMBIENT" />
+                            </PartImage>
                     </Compare>
                     <Compare expression="style_woodblock">
-                        <PartImage x="-25" y="-25" width="500" height="500">
-                            <Image resource="scene_woodblock_ocean" />
-                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 14) / 14))) : -25' mode="TO" />
-                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * cos(rad(360 * ([SECOND_MILLISECOND] % 18) / 18))) : -25' mode="TO" />
+                        <Group name="woodblock_sailboat" x="0" y="0" width="450" height="450" alpha="255">
                             <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="motion_woodblock_ocean" />
-                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 25 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="drift_woodblock_ocean" />
-                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="glass_woodblock_ocean" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                            <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" &amp;&amp; [CONFIGURATION.rotation_period] != "FIXED" &amp;&amp; (([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_sailboat] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_moon_rabbit] == "TRUE" ? 1 : 0)) > 1 ? ((((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE])) % [CONFIGURATION.rotation_period]) * 60 + ([SECOND_MILLISECOND] % 60)) &lt; 0.8 ? clamp((((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE])) % [CONFIGURATION.rotation_period]) * 60 + ([SECOND_MILLISECOND] % 60)) / 0.8 * 255, 0, 255) : 255) : 255' mode="TO" />
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="scene_woodblock_sailboat" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="150" y="0" width="450" height="450">
+                                <Image resource="motion_woodblock_sailboat" />
+                                <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-180 + 631 * ([SECOND_MILLISECOND] % 14) / 14) : 150' mode="TO" />
+                                <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 5) / 5)) : 0' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="drift_woodblock_sailboat" />
+                                <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 24 * sin(rad(360 * ([SECOND_MILLISECOND] % 9) / 9)) : 0' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="glass_woodblock_sailboat" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                        </Group>
+                        <PartImage x="0" y="0" width="450" height="450" alpha="0">
+                            <Image resource="woodblock_ambient" />
+                            <Variant target="alpha" value="255" mode="AMBIENT" />
                         </PartImage>
                     </Compare>
                     <Compare expression="style_risograph">
@@ -622,45 +814,59 @@
                         <Expression name="style_risograph"><![CDATA[[CONFIGURATION.art_style] == "risograph"]]></Expression>
                     </Expressions>
                     <Compare expression="style_origami">
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="scene_aurora" />
+                        <Group name="origami_aurora" x="0" y="0" width="450" height="450" alpha="255">
                             <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="drift_aurora" />
-                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 20 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="motion_aurora" />
-                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="glass_aurora" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
+                            <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" &amp;&amp; [CONFIGURATION.rotation_period] != "FIXED" &amp;&amp; (([CONFIGURATION.favorite_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_forest] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_coding] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_landscape] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_cosmos] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_ocean] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_aurora] == "TRUE" ? 1 : 0)) > 1 ? ((((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE])) % [CONFIGURATION.rotation_period]) * 60 + ([SECOND_MILLISECOND] % 60)) &lt; 0.8 ? clamp((((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE])) % [CONFIGURATION.rotation_period]) * 60 + ([SECOND_MILLISECOND] % 60)) / 0.8 * 255, 0, 255) : 255) : 255' mode="TO" />
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="scene_aurora" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="drift_aurora" />
+                                <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 22 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="motion_aurora" />
+                                <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 2 * sin(rad(360 * ([SECOND_MILLISECOND] % 4) / 4)) : 0' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="glass_aurora" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                        </Group>
+                            <PartImage x="0" y="0" width="450" height="450" alpha="0">
+                                <Image resource="origami_ambient" />
+                                <Variant target="alpha" value="255" mode="AMBIENT" />
+                            </PartImage>
                     </Compare>
                     <Compare expression="style_woodblock">
-                        <PartImage x="-25" y="-25" width="500" height="500">
-                            <Image resource="scene_woodblock_aurora" />
-                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 14) / 14))) : -25' mode="TO" />
-                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? (-25 + 12 * cos(rad(360 * ([SECOND_MILLISECOND] % 18) / 18))) : -25' mode="TO" />
+                        <Group name="woodblock_moon_rabbit" x="0" y="0" width="450" height="450" alpha="255">
                             <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="drift_woodblock_aurora" />
-                            <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 20 * sin(rad(360 * ([SECOND_MILLISECOND] % 10) / 10)) : 0' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="motion_woodblock_aurora" />
-                            <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 12 * sin(rad(360 * ([SECOND_MILLISECOND] % 6) / 6)) : 0' mode="TO" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
-                        </PartImage>
-                        <PartImage x="0" y="0" width="450" height="450">
-                            <Image resource="glass_woodblock_aurora" />
-                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                            <Transform target="alpha" value='[CONFIGURATION.motion_enabled] == "TRUE" &amp;&amp; [CONFIGURATION.rotation_period] != "FIXED" &amp;&amp; (([CONFIGURATION.favorite_woodblock_bicycle] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_crane] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_kitten] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_torii] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_lanterns] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_sailboat] == "TRUE" ? 1 : 0) + ([CONFIGURATION.favorite_woodblock_moon_rabbit] == "TRUE" ? 1 : 0)) > 1 ? ((((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE])) % [CONFIGURATION.rotation_period]) * 60 + ([SECOND_MILLISECOND] % 60)) &lt; 0.8 ? clamp((((((([YEAR] - 1970) * 365 + floor(([YEAR] - 1) / 4) - floor(([YEAR] - 1) / 100) + floor(([YEAR] - 1) / 400) - 477 + [DAY_OF_YEAR] - 1) * 1440 + [HOUR_0_23] * 60 + [MINUTE])) % [CONFIGURATION.rotation_period]) * 60 + ([SECOND_MILLISECOND] % 60)) / 0.8 * 255, 0, 255) : 255) : 255' mode="TO" />
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="scene_woodblock_moon_rabbit" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="motion_woodblock_moon_rabbit" />
+                                <Transform target="y" value='[CONFIGURATION.motion_enabled] == "TRUE" ? -26 * abs(sin(rad(180 * ([SECOND_MILLISECOND] % 3) / 3))) : 0' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="drift_woodblock_moon_rabbit" />
+                                <Transform target="x" value='[CONFIGURATION.motion_enabled] == "TRUE" ? 20 * sin(rad(360 * ([SECOND_MILLISECOND] % 8) / 8)) : 0' mode="TO" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                            <PartImage x="0" y="0" width="450" height="450">
+                                <Image resource="glass_woodblock_moon_rabbit" />
+                                <Variant target="alpha" value="0" mode="AMBIENT" />
+                            </PartImage>
+                        </Group>
+                        <PartImage x="0" y="0" width="450" height="450" alpha="0">
+                            <Image resource="woodblock_ambient" />
+                            <Variant target="alpha" value="255" mode="AMBIENT" />
                         </PartImage>
                     </Compare>
                     <Compare expression="style_risograph">
@@ -689,12 +895,36 @@
             </Compare>
         </Condition>
 
-        <DigitalClock x="0" y="149" width="450" height="118">
-            <TimeText x="0" y="0" width="450" height="118" format="hh:mm" hourFormat="SYNC_TO_DEVICE" align="CENTER">
-                <Variant target="tintColor" value="#FFF6EB" mode="AMBIENT" />
-                <BitmapFont family="fold_time" size="112" />
-            </TimeText>
-        </DigitalClock>
+        <Condition>
+            <Expressions>
+                <Expression name="clock_style_origami"><![CDATA[[CONFIGURATION.art_style] == "origami"]]></Expression>
+                <Expression name="clock_style_woodblock"><![CDATA[[CONFIGURATION.art_style] == "woodblock"]]></Expression>
+            </Expressions>
+            <Compare expression="clock_style_origami">
+                <DigitalClock x="0" y="149" width="450" height="118">
+                    <TimeText x="0" y="0" width="450" height="118" format="hh:mm" hourFormat="SYNC_TO_DEVICE" align="CENTER">
+                        <Variant target="tintColor" value="#FFF6EB" mode="AMBIENT" />
+                        <BitmapFont family="fold_time_origami" size="112" />
+                    </TimeText>
+                </DigitalClock>
+            </Compare>
+            <Compare expression="clock_style_woodblock">
+                <DigitalClock x="0" y="149" width="450" height="118">
+                    <TimeText x="0" y="0" width="450" height="118" format="hh:mm" hourFormat="SYNC_TO_DEVICE" align="CENTER">
+                        <Variant target="tintColor" value="#FFF6EB" mode="AMBIENT" />
+                        <BitmapFont family="fold_time_woodblock" size="112" />
+                    </TimeText>
+                </DigitalClock>
+            </Compare>
+            <Default>
+                    <DigitalClock x="0" y="149" width="450" height="118">
+                        <TimeText x="0" y="0" width="450" height="118" format="hh:mm" hourFormat="SYNC_TO_DEVICE" align="CENTER">
+                            <Variant target="tintColor" value="#FFF6EB" mode="AMBIENT" />
+                            <BitmapFont family="fold_time" size="112" />
+                        </TimeText>
+                    </DigitalClock>
+            </Default>
+        </Condition>
 
         <ComplicationSlot
             slotId="0"
@@ -709,19 +939,51 @@
                 <Parameter expression="[COMPLICATION.TEXT]" />
             </ScreenReader>
             <Complication type="LONG_TEXT">
-                <PartDraw x="0" y="0" width="380" height="42">
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                    <RoundRectangle x="0" y="0" width="380" height="42" cornerRadiusX="14" cornerRadiusY="14">
-                        <Transform target="x" value="(380 - (clamp(24 + (textLength([COMPLICATION.TEXT])) * 17, 58, 380))) / 2" mode="TO" />
-                        <Transform target="width" value="clamp(24 + (textLength([COMPLICATION.TEXT])) * 17, 58, 380)" mode="TO" />
-                        <Fill color="#30DFEBF7">
-                            <LinearGradient startX="0" startY="0" endX="0" endY="42" colors="#38DFEBF7 #24B8CCE4" positions="0 1" />
-                        </Fill>
-                    </RoundRectangle>
-                </PartDraw>
+                <Condition>
+                    <Expressions>
+                        <Expression name="origami_glass_style"><![CDATA[[CONFIGURATION.art_style] == "origami"]]></Expression>
+                        <Expression name="woodblock_glass_style"><![CDATA[[CONFIGURATION.art_style] == "woodblock"]]></Expression>
+                    </Expressions>
+                    <Compare expression="origami_glass_style">
+                        <PartDraw x="0" y="0" width="380" height="42">
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                            <RoundRectangle x="0" y="0" width="380" height="42" cornerRadiusX="14" cornerRadiusY="14">
+                                <Transform target="x" value="(380 - (clamp(24 + (textLength([COMPLICATION.TEXT])) * 20, 58, 380))) / 2" mode="TO" />
+                                <Transform target="width" value="clamp(24 + (textLength([COMPLICATION.TEXT])) * 20, 58, 380)" mode="TO" />
+                                <Fill color="#FFFFFFFF">
+                                    <LinearGradient startX="0" startY="0" endX="0" endY="42" colors="#38FFE9BF #24E8BC95" positions="0 1" />
+                                </Fill>
+                            </RoundRectangle>
+                        </PartDraw>
+                    </Compare>
+                    <Compare expression="woodblock_glass_style">
+                        <PartDraw x="0" y="0" width="380" height="42">
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                            <RoundRectangle x="0" y="0" width="380" height="42" cornerRadiusX="14" cornerRadiusY="14">
+                                <Transform target="x" value="(380 - (clamp(24 + (textLength([COMPLICATION.TEXT])) * 20, 58, 380))) / 2" mode="TO" />
+                                <Transform target="width" value="clamp(24 + (textLength([COMPLICATION.TEXT])) * 20, 58, 380)" mode="TO" />
+                                <Fill color="#FFFFFFFF">
+                                    <LinearGradient startX="0" startY="0" endX="0" endY="42" colors="#38E9DFC0 #24A3BCBE" positions="0 1" />
+                                </Fill>
+                            </RoundRectangle>
+                        </PartDraw>
+                    </Compare>
+                    <Default>
+                        <PartDraw x="0" y="0" width="380" height="42">
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                            <RoundRectangle x="0" y="0" width="380" height="42" cornerRadiusX="14" cornerRadiusY="14">
+                                <Transform target="x" value="(380 - (clamp(24 + (textLength([COMPLICATION.TEXT])) * 20, 58, 380))) / 2" mode="TO" />
+                                <Transform target="width" value="clamp(24 + (textLength([COMPLICATION.TEXT])) * 20, 58, 380)" mode="TO" />
+                                <Fill color="#30DFEBF7">
+                                    <LinearGradient startX="0" startY="0" endX="0" endY="42" colors="#38DFEBF7 #24B8CCE4" positions="0 1" />
+                                </Fill>
+                            </RoundRectangle>
+                        </PartDraw>
+                    </Default>
+                </Condition>
                 <PartText x="0" y="0" width="380" height="42">
                     <Text align="CENTER" maxLines="1" ellipsis="TRUE">
-                        <Font family="SYNC_TO_DEVICE" size="28" weight="SEMI_BOLD" color="#FFF4E8">
+                        <Font family="SYNC_TO_DEVICE" size="32" weight="SEMI_BOLD" color="#FFF4E8">
                             <Shadow color="#CC11182E" offsetY="1" radius="2.5">
                                 <Upper><Template><![CDATA[%s]]><Parameter expression='[COMPLICATION.TEXT] == "" ? "—" : [COMPLICATION.TEXT]' /></Template></Upper>
                             </Shadow>
@@ -730,19 +992,51 @@
                 </PartText>
             </Complication>
             <Complication type="SHORT_TEXT">
-                <PartDraw x="0" y="0" width="380" height="42">
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                    <RoundRectangle x="0" y="0" width="380" height="42" cornerRadiusX="14" cornerRadiusY="14">
-                        <Transform target="x" value="(380 - (clamp(24 + (textLength([COMPLICATION.TITLE]) + 1 + textLength([COMPLICATION.TEXT])) * 17, 58, 380))) / 2" mode="TO" />
-                        <Transform target="width" value="clamp(24 + (textLength([COMPLICATION.TITLE]) + 1 + textLength([COMPLICATION.TEXT])) * 17, 58, 380)" mode="TO" />
-                        <Fill color="#30DFEBF7">
-                            <LinearGradient startX="0" startY="0" endX="0" endY="42" colors="#38DFEBF7 #24B8CCE4" positions="0 1" />
-                        </Fill>
-                    </RoundRectangle>
-                </PartDraw>
+                <Condition>
+                    <Expressions>
+                        <Expression name="origami_glass_style"><![CDATA[[CONFIGURATION.art_style] == "origami"]]></Expression>
+                        <Expression name="woodblock_glass_style"><![CDATA[[CONFIGURATION.art_style] == "woodblock"]]></Expression>
+                    </Expressions>
+                    <Compare expression="origami_glass_style">
+                        <PartDraw x="0" y="0" width="380" height="42">
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                            <RoundRectangle x="0" y="0" width="380" height="42" cornerRadiusX="14" cornerRadiusY="14">
+                                <Transform target="x" value="(380 - (clamp(24 + (textLength([COMPLICATION.TITLE]) + 1 + textLength([COMPLICATION.TEXT])) * 20, 58, 380))) / 2" mode="TO" />
+                                <Transform target="width" value="clamp(24 + (textLength([COMPLICATION.TITLE]) + 1 + textLength([COMPLICATION.TEXT])) * 20, 58, 380)" mode="TO" />
+                                <Fill color="#FFFFFFFF">
+                                    <LinearGradient startX="0" startY="0" endX="0" endY="42" colors="#38FFE9BF #24E8BC95" positions="0 1" />
+                                </Fill>
+                            </RoundRectangle>
+                        </PartDraw>
+                    </Compare>
+                    <Compare expression="woodblock_glass_style">
+                        <PartDraw x="0" y="0" width="380" height="42">
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                            <RoundRectangle x="0" y="0" width="380" height="42" cornerRadiusX="14" cornerRadiusY="14">
+                                <Transform target="x" value="(380 - (clamp(24 + (textLength([COMPLICATION.TITLE]) + 1 + textLength([COMPLICATION.TEXT])) * 20, 58, 380))) / 2" mode="TO" />
+                                <Transform target="width" value="clamp(24 + (textLength([COMPLICATION.TITLE]) + 1 + textLength([COMPLICATION.TEXT])) * 20, 58, 380)" mode="TO" />
+                                <Fill color="#FFFFFFFF">
+                                    <LinearGradient startX="0" startY="0" endX="0" endY="42" colors="#38E9DFC0 #24A3BCBE" positions="0 1" />
+                                </Fill>
+                            </RoundRectangle>
+                        </PartDraw>
+                    </Compare>
+                    <Default>
+                        <PartDraw x="0" y="0" width="380" height="42">
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                            <RoundRectangle x="0" y="0" width="380" height="42" cornerRadiusX="14" cornerRadiusY="14">
+                                <Transform target="x" value="(380 - (clamp(24 + (textLength([COMPLICATION.TITLE]) + 1 + textLength([COMPLICATION.TEXT])) * 20, 58, 380))) / 2" mode="TO" />
+                                <Transform target="width" value="clamp(24 + (textLength([COMPLICATION.TITLE]) + 1 + textLength([COMPLICATION.TEXT])) * 20, 58, 380)" mode="TO" />
+                                <Fill color="#30DFEBF7">
+                                    <LinearGradient startX="0" startY="0" endX="0" endY="42" colors="#38DFEBF7 #24B8CCE4" positions="0 1" />
+                                </Fill>
+                            </RoundRectangle>
+                        </PartDraw>
+                    </Default>
+                </Condition>
                 <PartText x="0" y="0" width="380" height="42">
                     <Text align="CENTER" maxLines="1" ellipsis="TRUE">
-                        <Font family="SYNC_TO_DEVICE" size="28" weight="SEMI_BOLD" color="#FFF4E8">
+                        <Font family="SYNC_TO_DEVICE" size="32" weight="SEMI_BOLD" color="#FFF4E8">
                             <Shadow color="#CC11182E" offsetY="1" radius="2.5">
                                 <Upper><Template><![CDATA[%s %s]]><Parameter expression="[COMPLICATION.TITLE]" /><Parameter expression='[COMPLICATION.TEXT] == "" ? "—" : [COMPLICATION.TEXT]' /></Template></Upper>
                             </Shadow>
@@ -757,34 +1051,66 @@
             displayName="left_slot_label"
             isCustomizable="TRUE"
             supportedTypes="SHORT_TEXT EMPTY"
-            x="50" y="273" width="145" height="42">
+            x="38" y="273" width="169" height="42">
             <DefaultProviderPolicy defaultSystemProvider="WATCH_BATTERY" defaultSystemProviderType="SHORT_TEXT" />
-            <BoundingRoundBox x="0" y="0" width="145" height="42" cornerRadius="21" />
+            <BoundingRoundBox x="0" y="0" width="169" height="42" cornerRadius="21" />
             <ScreenReader stringId="left_screen_reader">
                 <Parameter expression="[COMPLICATION.TITLE]" />
                 <Parameter expression="[COMPLICATION.TEXT]" />
             </ScreenReader>
             <Complication type="SHORT_TEXT">
                 <!-- WFF 2 has no measured text width: keep padding around a capped estimate. -->
-                <PartDraw x="0" y="0" width="145" height="42">
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                    <RoundRectangle x="0" y="0" width="145" height="42" cornerRadiusX="14" cornerRadiusY="14">
-                        <Transform target="x" value="(145 - (48 + clamp(textLength([COMPLICATION.TEXT]) * 16.5, 16.5, 97))) / 2" mode="TO" />
-                        <Transform target="width" value="48 + clamp(textLength([COMPLICATION.TEXT]) * 16.5, 16.5, 97)" mode="TO" />
-                        <Fill color="#30DFEBF7">
-                            <LinearGradient startX="0" startY="0" endX="0" endY="42" colors="#38DFEBF7 #24B8CCE4" positions="0 1" />
-                        </Fill>
-                    </RoundRectangle>
-                </PartDraw>
-                <PartImage x="0" y="9" width="24" height="24" tintColor="#FFF4E8">
-                    <Transform target="x" value="(145 - (32 + clamp(textLength([COMPLICATION.TEXT]) * 16.5, 16.5, 97))) / 2" mode="TO" />
+                <Condition>
+                    <Expressions>
+                        <Expression name="origami_glass_style"><![CDATA[[CONFIGURATION.art_style] == "origami"]]></Expression>
+                        <Expression name="woodblock_glass_style"><![CDATA[[CONFIGURATION.art_style] == "woodblock"]]></Expression>
+                    </Expressions>
+                    <Compare expression="origami_glass_style">
+                        <PartDraw x="0" y="0" width="169" height="42">
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                            <RoundRectangle x="0" y="0" width="169" height="42" cornerRadiusX="14" cornerRadiusY="14">
+                                <Transform target="x" value="(169 - (50 + clamp(textLength([COMPLICATION.TEXT]) * 18.5, 18.5, 111))) / 2" mode="TO" />
+                                <Transform target="width" value="50 + clamp(textLength([COMPLICATION.TEXT]) * 18.5, 18.5, 111)" mode="TO" />
+                                <Fill color="#FFFFFFFF">
+                                    <LinearGradient startX="0" startY="0" endX="0" endY="42" colors="#38FFE9BF #24E8BC95" positions="0 1" />
+                                </Fill>
+                            </RoundRectangle>
+                        </PartDraw>
+                    </Compare>
+                    <Compare expression="woodblock_glass_style">
+                        <PartDraw x="0" y="0" width="169" height="42">
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                            <RoundRectangle x="0" y="0" width="169" height="42" cornerRadiusX="14" cornerRadiusY="14">
+                                <Transform target="x" value="(169 - (50 + clamp(textLength([COMPLICATION.TEXT]) * 18.5, 18.5, 111))) / 2" mode="TO" />
+                                <Transform target="width" value="50 + clamp(textLength([COMPLICATION.TEXT]) * 18.5, 18.5, 111)" mode="TO" />
+                                <Fill color="#FFFFFFFF">
+                                    <LinearGradient startX="0" startY="0" endX="0" endY="42" colors="#38E9DFC0 #24A3BCBE" positions="0 1" />
+                                </Fill>
+                            </RoundRectangle>
+                        </PartDraw>
+                    </Compare>
+                    <Default>
+                        <PartDraw x="0" y="0" width="169" height="42">
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                            <RoundRectangle x="0" y="0" width="169" height="42" cornerRadiusX="14" cornerRadiusY="14">
+                                <Transform target="x" value="(169 - (50 + clamp(textLength([COMPLICATION.TEXT]) * 18.5, 18.5, 111))) / 2" mode="TO" />
+                                <Transform target="width" value="50 + clamp(textLength([COMPLICATION.TEXT]) * 18.5, 18.5, 111)" mode="TO" />
+                                <Fill color="#30DFEBF7">
+                                    <LinearGradient startX="0" startY="0" endX="0" endY="42" colors="#38DFEBF7 #24B8CCE4" positions="0 1" />
+                                </Fill>
+                            </RoundRectangle>
+                        </PartDraw>
+                    </Default>
+                </Condition>
+                <PartImage x="0" y="8" width="26" height="26" tintColor="#FFF4E8">
+                    <Transform target="x" value="(169 - (34 + clamp(textLength([COMPLICATION.TEXT]) * 18.5, 18.5, 111))) / 2" mode="TO" />
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
                 <PartText x="0" y="0" width="97" height="42">
-                    <Transform target="x" value="((145 - (32 + clamp(textLength([COMPLICATION.TEXT]) * 16.5, 16.5, 97))) / 2) + 32" mode="TO" />
-                    <Transform target="width" value="clamp(textLength([COMPLICATION.TEXT]) * 16.5, 16.5, 97)" mode="TO" />
+                    <Transform target="x" value="((169 - (34 + clamp(textLength([COMPLICATION.TEXT]) * 18.5, 18.5, 111))) / 2) + 34" mode="TO" />
+                    <Transform target="width" value="clamp(textLength([COMPLICATION.TEXT]) * 18.5, 18.5, 111)" mode="TO" />
                     <Text align="CENTER" maxLines="1" ellipsis="TRUE">
-                        <Font family="SYNC_TO_DEVICE" size="28" weight="BOLD" color="#FFF4E8">
+                        <Font family="SYNC_TO_DEVICE" size="32" weight="BOLD" color="#FFF4E8">
                             <Shadow color="#CC11182E" offsetY="1" radius="2.5"><Template><![CDATA[%s]]><Parameter expression='[COMPLICATION.TEXT] == "" ? "—" : [COMPLICATION.TEXT]' /></Template></Shadow>
                         </Font>
                     </Text>
@@ -797,34 +1123,66 @@
             displayName="right_slot_label"
             isCustomizable="TRUE"
             supportedTypes="SHORT_TEXT EMPTY"
-            x="255" y="273" width="145" height="42">
+            x="243" y="273" width="169" height="42">
             <DefaultProviderPolicy defaultSystemProvider="STEP_COUNT" defaultSystemProviderType="SHORT_TEXT" />
-            <BoundingRoundBox x="0" y="0" width="145" height="42" cornerRadius="21" />
+            <BoundingRoundBox x="0" y="0" width="169" height="42" cornerRadius="21" />
             <ScreenReader stringId="right_screen_reader">
                 <Parameter expression="[COMPLICATION.TITLE]" />
                 <Parameter expression="[COMPLICATION.TEXT]" />
             </ScreenReader>
             <Complication type="SHORT_TEXT">
                 <!-- WFF 2 has no measured text width: keep padding around a capped estimate. -->
-                <PartDraw x="0" y="0" width="145" height="42">
-                    <Variant target="alpha" value="0" mode="AMBIENT" />
-                    <RoundRectangle x="0" y="0" width="145" height="42" cornerRadiusX="14" cornerRadiusY="14">
-                        <Transform target="x" value="(145 - (48 + clamp(textLength([COMPLICATION.TEXT]) * 16.5, 16.5, 97))) / 2" mode="TO" />
-                        <Transform target="width" value="48 + clamp(textLength([COMPLICATION.TEXT]) * 16.5, 16.5, 97)" mode="TO" />
-                        <Fill color="#30DFEBF7">
-                            <LinearGradient startX="0" startY="0" endX="0" endY="42" colors="#38DFEBF7 #24B8CCE4" positions="0 1" />
-                        </Fill>
-                    </RoundRectangle>
-                </PartDraw>
-                <PartImage x="0" y="9" width="24" height="24" tintColor="#FFF4E8">
-                    <Transform target="x" value="(145 - (32 + clamp(textLength([COMPLICATION.TEXT]) * 16.5, 16.5, 97))) / 2" mode="TO" />
+                <Condition>
+                    <Expressions>
+                        <Expression name="origami_glass_style"><![CDATA[[CONFIGURATION.art_style] == "origami"]]></Expression>
+                        <Expression name="woodblock_glass_style"><![CDATA[[CONFIGURATION.art_style] == "woodblock"]]></Expression>
+                    </Expressions>
+                    <Compare expression="origami_glass_style">
+                        <PartDraw x="0" y="0" width="169" height="42">
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                            <RoundRectangle x="0" y="0" width="169" height="42" cornerRadiusX="14" cornerRadiusY="14">
+                                <Transform target="x" value="(169 - (50 + clamp(textLength([COMPLICATION.TEXT]) * 18.5, 18.5, 111))) / 2" mode="TO" />
+                                <Transform target="width" value="50 + clamp(textLength([COMPLICATION.TEXT]) * 18.5, 18.5, 111)" mode="TO" />
+                                <Fill color="#FFFFFFFF">
+                                    <LinearGradient startX="0" startY="0" endX="0" endY="42" colors="#38FFE9BF #24E8BC95" positions="0 1" />
+                                </Fill>
+                            </RoundRectangle>
+                        </PartDraw>
+                    </Compare>
+                    <Compare expression="woodblock_glass_style">
+                        <PartDraw x="0" y="0" width="169" height="42">
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                            <RoundRectangle x="0" y="0" width="169" height="42" cornerRadiusX="14" cornerRadiusY="14">
+                                <Transform target="x" value="(169 - (50 + clamp(textLength([COMPLICATION.TEXT]) * 18.5, 18.5, 111))) / 2" mode="TO" />
+                                <Transform target="width" value="50 + clamp(textLength([COMPLICATION.TEXT]) * 18.5, 18.5, 111)" mode="TO" />
+                                <Fill color="#FFFFFFFF">
+                                    <LinearGradient startX="0" startY="0" endX="0" endY="42" colors="#38E9DFC0 #24A3BCBE" positions="0 1" />
+                                </Fill>
+                            </RoundRectangle>
+                        </PartDraw>
+                    </Compare>
+                    <Default>
+                        <PartDraw x="0" y="0" width="169" height="42">
+                            <Variant target="alpha" value="0" mode="AMBIENT" />
+                            <RoundRectangle x="0" y="0" width="169" height="42" cornerRadiusX="14" cornerRadiusY="14">
+                                <Transform target="x" value="(169 - (50 + clamp(textLength([COMPLICATION.TEXT]) * 18.5, 18.5, 111))) / 2" mode="TO" />
+                                <Transform target="width" value="50 + clamp(textLength([COMPLICATION.TEXT]) * 18.5, 18.5, 111)" mode="TO" />
+                                <Fill color="#30DFEBF7">
+                                    <LinearGradient startX="0" startY="0" endX="0" endY="42" colors="#38DFEBF7 #24B8CCE4" positions="0 1" />
+                                </Fill>
+                            </RoundRectangle>
+                        </PartDraw>
+                    </Default>
+                </Condition>
+                <PartImage x="0" y="8" width="26" height="26" tintColor="#FFF4E8">
+                    <Transform target="x" value="(169 - (34 + clamp(textLength([COMPLICATION.TEXT]) * 18.5, 18.5, 111))) / 2" mode="TO" />
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
                 <PartText x="0" y="0" width="97" height="42">
-                    <Transform target="x" value="((145 - (32 + clamp(textLength([COMPLICATION.TEXT]) * 16.5, 16.5, 97))) / 2) + 32" mode="TO" />
-                    <Transform target="width" value="clamp(textLength([COMPLICATION.TEXT]) * 16.5, 16.5, 97)" mode="TO" />
+                    <Transform target="x" value="((169 - (34 + clamp(textLength([COMPLICATION.TEXT]) * 18.5, 18.5, 111))) / 2) + 34" mode="TO" />
+                    <Transform target="width" value="clamp(textLength([COMPLICATION.TEXT]) * 18.5, 18.5, 111)" mode="TO" />
                     <Text align="CENTER" maxLines="1" ellipsis="TRUE">
-                        <Font family="SYNC_TO_DEVICE" size="28" weight="BOLD" color="#FFF4E8">
+                        <Font family="SYNC_TO_DEVICE" size="32" weight="BOLD" color="#FFF4E8">
                             <Shadow color="#CC11182E" offsetY="1" radius="2.5"><Template><![CDATA[%s]]><Parameter expression='[COMPLICATION.TEXT] == "" ? "—" : [COMPLICATION.TEXT]' /></Template></Shadow>
                         </Font>
                     </Text>

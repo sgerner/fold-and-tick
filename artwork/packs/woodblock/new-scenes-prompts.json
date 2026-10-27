@@ -1,0 +1,100 @@
+{
+  "tool": "Built-in image_gen",
+  "style_reference": "Inspected the project Woodblock forest source illustration at artwork/packs/woodblock/forest.png before generation; prompts preserve its dark carved outlines, layered Japanese woodblock color planes, and washi grain.",
+  "backgrounds": [
+    {
+      "scene": "crane",
+      "file": "crane_day_background_source.png",
+      "selected": true,
+      "generated_source": "exec-eb029659-a954-495c-ad91-7f78898b13a4.png",
+      "prompt": "Use case: smartwatch watch face art. Asset type: square full-bleed actor-free background only. Scene: a vivid late-afternoon bamboo grove in a bright woodblock print, with tall deep emerald and blue-green bamboo framing both sides and a bold vermilion-orange setting sun peeking through upper-left leaves. Sunlit ochre leaves and warm amber carved marks add lively contrast. No birds or animals; the moving crane will be a separate transparent sprite. Preserve a calm dark teal-green field through the center third for pale clock digits and complications, with no bright accents behind them. Palette should feel bright, bold, and richly colored while keeping this central area dark. Japanese woodblock/washi print, crisp carved ink outlines, visible carved grain and paper fibers, flat layered colors and slight imperfect registration. Round-watch crop from a square. No moon, night sky, text, letters, numbers, interface, border, or watermark."
+    },
+    {
+      "scene": "torii",
+      "file": "torii_background_source.png",
+      "selected": true,
+      "generated_source": "exec-e1e6a931-3bdf-4565-a621-c5c131be0f51.png",
+      "prompt": "Use case: smartwatch watch face art. Asset type: square full-bleed background only. Scene: vermilion torii gate spanning a still mountain lake, gate and stone lanterns composed around the outer sides, low layered ribbons of silver mist and distant pine-covered islands; no people, animals, or moving subjects. Leave a broad quiet dark-water center clear for time and complications. Woodblock style: refined Japanese woodblock/washi print, crisp carved ink lines, visible wood grain and paper fibers, layered flat color shapes, slight imperfect registration; midnight indigo, faded vermilion, pine green, warm parchment, muted gold highlights. Square background for a circular smartwatch crop. No text, letters, numbers, interface, border, or watermark."
+    },
+    {
+      "scene": "lanterns",
+      "file": "lanterns_background_source.png",
+      "selected": true,
+      "generated_source": "exec-0b955ba1-ee86-41e3-bf5b-198fbf9fa72e.png",
+      "prompt": "Use case: smartwatch watch face art. Asset type: square full-bleed background only. Scene: quiet Edo-period night street at a lantern festival, dark timber shop roofs and eaves frame the left and right edges; rows of warm paper lanterns hang near the upper edges but leave the middle third open and dark for the clock; distant rooftops and a narrow stone lane settle at the bottom. No people or animals. Make the central time area uncluttered. Woodblock style: richly carved Japanese print on aged washi, crisp ink contours, visible woodcut grain and paper fibers, flat layered planes, subtle imperfect registration; indigo-black, muted pine, warm parchment, aged amber, tiny vermilion accents. Square art for round watch crop. No text, lettering, numbers, interface, border, or watermark."
+    },
+    {
+      "scene": "sailboat",
+      "file": "sailboat_sunset_background_source.png",
+      "selected": true,
+      "generated_source": "exec-75c1fe90-5d73-4aa1-acf6-16e09384839d.png",
+      "prompt": "Use case: smartwatch watch face art. Asset type: square full-bleed actor-free background only. Scene: a dramatic Japanese woodblock sunset over a wide turquoise and indigo sea, layered headlands and carved wave crests in the lower corners, broad red-orange and aged-gold sunset band low on the horizon, delicate warm reflection near the far edges. No sailboats, people, animals, or moon; the sailboat will be a separate transparent sprite. Keep the center third as smooth dark blue-green water for pale clock digits and complications, with all bright sunset color and foam outside that area. Strong vivid color and distinct daytime-sunset character, not a night sky. Japanese woodblock/washi print with crisp carved ink outlines, visible wood grain and subtle paper fibers, flat layered color planes and slight imperfect registration. Square composed for a round smartwatch crop. No text, letters, numbers, interface, border, or watermark."
+    },
+    {
+      "scene": "moon_rabbit",
+      "file": "moon_rabbit_background_source.png",
+      "selected": true,
+      "generated_source": "exec-27c94347-d3e3-4435-88cf-45b28b483f45.png",
+      "prompt": "Use case: smartwatch watch face art. Asset type: square full-bleed background only. Scene: quiet moonlit pampas grassland with low dark hills, a large pale parchment moon behind layered clouds, reeds and grasses framing the lower corners; no rabbit or other animal in this background, moon rabbit will be a separate motion sprite. Keep the central third of the sky dark and open for time and complications. Japanese woodblock/washi print, crisp carved ink lines, visible grain, subtle paper fibers, layered flat colors and slight imperfect registration; midnight indigo, cool blue-green, muted pine, warm moon parchment, small aged-gold details. Square background for a circular smartwatch crop. No text, lettering, numbers, interface, border, watermark."
+    }
+  ],
+  "sprites": [
+    {
+      "scene": "crane",
+      "file": "crane_motion_source.png",
+      "generated_source": "exec-57669df0-1e7f-4375-8ea3-fdf8de25a7df.png",
+      "prompt": "Use case: smartwatch animation sprite. Asset type: one isolated moving bird on a truly transparent background. Subject: a single elegant red-crowned crane gliding to the right, wings fully spread, slender legs trailing, black flight feathers with warm ivory body and a small vermilion crown. Composition: square canvas, bird occupies about 35% of the width, centered, graceful silhouette. Medium: Japanese woodblock/washi print matching carved ink outlines, visible feather cuts, subtle paper grain within color, deep indigo-black and parchment with vermilion detail. No sky, cloud, bamboo, shadow, scenery, text, letters, numbers, border, or watermark."
+    },
+    {
+      "scene": "torii",
+      "file": "torii_motion_source.png",
+      "generated_source": "exec-0917db4e-7c25-4daf-8299-48e6e86cfc63.png",
+      "prompt": "Use case: smartwatch animation sprite. Asset type: three flowing mist ribbons isolated on a truly transparent background. They should look like layered pale blue-grey carved woodblock cloud curls, thin and translucent with crisp etched lines; long horizontal strips suited to drifting gently left-to-right across a dark lake, distinct wispy ends, occupying the lower half of a square canvas. Japanese woodblock/washi print, subtle ink grain and paper fibers. No gate, water, rocks, plants, animals, ground, shadow, text, letters, numbers, border, or watermark."
+    },
+    {
+      "scene": "lanterns",
+      "file": "lanterns_motion_source.png",
+      "generated_source": "exec-432131ba-2d9a-4fce-8005-6b95f6a8f9d8.png",
+      "prompt": "Use case: smartwatch animation sprite. Asset type: two isolated hanging paper lanterns on a truly transparent background, suspended from short fine cords and finished with small tassels. Lanterns are warm parchment and aged amber with cinnabar seals, visible carved rib lines and deep indigo outlines, carefully rendered Japanese woodblock/washi print. Arrange as a compact pair with slight size difference, occupy about 32% of square width, centered; recognizable when small, no text or symbols. No building, night sky, glow halo outside the paper, shadow, people, scenery, letters, numbers, border, watermark."
+    },
+    {
+      "scene": "sailboat",
+      "file": "sailboat_motion_source.png",
+      "generated_source": "exec-bdab1da9-b2c7-4839-a390-bad68199b27e.png",
+      "prompt": "Use case: smartwatch animation sprite. Asset type: one isolated small sailboat on a truly transparent full square canvas. The boat is placed at the far left edge in the lower quarter of the canvas, about 38% of canvas width, so translating this canvas horizontally creates a complete left-to-right pass. Side view facing right: dark indigo carved wooden hull, one tall warm parchment sail with a small cinnabar panel, delicate rigging, tiny stern flag. Japanese woodblock/washi print, crisp carved outlines and grain, subtle paper fibers. Keep the rest of the square fully transparent. No water, waves, clouds, shadow, scenery, text, letters, numbers, border, watermark."
+    },
+    {
+      "scene": "moon_rabbit",
+      "file": "moon_rabbit_motion_source.png",
+      "generated_source": "exec-b30f53b1-d13c-4453-881a-d2997778104c.png",
+      "prompt": "Use case: smartwatch animation sprite. Asset type: one isolated small hare on a truly transparent background. Subject: a charming alert moon hare in a light hopping pose facing right, long ears, rounded head and clear bright eye, pale warm-parchment fur with cool blue-grey carved shading and a few fine indigo ink cuts. Composition: square canvas, rabbit occupies about 28% of width and is centered low, with all paws visible; readable at small smartwatch size. Japanese woodblock/washi print with crisp etched contours and subtle paper grain. No moon, grass, plants, shadows, scenery, text, letters, numbers, border, watermark."
+    }
+  ],
+  "import": {
+    "command": "tools/.venv/bin/python tools/import_style_packs.py --style woodblock",
+    "generated_layer_sizes": {
+      "scene": "450x450",
+      "motion": "450x450",
+      "drift": "225x225",
+      "glass": "225x225",
+      "icon": "160x160",
+      "ambient": "450x450"
+    }
+  },
+  "alternate_backgrounds": [
+    {
+      "scene": "crane",
+      "file": "crane_background_source.png",
+      "selected": false,
+      "generated_source": "exec-c61ee901-d65e-4255-b36b-5086eed7bd66.png",
+      "prompt": "Use case: smartwatch watch face art. Asset type: square full-bleed background only. Scene: moonlit bamboo grove at night, tall bamboo framing the far left and right, pale parchment moon upper left, layered distant mountain silhouettes and hand-cut clouds. No birds or animals in this background; moving crane will be added as a separate sprite. Keep the center third calm dark midnight-indigo for the time and complications. Woodblock style: richly textured Japanese woodblock/washi print, crisp dark carved outlines, visible carved grain and subtle paper fibers, layered flat color, slight imperfect registration; deep indigo, muted pine, parchment, sparse aged-gold and vermilion accents. Rounded smartwatch crop from a square. No text, letters, numbers, interface, borders, or watermark."
+    },
+    {
+      "scene": "sailboat",
+      "file": "sailboat_background_source.png",
+      "selected": false,
+      "generated_source": "exec-6cedd5db-96fa-4951-862a-adbe9349afe6.png",
+      "prompt": "Use case: smartwatch watch face art. Asset type: square full-bleed actor-free background only. Scene: broad moonlit Japanese harbor with dark layered waves, far cliffs, low coastal pines and a small beacon at the far edge; no boats or people because the moving sailboat is a separate sprite. Keep the middle third of the water smooth, quiet, and dark for time and complications; waves and foam can frame the bottom corners. Woodblock style: richly textured Japanese woodblock/washi print, clean carved outlines and grain, subtle paper fibers, layered flat colors and slight imperfect registration; deep indigo, blue-green, pine, parchment moonlight, restrained aged-gold accents. Square scene composed for round smartwatch crop. No text, letters, numbers, interface, border, watermark."
+    }
+  ]
+}
