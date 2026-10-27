@@ -21,6 +21,7 @@ MOTION_PREVIEW = ROOT / "preview/scene-motion.gif"
 CHASE_PREVIEW = ROOT / "preview/chase-motion.gif"
 KITTEN_PREVIEW = ROOT / "preview/kitten-motion.gif"
 ROCKET_PREVIEW = ROOT / "preview/rocket-motion.gif"
+OCEAN_PREVIEW = ROOT / "preview/ocean-motion.gif"
 SIZE = 450
 SCALE = 3
 HI = SIZE * SCALE
@@ -115,17 +116,17 @@ def composite_art(base, painter, blur=4.0, offset=(0, 4), shadow_alpha=82):
 # ── Bicycle: valley sunrise, layered bridge, turquoise river ────────────────
 
 def bicycle_environment(c: Canvas):
-    # Wide faceted sun behind the valley ridges.
-    sun = regular_polygon(215, 163, 108, 20)
+    # A small paper sun rests in the upper-left sky, clear of the clock glass.
+    sun = regular_polygon(64, 60, 58, 20)
     c.poly(sun, "#ffb95f")
     for i, color in enumerate(["#ffd978", "#ff9a68", "#ffe394", "#f58482",
                                "#ffc269", "#ffda82", "#ed7b88", "#ffb85f"]):
         a = -math.pi / 2 + i * math.tau / 8
         b = a + math.tau / 8
-        c.poly([(215, 163),
-                (215 + math.cos(a) * 106, 163 + math.sin(a) * 106),
-                (215 + math.cos((a + b) / 2) * 95, 163 + math.sin((a + b) / 2) * 95),
-                (215 + math.cos(b) * 106, 163 + math.sin(b) * 106)], color)
+        c.poly([(64, 60),
+                (64 + math.cos(a) * 56, 60 + math.sin(a) * 56),
+                (64 + math.cos((a + b) / 2) * 50, 60 + math.sin((a + b) / 2) * 50),
+                (64 + math.cos(b) * 56, 60 + math.sin(b) * 56)], color)
 
     # Mountain planes layer from violet distance to hot pink foothills.
     c.poly([(0, 212), (58, 153), (110, 191), (175, 122), (237, 186),
@@ -171,12 +172,12 @@ def bicycle_environment(c: Canvas):
     c.poly([(0, 286), (74, 290), (151, 298), (220, 310), (286, 301),
             (370, 292), (450, 286), (450, 293), (371, 300), (287, 309),
             (220, 317), (152, 305), (74, 297), (0, 294)], "#7350a8")
-    # Foreground riverside road keeps the cyclist grounded without hiding the river.
-    c.poly([(0, 380), (93, 371), (174, 383), (272, 370), (365, 385), (450, 373),
-            (450, 408), (366, 418), (272, 404), (174, 419), (92, 407), (0, 416)], "#eaa36d")
-    c.poly([(0, 380), (93, 371), (174, 383), (272, 370), (365, 385), (450, 373),
-            (450, 385), (366, 397), (272, 383), (174, 396), (92, 384), (0, 393)], "#ffd07b")
-    c.line([(14, 397), (97, 390), (171, 400), (270, 387)], "#fff0ae", 1.5)
+    # A broad lower road gives the moving bicycle a clear lane beneath readouts.
+    c.poly([(0, 387), (93, 378), (174, 390), (272, 377), (365, 392), (450, 380),
+            (450, 431), (366, 442), (272, 426), (174, 443), (92, 428), (0, 437)], "#eaa36d")
+    c.poly([(0, 387), (93, 378), (174, 390), (272, 377), (365, 392), (450, 380),
+            (450, 399), (366, 410), (272, 394), (174, 411), (92, 396), (0, 405)], "#ffd07b")
+    c.line([(14, 414), (97, 407), (171, 417), (270, 404), (351, 416)], "#fff0ae", 1.5)
 
 
 def bicycle_actor(c: Canvas):
@@ -319,73 +320,60 @@ def forest_drift(c: Canvas):
         c.line([(x, y-r-2), (x, y+r+2)], "#e9f8b3", 0.8)
 
 
-# ── Coding: luminous terminal glass, saturated desk, code on the right edge ──
+# ── Coding: a bright folded laptop rests below the watch readouts ────────────
 
 def coding_environment(c: Canvas):
-    # Oversized monitor shell and its folded luminous screen planes.
-    c.poly([(31, 24), (414, 24), (396, 244), (50, 244)], "#252654")
-    c.poly([(40, 31), (405, 31), (388, 229), (60, 229)], "#256e9a")
-    c.poly([(40, 31), (200, 31), (207, 229), (60, 229)], "#3854a6")
-    c.poly([(200, 31), (405, 31), (388, 229), (207, 229)], "#6f4aa5")
-    c.poly([(40, 31), (405, 31), (405, 88), (40, 113)], "#303872")
-    c.poly([(40, 113), (200, 102), (207, 229), (60, 229)], "#176b88")
-    c.poly([(200, 102), (405, 88), (388, 229), (207, 229)], "#443d80")
-    # Overlapping translucent-looking facets become paper reflections.
-    c.poly([(49, 42), (172, 40), (198, 79), (62, 90)], "#527ac1")
-    c.poly([(246, 41), (394, 38), (385, 83), (226, 91)], "#9a57a0")
-    c.poly([(66, 134), (208, 119), (208, 218), (71, 222)], "#286e92")
-    c.poly([(214, 115), (383, 101), (375, 215), (218, 218)], "#613f88")
-    c.poly([(220, 118), (298, 111), (292, 169), (220, 176)], "#d74f9b")
-    c.poly([(299, 111), (379, 104), (375, 155), (296, 164)], "#f07a7c")
-    c.poly([(65, 143), (198, 131), (198, 143), (65, 155)], "#53d6d1")
-    c.poly([(65, 168), (177, 157), (177, 168), (65, 179)], "#f5ca69")
-    c.poly([(79, 194), (193, 185), (193, 196), (79, 205)], "#c57bd0")
-    c.poly([(225, 188), (341, 178), (340, 187), (224, 198)], "#ffd06a")
-    c.poly([(246, 204), (366, 194), (365, 202), (246, 213)], "#5addc7")
-    # A small faceted status rail under the screen.
-    c.poly([(60, 231), (388, 231), (385, 242), (60, 242)], "#91d9d6")
-    c.poly([(60, 231), (220, 231), (220, 238), (60, 238)], "#e36a9a")
-
-    # Angular stand, broad glowing desktop, and shallow keyboard plane.
-    c.poly([(192, 243), (255, 243), (275, 297), (172, 297)], "#313b78")
-    c.poly([(193, 243), (222, 243), (220, 291), (172, 297)], "#5462a5")
-    c.poly([(26, 294), (418, 279), (450, 316), (0, 341)], "#cb5b8c")
-    c.poly([(0, 310), (418, 279), (450, 294), (0, 337)], "#f18b80")
-    c.poly([(0, 337), (450, 294), (450, 450), (0, 450)], "#342d69")
-    c.poly([(0, 337), (450, 294), (450, 331), (0, 378)], "#5c3d8a")
-    c.poly([(25, 354), (308, 328), (359, 351), (70, 385)], "#29305e")
-    c.poly([(25, 354), (308, 328), (342, 343), (59, 375)], "#90c6d1")
-    # Repeating paper keycaps add scale without turning the desk into visual noise.
-    for row in range(3):
-        for col in range(10 - row):
-            x = 45 + col * 25 + row * 9
-            y = 361 + row * 9
-            color = ["#354375", "#3b4a80", "#345f83", "#59477f"][(col + row) % 4]
-            c.poly([(x, y), (x + 18, y - 2), (x + 20, y + 3), (x + 2, y + 6)], color)
-            if (row + col) % 4 == 0:
-                c.poly([(x + 2, y), (x + 18, y - 2), (x + 17, y + 1), (x + 2, y + 3)], "#6fe0d0")
-    c.poly([(315, 365), (422, 353), (440, 384), (329, 398)], "#e46698")
-    c.poly([(315, 365), (422, 353), (430, 365), (322, 377)], "#ffc96a")
-    c.poly([(324, 380), (430, 369), (439, 383), (330, 396)], "#7553a3")
+    # Keep the broad center calm. The laptop is large enough to read in the
+    # lower band without competing with the central clock.
+    c.poly([(0, 0), (450, 0), (450, 450), (0, 450)], "#282b62")
+    c.poly([(0, 0), (450, 0), (450, 250), (0, 250)], "#303b79")
+    c.poly([(0, 250), (450, 250), (450, 450), (0, 450)], "#382e68")
+    c.poly([(0, 334), (450, 311), (450, 450), (0, 450)], "#514080")
+    # Two dim paper planes frame the device and leave the readout area open.
+    c.poly([(0, 300), (81, 287), (136, 305), (91, 316), (0, 318)], "#604982")
+    c.poly([(450, 284), (388, 295), (350, 311), (405, 321), (450, 316)], "#61417a")
+    # Laptop screen: distinct bezel, cool glass and broad syntax rows.
+    c.poly([(68, 317), (382, 317), (372, 389), (78, 389)], "#202443")
+    c.poly([(78, 325), (372, 325), (364, 381), (86, 381)], "#153d62")
+    c.poly([(86, 329), (218, 327), (220, 381), (86, 381)], "#185273")
+    c.poly([(220, 327), (372, 325), (364, 381), (220, 381)], "#263b70")
+    # A folded code window gives the screen a readable, familiar story.
+    c.poly([(101, 338), (168, 337), (168, 343), (101, 345)], "#68ded4")
+    c.poly([(111, 350), (230, 347), (230, 354), (111, 356)], "#f5c86c")
+    c.poly([(101, 362), (205, 360), (205, 366), (101, 368)], "#e98dc4")
+    c.poly([(234, 340), (302, 339), (301, 345), (234, 347)], "#ff8d93")
+    c.poly([(244, 354), (342, 351), (341, 357), (244, 359)], "#74ddd0")
+    c.poly([(269, 366), (333, 364), (332, 370), (269, 371)], "#ffc96a")
+    c.line([(76, 389), (374, 389)], "#a5e5dd", 2)
+    # Perspective keyboard deck and a simple visible trackpad.
+    c.poly([(51, 392), (398, 392), (433, 420), (18, 420)], "#d56b98")
+    c.poly([(51, 392), (398, 392), (420, 408), (32, 408)], "#f2a17f")
+    for row in range(2):
+        for col in range(11):
+            x = 72 + col * 25 + row * 5
+            y = 398 + row * 8
+            color = ["#3d477c", "#43518b", "#356487", "#614982"][(col + row) % 4]
+            c.poly([(x, y), (x + 18, y), (x + 20, y + 5), (x + 2, y + 5)], color)
+    c.poly([(188, 414), (267, 414), (277, 419), (178, 419)], "#c9c5dc")
+    c.poly([(18, 420), (433, 420), (400, 434), (48, 434)], "#25284d")
 
 
 def coding_actor(c: Canvas):
-    # Folded code brackets and a floating syntax ribbon live at the screen edge.
-    c.poly([(370, 183), (357, 198), (371, 212), (377, 207), (367, 198), (377, 188)], "#ff7e9c")
-    c.poly([(397, 183), (410, 198), (397, 212), (391, 207), (401, 198), (391, 188)], "#69e1d1")
-    c.poly([(386, 181), (379, 214), (386, 216), (393, 183)], "#ffd267")
-    c.poly([(358, 222), (397, 218), (397, 223), (358, 227)], "#99d8e4")
-    c.poly([(365, 231), (406, 226), (406, 231), (365, 236)], "#d68bd7")
+    # A bright folded terminal mark lives inside the visible laptop screen.
+    c.poly([(321, 340), (308, 350), (321, 359), (326, 355), (318, 350), (326, 344)], "#ff8ca4")
+    c.poly([(341, 340), (354, 350), (341, 359), (336, 355), (344, 350), (336, 344)], "#69e1d1")
+    c.poly([(332, 339), (325, 362), (331, 363), (338, 340)], "#ffd267")
+    c.poly([(291, 370), (349, 369), (349, 373), (291, 374)], "#99d8e4")
 
 
 def coding_cursor(c: Canvas):
-    c.poly([(409, 219), (420, 218), (420, 235), (409, 236)], "#ffe071")
-    c.poly([(409, 219), (420, 218), (416, 224), (409, 225)], "#fff4b9")
+    c.poly([(356, 365), (366, 365), (366, 378), (356, 378)], "#ffe071")
+    c.poly([(356, 365), (366, 365), (362, 371), (356, 372)], "#fff4b9")
 
 
 def coding_drift(c: Canvas):
-    # Tiny angular chips drift over the lower desk as a distinct foreground plane.
-    for x, y, color in [(374, 407, "#61dbce"), (402, 416, "#ff789d"), (341, 423, "#ffd36f")]:
+    # A few restrained paper flecks sit on the desktop corners.
+    for x, y, color in [(24, 362, "#61dbce"), (411, 367, "#ff789d"), (406, 431, "#ffd36f")]:
         c.poly([(x, y), (x + 11, y - 4), (x + 17, y + 4), (x + 6, y + 8)], color)
         c.poly([(x + 6, y + 8), (x + 17, y + 4), (x + 14, y + 12), (x + 3, y + 15)], "#3e3b72")
 
@@ -393,159 +381,119 @@ def coding_drift(c: Canvas):
 # ── Kitten: colorful yarn world, plush cat and an independent mouse ─────────
 
 def kitten_environment(c: Canvas):
-    # A full-dial yarn world of large soft wool balls and looping ribbon.
-    c.poly([(0, 0), (450, 0), (450, 450), (0, 450)], "#563a68")
-    c.poly([(0, 0), (450, 0), (450, 231), (377, 214), (300, 232),
-            (223, 210), (146, 236), (73, 213), (0, 236)], "#7b4b76")
-    c.poly([(0, 237), (89, 218), (169, 239), (252, 219), (333, 240),
-            (413, 218), (450, 228), (450, 450), (0, 450)], "#4a416c")
-    # Faceted yarn balls anchor the corners with pink, cream and mint wool.
-    c.poly(regular_polygon(80, 350, 94, 14), "#bc6e96")
-    c.poly([(0, 315), (48, 261), (116, 273), (166, 329), (155, 398),
-            (104, 448), (19, 428), (0, 398)], "#d987a1")
-    c.poly([(0, 315), (48, 261), (82, 341), (19, 428), (0, 398)], "#f1adad")
-    c.poly([(82, 341), (48, 261), (116, 273), (166, 329), (128, 366)], "#e99ab3")
-    c.poly([(82, 341), (128, 366), (155, 398), (104, 448), (19, 428)], "#a65d8a")
-    c.poly(regular_polygon(384, 95, 74, 14), "#86cda7")
-    c.poly([(326, 42), (367, 21), (423, 41), (450, 94), (431, 143),
-            (380, 167), (334, 142), (309, 94)], "#9fe0b0")
-    c.poly([(326, 42), (367, 21), (384, 93), (334, 142), (309, 94)], "#c9edbb")
-    c.poly([(384, 93), (367, 21), (423, 41), (450, 94), (431, 143)], "#72b994")
-    c.poly([(325, 42), (367, 21), (384, 93), (352, 73)], "#ebd7c0")
-    c.poly(regular_polygon(53, 139, 57, 12), "#927ab0")
-    c.poly([(13, 100), (50, 77), (91, 104), (107, 147), (78, 191),
-            (32, 187), (0, 156)], "#a991c5")
-    c.poly([(13, 100), (50, 77), (57, 137), (32, 187), (0, 156)], "#d4bad4")
-    c.poly([(57, 137), (50, 77), (91, 104), (107, 147), (78, 191)], "#786a9c")
-    # Thick looping wool threads sweep through the whole composition.
-    c.line([(0, 242), (46, 221), (88, 230), (113, 251), (95, 267), (66, 257),
-            (56, 241), (79, 231), (109, 245), (137, 265), (172, 263)], "#f4c4c8", 7)
-    c.line([(0, 246), (46, 225), (88, 234), (111, 252)], "#ffe8cf", 2)
-    c.line([(282, 190), (317, 174), (357, 185), (377, 205), (361, 222),
-            (331, 210), (322, 194), (346, 181), (380, 193), (415, 219), (450, 214)], "#e5a5c1", 7)
-    c.line([(282, 186), (317, 170), (357, 181), (377, 201)], "#ffe1cb", 2)
-    c.line([(25, 57), (88, 30), (147, 49), (168, 83), (149, 103)], "#de9fc2", 5)
-    c.line([(28, 53), (88, 26), (147, 45)], "#f7d2d3", 1.8)
-    c.poly([(0, 429), (93, 404), (181, 420), (262, 400), (350, 421), (450, 402),
-            (450, 450), (0, 450)], "#413c62")
+    # A calm felt-paper playroom keeps its yarn accents at the dial edges.
+    c.poly([(0, 0), (450, 0), (450, 450), (0, 450)], "#60446f")
+    c.poly([(0, 0), (450, 0), (450, 150), (0, 150)], "#795276")
+    c.poly([(0, 150), (450, 150), (450, 327), (0, 327)], "#59456f")
+    c.poly([(0, 327), (450, 327), (450, 450), (0, 450)], "#474269")
+    # Small faceted yarn balls frame the face instead of crowding the clock.
+    c.poly(regular_polygon(43, 66, 49, 12), "#be7399")
+    c.poly([(0, 34), (26, 18), (63, 27), (87, 57), (73, 93), (35, 111), (0, 95)], "#e29baa")
+    c.poly([(0, 34), (26, 18), (43, 68), (35, 111), (0, 95)], "#f3b8b1")
+    c.poly([(43, 68), (26, 18), (63, 27), (87, 57), (73, 93)], "#ba6f95")
+    c.poly(regular_polygon(407, 77, 48, 12), "#74ad91")
+    c.poly([(368, 35), (399, 22), (431, 38), (450, 68), (436, 103),
+            (401, 121), (369, 102), (351, 68)], "#9ed5a9")
+    c.poly([(368, 35), (399, 22), (401, 71), (369, 102), (351, 68)], "#c2e5b7")
+    c.poly([(401, 71), (399, 22), (431, 38), (450, 68), (436, 103)], "#78b18f")
+    # One loose thread curls around the bottom corners like a toy waiting to play.
+    c.line([(0, 359), (39, 345), (72, 358), (81, 379), (66, 394),
+            (45, 389), (42, 371), (61, 358), (92, 368)], "#f1c4cb", 5)
+    c.line([(0, 354), (39, 340), (72, 353), (79, 372)], "#ffe8cf", 1.8)
+    c.line([(450, 369), (414, 354), (385, 366), (377, 387), (394, 402),
+            (416, 394), (417, 377), (398, 366), (370, 376)], "#e8a9c3", 5)
+    c.line([(450, 364), (414, 349), (385, 361), (379, 379)], "#ffe4cf", 1.8)
+    c.poly([(0, 425), (96, 410), (181, 424), (268, 409), (353, 426), (450, 411),
+            (450, 450), (0, 450)], "#3e3b60")
 
 
 def kitten_actor(c: Canvas):
-    # Plush full-body kitten with a round head, huge eyes and little pink paws.
-    c.line([(151, 302), (125, 331), (105, 360), (119, 385), (149, 379)], "#d88b83", 24)
-    c.line([(148, 304), (124, 333), (108, 360)], "#f2b5a7", 6)
-    # Soft body silhouette and overlapping warm facets.
-    c.ellipse((112, 151, 340, 430), fill="#c97778", outline="#8c5272", width=2)
-    c.poly([(124, 212), (159, 170), (204, 185), (219, 272), (188, 369),
-            (126, 388), (109, 331)], "#e99b83")
-    c.poly([(219, 272), (204, 185), (257, 168), (306, 198), (340, 300),
-            (322, 385), (251, 408), (188, 369)], "#d4847c")
-    c.ellipse((155, 263, 302, 413), fill="#f0ba9b")
-    c.poly([(165, 309), (220, 278), (278, 310), (265, 391), (217, 415), (164, 390)], "#ffe0bd")
-    c.poly([(220, 278), (278, 310), (302, 359), (265, 391), (247, 334)], "#f6c9a7")
-    # Rounded cheeks and ears frame the face, with gentle paper folds.
-    c.poly([(123, 93), (126, 59), (147, 36), (190, 48), (219, 57),
-            (251, 47), (294, 39), (323, 67), (323, 111), (312, 148),
-            (288, 172), (252, 184), (188, 181), (151, 164), (128, 135)], "#d58a7d")
-    c.poly([(130, 77), (135, 37), (178, 54), (177, 93)], "#ecaa91")
-    c.poly([(267, 54), (306, 36), (318, 78), (283, 95)], "#e9a28d")
-    c.poly([(139, 77), (143, 47), (170, 59), (166, 89)], "#f5afc1")
-    c.poly([(278, 59), (302, 46), (310, 77), (287, 91)], "#f2b0bf")
-    c.ellipse((134, 72, 214, 158), fill="#e9a082")
-    c.ellipse((234, 71, 314, 158), fill="#d98479")
-    c.poly([(145, 115), (168, 80), (217, 63), (232, 108), (212, 142), (175, 151)], "#f1b691")
-    c.poly([(232, 108), (217, 63), (253, 53), (292, 72), (309, 114), (279, 150), (246, 144)], "#e89b83")
-    c.poly([(145, 121), (178, 146), (218, 128), (232, 156), (210, 177), (169, 165), (138, 143)], "#f7c8a4")
-    c.poly([(232, 156), (218, 128), (246, 144), (279, 150), (309, 120),
-            (307, 146), (282, 171), (250, 182)], "#cd7c76")
-    # Huge round jewel eyes sit well above the date strip.
-    for box, iris in [((157, 65, 205, 111), "#60a89a"), ((245, 65, 293, 111), "#6fae9d")]:
-        c.ellipse(box, fill="#fff1d4", outline="#a66072", width=2)
+    # A compact kitten crouches and looks toward the mouse on its lower lane.
+    c.line([(165, 386), (139, 376), (121, 384), (117, 400), (131, 406)], "#d88b83", 17)
+    c.line([(160, 386), (139, 380), (124, 387)], "#f2b5a7", 4)
+    c.ellipse((143, 366, 296, 447), fill="#c97778", outline="#8c5272", width=2)
+    c.poly([(148, 385), (165, 371), (211, 380), (219, 425), (194, 444),
+            (151, 426)], "#e99b83")
+    c.poly([(211, 380), (245, 369), (281, 383), (296, 418), (276, 444),
+            (219, 425)], "#d4847c")
+    c.poly([(173, 402), (218, 388), (267, 404), (267, 434), (225, 444), (177, 431)], "#ffe0bd")
+    # Ear tips start below the complication band; the broad face stays readable.
+    c.poly([(150, 351), (157, 327), (181, 342), (197, 354)], "#d58a7d")
+    c.poly([(253, 354), (276, 328), (289, 357), (276, 375)], "#d58a7d")
+    c.poly([(160, 347), (165, 335), (180, 348)], "#f5afc1")
+    c.poly([(264, 350), (276, 337), (281, 353)], "#f2b0bf")
+    c.poly([(149, 354), (171, 337), (207, 331), (232, 337), (265, 331),
+            (288, 347), (295, 369), (284, 391), (258, 404), (215, 409),
+            (177, 399), (153, 382)], "#d58a7d")
+    c.poly([(154, 359), (176, 343), (207, 338), (224, 356), (218, 391),
+            (181, 399), (155, 381)], "#f1b691")
+    c.poly([(224, 356), (242, 338), (267, 340), (286, 352), (292, 371),
+            (278, 391), (249, 400), (220, 391)], "#e89b83")
+    # Oversized eyes and right-looking pupils give the cat a playful focus.
+    for box, iris in [((177, 348, 211, 382), "#69b4a1"), ((235, 348, 269, 382), "#69b4a1")]:
+        c.ellipse(box, fill="#fff1d4", outline="#a66072", width=1.6)
         x0, y0, x1, y1 = box
-        c.ellipse((x0+7, y0+5, x1-5, y1-3), fill=iris)
-        c.ellipse((x0+15, y0+7, x1-12, y1-3), fill="#263a4e")
-        c.ellipse((x0+17, y0+9, x0+25, y0+17), fill="#fffdf0")
-        c.ellipse((x1-17, y1-14, x1-12, y1-9), fill="#d7f7ec")
-    # Tiny heart-shaped pink nose, smile and soft whiskers.
-    c.poly([(207, 104), (216, 99), (224, 104), (232, 99), (241, 105),
-            (235, 114), (224, 118), (213, 114)], "#e97591")
-    c.ellipse((212, 102, 219, 108), fill="#ffb2c0")
-    c.line([(224, 116), (224, 126), (216, 132)], "#8b5967", 1.7)
-    c.line([(224, 126), (233, 132)], "#8b5967", 1.7)
-    c.ellipse((160, 127, 188, 146), fill="#ef9b9e")
-    c.ellipse((262, 127, 290, 146), fill="#ef9b9e")
-    for pts in [[(211, 119), (181, 121), (159, 115)], [(211, 126), (181, 136), (158, 138)],
-                [(237, 119), (267, 121), (291, 115)], [(237, 126), (267, 136), (292, 138)]]:
-        c.line(pts, "#ffe8d2", 1.3)
-    # Small cream paws peek out beneath the plush belly.
-    c.ellipse((139, 389, 208, 438), fill="#ffe0bf", outline="#bd767e", width=1.4)
-    c.ellipse((244, 389, 313, 438), fill="#ffe0bf", outline="#bd767e", width=1.4)
-    for x in (161, 179, 266, 284):
-        c.line([(x, 420), (x+2, 428)], "#de98a0", 1.2)
+        c.ellipse((x0 + 8, y0 + 5, x1 - 3, y1 - 3), fill=iris)
+        c.ellipse((x0 + 14, y0 + 7, x1 - 4, y1 - 3), fill="#263a4e")
+        c.ellipse((x0 + 16, y0 + 9, x0 + 22, y0 + 15), fill="#fffdf0")
+    c.poly([(209, 382), (218, 378), (227, 383), (220, 390), (213, 389)], "#e97591")
+    c.line([(218, 389), (218, 395), (211, 399)], "#8b5967", 1.4)
+    c.line([(218, 395), (225, 400)], "#8b5967", 1.4)
+    for pts in [[(209, 387), (181, 386), (165, 381)], [(209, 392), (182, 397), (167, 399)],
+                [(228, 387), (257, 385), (277, 379)], [(228, 393), (255, 399), (276, 402)]]:
+        c.line(pts, "#ffe8d2", 1.2)
+    # One raised paw reaches toward the mouse; the other anchors the crouch.
+    c.poly([(264, 408), (288, 401), (303, 391), (312, 396), (308, 409), (291, 420)], "#f0ba9b")
+    c.ellipse((157, 419, 204, 446), fill="#ffe0bf", outline="#bd767e", width=1.2)
+    c.ellipse((227, 420, 273, 446), fill="#ffe0bf", outline="#bd767e", width=1.2)
+    for x in (170, 185, 240, 255):
+        c.line([(x, 434), (x + 1, 440)], "#de98a0", 1.1)
 
 
 def kitten_drift(c: Canvas):
-    # A side-on mouse faces right and runs independently along the lower dial.
-    c.line([(292, 324), (278, 333), (270, 345), (277, 351)], "#8f6275", 2.6)
-    c.ellipse((285, 301, 337, 342), fill="#a68796", outline="#6b536d", width=1.5)
-    c.poly([(312, 306), (332, 298), (350, 313), (344, 331), (329, 340), (309, 332)], "#b79aa1")
-    c.ellipse((314, 297, 328, 314), fill="#d99cae")
-    c.ellipse((331, 302, 343, 317), fill="#d99cae")
-    c.ellipse((333, 313, 339, 319), fill="#293746")
-    c.poly([(346, 318), (356, 322), (347, 328), (340, 324)], "#ed8da2")
-    c.ellipse((293, 333, 304, 339), fill="#f2c7c7")
-    c.ellipse((322, 335, 333, 341), fill="#f2c7c7")
+    # A separate mouse runs on a low path under the kitten's reaching paw.
+    c.line([(292, 394), (278, 403), (270, 415), (277, 421)], "#8f6275", 2.6)
+    c.ellipse((285, 371, 337, 412), fill="#a68796", outline="#6b536d", width=1.5)
+    c.poly([(312, 376), (332, 368), (350, 383), (344, 401), (329, 410), (309, 402)], "#b79aa1")
+    c.ellipse((314, 367, 328, 384), fill="#d99cae")
+    c.ellipse((331, 372, 343, 387), fill="#d99cae")
+    c.ellipse((333, 383, 339, 389), fill="#293746")
+    c.poly([(346, 388), (356, 392), (347, 398), (340, 394)], "#ed8da2")
+    c.ellipse((293, 403, 304, 409), fill="#f2c7c7")
+    c.ellipse((322, 405, 333, 411), fill="#f2c7c7")
 
 
 # ── Landscape: saturated mountain bowl, faceted sunset and reflective lake ──
 
 def landscape_environment(c: Canvas):
-    # Distant peaks and folded ridgelines in rainbow sunset light.
-    c.poly([(0, 184), (47, 146), (91, 178), (151, 110), (216, 176),
-            (271, 129), (333, 185), (391, 145), (450, 178), (450, 306), (0, 306)], "#7043a4")
-    c.poly([(0, 184), (47, 146), (91, 178), (60, 166), (47, 153), (22, 198)], "#bc5cb1")
-    c.poly([(91, 178), (151, 110), (216, 176), (183, 156), (151, 126), (126, 192)], "#e264a0")
-    c.poly([(216, 176), (271, 129), (333, 185), (300, 164), (271, 143), (246, 197)], "#9c4b9b")
-    c.poly([(333, 185), (391, 145), (450, 178), (450, 225), (411, 166), (381, 197)], "#dc648e")
-    c.poly([(0, 221), (76, 181), (134, 212), (211, 171), (271, 214),
-            (343, 180), (450, 222), (450, 316), (0, 316)], "#e27686")
-    c.poly([(0, 221), (76, 181), (134, 212), (102, 200), (76, 189), (44, 237)], "#f5a078")
-    c.poly([(134, 212), (211, 171), (271, 214), (238, 196), (211, 184), (180, 231)], "#c15c93")
-    c.poly([(271, 214), (343, 180), (450, 222), (406, 207), (343, 191), (314, 231)], "#fa9b78")
-    # Lower slopes fan outward like folded paper into the lake.
-    c.poly([(0, 264), (84, 225), (157, 258), (223, 222), (299, 265),
-            (365, 231), (450, 265), (450, 338), (0, 338)], "#a44e97")
-    c.poly([(0, 264), (84, 225), (157, 258), (124, 248), (84, 235), (49, 281)], "#e77491")
-    c.poly([(157, 258), (223, 222), (299, 265), (264, 251), (223, 236), (195, 279)], "#f6a45f")
-    c.poly([(299, 265), (365, 231), (450, 265), (418, 257), (365, 243), (336, 286)], "#dc6a92")
-
-    # The lake is a wide jewel-blue plane, broken by horizontal reflections.
-    c.poly([(0, 272), (69, 285), (145, 269), (220, 287), (304, 270),
-            (377, 288), (450, 273), (450, 450), (0, 450)], "#286f9f")
-    c.poly([(0, 297), (68, 305), (143, 291), (218, 307), (303, 291),
-            (378, 308), (450, 293), (450, 345), (379, 359), (303, 342),
-            (218, 359), (143, 341), (68, 358), (0, 346)], "#49b4b7")
-    c.poly([(0, 346), (72, 359), (147, 344), (223, 364), (303, 346),
-            (379, 365), (450, 348), (450, 393), (375, 407), (302, 388),
-            (222, 408), (147, 388), (72, 405), (0, 392)], "#287eaa")
-    c.poly([(0, 407), (79, 395), (157, 412), (228, 399), (306, 417),
+    # Open sunset sky leaves a quiet field for the time; folded peaks rise from
+    # the lower edge into a reflective blue lake.
+    c.poly([(0, 0), (450, 0), (450, 298), (0, 298)], "#7543a2")
+    c.poly([(0, 0), (450, 0), (450, 133), (0, 171)], "#b956a4")
+    c.poly([(0, 171), (123, 142), (229, 168), (345, 138), (450, 157),
+            (450, 220), (341, 193), (229, 219), (117, 191), (0, 222)], "#dd708d")
+    c.poly([(0, 300), (58, 270), (119, 302), (181, 275), (244, 307),
+            (316, 272), (384, 304), (450, 273), (450, 354), (0, 354)], "#9e4e98")
+    c.poly([(0, 300), (58, 270), (119, 302), (88, 292), (58, 280), (27, 321)], "#f09084")
+    c.poly([(181, 275), (244, 307), (316, 272), (281, 290), (244, 286), (215, 322)], "#e77b88")
+    c.poly([(316, 272), (384, 304), (450, 273), (418, 290), (384, 287), (351, 326)], "#f3a06f")
+    # The lake carries just a few bright folded reflections at the bottom.
+    c.poly([(0, 340), (74, 354), (151, 337), (226, 355), (302, 337),
+            (378, 355), (450, 340), (450, 450), (0, 450)], "#286f9f")
+    c.poly([(0, 363), (74, 375), (151, 359), (226, 377), (302, 359),
+            (378, 377), (450, 362), (450, 403), (378, 416), (302, 399),
+            (226, 418), (151, 399), (74, 418), (0, 403)], "#49b4b7")
+    c.poly([(0, 409), (79, 395), (157, 412), (228, 399), (306, 417),
             (378, 398), (450, 414), (450, 450), (0, 450)], "#235b8f")
-    for pts, color in [([(34, 320), (94, 316), (129, 321)], "#f7b67b"),
-                       ([(239, 324), (284, 320), (341, 327)], "#ffe08a"),
-                       ([(80, 373), (143, 369), (177, 375)], "#9ce0d2"),
-                       ([(310, 377), (376, 370), (425, 375)], "#f1a1a1"),
-                       ([(177, 431), (225, 425), (267, 432)], "#78cbd0")]:
+    for pts, color in [([(32, 384), (93, 379), (132, 385)], "#f7b67b"),
+                       ([(244, 386), (297, 382), (350, 388)], "#ffe08a"),
+                       ([(83, 431), (144, 425), (184, 432)], "#9ce0d2"),
+                       ([(317, 434), (376, 427), (427, 433)], "#f1a1a1")]:
         c.line(pts, color, 2.2)
-    # Near shore folds along the bottom edge.
-    c.poly([(0, 425), (118, 407), (210, 431), (314, 411), (450, 433),
-            (450, 450), (0, 450)], "#493875")
-    c.poly([(0, 425), (118, 407), (210, 431), (314, 411), (450, 433),
-            (450, 442), (314, 423), (210, 443), (118, 419), (0, 438)], "#d86688")
-
 
 def landscape_actor(c: Canvas):
-    # Large, softly faceted paper sun, intentionally behind the time glass.
-    cx, cy, r = 364, 222, 42
+    # A warm paper sun anchors the upper-left corner, clear of the date.
+    cx, cy, r = 76, 73, 43
     c.poly(regular_polygon(cx, cy, r, 16), "#ffd56b")
     c.poly([(cx, cy), (cx + 42, cy), (cx + 30, cy + 30), (cx + 1, cy + 41)], "#f28b6c")
     c.poly([(cx, cy), (cx - 30, cy + 29), (cx - 42, cy), (cx - 27, cy - 30)], "#fff0a2")
@@ -554,38 +502,36 @@ def landscape_actor(c: Canvas):
 
 def landscape_drift(c: Canvas):
     # A distant folded cloud passes through the upper left sky.
-    c.poly([(65, 82), (80, 70), (96, 74), (106, 63), (123, 68),
-            (135, 83), (124, 91), (75, 92)], "#f0a6b2")
-    c.poly([(65, 82), (80, 70), (95, 76), (78, 87)], "#ffd294")
-    c.poly([(96, 76), (106, 63), (123, 68), (135, 83), (111, 82)], "#ffe6ac")
+    c.poly([(268, 84), (283, 72), (299, 76), (309, 65), (326, 70),
+            (338, 85), (327, 93), (278, 94)], "#f0a6b2")
+    c.poly([(268, 84), (283, 72), (298, 78), (281, 89)], "#ffd294")
+    c.poly([(299, 78), (309, 65), (326, 70), (338, 85), (314, 84)], "#ffe6ac")
     c.poly([(325, 110), (337, 103), (350, 106), (358, 115), (346, 121), (329, 118)], "#e88d9c")
 
 
 # ── Cosmos: open deep space, one ringed planet and a paper rocket ────────────
 
 def cosmos_environment(c: Canvas):
-    # Open deep-space gradient, one large ringed planet, and a few tiny stars.
-    # The gradient beneath this layer supplies the navy-to-teal color field.
-    c.ellipse((266, 39, 441, 149), outline="#b77e85", width=9)
-    c.ellipse((269, 37, 438, 147), outline="#f3d19a", width=2)
-    c.poly(regular_polygon(352, 91, 53, 18), "#3e8294")
-    c.poly([(301, 91), (312, 58), (339, 40), (369, 42), (392, 62),
-            (404, 92), (389, 121), (361, 143), (329, 136), (307, 116)], "#4e9b9c")
-    c.poly([(301, 91), (312, 58), (339, 40), (352, 91), (329, 136), (307, 116)], "#79d4c3")
-    c.poly([(352, 91), (339, 40), (369, 42), (392, 62), (404, 92),
-            (389, 121), (361, 143)], "#3e688f")
-    c.poly([(312, 58), (339, 40), (352, 91), (329, 78)], "#b8e6ce")
-    lower_ring = [(353 + 86*math.cos(math.radians(a)), 94 + 49*math.sin(math.radians(a)))
-                  for a in range(12, 170, 8)]
-    c.line(lower_ring, "#d9a875", 9)
-    c.line(lower_ring, "#ffedbf", 1.8)
-    for x, y, r, col in [(61, 64, 4, "#fff0a8"), (183, 165, 3, "#73e4d1"),
-                         (72, 272, 4, "#eca1c5"), (412, 215, 3, "#ffe08a"),
-                         (45, 386, 3, "#7be4d2"), (402, 354, 4, "#efa5d0"),
-                         (211, 421, 3, "#ffe18c")]:
+    # A ringed planet sits in the upper-right pocket of open deep space.
+    c.ellipse((281, 26, 452, 111), outline="#b77e85", width=8)
+    c.ellipse((284, 24, 449, 109), outline="#f3d19a", width=2)
+    c.poly(regular_polygon(368, 67, 40, 18), "#3e8294")
+    c.poly([(328, 67), (336, 43), (355, 28), (378, 29), (396, 46),
+            (408, 68), (396, 88), (378, 105), (352, 100), (333, 84)], "#4e9b9c")
+    c.poly([(328, 67), (336, 43), (355, 28), (368, 67), (352, 100), (333, 84)], "#79d4c3")
+    c.poly([(368, 67), (355, 28), (378, 29), (396, 46), (408, 68),
+            (396, 88), (378, 105)], "#3e688f")
+    c.poly([(336, 43), (355, 28), (368, 67), (352, 58)], "#b8e6ce")
+    lower_ring = [(368 + 84 * math.cos(math.radians(a)), 68 + 38 * math.sin(math.radians(a)))
+                  for a in range(8, 173, 8)]
+    c.line(lower_ring, "#d9a875", 8)
+    c.line(lower_ring, "#ffedbf", 1.7)
+    # Tiny stars mark the margins; the lower-left cluster becomes the rocket trail.
+    for x, y, r, col in [(55, 58, 3, "#fff0a8"), (405, 145, 3, "#ffe08a"),
+                         (45, 357, 3, "#7be4d2"), (404, 346, 4, "#efa5d0"),
+                         (211, 425, 3, "#ffe18c")]:
         c.poly([(x, y-r), (x+1, y-1), (x+r, y), (x+1, y+1),
                 (x, y+r), (x-1, y+1), (x-r, y), (x-1, y-1)], col)
-
 
 def cosmos_actor(c: Canvas):
     # Draw an anatomical retro rocket horizontally, then rotate its full
@@ -614,7 +560,7 @@ def cosmos_actor(c: Canvas):
     # Rotate around the center so the nose points northeast and exhaust southwest.
     angled = local.rotate(45, resample=Image.Resampling.BICUBIC,
                           center=(210 * SCALE, 310 * SCALE), fillcolor=(0, 0, 0, 0))
-    c.d._image.alpha_composite(angled)
+    c.d._image.alpha_composite(angled, dest=(0, 65 * SCALE))
 
 
 def cosmos_drift(c: Canvas):
@@ -688,28 +634,29 @@ def ocean_drift(c: Canvas):
 
 
 def aurora_environment(c: Canvas):
-    # Amber and scarlet aurora over a burgundy polar night and cream snow.
-    c.poly([(0, 0), (450, 0), (450, 245), (375, 224), (300, 242),
-            (224, 219), (149, 243), (73, 220), (0, 243)], "#3d1e39")
-    c.poly([(0, 236), (76, 213), (151, 236), (226, 214), (301, 238),
-            (376, 215), (450, 237), (450, 302), (374, 320), (298, 298),
-            (224, 321), (149, 298), (74, 319), (0, 300)], "#6a3045")
-    # Folded snow shelves glow in warm apricot and honey tones.
-    c.poly([(0, 257), (62, 226), (119, 255), (184, 232), (248, 264),
-            (313, 237), (377, 265), (420, 236), (450, 255), (450, 450), (0, 450)], "#9f5960")
-    c.poly([(0, 290), (70, 261), (137, 288), (204, 264), (274, 295),
-            (342, 266), (414, 294), (450, 279), (450, 450), (0, 450)], "#e3a77b")
-    c.poly([(0, 330), (75, 302), (153, 327), (229, 301), (306, 331),
-            (382, 303), (450, 326), (450, 450), (0, 450)], "#f3d6a4")
-    c.poly([(0, 385), (83, 359), (164, 382), (246, 356), (330, 385),
-            (411, 358), (450, 369), (450, 450), (0, 450)], "#fff0cf")
-    c.poly([(0, 421), (111, 393), (220, 419), (333, 390), (450, 420),
+    # A quiet polar night frames two narrow aurora ribbons at the outer edges.
+    c.poly([(0, 0), (450, 0), (450, 450), (0, 450)], "#3d1e39")
+    c.poly([(0, 0), (56, 0), (88, 52), (74, 103), (92, 157),
+            (71, 193), (45, 154), (54, 96), (35, 45)], "#bd6859")
+    c.poly([(0, 0), (27, 0), (58, 49), (49, 102), (68, 154),
+            (55, 181), (40, 145), (43, 94), (22, 43)], "#f4b56e")
+    c.poly([(391, 0), (450, 0), (450, 166), (419, 195), (396, 153),
+            (410, 95), (382, 47)], "#a44d58")
+    c.poly([(423, 0), (450, 0), (450, 139), (431, 174), (415, 137),
+            (428, 87), (408, 42)], "#e89962")
+    # Snow shelves start beneath the readouts and give the fox a warm stage.
+    c.poly([(0, 318), (75, 294), (153, 320), (229, 296), (306, 323),
+            (382, 298), (450, 321), (450, 450), (0, 450)], "#9f5960")
+    c.poly([(0, 343), (70, 317), (137, 344), (204, 320), (274, 350),
+            (342, 322), (414, 349), (450, 334), (450, 450), (0, 450)], "#e3a77b")
+    c.poly([(0, 372), (75, 347), (153, 371), (229, 345), (306, 375),
+            (382, 349), (450, 372), (450, 450), (0, 450)], "#f3d6a4")
+    c.poly([(0, 410), (83, 387), (164, 409), (246, 384), (330, 412),
+            (411, 386), (450, 398), (450, 450), (0, 450)], "#fff0cf")
+    c.poly([(0, 430), (111, 407), (220, 431), (333, 403), (450, 429),
             (450, 450), (0, 450)], "#d9ac8d")
-    c.poly([(0, 278), (62, 226), (119, 255), (83, 252), (62, 240), (28, 292)], "#b36b69")
-    c.poly([(343, 261), (420, 236), (450, 255), (450, 295), (413, 251), (380, 283)], "#bd776b")
-    for x, y, r in [(47, 160, 4), (148, 183, 3), (307, 167, 4), (407, 143, 3)]:
+    for x, y, r in [(112, 50, 3), (152, 91, 3), (344, 53, 4), (377, 114, 3)]:
         c.poly([(x, y-r), (x+2, y-1), (x+r, y), (x, y+r), (x-r, y)], "#ffe8c1")
-
 
 def aurora_actor(c: Canvas):
     # A golden-red paper fox stands against the snow.
@@ -759,10 +706,12 @@ SCENES = {
     "bicycle": {
         "stops": [(0, "#5b327e"), (0.35, "#e45e8c"), (0.65, "#ffb867"), (1, "#2a7193")],
         "background": bicycle_environment, "motion": bicycle_actor, "drift": bicycle_drift,
+        "motion_scale": (1.0, 0.9), "motion_center": (225, 360), "motion_offset": (0, 30),
     },
     "forest": {
         "stops": [(0, "#15583e"), (0.34, "#238a51"), (0.68, "#146d70"), (1, "#124e60")],
         "background": forest_environment, "motion": forest_actor, "drift": forest_drift,
+        "motion_scale": (1.0, 0.68), "motion_center": (225, 299), "motion_offset": (0, 45),
     },
     "coding": {
         "stops": [(0, "#201e59"), (0.48, "#3b326f"), (1, "#613869")],
@@ -771,7 +720,7 @@ SCENES = {
     "kitten": {
         "stops": [(0, "#91516f"), (0.42, "#bc6d8d"), (0.72, "#68517d"), (1, "#393b68")],
         "background": kitten_environment, "motion": kitten_actor, "drift": kitten_drift,
-        "motion_offset": (0, -18),
+        "motion_scale": (1.08, 0.9), "motion_center": (225, 327),
     },
     "landscape": {
         "stops": [(0, "#652e83"), (0.3, "#d54c9a"), (0.58, "#ff956f"), (1, "#246c9c")],
@@ -780,16 +729,18 @@ SCENES = {
     "cosmos": {
         "stops": [(0, "#111e3f"), (0.4, "#1b3454"), (0.75, "#142f4e"), (1, "#111b3a")],
         "background": cosmos_environment, "motion": cosmos_actor, "drift": cosmos_drift,
+        "motion_scale": (0.9, 0.9), "motion_center": (210, 375),
         "drift_below_actor": True,
     },
     "ocean": {
         "stops": [(0, "#42c0b2"), (0.22, "#167d9a"), (0.62, "#1a668d"), (1, "#123c68")],
         "background": ocean_environment, "motion": ocean_actor, "drift": ocean_drift,
-        "motion_offset": (0, 100),
+        "motion_scale": (0.82, 0.72), "motion_center": (225, 225), "motion_offset": (0, 130),
     },
     "aurora": {
         "stops": [(0, "#321b35"), (0.38, "#692d47"), (0.68, "#b25353"), (1, "#f0bd8f")],
         "background": aurora_environment, "motion": aurora_actor, "drift": aurora_drift,
+        "motion_scale": (1.0, 0.68), "motion_center": (225, 350), "motion_offset": (0, 34),
         "drift_below_actor": True,
     },
 }
@@ -835,7 +786,7 @@ def assemble(scene, motion, drift, motion_offset=(0, 0), drift_offset=(0, 0), dr
     return out
 
 
-def feathered_glass(scene):
+def feathered_glass(scene, style=None):
     """Scene-aware translucent blur plates with feathered edges and no borders."""
     blurred = scene.convert("RGB").filter(ImageFilter.GaussianBlur(6))
     layer = Image.new("RGBA", (SIZE, SIZE), (0, 0, 0, 0))
@@ -846,7 +797,8 @@ def feathered_glass(scene):
         ImageDraw.Draw(mask).rounded_rectangle(box, radius=radius, fill=255)
         mask = mask.filter(ImageFilter.GaussianBlur(feather))
         patch = blurred.copy()
-        navy = Image.new("RGB", patch.size, (13, 20, 43))
+        tint_color = (62, 39, 47) if style == "origami" else (13, 20, 43)
+        navy = Image.new("RGB", patch.size, tint_color)
         patch = Image.blend(patch, navy, tint)
         patch = patch.convert("RGBA")
         patch.putalpha(mask.point(lambda a: round(a * alpha / 255)))
@@ -867,9 +819,12 @@ def font(size, bold=False):
     return ImageFont.load_default()
 
 
-def native_clock():
-    paths = [OUT / f"clock_{digit}.png" for digit in "1008"]
-    paths.insert(2, OUT / "clock_colon.png")
+def native_clock(style=None):
+    glyph_names = ([f"clock_{style}_{digit}.png" for digit in "1008"] if style else
+                   [f"clock_{digit}.png" for digit in "1008"])
+    colon_name = f"clock_{style}_colon.png" if style else "clock_colon.png"
+    paths = [OUT / name for name in glyph_names]
+    paths.insert(2, OUT / colon_name)
     if not all(path.exists() for path in paths):
         return None
     glyphs = [Image.open(path).convert("RGBA") for path in paths]
@@ -881,46 +836,76 @@ def native_clock():
     return clock.resize((round(clock.width * 112 / 96), 112), Image.Resampling.LANCZOS)
 
 
-def draw_complications(draw):
+def proof_glass_color(style):
+    return {
+        "origami": (255, 226, 186, 54),
+        "woodblock": (213, 214, 191, 48),
+    }.get(style, (223, 235, 247, 48))
+
+
+def draw_complications(draw, style=None):
     for center, value, icon_color in [(122.5, "82%", (164, 209, 188, 255)),
                                       (327.5, "6,248", (166, 236, 230, 255))]:
-        label_font = font(28, True)
-        label_width = max(16.5, min(len(value) * 16.5, 97))
-        row_width = 24 + 8 + label_width
+        label_font = font(32, True)
+        label_width = draw.textbbox((0, 0), value, font=label_font)[2]
+        row_width = 26 + 8 + label_width
         left = center - row_width / 2
-        plate_width = min(145, row_width + 16)
+        plate_width = min(161, 50 + label_width)
         draw.rounded_rectangle((center - plate_width / 2, 273,
                                 center + plate_width / 2, 315), radius=14,
-                               fill=(223, 235, 247, 48))
+                               fill=proof_glass_color(style))
         if value == "82%":
-            draw.rounded_rectangle((left+3, 286, left+20, 302), radius=3,
+            draw.rounded_rectangle((left+3, 284, left+23, 303), radius=4,
                                    outline=icon_color, width=2)
-            draw.rectangle((left+8, 283, left+15, 286), fill=icon_color)
+            draw.rectangle((left+9, 281, left+17, 284), fill=icon_color)
         else:
-            draw.ellipse((left+9, 282, left+15, 288), fill=icon_color)
-            draw.line([(left+12, 289), (left+10, 297), (left+4, 305)], fill=icon_color, width=3)
-            draw.line([(left+11, 293), (left+20, 298)], fill=icon_color, width=3)
-            draw.line([(left+10, 297), (left+18, 306)], fill=icon_color, width=3)
-        draw.text((left + 32 + label_width / 2, 294), value, font=label_font,
+            draw.ellipse((left+11, 281, left+17, 287), fill=icon_color)
+            draw.line([(left+14, 288), (left+12, 297), (left+5, 305)], fill=icon_color, width=3)
+            draw.line([(left+13, 293), (left+22, 298)], fill=icon_color, width=3)
+            draw.line([(left+12, 297), (left+20, 306)], fill=icon_color, width=3)
+        draw.text((left + 34 + label_width / 2, 294), value, font=label_font,
                   fill=(255, 244, 232, 255), anchor="mm")
 
 
-def add_watch_content(face, glass, clock):
+def add_watch_content(face, glass, clock, style=None):
     overlay = glass.copy()
     d = ImageDraw.Draw(overlay)
     date = "SUN OCT 25"
-    date_width = max(58, min(24 + len(date) * 17, 380))
-    d.rounded_rectangle((225-date_width/2, 112, 225+date_width/2, 154), radius=14, fill=(223, 235, 247, 48))
-    d.text((225, 133), date, font=font(28, True),
+    date_font = font(32, True)
+    date_text_width = d.textbbox((0, 0), date, font=date_font)[2]
+    date_width = max(58, min(date_text_width + 24, 380))
+    d.rounded_rectangle((225-date_width/2, 112, 225+date_width/2, 154), radius=14,
+                        fill=proof_glass_color(style))
+    d.text((225, 133), date, font=date_font,
            fill=(239, 243, 255, 255), anchor="mm")
     if clock is not None:
         overlay.alpha_composite(clock, ((450-clock.width)//2, 152))
     else:
         d.text((225, 206), "10:08", font=font(68, True), fill=(255, 240, 221, 255), anchor="mm")
-    draw_complications(d)
+    draw_complications(d, style=style)
     out = face.convert("RGBA")
     out.alpha_composite(overlay)
     return out
+
+
+def origami_ambient():
+    """Sparse, low-light folded marks for the Origami ambient watch face."""
+    layer = Image.new("RGBA", (HI, HI), (0, 0, 0, 0))
+    c = Canvas(ImageDraw.Draw(layer))
+    motifs = [(34, 59, 9), (416, 62, 8), (28, 193, 6), (422, 196, 6),
+              (40, 385, 9), (413, 386, 8), (116, 422, 5), (348, 419, 5)]
+    for x, y, size in motifs:
+        # Two paper facets make each tiny star read as a folded mark, not a dot.
+        c.poly([(x, y-size), (x+size*0.42, y-size*0.18), (x, y),
+                (x-size*0.42, y-size*0.18)], (220, 185, 124, 42))
+        c.poly([(x, y), (x+size*0.42, y-size*0.18), (x+size, y),
+                (x+size*0.42, y+size*0.24)], (240, 214, 163, 48))
+        c.poly([(x, y), (x+size*0.42, y+size*0.24), (x, y+size),
+                (x-size*0.42, y+size*0.24)], (201, 166, 109, 38))
+        c.poly([(x, y), (x-size*0.42, y+size*0.24), (x-size, y),
+                (x-size*0.42, y-size*0.18)], (226, 193, 134, 36))
+        c.line([(x-size, y), (x, y+size), (x+size, y)], (248, 227, 177, 52), 0.8)
+    return layer.resize((SIZE, SIZE), Image.Resampling.LANCZOS)
 
 
 def circular_crop(face):
@@ -931,23 +916,23 @@ def circular_crop(face):
     return result
 
 
-def picker_preview(face, glass, clock):
-    return circular_crop(add_watch_content(face, glass, clock))
+def picker_preview(face, glass, clock, style=None):
+    return circular_crop(add_watch_content(face, glass, clock, style=style))
 
 
-def add_mockup(face, glass, clock):
+def add_mockup(face, glass, clock, style=None):
     window = circular_crop(face.resize((408, 408), Image.Resampling.LANCZOS))
     rim = Image.new("RGBA", (422, 422), (0, 0, 0, 0))
     d = ImageDraw.Draw(rim)
     d.ellipse((1, 1, 420, 420), fill=(49, 55, 83, 255), outline=(139, 152, 190, 210), width=2)
     rim.alpha_composite(window, (7, 7))
-    framed_content = add_watch_content(face, glass, clock).resize((408, 408), Image.Resampling.LANCZOS)
+    framed_content = add_watch_content(face, glass, clock, style=style).resize((408, 408), Image.Resampling.LANCZOS)
     rim.alpha_composite(circular_crop(framed_content), (7, 7))
     ImageDraw.Draw(rim).ellipse((8, 8, 413, 413), outline=(218, 222, 243, 82), width=1)
     return rim
 
 
-def contact_sheet(faces, glasses, clock):
+def contact_sheet(faces, glasses, clock, style=None):
     names = list(SCENES)
     cell_w, cell_h, gap = 478, 492, 20
     columns = 4
@@ -961,7 +946,7 @@ def contact_sheet(faces, glasses, clock):
                             fill="#1a2340", outline="#394765", width=2)
         d.text((x + 22, y + 23), name.upper(), font=font(17, True), fill="#e7edff")
         d.text((x + cell_w - 22, y + 23), "FOLD & TICK", font=font(10, True), fill="#a3aec8", anchor="ra")
-        dial = add_mockup(faces[name], glasses[name], clock)
+        dial = add_mockup(faces[name], glasses[name], clock, style=style)
         sheet.paste(dial, (x + (cell_w - dial.width) // 2, y + 58), dial)
     return sheet
 
@@ -972,35 +957,47 @@ def alpha_layer(layer, opacity):
     return out
 
 
-def make_motion_gif(path, scene, motion, drift, glass, clock, route, drift_below=False):
+def make_motion_gif(path, scene, motion, drift, glass, clock, route, drift_below=False, style=None):
     frames = []
-    # Every proof is a 10-second native-matched route with both actors offscreen
-    # at the loop seam. GIF delays are exact 100ms increments.
-    frame_count = 100
+    # Match each native route's period. GIF delays are exact 100ms increments.
+    frame_count = {"kitten": 80, "ocean": 140}.get(route, 100)
     for i in range(frame_count):
-        t = i / (frame_count - 1)
+        t = i / frame_count
         if route == "bicycle":
             offset = (round(-300 + 720 * t), 0)
             drift_offset = (round(math.sin(i * math.tau / frame_count) * 12),
                             round(math.cos(i * math.tau / frame_count) * 8))
             actor, floater = motion, drift
         elif route == "kitten":
-            # The plush cat plays in place while the mouse runs independently
-            # across the lower dial, matching the two native animation tracks.
-            offset = (round(math.sin(t * math.tau) * 18),
-                      round(math.sin(t * math.tau * 2) * 9))
-            drift_offset = (round(-320 + 770 * t), round(math.sin(t * math.tau) * 4))
+            # The kitten lunges toward the mouse, which runs independently
+            # across the lower dial on its own eight-second pass.
+            seconds = i / 10
+            lunge_phase = seconds % 3
+            if lunge_phase < 0.5:
+                lunge = lunge_phase / 0.5
+            elif lunge_phase < 1.0:
+                lunge = 1.0
+            elif lunge_phase < 2.0:
+                lunge = 2.0 - lunge_phase
+            else:
+                lunge = 0.0
+            offset = (round(lunge * 10), round(-lunge * 5))
+            drift_offset = (round(-350 + 720 * t), round(7 * math.sin(t * math.tau)))
             actor, floater = motion, drift
         elif route == "rocket":
-            offset = (round(-320 + 740 * t), round(320 - 740 * t))
+            offset = (round(-320 + 740 * t), round(180 - 740 * t))
             drift_offset = offset
             actor = motion
             opacity = 0.25 + 0.75 * (0.5 + 0.5 * math.sin(i * math.tau / 18))
             floater = alpha_layer(drift, opacity)
+        elif route == "ocean":
+            offset = (round(-320 + 740 * t), round(8 * math.sin(i * math.tau / frame_count)))
+            drift_offset = (0, round(4 * math.sin(i * math.tau / frame_count)))
+            actor, floater = motion, drift
         else:
             raise ValueError(f"Unknown motion route: {route}")
         face = assemble(scene, actor, floater, offset, drift_offset, drift_below)
-        frame = picker_preview(face, glass, clock).convert("RGB")
+        frame = picker_preview(face, glass, clock, style=style).convert("RGB")
         frames.append(frame)
     palette = frames[0].quantize(colors=255, method=Image.Quantize.MEDIANCUT)
     frames = [f.quantize(palette=palette, dither=Image.Dither.NONE) for f in frames]
@@ -1012,6 +1009,7 @@ def make_motion_gif(path, scene, motion, drift, glass, clock, route, drift_below
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     PREVIEW.parent.mkdir(parents=True, exist_ok=True)
+    origami_ambient().save(OUT / "origami_ambient.png", optimize=True)
     # Remove retired scene assets so resource folders match the current scene list.
     for stale in ("scene_garden.png", "icon_scene_garden.png", "motion_garden.png",
                   "drift_garden.png", "glass_garden.png", "scene_baking.png",
@@ -1035,7 +1033,7 @@ def main():
                                     drift_below=spec.get("drift_below_actor", False))
         # Keep scene-aware glass independent of moving actors so native motion
         # never leaves a blurred duplicate at the actor's default position.
-        glasses[name] = feathered_glass(stills[name])
+        glasses[name] = feathered_glass(stills[name], style="origami")
         glasses[name].save(OUT / f"glass_{name}.png", optimize=True)
         assembled[name].resize((160, 160), Image.Resampling.LANCZOS).save(
             OUT / f"icon_scene_{name}.png", optimize=True
@@ -1043,27 +1041,27 @@ def main():
 
     cursor_layer = render_transparent(coding_cursor)
     cursor_layer.save(OUT / "blink_coding.png", optimize=True)
-    clock = native_clock()
+    clock = native_clock(style="origami")
     contact_faces = dict(assembled)
-    # Keep the poster cat centered with its mouse visible below the readouts.
-    contact_faces["kitten"] = assemble(stills["kitten"], motions["kitten"], drifts["kitten"],
-                                       (0, 0), (20, 44))
-    contact_sheet(contact_faces, glasses, clock).save(PREVIEW, optimize=True)
-    picker_preview(assembled["bicycle"], glasses["bicycle"], clock).save(
+    contact_sheet(contact_faces, glasses, clock, style="origami").save(PREVIEW, optimize=True)
+    picker_preview(assembled["bicycle"], glasses["bicycle"], clock, style="origami").save(
         OUT / "watchface_preview.png", optimize=True
     )
     make_motion_gif(MOTION_PREVIEW, stills["bicycle"], motions["bicycle"],
-                    drifts["bicycle"], glasses["bicycle"], clock, "bicycle")
+                    drifts["bicycle"], glasses["bicycle"], clock, "bicycle", style="origami")
     make_motion_gif(KITTEN_PREVIEW, stills["kitten"], motions["kitten"],
-                    drifts["kitten"], glasses["kitten"], clock, "kitten")
+                    drifts["kitten"], glasses["kitten"], clock, "kitten", style="origami")
     make_motion_gif(ROCKET_PREVIEW, stills["cosmos"], motions["cosmos"],
                     drifts["cosmos"], glasses["cosmos"], clock, "rocket",
-                    drift_below=SCENES["cosmos"].get("drift_below_actor", False))
+                    drift_below=SCENES["cosmos"].get("drift_below_actor", False), style="origami")
+    make_motion_gif(OCEAN_PREVIEW, stills["ocean"], motions["ocean"],
+                    drifts["ocean"], glasses["ocean"], clock, "ocean", style="origami")
     print(f"Wrote {len(stills)} full-bleed 450x450 scenes and actor/drift/glass layers to {OUT}")
     print(f"Wrote watch mockup contact sheet to {PREVIEW}")
     print(f"Wrote animated bicycle proof to {MOTION_PREVIEW}")
     print(f"Wrote animated kitten-and-mouse proof to {KITTEN_PREVIEW}")
     print(f"Wrote animated rocket proof to {ROCKET_PREVIEW}")
+    print(f"Wrote animated ocean proof to {OCEAN_PREVIEW}")
 
 
 if __name__ == "__main__":

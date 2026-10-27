@@ -40,7 +40,17 @@ class PreviewTest(unittest.TestCase):
                 self.assertTrue(src.startswith('./assets/') or src.startswith('assets/'),src)
                 self.assertTrue((output/src).is_file(),src)
             names={p.name for p in (output/'assets').glob('*.png')}
+            self.assertFalse(any('koi' in name.lower() for name in names))
             self.assertIn('scene_forest.png',names)
+            self.assertIn('origami_ambient.png',names)
+            self.assertIn('clock_origami_0.png',names)
+            self.assertIn('clock_origami_colon.png',names)
+            self.assertIn('woodblock_ambient.png',names)
+            self.assertIn('clock_woodblock_0.png',names)
+            self.assertIn('clock_woodblock_colon.png',names)
+            for scene in ('bicycle', 'crane', 'kitten', 'torii', 'lanterns', 'sailboat', 'moon_rabbit'):
+                for layer in ('scene', 'motion', 'drift', 'glass', 'icon_scene'):
+                    self.assertIn(f'{layer}_woodblock_{scene}.png', names)
             self.assertFalse(any('baking' in n for n in names))
             self.assertIn('releases/latest/download/Fold-and-Tick.apk',html)
             self.assertNotIn('Eight tiny worlds orbit a calm',html)
@@ -59,17 +69,87 @@ class PreviewTest(unittest.TestCase):
         self.assertEqual(controls.scenes, [
             'bicycle', 'forest', 'coding', 'kitten', 'landscape', 'cosmos', 'ocean', 'aurora'
         ])
+        self.assertEqual(html.count('class="favorite-toggle"'), 8)
+        self.assertEqual(html.count('type="checkbox" checked'), 8)
         self.assertEqual(controls.style_select.get('aria-describedby'), 'styleDescription')
         self.assertIn('label for="styleSelect">Art style</label>', html)
         self.assertIn('style: "origami"', html)
         self.assertIn('hasOwnProperty.call(artStyles, saved.style)', html)
         self.assertIn('kind + "_" + style + "_" + scene.id', html)
+        self.assertIn('style === "woodblock" ? "?v=woodblock-2026-10-kitten-butterfly" : ""', html)
         self.assertIn('sceneAssetPaths[style + ":" + kind + ":" + scene.id]', html)
         self.assertIn('hasOwnProperty.call(sceneAssetPaths, key)', html)
-        self.assertIn('getSceneAssetPath("icon_scene", state.style, scenes[index].id)', html)
-        self.assertIn('return (getScheduledScene(now) + previewOffset) % scenes.length;', html)
-        self.assertIn('state.scene = (state.scene + 1) % scenes.length;', html)
+        self.assertIn('favorites: [true, true, true, true, true, true, true, true]', html)
+        self.assertIn('woodblockFavorites: [true, true, true, true, true, true, true]', html)
+        self.assertIn('woodScene: 0', html)
+        self.assertIn('var woodblockScenes = [', html)
+        for scene_id in ('bicycle', 'crane', 'kitten', 'torii', 'lanterns', 'sailboat', 'moon_rabbit'):
+            self.assertIn('id: "' + scene_id + '"', html)
+        self.assertNotIn('id: "koi"', html)
+        self.assertIn('saved.woodScene - 1', html)
+        self.assertIn('saved.woodblockFavorites.length === 8', html)
+        self.assertIn('woodblock-2026-10-kitten-butterfly', html)
+        self.assertIn('getRotationSequence()', html)
+        self.assertIn('if (enabled.length === 0) return [getCurrentSceneIndex()];', html)
+        self.assertIn('enabled.findIndex(function (index) { return index >= getCurrentSceneIndex(); })', html)
+        self.assertIn('var scheduledIndex = sequence.indexOf(getScheduledScene(now));', html)
+        self.assertIn('state.woodScene = nextIndex;', html)
+        self.assertIn('clockGlyphPaths[state.style][character]', html)
+        self.assertIn('var clockKey = state.style + ":" + timeValue;', html)
+        self.assertIn('clock_origami_9.png', html)
+        self.assertIn('clock_woodblock_9.png', html)
+        self.assertIn('clock_woodblock_colon.png', html)
+        self.assertIn('24 + date.length * 20', html)
+        self.assertIn('chip.querySelector(".chip-value").textContent.length * 18.5', html)
+        self.assertIn('Math.min(169, 50 + valueWidth)', html)
+        self.assertIn('grid-template-columns: repeat(2, 45.187%)', html)
+        self.assertIn('width: 83.111%', html)
+        self.assertIn('font-size: 7.111cqw', html)
+        self.assertIn('linear-gradient(rgba(255, 233, 191, .2196), rgba(232, 188, 149, .1412))', html)
+        self.assertIn('linear-gradient(rgba(233, 223, 192, .2196), rgba(163, 188, 190, .1412))', html)
+        self.assertIn('color: #fff4e8;', html)
+        self.assertIn('rgba(223, 235, 247, .2196)', html)
+        self.assertIn('stroke: #fff4e8;', html)
+        self.assertIn('filter: brightness(0) invert(97%) sepia(4%)', html)
+        self.assertNotIn('backdrop-filter: blur(7px)', html)
+        self.assertNotIn('filter: blur(1px)', html)
+        self.assertIn('origami_ambient.png', html)
+        self.assertIn('woodblock_ambient.png', html)
+        self.assertIn('scene-arrive .8s linear', html)
+        self.assertIn('state.style === "origami" || state.style === "woodblock"', html)
+        self.assertIn('(state.style === "origami" || state.style === "woodblock")', html)
+        self.assertIn('state.motion && !motionPreference.matches', html)
+        self.assertIn('Folded paper worlds, warm colors, and playful character motion.', html)
+        self.assertIn('--actor-animation: forest-hop-origami', html)
+        self.assertIn('--actor-animation: landscape-sun-origami; --actor-duration: 6s', html)
+        self.assertIn('--actor-animation: ocean-whale-traverse; --actor-duration: 14s', html)
+        self.assertIn('--actor-animation: aurora-breathe; --actor-duration: 4s', html)
+        self.assertIn('animation: mouse-run-origami 8s linear infinite', html)
+        self.assertIn('animation: landscape-cloud-origami 10s linear infinite', html)
+        self.assertIn('translate3d(-71.111cqw, 0, 0)', html)
+        self.assertIn('translate3d(93.333cqw, 0, 0)', html)
+        self.assertIn('translate3d(-30cqw, 1.778cqw, 0)', html)
+        self.assertIn('animation: aurora-curtains-origami 10s linear infinite', html)
+        self.assertIn('animation: forest-firefly-origami 10s linear infinite', html)
         self.assertIn('scene-pan 24s ease-in-out infinite alternate', html)
+        for choreography in (
+            'woodblock-bicycle-traverse 10s linear infinite',
+            'woodblock-bicycle-drift 10s linear infinite',
+            'woodblock-crane 12s linear infinite',
+            'woodblock-crane-drift 9s linear infinite',
+            'woodblock-kitten-x 6s linear infinite',
+            'woodblock-kitten-y 3s linear infinite',
+            'woodblock-torii 11s linear infinite',
+            'woodblock-torii-drift 8s linear infinite',
+            'woodblock-lanterns 9s linear infinite',
+            'woodblock-lantern-rise 5s linear infinite',
+            'woodblock-lantern-pulse 2s linear infinite',
+            'woodblock-sailboat-x 14s linear infinite',
+            'woodblock-sailboat-y 5s linear infinite',
+            'woodblock-moon-rabbit 3s linear infinite',
+            'translateX(100.222cqw)',
+        ):
+            self.assertIn(choreography, html)
         self.assertIn('prefers-reduced-motion: reduce', html)
         self.assertIn('.watch-screen.motion-on:not(.ambient) .scene-layer .scene-motion', html)
         self.assertIn('.watch-screen.motion-on:not(.ambient) .scene-layer .scene-drift', html)
@@ -77,7 +157,17 @@ class PreviewTest(unittest.TestCase):
         self.assertNotIn('.scene-layer[data-style]:not([data-style="origami"]) .scene-motion-wrap', html)
         self.assertNotIn('.scene-layer[data-style]:not([data-style="origami"]) .scene-drift', html)
         self.assertIn('.scene-layer[data-scene="kitten"] .scene-motion-wrap', html)
+        self.assertIn('.scene-layer[data-style="origami"][data-scene="kitten"] .scene-motion-wrap', html)
+        self.assertIn('kitten-lunge 3s linear infinite', html)
         self.assertIn('.scene-layer[data-scene="cosmos"] .scene-drift', html)
+        self.assertIn('.scene-layer[data-style="woodblock"][data-scene="crane"]', html)
+        self.assertNotIn('.scene-layer[data-style="woodblock"][data-scene="koi"]', html)
+        self.assertIn('.scene-layer[data-style="woodblock"][data-scene="torii"]', html)
+        self.assertIn('.scene-layer[data-style="woodblock"][data-scene="lanterns"]', html)
+        self.assertIn('.scene-layer[data-style="woodblock"][data-scene="sailboat"]', html)
+        self.assertIn('.scene-layer[data-style="woodblock"][data-scene="moon_rabbit"]', html)
+        self.assertIn('.scene-layer[data-style="woodblock"][data-scene="sailboat"] .scene-motion-wrap[data-static-offset="true"]', html)
+        self.assertIn('transform: translateX(33.333cqw);', html)
 
     @unittest.skipUnless(shutil.which('node'), 'Node.js is unavailable for JavaScript syntax validation')
     def test_preview_javascript_parses(self):
@@ -100,7 +190,8 @@ class Element {
   constructor(attrs = {}) {
     this.attrs = { ...attrs }; this.style = {}; this.listeners = {}; this.children = [];
     this.hidden = Object.prototype.hasOwnProperty.call(attrs, 'hidden');
-    this.disabled = false; this.value = attrs.value || ''; this.textContent = '';
+    this.checked = Object.prototype.hasOwnProperty.call(attrs, 'checked');
+    this.disabled = false; this.value = attrs.value || ''; this.textContent = ''; this.parentElement = null;
     this.src = attrs.src || '';
     const classes = new Set((attrs.class || '').split(/\s+/).filter(Boolean));
     this.classList = {
@@ -119,13 +210,15 @@ class Element {
 }
 const sceneIds = ['bicycle', 'forest', 'coding', 'kitten', 'landscape', 'cosmos', 'ocean', 'aurora'];
 const cardImages = sceneIds.map(() => new Element({ src: '' }));
+const cardNames = sceneIds.map(() => new Element({}));
 const cards = sceneIds.map((id, index) => {
   const image = cardImages[index];
   const card = new Element({ class: 'scene-card', 'data-scene': id });
-  card.queries = { '.scene-thumb img': image };
+  card.queries = { '.scene-thumb img': image, '.scene-name': cardNames[index] };
   return card;
 });
 const sceneArt = new Element({});
+const ambientMotif = new Element({ src: './assets/origami_ambient.png', hidden: true });
 const artImages = {
   '.scene-background': new Element({ src: './assets/scene_bicycle.png' }),
   '.scene-motion': new Element({ src: './assets/motion_bicycle.png' }),
@@ -138,8 +231,19 @@ sceneArt.queries = artImages;
 const ids = {};
 for (const id of ['watchCase', 'watchScreen', 'timeText', 'dateText', 'activeSceneLabel',
   'rotationStatus', 'modeBadge', 'modeNote', 'rotationSelect', 'styleSelect',
-  'styleDescription', 'ambientToggle', 'motionToggle', 'cycleButton', 'resetButton']) ids[id] = new Element({});
+  'styleDescription', 'ambientToggle', 'motionToggle', 'cycleButton', 'resetButton',
+  'favoritesGroup', 'favoritesTitle', 'favoritesHint']) ids[id] = new Element({});
 ids.sceneArt = sceneArt;
+ids.ambientMotif = ambientMotif;
+const favoriteNames = sceneIds.map(() => new Element({}));
+const favoriteOptions = sceneIds.map((id, index) => {
+  const option = new Element({});
+  option.queries = { '.favorite-name': favoriteNames[index] };
+  const toggle = new Element({ 'data-scene': id, type: 'checkbox', checked: '' });
+  toggle.parentElement = option;
+  return { option, toggle };
+});
+const favoriteToggles = favoriteOptions.map(option => option.toggle);
 const chips = ['82%', '6,248'].map(value => {
   const chip = new Element({});
   chip.queries = { '.chip-value': new Element({}), '.chip-copy': new Element({}) };
@@ -151,32 +255,42 @@ ids.watchScreen.classList.add('motion-on');
 const modes = ['auto', 'manual'].map(value => new Element({ 'data-mode': value }));
 const hours = [12, 24].map(value => new Element({ 'data-hours': String(value) }));
 const sizes = [41, 45].map(value => new Element({ 'data-size': String(value) }));
-const allImages = [...Object.values(artImages).filter(image => image instanceof Element && image.src !== undefined), ...cardImages];
+const allImages = [...Object.values(artImages).filter(image => image instanceof Element && image.src !== undefined), ...cardImages, ambientMotif];
 const previewColumn = new Element({});
+const sceneGrid = new Element({});
+let fixedNow = new Date(2026, 9, 25, 12, 14, 0);
+let intervalCallback = null;
 const document = {
   getElementById: id => ids[id],
   createElement: () => new Element({}),
-  querySelector: selector => selector === '.preview-column' ? previewColumn : null,
+  querySelector: selector => selector === '.preview-column' ? previewColumn : (selector === '.scene-grid' ? sceneGrid : null),
   querySelectorAll: selector => ({
     '.mode-option': modes, '.hour-option': hours, '.size-option': sizes,
     '.scene-card': cards, '.complication': chips,
-    '.scene-layer img, .scene-thumb img': allImages
+    '.favorite-toggle': favoriteToggles,
+    '.scene-layer img, .scene-thumb img, #ambientMotif': allImages
   })[selector] || []
 };
-const data = { mode: 'manual', scene: 2, rotation: 30 };
+const data = { mode: 'manual', scene: 2, rotation: 30, favorites: [true, false, true, false, true, true, false, true], hours: 24, size: 41 };
 let saved = JSON.stringify(data);
 const motionPreference = { matches: false };
 const window = {
-  matchMedia: () => motionPreference, setInterval: () => 0,
+  matchMedia: () => motionPreference, setInterval: fn => { intervalCallback = fn; return 0; }, setTimeout: () => 1, clearTimeout: () => {},
   localStorage: { getItem: () => saved, setItem: (_key, value) => { saved = value; } }
 };
 class FixedDate extends Date {
-  constructor(...args) { super(...(args.length ? args : [2026, 9, 25, 12, 0, 0])); }
+  constructor(...args) { super(...(args.length ? args : [fixedNow.getTime()])); }
 }
 vm.runInNewContext(previewScript, { window, document, Date: FixedDate });
 assert.equal(ids.styleSelect.value, 'origami');
 assert.equal(cards[2].getAttribute('aria-pressed'), 'true');
 assert.equal(artImages['.scene-background'].src, './assets/scene_coding.png');
+assert.equal(ids.favoritesGroup.hidden, false);
+assert.deepEqual(favoriteToggles.map(toggle => toggle.checked), [true, false, true, false, true, true, false, true]);
+assert.equal(ambientMotif.hidden, true);
+assert.equal(ids.timeText.children[0].src, './assets/clock_origami_1.png');
+assert.equal(ids.timeText.children[2].src, './assets/clock_origami_colon.png');
+assert.equal(ids.watchCase.getAttribute('data-size'), '41');
 ids.motionToggle.dispatch('click');
 assert.equal(JSON.parse(saved).motion, false); assert.equal(ids.watchScreen.classList.contains('motion-on'), false);
 ids.motionToggle.dispatch('click');
@@ -187,49 +301,155 @@ assert.equal(JSON.parse(saved).motion, true);
 motionPreference.matches = false;
 ids.ambientToggle.dispatch('click');
 assert.equal(JSON.parse(saved).ambient, true); assert.equal(ids.watchScreen.classList.contains('ambient'), true);
+assert.equal(ambientMotif.hidden, false);
 ids.ambientToggle.dispatch('click');
 assert.equal(JSON.parse(saved).ambient, false); assert.equal(ids.watchScreen.classList.contains('ambient'), false);
+assert.equal(ambientMotif.hidden, true);
 ids.styleSelect.value = 'woodblock'; ids.styleSelect.dispatch('change');
 let state = JSON.parse(saved);
-assert.equal(state.style, 'woodblock'); assert.equal(state.scene, 2); assert.equal(state.rotation, 30);
-assert.equal(artImages['.scene-background'].src, './assets/scene_woodblock_coding.png');
-assert.equal(artImages['.scene-glass'].src, './assets/glass_woodblock_coding.png');
-assert.equal(artImages['.scene-motion'].src, './assets/motion_woodblock_coding.png');
-assert.equal(artImages['.scene-drift'].src, './assets/drift_woodblock_coding.png');
-assert.equal(artImages['.scene-motion-wrap'].hidden, false); assert.equal(artImages['.scene-motion'].hidden, false);
-assert.equal(artImages['.scene-drift'].hidden, false); assert.equal(artImages['.scene-cursor'].hidden, true);
-assert.equal(cardImages[7].src, './assets/icon_scene_woodblock_aurora.png');
-ids.cycleButton.dispatch('click');
-state = JSON.parse(saved);
-assert.equal(state.scene, 3); assert.equal(state.style, 'woodblock');
-assert.equal(artImages['.scene-background'].src, './assets/scene_woodblock_kitten.png');
-assert.equal(cards[3].getAttribute('aria-pressed'), 'true');
-modes[0].dispatch('click');
-const scheduledScene = sceneArt.getAttribute('data-scene');
-ids.cycleButton.dispatch('click');
-assert.notEqual(sceneArt.getAttribute('data-scene'), scheduledScene);
-ids.styleSelect.value = 'risograph'; ids.styleSelect.dispatch('change');
-state = JSON.parse(saved);
-assert.equal(state.style, 'risograph'); assert.equal(state.rotation, 30); assert.equal(state.scene, 3);
-assert.equal(sceneArt.getAttribute('data-scene'), scheduledScene);
-for (let i = 0; i < sceneIds.length; i++) ids.cycleButton.dispatch('click');
-assert.equal(sceneArt.getAttribute('data-scene'), scheduledScene);
-assert.equal(artImages['.scene-background'].src, './assets/scene_risograph_' + scheduledScene + '.png');
-for (const style of ['origami', 'woodblock', 'risograph']) {
-  ids.styleSelect.value = style; ids.styleSelect.dispatch('change');
-  for (let index = 0; index < sceneIds.length; index++) {
-    const sceneId = sceneIds[index];
-    cards[index].dispatch('click');
-    const prefix = style === 'origami' ? '' : style + '_';
-    assert.equal(sceneArt.getAttribute('data-scene'), sceneId);
-    assert.equal(artImages['.scene-motion'].src, './assets/motion_' + prefix + sceneId + '.png');
-    assert.equal(artImages['.scene-drift'].src, './assets/drift_' + prefix + sceneId + '.png');
-    assert.equal(artImages['.scene-motion-wrap'].hidden, false);
-    assert.equal(artImages['.scene-motion'].hidden, false);
-    assert.equal(artImages['.scene-drift'].hidden, false);
-    assert.equal(artImages['.scene-cursor'].hidden, !(style === 'origami' && sceneId === 'coding'));
+assert.equal(state.style, 'woodblock'); assert.equal(state.scene, 2); assert.equal(state.woodScene, 0); assert.equal(state.rotation, 30);
+assert.equal(ids.favoritesGroup.hidden, false);
+assert.equal(ids.favoritesTitle.textContent, 'Woodblock rotation');
+assert.equal(ids.favoritesHint.textContent, 'Scenes included in auto mode');
+assert.equal(favoriteToggles.slice(0, 7).every(toggle => toggle.checked), true);
+assert.equal(favoriteToggles[7].checked, false);
+assert.equal(ids.timeText.children[0].src, './assets/clock_woodblock_1.png');
+assert.equal(ids.timeText.children[2].src, './assets/clock_woodblock_colon.png');
+const woodblockCache = '?v=woodblock-2026-10-kitten-butterfly';
+assert.equal(artImages['.scene-background'].src, './assets/scene_woodblock_bicycle.png' + woodblockCache);
+assert.equal(artImages['.scene-glass'].src, './assets/glass_woodblock_bicycle.png' + woodblockCache);
+assert.equal(artImages['.scene-motion'].src, './assets/motion_woodblock_bicycle.png' + woodblockCache);
+assert.equal(artImages['.scene-drift'].src, './assets/drift_woodblock_bicycle.png' + woodblockCache);
+assert.equal(cardImages[0].src, './assets/icon_scene_woodblock_bicycle.png' + woodblockCache);
+assert.deepEqual(cardNames.slice(0, 7).map(name => name.textContent), ['Bicycle', 'Crane', 'Kitten', 'Torii', 'Lanterns', 'Sailboat', 'Moon rabbit']);
+assert.deepEqual(favoriteNames.slice(0, 7).map(name => name.textContent), ['Bicycle', 'Crane', 'Kitten', 'Torii', 'Lanterns', 'Sailboat', 'Moon rabbit']);
+assert.equal(cards.filter(card => !card.hidden).length, 7);
+assert.equal(favoriteOptions.filter(option => !option.option.hidden).length, 7);
+assert.equal(sceneGrid.getAttribute('aria-label'), 'Choose a Woodblock scene');
+for (const [index, id] of ['bicycle', 'crane', 'kitten', 'torii', 'lanterns', 'sailboat', 'moon_rabbit'].entries()) {
+  cards[index].dispatch('click');
+  assert.equal(sceneArt.getAttribute('data-scene'), id);
+  assert.equal(artImages['.scene-background'].src, './assets/scene_woodblock_' + id + '.png' + woodblockCache);
+  assert.equal(artImages['.scene-glass'].src, './assets/glass_woodblock_' + id + '.png' + woodblockCache);
+  assert.equal(artImages['.scene-motion'].src, './assets/motion_woodblock_' + id + '.png' + woodblockCache);
+  assert.equal(artImages['.scene-drift'].src, './assets/drift_woodblock_' + id + '.png' + woodblockCache);
+  assert.equal(cardImages[index].src, './assets/icon_scene_woodblock_' + id + '.png' + woodblockCache);
+  assert.equal(artImages['.scene-cursor'].hidden, true);
+  if (id === 'sailboat') {
+    assert.equal(artImages['.scene-motion-wrap'].getAttribute('data-static-offset'), 'false');
+    ids.motionToggle.dispatch('click');
+    assert.equal(JSON.parse(saved).motion, false);
+    assert.equal(artImages['.scene-motion-wrap'].getAttribute('data-static-offset'), 'true');
+    ids.motionToggle.dispatch('click');
+    assert.equal(JSON.parse(saved).motion, true);
+    assert.equal(artImages['.scene-motion-wrap'].getAttribute('data-static-offset'), 'false');
   }
 }
+assert.equal(JSON.parse(saved).woodScene, 6);
+assert.equal(ids.activeSceneLabel.textContent, 'Moon rabbit');
+ids.styleSelect.value = 'origami'; ids.styleSelect.dispatch('change');
+assert.equal(sceneArt.getAttribute('data-scene'), 'coding');
+assert.equal(cards[2].getAttribute('aria-pressed'), 'true');
+assert.equal(favoriteToggles[1].checked, false);
+cards[3].dispatch('click');
+assert.equal(sceneArt.getAttribute('data-scene'), 'kitten');
+assert.equal(JSON.parse(saved).scene, 3);
+favoriteToggles.forEach(toggle => { toggle.checked = false; toggle.dispatch('change'); });
+modes[0].dispatch('click');
+assert.equal(sceneArt.getAttribute('data-scene'), 'kitten');
+assert.match(ids.modeNote.textContent, /No Origami scenes/);
+assert.equal(ids.cycleButton.disabled, true);
+favoriteToggles[5].checked = true; favoriteToggles[5].dispatch('change');
+assert.equal(sceneArt.getAttribute('data-scene'), 'cosmos');
+assert.match(ids.modeNote.textContent, /One Origami scene/);
+favoriteToggles[2].checked = true; favoriteToggles[2].dispatch('change');
+assert.equal(ids.cycleButton.disabled, false);
+ids.cycleButton.dispatch('click');
+assert.equal(sceneArt.getAttribute('data-scene'), 'coding');
+for (const [index, favorite] of [true, false, true, false, true, true, false, true].entries()) {
+  if (favoriteToggles[index].checked !== favorite) {
+    favoriteToggles[index].checked = favorite; favoriteToggles[index].dispatch('change');
+  }
+}
+modes[1].dispatch('click');
+assert.equal(sceneArt.getAttribute('data-scene'), 'kitten');
+ids.styleSelect.value = 'risograph'; ids.styleSelect.dispatch('change');
+assert.equal(sceneArt.getAttribute('data-scene'), 'kitten');
+assert.equal(ids.favoritesGroup.hidden, true);
+assert.equal(artImages['.scene-background'].src, './assets/scene_risograph_kitten.png');
+modes[0].dispatch('click');
+const risoScene = sceneArt.getAttribute('data-scene');
+ids.cycleButton.dispatch('click');
+assert.notEqual(sceneArt.getAttribute('data-scene'), risoScene);
+for (let i = 0; i < sceneIds.length - 1; i++) ids.cycleButton.dispatch('click');
+assert.equal(sceneArt.getAttribute('data-scene'), risoScene);
+assert.equal(artImages['.scene-background'].src, './assets/scene_risograph_' + risoScene + '.png');
+ids.styleSelect.value = 'woodblock'; ids.styleSelect.dispatch('change');
+assert.equal(sceneArt.getAttribute('data-scene'), 'moon_rabbit');
+assert.equal(favoriteToggles.slice(0, 7).every(toggle => toggle.checked), true);
+assert.equal(favoriteToggles[7].checked, false);
+favoriteToggles.forEach(toggle => { toggle.checked = false; toggle.dispatch('change'); });
+assert.equal(JSON.parse(saved).woodblockFavorites.every(favorite => !favorite), true);
+assert.deepEqual(JSON.parse(saved).favorites, [true, false, true, false, true, true, false, true]);
+modes[0].dispatch('click');
+assert.equal(sceneArt.getAttribute('data-scene'), 'moon_rabbit');
+assert.match(ids.modeNote.textContent, /No Woodblock scenes/);
+assert.equal(ids.cycleButton.disabled, true);
+ids.cycleButton.dispatch('click');
+assert.equal(sceneArt.getAttribute('data-scene'), 'moon_rabbit');
+favoriteToggles[1].checked = true; favoriteToggles[1].dispatch('change');
+assert.equal(sceneArt.getAttribute('data-scene'), 'crane');
+assert.equal(ids.cycleButton.disabled, true);
+favoriteToggles[6].checked = true; favoriteToggles[6].dispatch('change');
+assert.equal(ids.cycleButton.disabled, false);
+assert.equal(sceneArt.getAttribute('data-scene'), 'moon_rabbit');
+ids.cycleButton.dispatch('click');
+assert.equal(sceneArt.getAttribute('data-scene'), 'crane');
+ids.rotationSelect.value = '15'; ids.rotationSelect.dispatch('change');
+fixedNow = new Date(2026, 9, 25, 12, 15, 0); intervalCallback();
+assert.equal(sceneArt.classList.contains('scheduled-transition'), true);
+ids.ambientToggle.dispatch('click');
+assert.equal(ambientMotif.src, './assets/woodblock_ambient.png');
+assert.equal(ambientMotif.hidden, false);
+assert.equal(JSON.parse(saved).woodScene, 6);
+modes[1].dispatch('click');
+ids.styleSelect.value = 'origami'; ids.styleSelect.dispatch('change');
+assert.equal(sceneArt.getAttribute('data-scene'), 'kitten');
+assert.deepEqual(JSON.parse(saved).favorites, [true, false, true, false, true, true, false, true]);
+ids.styleSelect.value = 'woodblock'; ids.styleSelect.dispatch('change');
+assert.equal(sceneArt.getAttribute('data-scene'), 'moon_rabbit');
+assert.equal(ambientMotif.hidden, false);
+state = JSON.parse(saved);
+assert.equal(state.scene, 3); assert.equal(state.woodScene, 6);
+assert.equal(state.favorites.filter(Boolean).length, 5);
+assert.deepEqual(state.woodblockFavorites, [false, true, false, false, false, false, true]);
+vm.runInNewContext(previewScript, { window, document, Date: FixedDate });
+assert.equal(favoriteToggles[1].checked, true);
+assert.equal(favoriteToggles[6].checked, true);
+assert.equal(favoriteToggles.filter(toggle => toggle.checked).length, 2);
+assert.equal(sceneArt.getAttribute('data-scene'), 'moon_rabbit');
+saved = JSON.stringify({ style: 'woodblock', mode: 'manual', scene: 3, rotation: 60, favorites: [true, false, false, true, true, true, true, true] });
+vm.runInNewContext(previewScript, { window, document, Date: FixedDate });
+assert.equal(sceneArt.getAttribute('data-scene'), 'bicycle');
+assert.equal(JSON.parse(saved).woodScene, undefined);
+assert.equal(favoriteToggles.slice(0, 7).every(toggle => toggle.checked), true);
+assert.equal(favoriteToggles[7].checked, false);
+assert.equal(ids.styleSelect.value, 'woodblock');
+saved = JSON.stringify({ style: 'woodblock', mode: 'manual', woodScene: 6, woodblockFavorites: [true, false, true, false, true, false, true, false] });
+vm.runInNewContext(previewScript, { window, document, Date: FixedDate });
+assert.equal(sceneArt.getAttribute('data-scene'), 'sailboat');
+assert.equal(JSON.parse(saved).woodScene, 5);
+assert.deepEqual(JSON.parse(saved).woodblockFavorites, [true, false, false, true, false, true, false]);
+saved = JSON.stringify({ style: 'woodblock', mode: 'manual', woodScene: 2, woodblockFavorites: [true, true, false, true, true, true, true, true] });
+vm.runInNewContext(previewScript, { window, document, Date: FixedDate });
+assert.equal(sceneArt.getAttribute('data-scene'), 'kitten');
+assert.equal(JSON.parse(saved).woodScene, 2);
+assert.deepEqual(JSON.parse(saved).woodblockFavorites, [true, true, true, true, true, true, true]);
+saved = JSON.stringify({ style: 'woodblock', mode: 'manual', woodScene: 4, woodblockFavorites: [true, false, true, false, true, false, true] });
+vm.runInNewContext(previewScript, { window, document, Date: FixedDate });
+assert.equal(sceneArt.getAttribute('data-scene'), 'lanterns');
+assert.equal(JSON.parse(saved).woodScene, 4);
+assert.deepEqual(JSON.parse(saved).woodblockFavorites, [true, false, true, false, true, false, true]);
 '''
         with tempfile.TemporaryDirectory() as folder:
             script_path=Path(folder)/'preview.js'; script_path.write_text(script)

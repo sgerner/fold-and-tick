@@ -268,6 +268,28 @@
     .scene-layer img[hidden] { display: none; }
     .scene-layer.asset-missing .scene-background { display: none; }
 
+    .ambient-motif {
+      position: absolute;
+      z-index: 3;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    .watch-screen:not(.ambient) .ambient-motif,
+    .watch-screen[data-style="risograph"] .ambient-motif { display: none; }
+
+    .watch-screen.motion-on:not(.ambient) .scene-layer.scheduled-transition {
+      animation: scene-arrive .8s linear both;
+    }
+
+    @keyframes scene-arrive {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
     .scene-layer[data-style]:not([data-style="origami"]) .scene-background {
       inset: -5.556%;
       width: 111.111%;
@@ -289,6 +311,19 @@
       will-change: transform;
     }
 
+    .watch-screen[data-style="origami"] .day-chip,
+    .watch-screen[data-style="origami"] .complication {
+      background: linear-gradient(rgba(255, 233, 191, .2196), rgba(232, 188, 149, .1412));
+      box-shadow: none;
+    }
+
+    .watch-screen[data-style="woodblock"] .day-chip,
+    .watch-screen[data-style="woodblock"] .complication {
+      background: linear-gradient(rgba(233, 223, 192, .2196), rgba(163, 188, 190, .1412));
+      box-shadow: none;
+    }
+    .watch-screen[data-style="woodblock"] .complication { color: #fff4e8; }
+
     .watch-screen.motion-on:not(.ambient) .scene-layer[data-scene="coding"] .scene-cursor {
       animation: cursor-blink 1.2s steps(2, end) infinite;
       filter: brightness(1.6) drop-shadow(0 0 8px rgba(161, 220, 255, .9));
@@ -305,6 +340,26 @@
     .scene-layer[data-scene="ocean"] { --scene-light: #83d8d1; --scene-dark: #245879; --actor-animation: ocean-whale; --actor-duration: 6s; }
     .scene-layer[data-scene="aurora"] { --scene-light: #b2e6d2; --scene-dark: #355678; --actor-animation: aurora-comet; }
 
+    .scene-layer[data-style="origami"][data-scene="forest"] { --actor-animation: forest-hop-origami; --actor-duration: 3s; --actor-easing: linear; }
+    .scene-layer[data-style="origami"][data-scene="cosmos"] { --actor-animation: cosmos-flight-origami; }
+    .scene-layer[data-style="origami"][data-scene="landscape"] { --actor-animation: landscape-sun-origami; --actor-duration: 6s; --actor-easing: linear; }
+    .scene-layer[data-style="origami"][data-scene="ocean"] { --actor-animation: ocean-whale-traverse; --actor-duration: 14s; --actor-easing: linear; }
+    .scene-layer[data-style="origami"][data-scene="aurora"] { --actor-animation: aurora-breathe; --actor-duration: 4s; --actor-easing: linear; }
+
+    .scene-layer[data-style="woodblock"] { --scene-light: #c7aa70; --scene-dark: #20304b; --actor-animation: none; }
+    .scene-layer[data-style="woodblock"][data-scene="bicycle"] { --scene-light: #c9a96c; --scene-dark: #23364e; }
+    .scene-layer[data-style="woodblock"][data-scene="crane"] { --scene-light: #d5b97e; --scene-dark: #26394f; }
+    .scene-layer[data-style="woodblock"][data-scene="kitten"] { --scene-light: #caa276; --scene-dark: #423a4d; }
+    .scene-layer[data-style="woodblock"][data-scene="torii"] { --scene-light: #b9634c; --scene-dark: #283951; }
+    .scene-layer[data-style="woodblock"][data-scene="lanterns"] { --scene-light: #d0a85e; --scene-dark: #303345; }
+    .scene-layer[data-style="woodblock"][data-scene="sailboat"] { --scene-light: #81aaa0; --scene-dark: #29435a; }
+    .scene-layer[data-style="woodblock"][data-scene="moon_rabbit"] { --scene-light: #bdadbb; --scene-dark: #27354f; }
+    .scene-layer[data-style="woodblock"] .scene-background { inset: 0; width: 100%; height: 100%; }
+    .scene-layer[data-style="woodblock"][data-scene="bicycle"] .scene-background,
+    .scene-layer[data-style="woodblock"][data-scene="kitten"] .scene-background {
+      inset: -5.556%; width: 111.111%; height: 111.111%;
+    }
+
     .scene-layer[data-scene="bicycle"] { --actor-animation: bicycle-ride; --actor-duration: 10s; --actor-easing: linear; }
     .scene-layer[data-scene="coding"] { --actor-animation: coding-cursor; --actor-duration: 1.6s; --actor-easing: ease-in-out; }
     .scene-layer[data-scene="cosmos"] { --actor-animation: cosmos-flight; --actor-duration: 10s; --actor-easing: linear; }
@@ -313,24 +368,104 @@
       animation: firefly-drift 10s ease-in-out infinite;
     }
 
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="origami"][data-scene="forest"] .scene-drift {
+      animation: forest-firefly-origami 10s linear infinite, forest-firefly-pulse 1s linear infinite;
+    }
+
     .watch-screen.motion-on:not(.ambient) .scene-layer[data-scene="kitten"] .scene-motion-wrap {
       animation: kitten-run 6s linear infinite;
+    }
+
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="origami"][data-scene="kitten"] .scene-motion-wrap {
+      animation: kitten-lunge 3s linear infinite;
     }
 
     .watch-screen.motion-on:not(.ambient) .scene-layer[data-scene="kitten"] .scene-drift {
       animation: mouse-run 8s linear infinite;
     }
 
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="origami"][data-scene="kitten"] .scene-drift {
+      animation: mouse-run-origami 8s linear infinite;
+    }
+
     .watch-screen.motion-on:not(.ambient) .scene-layer[data-scene="cosmos"] .scene-drift {
       animation: cosmos-flight 10s linear infinite, spark-pulse 1.3s ease-in-out infinite alternate;
+    }
+
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="origami"][data-scene="cosmos"] .scene-drift {
+      animation: cosmos-flight-origami 10s linear infinite, spark-pulse 1.3s ease-in-out infinite alternate;
     }
 
     .watch-screen.motion-on:not(.ambient) .scene-layer[data-scene="ocean"] .scene-drift {
       animation: ocean-bubbles 6s ease-in-out infinite alternate;
     }
 
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="origami"][data-scene="landscape"] .scene-drift {
+      animation: landscape-cloud-origami 10s linear infinite;
+    }
+
     .watch-screen.motion-on:not(.ambient) .scene-layer[data-scene="aurora"] .scene-drift {
       animation: aurora-curtains 8s ease-in-out infinite alternate;
+    }
+
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="origami"][data-scene="aurora"] .scene-drift {
+      animation: aurora-curtains-origami 10s linear infinite;
+    }
+
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="woodblock"] .scene-background { animation: none; }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="woodblock"][data-scene="bicycle"] .scene-motion-wrap {
+      animation: woodblock-bicycle-traverse 10s linear infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="woodblock"][data-scene="bicycle"] .scene-drift {
+      animation: woodblock-bicycle-drift 10s linear infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="woodblock"][data-scene="crane"] .scene-motion {
+      animation: woodblock-crane 12s linear infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="woodblock"][data-scene="crane"] .scene-drift {
+      animation: woodblock-crane-drift 9s linear infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="woodblock"][data-scene="kitten"] .scene-background {
+      animation: woodblock-kitten-bg-y 18s linear infinite, woodblock-kitten-bg-x 14s linear infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="woodblock"][data-scene="kitten"] .scene-motion-wrap {
+      animation: woodblock-kitten-x 6s linear infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="woodblock"][data-scene="kitten"] .scene-motion {
+      animation: woodblock-kitten-y 3s linear infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="woodblock"][data-scene="kitten"] .scene-drift {
+      animation: woodblock-kitten-drift-x 8s linear infinite, woodblock-kitten-drift-y 8s linear infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="woodblock"][data-scene="torii"] .scene-motion {
+      animation: woodblock-torii 11s linear infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="woodblock"][data-scene="torii"] .scene-drift {
+      animation: woodblock-torii-drift 8s linear infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="woodblock"][data-scene="lanterns"] .scene-motion {
+      animation: woodblock-lanterns 9s linear infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="woodblock"][data-scene="lanterns"] .scene-drift {
+      animation: woodblock-lantern-rise 5s linear infinite, woodblock-lantern-pulse 2s linear infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="woodblock"][data-scene="sailboat"] .scene-motion-wrap {
+      animation: woodblock-sailboat-x 14s linear infinite;
+    }
+    .scene-layer[data-style="woodblock"][data-scene="sailboat"] .scene-motion-wrap[data-static-offset="true"] {
+      transform: translateX(33.333cqw);
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="woodblock"][data-scene="sailboat"] .scene-motion {
+      animation: woodblock-sailboat-y 5s linear infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="woodblock"][data-scene="sailboat"] .scene-drift {
+      animation: woodblock-sailboat-drift 9s linear infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="woodblock"][data-scene="moon_rabbit"] .scene-motion {
+      animation: woodblock-moon-rabbit 3s linear infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="woodblock"][data-scene="moon_rabbit"] .scene-drift {
+      animation: woodblock-moon-drift 8s linear infinite;
     }
 
     /* Fixed camera keeps bicycle tires aligned with the painted road. */
@@ -367,6 +502,31 @@
       50% { transform: translateY(-2.667cqw); }
     }
 
+    @keyframes forest-hop-origami {
+      0% { transform: translateY(0); }
+      5% { transform: translateY(-1.533cqw); }
+      10% { transform: translateY(-2.822cqw); }
+      15% { transform: translateY(-3.689cqw); }
+      20% { transform: translateY(-4cqw); }
+      25% { transform: translateY(-3.689cqw); }
+      30% { transform: translateY(-2.822cqw); }
+      35% { transform: translateY(-1.533cqw); }
+      40%, 100% { transform: translateY(0); }
+    }
+
+    @keyframes forest-firefly-origami {
+      0%, 100% { transform: translate3d(0, 2.667cqw, 0); }
+      25% { transform: translate3d(4.444cqw, 0, 0); }
+      50% { transform: translate3d(0, -2.667cqw, 0); }
+      75% { transform: translate3d(-4.444cqw, 0, 0); }
+    }
+
+    @keyframes forest-firefly-pulse {
+      0%, 50%, 100% { opacity: .58; }
+      25% { opacity: 1; }
+      75% { opacity: .157; }
+    }
+
     @keyframes coding-cursor {
       0%, 100% { transform: translate3d(0, 2.222cqw, 0); filter: brightness(1.2) drop-shadow(0 0 2px rgba(161, 220, 255, .5)); }
       50% { transform: translate3d(0, -2.222cqw, 0); filter: brightness(1.55) drop-shadow(0 0 8px rgba(161, 220, 255, .9)); }
@@ -380,6 +540,20 @@
     @keyframes kitten-run {
       0%, 100% { transform: translateX(-4cqw); }
       50% { transform: translateX(4cqw); }
+    }
+
+    @keyframes kitten-lunge {
+      0% { transform: translate3d(0, 0, 0); }
+      16.667%, 33.333% { transform: translate3d(2.222cqw, -1.111cqw, 0); }
+      66.667%, 100% { transform: translate3d(0, 0, 0); }
+    }
+
+    @keyframes mouse-run-origami {
+      0% { transform: translate3d(-77.778%, 0, 0); }
+      25% { transform: translate3d(-37.778%, 1.556cqw, 0); }
+      50% { transform: translate3d(2.222%, 0, 0); }
+      75% { transform: translate3d(42.222%, -1.556cqw, 0); }
+      100% { transform: translate3d(82.222%, 0, 0); }
     }
 
     @keyframes kitten-pounce {
@@ -401,6 +575,45 @@
     @keyframes cosmos-flight {
       from { transform: translate3d(-71.111%, 71.111%, 0); }
       to { transform: translate3d(93.333%, -93.333%, 0); }
+    }
+
+    @keyframes cosmos-flight-origami {
+      from { transform: translate3d(-71.111cqw, 40cqw, 0); }
+      to { transform: translate3d(93.333cqw, -124.444cqw, 0); }
+    }
+
+    @keyframes landscape-sun-origami {
+      0%, 100% { transform: translateY(0); }
+      25% { transform: translateY(2.667cqw); }
+      50% { transform: translateY(0); }
+      75% { transform: translateY(-2.667cqw); }
+    }
+
+    @keyframes ocean-whale-traverse {
+      0% { transform: translate3d(-71.111cqw, 0, 0); }
+      25% { transform: translate3d(-30cqw, 1.778cqw, 0); }
+      50% { transform: translate3d(11.111cqw, 0, 0); }
+      75% { transform: translate3d(52.222cqw, -1.778cqw, 0); }
+      100% { transform: translate3d(93.333cqw, 0, 0); }
+    }
+
+    @keyframes landscape-cloud-origami {
+      0%, 100% { transform: translate3d(0, 2.222cqw, 0); }
+      25% { transform: translate3d(8.889cqw, 0, 0); }
+      50% { transform: translate3d(0, -2.222cqw, 0); }
+      75% { transform: translate3d(-8.889cqw, 0, 0); }
+    }
+
+    @keyframes aurora-breathe {
+      0%, 50%, 100% { transform: translateY(0); }
+      25% { transform: translateY(.444cqw); }
+      75% { transform: translateY(-.444cqw); }
+    }
+
+    @keyframes aurora-curtains-origami {
+      0%, 50%, 100% { transform: translateX(0); }
+      25% { transform: translateX(4.889cqw); }
+      75% { transform: translateX(-4.889cqw); }
     }
 
     @keyframes spark-pulse {
@@ -428,6 +641,178 @@
       to { transform: translateX(4.444cqw); }
     }
 
+    @keyframes woodblock-bicycle-traverse { from { transform: translateX(-66.667cqw); } to { transform: translateX(93.333cqw); } }
+    @keyframes woodblock-bicycle-drift {
+      0%, 100% { transform: translate3d(0, 2.222cqw, 0); }
+      12.5% { transform: translate3d(1.276cqw, 2.053cqw, 0); }
+      25% { transform: translate3d(2.357cqw, 1.571cqw, 0); }
+      37.5% { transform: translate3d(3.079cqw, .851cqw, 0); }
+      50% { transform: translate3d(3.333cqw, 0, 0); }
+      62.5% { transform: translate3d(3.079cqw, -.851cqw, 0); }
+      75% { transform: translate3d(2.357cqw, -1.571cqw, 0); }
+      87.5% { transform: translate3d(1.276cqw, -2.053cqw, 0); }
+    }
+    @keyframes woodblock-crane {
+      0%, 100% { transform: translate3d(0, 0, 0); }
+      12.5% { transform: translate3d(8.171cqw, 1.257cqw, 0); }
+      25% { transform: translate3d(11.556cqw, 1.778cqw, 0); }
+      37.5% { transform: translate3d(8.171cqw, 1.257cqw, 0); }
+      50% { transform: translate3d(0, 0, 0); }
+      62.5% { transform: translate3d(-8.171cqw, -1.257cqw, 0); }
+      75% { transform: translate3d(-11.556cqw, -1.778cqw, 0); }
+      87.5% { transform: translate3d(-8.171cqw, -1.257cqw, 0); }
+    }
+    @keyframes woodblock-crane-drift {
+      0%, 100% { transform: translateX(0); }
+      12.5% { transform: translateX(2.828cqw); }
+      25% { transform: translateX(4cqw); }
+      37.5% { transform: translateX(2.828cqw); }
+      50% { transform: translateX(0); }
+      62.5% { transform: translateX(-2.828cqw); }
+      75% { transform: translateX(-4cqw); }
+      87.5% { transform: translateX(-2.828cqw); }
+    }
+    @keyframes woodblock-kitten-bg-x {
+      0%, 100% { translate: 0 0; }
+      12.5% { translate: 1.021cqw 0; }
+      25% { translate: 1.886cqw 0; }
+      37.5% { translate: 2.463cqw 0; }
+      50% { translate: 2.667cqw 0; }
+      62.5% { translate: 2.463cqw 0; }
+      75% { translate: 1.886cqw 0; }
+      87.5% { translate: 1.021cqw 0; }
+    }
+    @keyframes woodblock-kitten-bg-y {
+      0% { transform: translateY(2.667cqw); }
+      12.5% { transform: translateY(1.886cqw); }
+      25% { transform: translateY(0); }
+      37.5% { transform: translateY(-1.886cqw); }
+      50% { transform: translateY(-2.667cqw); }
+      62.5% { transform: translateY(-1.886cqw); }
+      75% { transform: translateY(0); }
+      87.5% { transform: translateY(1.886cqw); }
+      100% { transform: translateY(2.667cqw); }
+    }
+    @keyframes woodblock-kitten-x {
+      0%, 100% { transform: translateX(0); }
+      12.5% { transform: translateX(2.828cqw); }
+      25% { transform: translateX(4cqw); }
+      37.5% { transform: translateX(2.828cqw); }
+      50% { transform: translateX(0); }
+      62.5% { transform: translateX(-2.828cqw); }
+      75% { transform: translateX(-4cqw); }
+      87.5% { transform: translateX(-2.828cqw); }
+    }
+    @keyframes woodblock-kitten-y {
+      0%, 100% { transform: translateY(0); }
+      25% { transform: translateY(1.257cqw); }
+      50% { transform: translateY(0); }
+      75% { transform: translateY(-1.257cqw); }
+    }
+    @keyframes woodblock-kitten-drift-x { from { transform: translateX(-77.778cqw); } to { transform: translateX(82.222cqw); } }
+    @keyframes woodblock-kitten-drift-y {
+      0%, 100% { translate: 0 -3.333cqw; }
+      12.5% { translate: 0 -1.632cqw; }
+      25% { translate: 0 -.19cqw; }
+      37.5% { translate: 0 .773cqw; }
+      50% { translate: 0 1.111cqw; }
+      62.5% { translate: 0 .773cqw; }
+      75% { translate: 0 -.19cqw; }
+      87.5% { translate: 0 -1.632cqw; }
+    }
+    @keyframes woodblock-torii {
+      0%, 100% { transform: translateX(0); }
+      12.5% { transform: translateX(4.714cqw); }
+      25% { transform: translateX(6.667cqw); }
+      37.5% { transform: translateX(4.714cqw); }
+      50% { transform: translateX(0); }
+      62.5% { transform: translateX(-4.714cqw); }
+      75% { transform: translateX(-6.667cqw); }
+      87.5% { transform: translateX(-4.714cqw); }
+    }
+    @keyframes woodblock-torii-drift {
+      0% { transform: translate3d(0, 2cqw, 0); }
+      12.5% { transform: translate3d(2.671cqw, 1.414cqw, 0); }
+      25% { transform: translate3d(3.778cqw, 0, 0); }
+      37.5% { transform: translate3d(2.671cqw, -1.414cqw, 0); }
+      50% { transform: translate3d(0, -2cqw, 0); }
+      62.5% { transform: translate3d(-2.671cqw, -1.414cqw, 0); }
+      75% { transform: translate3d(-3.778cqw, 0, 0); }
+      87.5% { transform: translate3d(-2.671cqw, 1.414cqw, 0); }
+      100% { transform: translate3d(0, 2cqw, 0); }
+    }
+    @keyframes woodblock-lanterns {
+      0%, 100% { transform: translateX(0); }
+      12.5% { transform: translateX(2.828cqw); }
+      25% { transform: translateX(4cqw); }
+      37.5% { transform: translateX(2.828cqw); }
+      50% { transform: translateX(0); }
+      62.5% { transform: translateX(-2.828cqw); }
+      75% { transform: translateX(-4cqw); }
+      87.5% { transform: translateX(-2.828cqw); }
+    }
+    @keyframes woodblock-lantern-rise {
+      0%, 100% { transform: translateY(0); }
+      12.5% { transform: translateY(-2.381cqw); }
+      25% { transform: translateY(-4.4cqw); }
+      37.5% { transform: translateY(-5.75cqw); }
+      50% { transform: translateY(-6.222cqw); }
+      62.5% { transform: translateY(-5.75cqw); }
+      75% { transform: translateY(-4.4cqw); }
+      87.5% { transform: translateY(-2.381cqw); }
+    }
+    @keyframes woodblock-lantern-pulse {
+      0%, 100% { opacity: .598; }
+      12.5% { opacity: .882; }
+      25% { opacity: 1; }
+      37.5% { opacity: .882; }
+      50% { opacity: .598; }
+      62.5% { opacity: .314; }
+      75% { opacity: .196; }
+      87.5% { opacity: .314; }
+    }
+    @keyframes woodblock-sailboat-x { from { transform: translateX(-40cqw); } to { transform: translateX(100.222cqw); } }
+    @keyframes woodblock-sailboat-y {
+      0%, 100% { transform: translateY(0); }
+      12.5% { transform: translateY(1.021cqw); }
+      25% { transform: translateY(1.886cqw); }
+      37.5% { transform: translateY(2.463cqw); }
+      50% { transform: translateY(2.667cqw); }
+      62.5% { transform: translateY(2.463cqw); }
+      75% { transform: translateY(1.886cqw); }
+      87.5% { transform: translateY(1.021cqw); }
+    }
+    @keyframes woodblock-sailboat-drift {
+      0%, 100% { transform: translateX(0); }
+      12.5% { transform: translateX(3.771cqw); }
+      25% { transform: translateX(5.333cqw); }
+      37.5% { transform: translateX(3.771cqw); }
+      50% { transform: translateX(0); }
+      62.5% { transform: translateX(-3.771cqw); }
+      75% { transform: translateX(-5.333cqw); }
+      87.5% { transform: translateX(-3.771cqw); }
+    }
+    @keyframes woodblock-moon-rabbit {
+      0%, 100% { transform: translateY(0); }
+      12.5% { transform: translateY(-2.211cqw); }
+      25% { transform: translateY(-4.085cqw); }
+      37.5% { transform: translateY(-5.308cqw); }
+      50% { transform: translateY(-5.778cqw); }
+      62.5% { transform: translateY(-5.308cqw); }
+      75% { transform: translateY(-4.085cqw); }
+      87.5% { transform: translateY(-2.211cqw); }
+    }
+    @keyframes woodblock-moon-drift {
+      0%, 100% { transform: translateX(0); }
+      12.5% { transform: translateX(3.142cqw); }
+      25% { transform: translateX(4.444cqw); }
+      37.5% { transform: translateX(3.142cqw); }
+      50% { transform: translateX(0); }
+      62.5% { transform: translateX(-3.142cqw); }
+      75% { transform: translateX(-4.444cqw); }
+      87.5% { transform: translateX(-3.142cqw); }
+    }
+
     @keyframes cursor-blink {
       from { opacity: 1; }
       to { opacity: .2; }
@@ -453,7 +838,7 @@
       border-radius: 3.111cqw;
       background: linear-gradient(rgba(223, 235, 247, .2196), rgba(184, 204, 228, .1412));
       color: #fff4e8;
-      font-size: 6.222cqw;
+      font-size: 7.111cqw;
       font-weight: 600;
       text-transform: uppercase;
       white-space: nowrap;
@@ -506,8 +891,8 @@
       top: 60.667%;
       left: 50%;
       display: grid;
-      grid-template-columns: repeat(2, 41.429%);
-      width: 77.778%;
+      grid-template-columns: repeat(2, 45.187%);
+      width: 83.111%;
       height: 9.333%;
       align-items: stretch;
       justify-content: space-between;
@@ -530,17 +915,15 @@
     .battery-chip, .steps-chip { width: max-content; max-width: 100%; justify-self: center; }
 
     .complication svg {
-      width: 5.333cqw;
-      height: 5.333cqw;
+      width: 5.778cqw;
+      height: 5.778cqw;
       flex: 0 0 auto;
       fill: none;
-      stroke: #f1bd8c;
+      stroke: #fff4e8;
       stroke-linecap: round;
       stroke-linejoin: round;
       stroke-width: 1.8;
     }
-
-    .battery-chip svg { stroke: #a4d1bc; }
 
     .chip-copy {
       display: flex;
@@ -553,7 +936,7 @@
     }
 
     .chip-value {
-      font-size: 6.222cqw;
+      font-size: 7.111cqw;
       font-weight: 700;
       letter-spacing: 0;
       font-variant-numeric: tabular-nums;
@@ -568,15 +951,25 @@
 
     .ambient .day-chip {
       background: transparent;
-      color: #d8dbe1;
+      color: #fff4e8;
       backdrop-filter: none;
       -webkit-backdrop-filter: none;
     }
 
     .ambient .complication { background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; }
-    .ambient .complication svg { stroke: #8d98a8; }
-    .ambient .chip-value { color: #c2c8d1; }
+    .ambient .day-chip, .ambient .complication { box-shadow: none; }
+    .ambient .chip-value { color: #fff4e8; }
     .ambient.watch-screen::after { background: radial-gradient(ellipse at center, transparent 54%, rgba(0, 0, 0, .42) 100%); }
+    .ambient.watch-screen[data-style="origami"] .day-chip,
+    .ambient.watch-screen[data-style="origami"] .complication,
+    .ambient.watch-screen[data-style="woodblock"] .day-chip,
+    .ambient.watch-screen[data-style="woodblock"] .complication {
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .watch-screen.ambient[data-style="origami"] .time img,
+    .watch-screen.ambient[data-style="woodblock"] .time img { filter: brightness(0) invert(97%) sepia(4%); }
 
     .watch-foot {
       display: flex;
@@ -902,6 +1295,8 @@
       transition: border-color .15s ease, background .15s ease, transform .15s ease, box-shadow .15s ease;
     }
 
+    .scene-card[hidden], .favorite-option[hidden] { display: none !important; }
+
     .scene-card:hover { border-color: #c5ccdc; background: #fffdf8; transform: translateY(-1px); }
     .scene-card[aria-pressed="true"] {
       border-color: #687fcc;
@@ -932,11 +1327,11 @@
     }
 
     .scene-name {
-      overflow: hidden;
+      min-width: 0;
       font-size: 10px;
       font-weight: 730;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      line-height: 1.15;
+      white-space: normal;
     }
 
     .scene-card[data-scene="bicycle"] .scene-thumb { --scene-light: #f2ad66; --scene-dark: #604a70; }
@@ -947,6 +1342,37 @@
     .scene-card[data-scene="cosmos"] .scene-thumb { --scene-light: #8e8ad2; --scene-dark: #292c61; }
     .scene-card[data-scene="ocean"] .scene-thumb { --scene-light: #83d8d1; --scene-dark: #245879; }
     .scene-card[data-scene="aurora"] .scene-thumb { --scene-light: #b2e6d2; --scene-dark: #355678; }
+    .scene-card[data-scene="crane"] .scene-thumb { --scene-light: #d5b97e; --scene-dark: #26394f; }
+    .scene-card[data-scene="torii"] .scene-thumb { --scene-light: #b9634c; --scene-dark: #283951; }
+    .scene-card[data-scene="lanterns"] .scene-thumb { --scene-light: #d0a85e; --scene-dark: #303345; }
+    .scene-card[data-scene="sailboat"] .scene-thumb { --scene-light: #81aaa0; --scene-dark: #29435a; }
+    .scene-card[data-scene="moon_rabbit"] .scene-thumb { --scene-light: #bdadbb; --scene-dark: #27354f; }
+
+    .favorite-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 5px;
+    }
+
+    .favorite-control { margin-top: 14px; }
+
+    .favorite-option {
+      display: flex;
+      min-width: 0;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 7px;
+      border: 1px solid #e8e2d7;
+      border-radius: 9px;
+      background: rgba(255, 255, 255, .51);
+      color: #576277;
+      font-size: 10px;
+      font-weight: 680;
+      cursor: pointer;
+    }
+
+    .favorite-option input { width: 14px; height: 14px; flex: 0 0 auto; margin: 0; accent-color: #687fcc; }
+    .favorite-option span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
     .mode-note {
       min-height: 15px;
@@ -1043,6 +1469,8 @@
     }
 
     .cycle-button:hover { background: #e9edfa; transform: translateY(-1px); }
+    .cycle-button:disabled { cursor: not-allowed; opacity: .52; }
+    .cycle-button:disabled:hover { background: #f2f4fb; transform: none; }
     .cycle-button svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; }
 
     .size-control .segment { min-width: 53px; }
@@ -1099,7 +1527,6 @@
       .scene-grid { gap: 6px; }
       .scene-card { gap: 6px; padding: 5px; }
       .scene-thumb { width: 29px; height: 29px; }
-      .scene-name { font-size: 9px; }
       .rotation-control { gap: 6px; }
       .rotation-control select { padding-left: 8px; padding-right: 20px; }
       .secondary-controls { gap: 11px 12px; }
@@ -1111,7 +1538,6 @@
     @media (max-width: 370px) {
       .mode-row { align-items: flex-start; flex-direction: column; }
       .rotation-control { width: 100%; justify-content: space-between; margin-left: 0; }
-      .scene-name { font-size: 8px; }
       .scene-thumb { width: 26px; height: 26px; }
       .secondary-controls { grid-template-columns: 1fr; }
       .watch-foot { font-size: 10px; }
@@ -1159,6 +1585,7 @@
                 <img class="scene-drift" src="./assets/drift_bicycle.png" alt="">
                 <img class="scene-glass" src="./assets/glass_bicycle.png" alt="">
               </div>
+              <img class="ambient-motif" id="ambientMotif" src="./assets/origami_ambient.png" alt="" aria-hidden="true" hidden>
               <div class="day-chip" id="dateText">SUN OCT 25</div>
               <div class="clock-display">
                 <span class="time" id="timeText" role="img" aria-label="08:41"></span>
@@ -1202,7 +1629,7 @@
             <option value="woodblock">Woodblock</option>
             <option value="risograph">Risograph</option>
           </select>
-          <p class="style-description" id="styleDescription" aria-live="polite">Layered folded paper with the original gentle character motion.</p>
+          <p class="style-description" id="styleDescription" aria-live="polite">Folded paper worlds, warm colors, and playful character motion.</p>
         </div>
 
         <div class="control-group">
@@ -1227,7 +1654,7 @@
               </select>
             </label>
           </div>
-          <p class="mode-note" id="modeNote">Automatic rotation follows your local calendar, including midnight.</p>
+          <p class="mode-note" id="modeNote" aria-live="polite">Automatic rotation follows your local calendar, including midnight.</p>
           <div class="scene-grid" role="group" aria-label="Choose a scene">
             <button class="scene-card" data-scene="bicycle" type="button" aria-pressed="true">
               <span class="scene-thumb" aria-hidden="true"><img src="./assets/icon_scene_bicycle.png" alt=""></span><span class="scene-name">Bicycle</span>
@@ -1253,6 +1680,22 @@
             <button class="scene-card" data-scene="aurora" type="button" aria-pressed="false">
               <span class="scene-thumb" aria-hidden="true"><img src="./assets/icon_scene_aurora.png" alt=""></span><span class="scene-name">Aurora</span>
             </button>
+          </div>
+          <div class="favorite-control" id="favoritesGroup" role="group" aria-labelledby="favoritesTitle">
+            <div class="group-head">
+              <h3 id="favoritesTitle">Origami rotation</h3>
+              <span class="group-hint" id="favoritesHint">Scenes included in auto mode</span>
+            </div>
+            <div class="favorite-grid">
+              <label class="favorite-option"><input class="favorite-toggle" data-scene="bicycle" type="checkbox" checked><span class="favorite-name">Bicycle</span></label>
+              <label class="favorite-option"><input class="favorite-toggle" data-scene="forest" type="checkbox" checked><span class="favorite-name">Forest</span></label>
+              <label class="favorite-option"><input class="favorite-toggle" data-scene="coding" type="checkbox" checked><span class="favorite-name">Coding</span></label>
+              <label class="favorite-option"><input class="favorite-toggle" data-scene="kitten" type="checkbox" checked><span class="favorite-name">Kitten</span></label>
+              <label class="favorite-option"><input class="favorite-toggle" data-scene="landscape" type="checkbox" checked><span class="favorite-name">Landscape</span></label>
+              <label class="favorite-option"><input class="favorite-toggle" data-scene="cosmos" type="checkbox" checked><span class="favorite-name">Cosmos</span></label>
+              <label class="favorite-option"><input class="favorite-toggle" data-scene="ocean" type="checkbox" checked><span class="favorite-name">Ocean</span></label>
+              <label class="favorite-option"><input class="favorite-toggle" data-scene="aurora" type="checkbox" checked><span class="favorite-name">Aurora</span></label>
+            </div>
           </div>
         </div>
 
@@ -1340,7 +1783,7 @@
     (function () {
       "use strict";
 
-      var scenes = [
+      var origamiScenes = [
         { id: "bicycle", label: "Bicycle" },
         { id: "forest", label: "Forest" },
         { id: "coding", label: "Coding" },
@@ -1350,20 +1793,62 @@
         { id: "ocean", label: "Ocean" },
         { id: "aurora", label: "Aurora" }
       ];
+      var woodblockScenes = [
+        { id: "bicycle", label: "Bicycle" },
+        { id: "crane", label: "Crane" },
+        { id: "kitten", label: "Kitten" },
+        { id: "torii", label: "Torii" },
+        { id: "lanterns", label: "Lanterns" },
+        { id: "sailboat", label: "Sailboat" },
+        { id: "moon_rabbit", label: "Moon rabbit" }
+      ];
+      var sceneCatalogs = {
+        origami: origamiScenes,
+        woodblock: woodblockScenes,
+        risograph: origamiScenes
+      };
       var artStyles = {
-        origami: { label: "Origami", description: "Layered folded paper with the original gentle character motion." },
+        origami: { label: "Origami", description: "Folded paper worlds, warm colors, and playful character motion." },
         woodblock: { label: "Woodblock", description: "Bold carved lines, flat color, and visible print texture." },
         risograph: { label: "Risograph", description: "Fresh graphic worlds in bold spot inks, halftone, and playful geometric shapes." }
+      };
+      var standardClockGlyphPaths = {
+        "0": "./assets/clock_0.png", "1": "./assets/clock_1.png",
+        "2": "./assets/clock_2.png", "3": "./assets/clock_3.png",
+        "4": "./assets/clock_4.png", "5": "./assets/clock_5.png",
+        "6": "./assets/clock_6.png", "7": "./assets/clock_7.png",
+        "8": "./assets/clock_8.png", "9": "./assets/clock_9.png",
+        ":": "./assets/clock_colon.png"
+      };
+      var clockGlyphPaths = {
+        origami: {
+          "0": "./assets/clock_origami_0.png", "1": "./assets/clock_origami_1.png",
+          "2": "./assets/clock_origami_2.png", "3": "./assets/clock_origami_3.png",
+          "4": "./assets/clock_origami_4.png", "5": "./assets/clock_origami_5.png",
+          "6": "./assets/clock_origami_6.png", "7": "./assets/clock_origami_7.png",
+          "8": "./assets/clock_origami_8.png", "9": "./assets/clock_origami_9.png",
+          ":": "./assets/clock_origami_colon.png"
+        },
+        woodblock: {
+          "0": "./assets/clock_woodblock_0.png", "1": "./assets/clock_woodblock_1.png",
+          "2": "./assets/clock_woodblock_2.png", "3": "./assets/clock_woodblock_3.png",
+          "4": "./assets/clock_woodblock_4.png", "5": "./assets/clock_woodblock_5.png",
+          "6": "./assets/clock_woodblock_6.png", "7": "./assets/clock_woodblock_7.png",
+          "8": "./assets/clock_woodblock_8.png", "9": "./assets/clock_woodblock_9.png",
+          ":": "./assets/clock_woodblock_colon.png"
+        },
+        risograph: standardClockGlyphPaths
       };
 
       var sceneAssetPaths = Object.create(null);
       Object.keys(artStyles).forEach(function (style) {
-        scenes.forEach(function (scene) {
+        getScenesForStyle(style).forEach(function (scene) {
           ["scene", "glass", "motion", "drift", "icon_scene"].forEach(function (kind) {
             var name = style === "origami"
               ? kind + "_" + scene.id
               : kind + "_" + style + "_" + scene.id;
-            sceneAssetPaths[style + ":" + kind + ":" + scene.id] = "./assets/" + name + ".png";
+            var cacheVersion = style === "woodblock" ? "?v=woodblock-2026-10-kitten-butterfly" : "";
+            sceneAssetPaths[style + ":" + kind + ":" + scene.id] = "./assets/" + name + ".png" + cacheVersion;
           });
         });
       });
@@ -1373,13 +1858,42 @@
         mode: "auto",
         scene: 0,
         style: "origami",
+        woodScene: 0,
         rotation: 60,
         ambient: false,
         motion: !motionPreference.matches,
         hours: 12,
-        size: 45
+        size: 45,
+        favorites: [true, true, true, true, true, true, true, true],
+        woodblockFavorites: [true, true, true, true, true, true, true]
       };
+      var needsWoodblockMigration = false;
+
+      function freshDefaults() {
+        var next = Object.assign({}, defaults);
+        next.favorites = defaults.favorites.slice();
+        next.woodblockFavorites = defaults.woodblockFavorites.slice();
+        return next;
+      }
+
+      function getScenesForStyle(style) {
+        return sceneCatalogs[style] || origamiScenes;
+      }
+
+      function getCurrentScenes() {
+        return getScenesForStyle(state.style);
+      }
+
+      function getCurrentSceneIndex() {
+        return state.style === "woodblock" ? state.woodScene : state.scene;
+      }
+
+      function getCurrentFavorites() {
+        return state.style === "woodblock" ? state.woodblockFavorites : state.favorites;
+      }
+
       var state = readState();
+      if (needsWoodblockMigration) saveState();
       if (motionPreference.matches) state.motion = false;
       var autoSlot = getRotationSlot(new Date());
       var previewOffset = 0;
@@ -1389,6 +1903,7 @@
       var watchCase = document.getElementById("watchCase");
       var watchScreen = document.getElementById("watchScreen");
       var sceneArt = document.getElementById("sceneArt");
+      var ambientMotif = document.getElementById("ambientMotif");
       var timeText = document.getElementById("timeText");
       var dateText = document.getElementById("dateText");
       var activeSceneLabel = document.getElementById("activeSceneLabel");
@@ -1400,32 +1915,57 @@
       var rotationSelect = document.getElementById("rotationSelect");
       var ambientToggle = document.getElementById("ambientToggle");
       var motionToggle = document.getElementById("motionToggle");
+      var favoritesGroup = document.getElementById("favoritesGroup");
+      var favoriteToggles = document.querySelectorAll(".favorite-toggle");
+      var cycleButton = document.getElementById("cycleButton");
+      var sceneTransitionTimer = null;
 
       function readState() {
         try {
           var raw = window.localStorage.getItem(storageKey);
-          if (!raw) return Object.assign({}, defaults);
+          if (!raw) return freshDefaults();
           var saved = JSON.parse(raw);
-          var next = Object.assign({}, defaults);
+          var next = freshDefaults();
           if (saved.mode === "auto" || saved.mode === "manual") next.mode = saved.mode;
           if (Object.prototype.hasOwnProperty.call(artStyles, saved.style)) next.style = saved.style;
-          if (Number.isInteger(saved.scene) && saved.scene >= 0 && saved.scene < scenes.length) {
+          if (Number.isInteger(saved.scene) && saved.scene >= 0 && saved.scene < origamiScenes.length) {
             next.scene = saved.scene;
           } else {
             var savedSceneId = typeof saved.scene === "string" ? saved.scene : saved.sceneId;
             if (savedSceneId === "baking") savedSceneId = "forest";
             if (savedSceneId === "garden") savedSceneId = "landscape";
-            var savedSceneIndex = scenes.findIndex(function (scene) { return scene.id === savedSceneId; });
+            var savedSceneIndex = origamiScenes.findIndex(function (scene) { return scene.id === savedSceneId; });
             if (savedSceneIndex !== -1) next.scene = savedSceneIndex;
+          }
+          var hasOldWoodblockOrder = Array.isArray(saved.woodblockFavorites) && saved.woodblockFavorites.length === 8;
+          if (Number.isInteger(saved.woodScene) && saved.woodScene >= 0) {
+            var savedWoodScene = hasOldWoodblockOrder && saved.woodScene >= 3
+              ? saved.woodScene - 1
+              : saved.woodScene;
+            if (savedWoodScene < woodblockScenes.length) next.woodScene = savedWoodScene;
           }
           if ([15, 30, 60, 180, 360, 1440].indexOf(Number(saved.rotation)) !== -1) next.rotation = Number(saved.rotation);
           if (typeof saved.ambient === "boolean") next.ambient = saved.ambient;
           if (typeof saved.motion === "boolean") next.motion = saved.motion;
           if (saved.hours === 12 || saved.hours === 24) next.hours = saved.hours;
           if (saved.size === 41 || saved.size === 45) next.size = saved.size;
+          if (Array.isArray(saved.favorites)) {
+            next.favorites = next.favorites.map(function (favorite, index) {
+              return typeof saved.favorites[index] === "boolean" ? saved.favorites[index] : favorite;
+            });
+          }
+          if (Array.isArray(saved.woodblockFavorites)) {
+            next.woodblockFavorites = next.woodblockFavorites.map(function (favorite, index) {
+              var savedIndex = hasOldWoodblockOrder && index >= 2 ? index + 1 : index;
+              return typeof saved.woodblockFavorites[savedIndex] === "boolean"
+                ? saved.woodblockFavorites[savedIndex]
+                : favorite;
+            });
+          }
+          if (hasOldWoodblockOrder) needsWoodblockMigration = true;
           return next;
         } catch (error) {
-          return Object.assign({}, defaults);
+          return freshDefaults();
         }
       }
 
@@ -1443,12 +1983,28 @@
       }
 
       function getScheduledScene(now) {
-        return getRotationSlot(now) % scenes.length;
+        var sequence = getRotationSequence();
+        return sequence[getRotationSlot(now) % sequence.length];
       }
 
       function getActiveScene(now) {
-        if (state.mode === "manual") return state.scene;
-        return (getScheduledScene(now) + previewOffset) % scenes.length;
+        if (state.mode === "manual") return getCurrentSceneIndex();
+        var sequence = getRotationSequence();
+        var scheduledIndex = sequence.indexOf(getScheduledScene(now));
+        return sequence[(scheduledIndex + previewOffset) % sequence.length];
+      }
+
+      function getRotationSequence() {
+        var scenes = getCurrentScenes();
+        if (state.style === "risograph") return scenes.map(function (scene, index) { return index; });
+        var enabled = [];
+        getCurrentFavorites().forEach(function (favorite, index) {
+          if (favorite) enabled.push(index);
+        });
+        if (enabled.length === 0) return [getCurrentSceneIndex()];
+        var firstAtOrAfter = enabled.findIndex(function (index) { return index >= getCurrentSceneIndex(); });
+        if (firstAtOrAfter < 0) firstAtOrAfter = 0;
+        return enabled.slice(firstAtOrAfter).concat(enabled.slice(0, firstAtOrAfter));
       }
 
       function getSceneAssetPath(kind, style, sceneId) {
@@ -1458,11 +2014,33 @@
           : sceneAssetPaths["origami:scene:bicycle"];
       }
 
-      function setSceneArt(sceneId) {
+      function animateScheduledTransition() {
+        if (sceneTransitionTimer !== null) window.clearTimeout(sceneTransitionTimer);
+        sceneArt.classList.remove("scheduled-transition");
+        if (!state.motion || state.ambient || motionPreference.matches) return;
+        void sceneArt.offsetWidth;
+        sceneArt.classList.add("scheduled-transition");
+        sceneTransitionTimer = window.setTimeout(function () {
+          sceneArt.classList.remove("scheduled-transition");
+          sceneTransitionTimer = null;
+        }, 850);
+      }
+
+      function setSceneArt(sceneId, scheduledTransition) {
         var artKey = state.style + ":" + sceneId;
-        if (activeSceneArtKey === artKey) return;
+        var supportsAmbientMotif = state.style === "origami" || state.style === "woodblock";
+        var motionWrap = sceneArt.querySelector(".scene-motion-wrap");
+        watchScreen.setAttribute("data-style", state.style);
+        ambientMotif.src = state.style === "woodblock" ? "./assets/woodblock_ambient.png" : "./assets/origami_ambient.png";
+        ambientMotif.hidden = !(supportsAmbientMotif && state.ambient);
+        motionWrap.setAttribute("data-static-offset", String(
+          state.style === "woodblock" && sceneId === "sailboat" && (!state.motion || motionPreference.matches)
+        ));
+        if (activeSceneArtKey === artKey) {
+          if (scheduledTransition) animateScheduledTransition();
+          return;
+        }
         activeSceneArtKey = artKey;
-        var isOrigami = state.style === "origami";
         sceneArt.setAttribute("data-style", state.style);
         sceneArt.setAttribute("data-scene", sceneId);
         sceneArt.classList.remove("asset-missing");
@@ -1474,7 +2052,6 @@
           image.hidden = false;
           image.src = getSceneAssetPath(asset[1], state.style, sceneId);
         });
-        var motionWrap = sceneArt.querySelector(".scene-motion-wrap");
         var motion = sceneArt.querySelector(".scene-motion");
         var drift = sceneArt.querySelector(".scene-drift");
         motionWrap.hidden = false;
@@ -1483,10 +2060,16 @@
         motion.src = getSceneAssetPath("motion", state.style, sceneId);
         drift.src = getSceneAssetPath("drift", state.style, sceneId);
         var cursor = sceneArt.querySelector(".scene-cursor");
-        cursor.hidden = !isOrigami || sceneId !== "coding";
-        if (isOrigami && sceneId === "coding") {
+        cursor.hidden = state.style !== "origami" || sceneId !== "coding";
+        if (state.style === "origami" && sceneId === "coding") {
           cursor.hidden = false;
           cursor.src = "./assets/blink_coding.png";
+        }
+        if (scheduledTransition) animateScheduledTransition();
+        else {
+          if (sceneTransitionTimer !== null) window.clearTimeout(sceneTransitionTimer);
+          sceneArt.classList.remove("scheduled-transition");
+          sceneTransitionTimer = null;
         }
       }
 
@@ -1496,20 +2079,17 @@
         var hour = String(displayHour).padStart(2, "0");
         var minute = String(now.getMinutes()).padStart(2, "0");
         var timeValue = hour + ":" + minute;
-        if (timeValue !== renderedClock) {
+        var clockKey = state.style + ":" + timeValue;
+        if (clockKey !== renderedClock) {
           timeText.replaceChildren();
           timeValue.split("").forEach(function (character) {
             var glyph = document.createElement("img");
             glyph.alt = "";
-            if (character === ":") {
-              glyph.className = "clock-colon";
-              glyph.src = "./assets/clock_colon.png";
-            } else {
-              glyph.src = "./assets/clock_" + character + ".png";
-            }
+            if (character === ":") glyph.className = "clock-colon";
+            glyph.src = clockGlyphPaths[state.style][character];
             timeText.appendChild(glyph);
           });
-          renderedClock = timeValue;
+          renderedClock = clockKey;
         }
         timeText.setAttribute("aria-label", timeValue);
         var date = new Intl.DateTimeFormat(undefined, {
@@ -1519,10 +2099,10 @@
         }).map(function (part) { return part.value; }).join(" ").toLocaleUpperCase();
         dateText.textContent = date;
         // Match native WFF's capped character-width estimate, not CSS auto sizing.
-        dateText.style.width = (Math.min(380, Math.max(58, 24 + date.length * 17)) / 4.5) + "cqw";
+        dateText.style.width = (Math.min(380, Math.max(58, 24 + date.length * 20)) / 4.5) + "cqw";
         document.querySelectorAll(".complication").forEach(function (chip) {
-          var valueWidth = Math.min(97, Math.max(16.5, chip.querySelector(".chip-value").textContent.length * 16.5));
-          chip.style.width = ((48 + valueWidth) / 4.5) + "cqw";
+          var valueWidth = Math.min(111, Math.max(18.5, chip.querySelector(".chip-value").textContent.length * 18.5));
+          chip.style.width = (Math.min(169, 50 + valueWidth) / 4.5) + "cqw";
           chip.querySelector(".chip-copy").style.width = (valueWidth / 4.5) + "cqw";
         });
       }
@@ -1537,11 +2117,22 @@
         document.querySelectorAll(".size-option").forEach(function (button) {
           button.setAttribute("aria-pressed", String(Number(button.getAttribute("data-size")) === state.size));
         });
+        var currentScenes = getCurrentScenes();
+        var currentSceneIndex = getCurrentSceneIndex();
         document.querySelectorAll(".scene-card").forEach(function (button, index) {
-          var selected = state.mode === "manual" && index === state.scene;
+          var scene = currentScenes[index];
+          button.hidden = !scene;
+          if (!scene) {
+            button.setAttribute("aria-pressed", "false");
+            return;
+          }
+          button.setAttribute("data-scene", scene.id);
+          button.setAttribute("aria-label", scene.label);
+          var selected = index === currentSceneIndex;
           button.setAttribute("aria-pressed", String(selected));
+          button.querySelector(".scene-name").textContent = scene.label;
           var thumbnail = button.querySelector(".scene-thumb img");
-          var thumbnailPath = getSceneAssetPath("icon_scene", state.style, scenes[index].id);
+          var thumbnailPath = getSceneAssetPath("icon_scene", state.style, scene.id);
           if (thumbnail.getAttribute("src") !== thumbnailPath) {
             thumbnail.hidden = false;
             thumbnail.src = thumbnailPath;
@@ -1549,13 +2140,39 @@
         });
         styleSelect.value = state.style;
         styleDescription.textContent = artStyles[state.style].description;
+        document.querySelector(".scene-grid").setAttribute("aria-label", "Choose a " + artStyles[state.style].label + " scene");
+        favoritesGroup.hidden = state.style === "risograph";
+        document.getElementById("favoritesTitle").textContent = artStyles[state.style].label + " rotation";
+        document.getElementById("favoritesHint").textContent = "Scenes included in auto mode";
+        var currentFavorites = getCurrentFavorites();
+        favoriteToggles.forEach(function (toggle, index) {
+          var scene = currentScenes[index];
+          toggle.parentElement.hidden = !scene;
+          if (!scene) {
+            toggle.checked = false;
+            return;
+          }
+          toggle.setAttribute("data-scene", scene.id);
+          toggle.parentElement.querySelector(".favorite-name").textContent = scene.label;
+          toggle.checked = currentFavorites[index];
+        });
         rotationSelect.value = String(state.rotation);
         rotationSelect.disabled = state.mode !== "auto";
         modeBadge.textContent = state.mode === "auto" ? "Automatic" : "Manual";
         modeBadge.style.color = state.mode === "auto" ? "#687fcc" : "#cd7259";
-        modeNote.textContent = state.mode === "auto"
-          ? "Automatic rotation follows your local calendar, including midnight."
-          : "Choose a scene below or use Cycle now to step through them.";
+        if (state.mode === "manual") {
+          modeNote.textContent = "Fixed on the selected scene.";
+        } else if (state.style !== "risograph" && currentFavorites.every(function (favorite) { return !favorite; })) {
+          modeNote.textContent = "No " + artStyles[state.style].label + " scenes are included, so the selected scene stays fixed.";
+        } else if (state.style !== "risograph" && currentFavorites.filter(Boolean).length === 1) {
+          modeNote.textContent = "One " + artStyles[state.style].label + " scene is included, so the scene stays fixed.";
+        } else if (state.style !== "risograph") {
+          modeNote.textContent = "Rotates through included scenes, starting from the selected scene.";
+        } else {
+          modeNote.textContent = "Automatic rotation follows your local calendar, including midnight.";
+        }
+        var rotationSequence = getRotationSequence();
+        cycleButton.disabled = state.mode === "auto" && rotationSequence.length < 2;
         ambientToggle.setAttribute("aria-checked", String(state.ambient));
         motionToggle.setAttribute("aria-checked", String(state.motion && !motionPreference.matches));
         motionToggle.disabled = motionPreference.matches;
@@ -1563,13 +2180,18 @@
         watchCase.setAttribute("aria-label", state.size + " millimeter watch preview");
         watchScreen.classList.toggle("ambient", state.ambient);
         watchScreen.classList.toggle("motion-on", state.motion && !motionPreference.matches);
+        if (!state.motion || state.ambient || motionPreference.matches) {
+          if (sceneTransitionTimer !== null) window.clearTimeout(sceneTransitionTimer);
+          sceneArt.classList.remove("scheduled-transition");
+          sceneTransitionTimer = null;
+        }
         document.querySelector(".preview-column").setAttribute("aria-label", state.size + " millimeter watch preview");
       }
 
-      function updateScene(now) {
+      function updateScene(now, scheduledTransition) {
         var active = getActiveScene(now);
-        var scene = scenes[active];
-        setSceneArt(scene.id);
+        var scene = getCurrentScenes()[active];
+        setSceneArt(scene.id, scheduledTransition);
         activeSceneLabel.textContent = scene.label;
         if (state.mode === "auto") {
           rotationStatus.textContent = "AUTO · EVERY " + (Number(state.rotation) === 1440 ? "DAY" : state.rotation + " MIN");
@@ -1581,16 +2203,21 @@
       function render() {
         var now = new Date();
         var nextSlot = getRotationSlot(now);
+        var scheduledTransition = state.mode === "auto" && nextSlot !== autoSlot &&
+          (state.style === "origami" || state.style === "woodblock") &&
+          getRotationSequence().length > 1;
         if (state.mode === "auto" && nextSlot !== autoSlot) previewOffset = 0;
         autoSlot = nextSlot;
         updateClock(now);
         updateControls();
-        updateScene(now);
+        updateScene(now, scheduledTransition);
       }
 
       function chooseManualScene(index) {
         state.mode = "manual";
-        state.scene = index;
+        if (index < 0 || index >= getCurrentScenes().length) return;
+        if (state.style === "woodblock") state.woodScene = index;
+        else state.scene = index;
         previewOffset = 0;
         saveState();
         render();
@@ -1606,6 +2233,17 @@
 
       document.querySelectorAll(".scene-card").forEach(function (button, index) {
         button.addEventListener("click", function () { chooseManualScene(index); });
+      });
+
+      favoriteToggles.forEach(function (toggle) {
+        toggle.addEventListener("change", function () {
+          var index = getCurrentScenes().findIndex(function (scene) { return scene.id === toggle.getAttribute("data-scene"); });
+          if (index < 0) return;
+          getCurrentFavorites()[index] = toggle.checked;
+          previewOffset = 0;
+          saveState();
+          render();
+        });
       });
 
       document.querySelectorAll(".mode-option").forEach(function (button) {
@@ -1626,11 +2264,15 @@
         render();
       });
 
-      document.getElementById("cycleButton").addEventListener("click", function () {
+      cycleButton.addEventListener("click", function () {
         if (state.mode === "manual") {
-          state.scene = (state.scene + 1) % scenes.length;
+          var nextIndex = (getCurrentSceneIndex() + 1) % getCurrentScenes().length;
+          if (state.style === "woodblock") state.woodScene = nextIndex;
+          else state.scene = nextIndex;
         } else {
-          previewOffset = (previewOffset + 1) % scenes.length;
+          var sequence = getRotationSequence();
+          if (sequence.length < 2) return;
+          previewOffset = (previewOffset + 1) % sequence.length;
         }
         saveState();
         render();
@@ -1666,14 +2308,14 @@
       });
 
       document.getElementById("resetButton").addEventListener("click", function () {
-        state = Object.assign({}, defaults);
+        state = freshDefaults();
         previewOffset = 0;
         autoSlot = getRotationSlot(new Date());
         saveState();
         render();
       });
 
-      document.querySelectorAll(".scene-layer img, .scene-thumb img").forEach(function (image) {
+      document.querySelectorAll(".scene-layer img, .scene-thumb img, #ambientMotif").forEach(function (image) {
         image.addEventListener("error", function () {
           if (image.classList.contains("scene-background")) image.closest(".scene-layer").classList.add("asset-missing");
           image.hidden = true;
