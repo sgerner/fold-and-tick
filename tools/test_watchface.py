@@ -336,6 +336,45 @@ class RotationTest(unittest.TestCase):
                     'SECOND_MILLISECOND': 0.6,
                 }), 0)
 
+    def test_all_styles_shuffle_visits_every_scene_and_matches_preview(self):
+        manifest = json.loads((ROOT / 'artwork/all-styles-shuffle.json').read_text())
+        entries = manifest['scenes']
+        self.assertEqual(len(entries), 37)
+        expected = {(style, scene) for style in STYLES
+                    for scene in (WOODBLOCK_SCENES if style == 'woodblock' else
+                                  PIXEL_SCENES if style == 'pixel_art' else SCENES)}
+        self.assertEqual({(entry['style'], entry['scene']) for entry in entries}, expected)
+        for period in (*PERIODS, 'FIXED'):
+            minutes = 60 if period == 'FIXED' else period
+            previous = None
+            for cycle in (0, 1, 15000):
+                visited = set()
+                for index in range(37):
+                    slot = cycle * 37 + index
+                    now = datetime(1970, 1, 1) + timedelta(minutes=slot * minutes)
+                    values = config_values(now, period, 0, 'all', favorites=(), woodblock_favorites=())
+                    rank = (slot * manifest['multiplier'] + cycle * manifest['cycleShift']) % 37
+                    entry = entries[rank]
+                    active = [name for name, expression in zip(SCENES, EXPRESSIONS)
+                              if evaluate_expression(expression, values)]
+                    self.assertEqual(active, [entry['slot']])
+                    branch = FACE.find(f'./Scene/Condition/Compare[@expression="show_{entry["slot"]}"]/Condition')
+                    matching = [expr.attrib['name'] for expr in branch.findall('./Expressions/Expression')
+                                if evaluate_expression(expr.text, values)]
+                    self.assertEqual(matching, [f'style_{entry["style"]}'])
+                    scene = branch.find(f'Compare[@expression="style_{entry["style"]}"]')
+                    resource = ('scene_' if entry['style'] == 'origami' else f'scene_{entry["style"]}_') + entry['scene']
+                    self.assertIsNotNone(scene.find(f'.//Image[@resource="{resource}"]'))
+                    visited.add((entry['style'], entry['scene']))
+                self.assertEqual(visited, expected)
+        for slot in range(3700):
+            rank = lambda tick: (tick * 17 + (tick // 37) * 13) % 37
+            self.assertNotEqual(rank(slot), rank(slot + 1))
+        # Both renderers consume the exact same shuffled scene table.
+        html = (ROOT / 'preview/index.html').read_text()
+        table = re.search(r'var allStyleScenes = (.*?);', html).group(1)
+        self.assertEqual(json.loads(table), entries)
+
     def test_pinball_flippers_follow_impacts_and_pause_together(self):
         branch = FACE.find('./Scene/Condition/Compare[@expression="show_kitten"]'
                            '/Condition/Compare[@expression="style_pixel_art"]')
@@ -495,11 +534,11 @@ class RotationTest(unittest.TestCase):
 
         style = configurations[0]
         self.assertEqual(style.attrib['defaultValue'], 'origami')
-        self.assertEqual([option.attrib['id'] for option in style], list(STYLES))
+        self.assertEqual([option.attrib['id'] for option in style], [*STYLES, 'all'])
         self.assertEqual([option.attrib['icon'] for option in style],
                          ['icon_scene_cosmos', 'icon_scene_woodblock_bicycle',
                           'icon_scene_risograph_cosmos', 'icon_scene_bioluminescent_bicycle',
-                          'icon_scene_pixel_art_velodrome'])
+                          'icon_scene_pixel_art_velodrome', 'icon_scene_cosmos'])
         for option in style:
             icon_path = ROOT / 'watchface/src/main/res/drawable-nodpi' / f"{option.attrib['icon']}.png"
             width, height = struct.unpack('>II', icon_path.read_bytes()[16:24])
@@ -673,10 +712,7 @@ class RotationTest(unittest.TestCase):
                         style_expressions = {expression.attrib['name']: expression.text
                                              for expression in style_condition.findall('./Expressions/Expression')}
                         active_styles = [compare.attrib['expression'] for compare in style_condition.findall('Compare')
-                                         if eval(re.sub(r'\[([^\]]+)\]',
-                                                        lambda match: repr(selected_style),
-                                                        style_expressions[compare.attrib['expression']].strip()),
-                                                 {'__builtins__': {}})]
+                                         if evaluate_expression(style_expressions[compare.attrib['expression']], values)]
                         self.assertEqual(active_styles, [f'style_{selected_style}'])
 
                         branch = style_condition.find(f'Compare[@expression="style_{selected_style}"]')
@@ -1007,8 +1043,8 @@ class RotationTest(unittest.TestCase):
             condition = complication.find('Condition')
             expressions = {expression.attrib['name']: expression.text.strip()
                            for expression in condition.findall('Expressions/Expression')}
-            self.assertEqual(expressions['origami_glass_style'], '[CONFIGURATION.art_style] == "origami"')
-            self.assertEqual(expressions['woodblock_glass_style'], '[CONFIGURATION.art_style] == "woodblock"')
+            self.assertIn('[CONFIGURATION.art_style] == "origami"', expressions['origami_glass_style'])
+            self.assertIn('[CONFIGURATION.art_style] == "woodblock"', expressions['woodblock_glass_style'])
             origami = _complication_plate(complication, 'Compare[@expression="origami_glass_style"]')
             woodblock = _complication_plate(complication, 'Compare[@expression="woodblock_glass_style"]')
             other_styles = _complication_plate(complication)

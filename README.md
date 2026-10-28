@@ -12,7 +12,7 @@
 
 ## A little world for every mood
 
-Choose **Art style** first, then select a scene and rotation interval. Woodblock has seven designs; Origami, Risograph, and Bioluminescent each have eight. Pixel art has six original scenes: Velodrome, Laundry Kitten, Ramen Bar, Pinball, Airship Dock, and Vinyl Lounge. Every style includes bicycle and kitten themes. Automatic rotation stays within your chosen style; it never switches packs. Origami remains the default, preserving existing settings.
+Choose **Art style** first, then select a scene and rotation interval. Woodblock has seven designs; Origami, Risograph, and Bioluminescent each have eight. Pixel art has six original scenes: Velodrome, Laundry Kitten, Ramen Bar, Pinball, Airship Dock, and Vinyl Lounge. Every style includes bicycle and kitten themes. Automatic rotation stays within your chosen style. Choose **Shuffle all styles** to mix all 37 scenes across all five packs on the selected interval. This mode includes every scene regardless of favorites, visits every scene once per shuffle cycle, and avoids repeating a scene at cycle boundaries. In the watch editor, combining this option with **Fixed** uses an hourly shuffle. Origami remains the default, preserving existing settings.
 
 Origami has a warm folded-paper clock, matching cream glass, and compositions that leave room for the time and complications.
 

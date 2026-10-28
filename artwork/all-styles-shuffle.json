@@ -1,0 +1,191 @@
+{
+  "multiplier": 17,
+  "cycleShift": 13,
+  "scenes": [
+    {
+      "style": "pixel_art",
+      "scene": "ramen",
+      "slot": "coding"
+    },
+    {
+      "style": "origami",
+      "scene": "landscape",
+      "slot": "landscape"
+    },
+    {
+      "style": "risograph",
+      "scene": "cosmos",
+      "slot": "cosmos"
+    },
+    {
+      "style": "bioluminescent",
+      "scene": "ocean",
+      "slot": "ocean"
+    },
+    {
+      "style": "pixel_art",
+      "scene": "laundry_kitten",
+      "slot": "forest"
+    },
+    {
+      "style": "risograph",
+      "scene": "forest",
+      "slot": "forest"
+    },
+    {
+      "style": "origami",
+      "scene": "cosmos",
+      "slot": "cosmos"
+    },
+    {
+      "style": "bioluminescent",
+      "scene": "coding",
+      "slot": "coding"
+    },
+    {
+      "style": "risograph",
+      "scene": "bicycle",
+      "slot": "bicycle"
+    },
+    {
+      "style": "risograph",
+      "scene": "aurora",
+      "slot": "aurora"
+    },
+    {
+      "style": "bioluminescent",
+      "scene": "aurora",
+      "slot": "aurora"
+    },
+    {
+      "style": "woodblock",
+      "scene": "lanterns",
+      "slot": "cosmos"
+    },
+    {
+      "style": "origami",
+      "scene": "kitten",
+      "slot": "kitten"
+    },
+    {
+      "style": "risograph",
+      "scene": "coding",
+      "slot": "coding"
+    },
+    {
+      "style": "woodblock",
+      "scene": "kitten",
+      "slot": "kitten"
+    },
+    {
+      "style": "woodblock",
+      "scene": "torii",
+      "slot": "landscape"
+    },
+    {
+      "style": "pixel_art",
+      "scene": "pinball",
+      "slot": "kitten"
+    },
+    {
+      "style": "bioluminescent",
+      "scene": "landscape",
+      "slot": "landscape"
+    },
+    {
+      "style": "bioluminescent",
+      "scene": "forest",
+      "slot": "forest"
+    },
+    {
+      "style": "bioluminescent",
+      "scene": "cosmos",
+      "slot": "cosmos"
+    },
+    {
+      "style": "bioluminescent",
+      "scene": "bicycle",
+      "slot": "bicycle"
+    },
+    {
+      "style": "origami",
+      "scene": "forest",
+      "slot": "forest"
+    },
+    {
+      "style": "risograph",
+      "scene": "ocean",
+      "slot": "ocean"
+    },
+    {
+      "style": "risograph",
+      "scene": "kitten",
+      "slot": "kitten"
+    },
+    {
+      "style": "origami",
+      "scene": "ocean",
+      "slot": "ocean"
+    },
+    {
+      "style": "risograph",
+      "scene": "landscape",
+      "slot": "landscape"
+    },
+    {
+      "style": "origami",
+      "scene": "aurora",
+      "slot": "aurora"
+    },
+    {
+      "style": "woodblock",
+      "scene": "moon_rabbit",
+      "slot": "aurora"
+    },
+    {
+      "style": "origami",
+      "scene": "bicycle",
+      "slot": "bicycle"
+    },
+    {
+      "style": "woodblock",
+      "scene": "bicycle",
+      "slot": "bicycle"
+    },
+    {
+      "style": "bioluminescent",
+      "scene": "kitten",
+      "slot": "kitten"
+    },
+    {
+      "style": "woodblock",
+      "scene": "crane",
+      "slot": "forest"
+    },
+    {
+      "style": "pixel_art",
+      "scene": "velodrome",
+      "slot": "bicycle"
+    },
+    {
+      "style": "pixel_art",
+      "scene": "vinyl",
+      "slot": "cosmos"
+    },
+    {
+      "style": "woodblock",
+      "scene": "sailboat",
+      "slot": "ocean"
+    },
+    {
+      "style": "origami",
+      "scene": "coding",
+      "slot": "coding"
+    },
+    {
+      "style": "pixel_art",
+      "scene": "airship",
+      "slot": "landscape"
+    }
+  ]
+}
