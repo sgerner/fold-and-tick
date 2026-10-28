@@ -1,4 +1,5 @@
 """Ensure the static preview works under a GitHub Pages project subdirectory."""
+import json
 import re
 import shutil
 import subprocess
@@ -6,7 +7,7 @@ import tempfile
 import unittest
 from html.parser import HTMLParser
 from pathlib import Path
-from build_preview import ROOT, build
+from build_preview import ROOT, build, render_pinball_motion_css
 
 class Images(HTMLParser):
     def __init__(self):
@@ -48,9 +49,18 @@ class PreviewTest(unittest.TestCase):
             self.assertIn('woodblock_ambient.png',names)
             self.assertIn('clock_woodblock_0.png',names)
             self.assertIn('clock_woodblock_colon.png',names)
+            self.assertIn('flipper_pixel_art_pinball_left.png', names)
+            self.assertIn('flipper_pixel_art_pinball_right.png', names)
             for scene in ('bicycle', 'crane', 'kitten', 'torii', 'lanterns', 'sailboat', 'moon_rabbit'):
                 for layer in ('scene', 'motion', 'drift', 'glass', 'icon_scene'):
                     self.assertIn(f'{layer}_woodblock_{scene}.png', names)
+            for scene in ('bicycle', 'forest', 'coding', 'kitten', 'landscape', 'cosmos', 'ocean', 'aurora'):
+                for layer in ('scene', 'motion', 'drift', 'glass', 'icon_scene'):
+                    self.assertIn(f'{layer}_bioluminescent_{scene}.png', names)
+            for scene in ('velodrome', 'laundry_kitten', 'ramen', 'pinball', 'airship', 'vinyl'):
+                for layer in ('scene', 'motion', 'drift', 'glass', 'icon_scene'):
+                    self.assertIn(f'{layer}_pixel_art_{scene}.png', names)
+            self.assertFalse(any('orrery' in name.lower() for name in names))
             self.assertFalse(any('baking' in n for n in names))
             self.assertIn('releases/latest/download/Fold-and-Tick.apk',html)
             self.assertNotIn('Eight tiny worlds orbit a calm',html)
@@ -60,11 +70,71 @@ class PreviewTest(unittest.TestCase):
             output=build(Path(folder)); old=output/'assets/scene_baking.png';old.write_bytes(b'old')
             build(output);self.assertFalse(old.exists())
 
+    def test_pinball_preview_embeds_shared_motion_and_contact_frames(self):
+        motion_path = ROOT / 'artwork/packs/pixel_art/pinball-motion.json'
+        motion = json.loads(motion_path.read_text(encoding='utf-8'))
+        duration = float(motion['duration'])
+        fps = float(motion['fps'])
+        samples = motion['samples']
+        events = motion['events']
+        self.assertGreater(duration, 0)
+        self.assertEqual(samples[0]['t'], 0)
+        self.assertAlmostEqual(samples[-1]['t'], duration)
+        self.assertGreater(len(samples), 2)
+        for before, after in zip(samples, samples[1:]):
+            self.assertAlmostEqual(float(after['t']) - float(before['t']), 1 / fps, places=6)
+        for key, rest in (('x', 225), ('y', 350), ('leftAngle', 20), ('rightAngle', 160)):
+            self.assertAlmostEqual(float(samples[0][key]), rest)
+            self.assertAlmostEqual(float(samples[-1][key]), rest)
+
+        event_types = {event['type'] for event in events}
+        self.assertTrue({'bumper_1', 'bumper_2', 'bumper_3', 'rail', 'left_flipper', 'right_flipper'} <= event_types)
+        self.assertTrue(all(0 <= float(event['t']) <= duration for event in events))
+
+        css = render_pinball_motion_css(motion)
+        self.assertIn(f'--pinball-duration: {duration:g}s', css)
+        self.assertIn('.watch-screen.motion-on:not(.ambient)', css)
+        self.assertIn('.pinball-flipper-left { animation: pixel-pinball-left', css)
+        self.assertIn('.pinball-flipper-right { animation: pixel-pinball-right', css)
+        self.assertIn('.scene-drift { animation: pixel-pinball-impact', css)
+        self.assertIn('@keyframes pixel-pinball-impact {', css)
+        self.assertIn('0% { transform: translate3d(0cqw, 0cqw, 0); }', css)
+        self.assertIn('100% { transform: translate3d(0cqw, 0cqw, 0); }', css)
+        for event_type in event_types:
+            self.assertIn(f'pinball event: {event_type}', css)
+        ball_css = css.split('@keyframes pixel-pinball-ball {', 1)[1].split('@keyframes pixel-pinball-left {', 1)[0]
+        impact_css = css.split('@keyframes pixel-pinball-impact {', 1)[1]
+        for event in events:
+            event_time = f'{float(event["t"]):.6f}'.rstrip('0').rstrip('.')
+            event_x = f'{float(event["x"]):.3f}'.rstrip('0').rstrip('.')
+            event_y = f'{float(event["y"]):.3f}'.rstrip('0').rstrip('.')
+            note = f'pinball event: {event["type"]} t={event_time}s source=({event_x},{event_y})'
+            ball_line = next((line for line in ball_css.splitlines() if note in line), None)
+            impact_line = next((line for line in impact_css.splitlines() if note in line), None)
+            self.assertIsNotNone(ball_line, note)
+            self.assertIsNotNone(impact_line, note)
+            ball_transform = re.search(r'transform: ([^;]+);', ball_line).group(1)
+            impact_transform = re.search(r'transform: ([^;]+);', impact_line).group(1)
+            self.assertEqual(impact_transform, ball_transform)
+            self.assertIn('opacity: 1;', impact_line)
+            flash_end = f'pinball flash end: {event["type"]} start={event_time}s after=0.1s'
+            self.assertIn(flash_end, impact_css)
+        source_html = (ROOT / 'preview/index.html').read_text(encoding='utf-8')
+        self.assertIn('.scene-layer[data-style="pixel_art"][data-scene="pinball"] .scene-drift { opacity: 0; }', source_html)
+
+        with tempfile.TemporaryDirectory() as folder:
+            output = build(Path(folder))
+            html = (output / 'index.html').read_text(encoding='utf-8')
+        self.assertIn(css, html)
+        self.assertIn('flipper_pixel_art_pinball_left.png', html)
+        self.assertIn('flipper_pixel_art_pinball_right.png', html)
+
     def test_style_picker_keeps_scene_catalog_and_asset_contract(self):
         html=(ROOT/'preview/index.html').read_text()
         controls=PreviewControls(); controls.feed(html)
         self.assertEqual(controls.styles, [
-            ('origami', 'Origami'), ('woodblock', 'Woodblock'), ('risograph', 'Risograph')
+            ('origami', 'Origami'), ('woodblock', 'Woodblock'), ('risograph', 'Risograph'),
+            ('bioluminescent', 'Bioluminescent'), ('pixel_art', 'Pixel art')
         ])
         self.assertEqual(controls.scenes, [
             'bicycle', 'forest', 'coding', 'kitten', 'landscape', 'cosmos', 'ocean', 'aurora'
@@ -83,6 +153,21 @@ class PreviewTest(unittest.TestCase):
         self.assertIn('woodblockFavorites: [true, true, true, true, true, true, true]', html)
         self.assertIn('woodScene: 0', html)
         self.assertIn('var woodblockScenes = [', html)
+        self.assertIn('var pixelArtScenes = [', html)
+        for scene_id, label in (
+            ('velodrome', 'Velodrome'), ('laundry_kitten', 'Laundry Kitten'), ('ramen', 'Ramen Bar'),
+            ('pinball', 'Pinball'), ('airship', 'Airship Dock'), ('vinyl', 'Vinyl Lounge')
+        ):
+            self.assertIn('id: "' + scene_id + '"', html)
+            self.assertIn('label: "' + label + '"', html)
+        self.assertIn('pixel_art: pixelArtScenes', html)
+        self.assertIn('pixelScene: 0', html)
+        self.assertIn('saved.pixelScene', html)
+        self.assertIn('state.pixelScene = index;', html)
+        self.assertIn('state.pixelScene = nextIndex;', html)
+        self.assertIn('sceneCatalogs[style] || origamiScenes', html)
+        self.assertNotIn('orrery', html.lower())
+        self.assertIn('.scene-card[hidden], .favorite-option[hidden] { display: none !important; }', html)
         for scene_id in ('bicycle', 'crane', 'kitten', 'torii', 'lanterns', 'sailboat', 'moon_rabbit'):
             self.assertIn('id: "' + scene_id + '"', html)
         self.assertNotIn('id: "koi"', html)
@@ -132,6 +217,18 @@ class PreviewTest(unittest.TestCase):
         self.assertIn('animation: aurora-curtains-origami 10s linear infinite', html)
         self.assertIn('animation: forest-firefly-origami 10s linear infinite', html)
         self.assertIn('scene-pan 24s ease-in-out infinite alternate', html)
+        for choreography in (
+            'pixel-velodrome 10s linear infinite',
+            'pixel-laundry-kitten 3s linear infinite',
+            'pixel-ramen 5s linear infinite',
+            'pixel-airship 12s linear infinite',
+            'pixel-vinyl 4s linear infinite',
+            'translateX(-73.333cqw)',
+            'translateY(-6.667cqw)',
+            'translateY(-8.444cqw)',
+            'translate3d(2.667cqw, -2.222cqw, 0)',
+        ):
+            self.assertIn(choreography, html)
         for choreography in (
             'woodblock-bicycle-traverse 10s linear infinite',
             'woodblock-bicycle-drift 10s linear infinite',
@@ -225,6 +322,8 @@ const artImages = {
   '.scene-cursor': new Element({ src: './assets/blink_coding.png', hidden: true }),
   '.scene-drift': new Element({ src: './assets/drift_bicycle.png' }),
   '.scene-glass': new Element({ src: './assets/glass_bicycle.png' }),
+  '.pinball-flipper-left': new Element({ src: './assets/flipper_pixel_art_pinball_left.png', hidden: true }),
+  '.pinball-flipper-right': new Element({ src: './assets/flipper_pixel_art_pinball_right.png', hidden: true }),
   '.scene-motion-wrap': new Element({})
 };
 sceneArt.queries = artImages;
@@ -384,6 +483,65 @@ assert.notEqual(sceneArt.getAttribute('data-scene'), risoScene);
 for (let i = 0; i < sceneIds.length - 1; i++) ids.cycleButton.dispatch('click');
 assert.equal(sceneArt.getAttribute('data-scene'), risoScene);
 assert.equal(artImages['.scene-background'].src, './assets/scene_risograph_' + risoScene + '.png');
+for (const style of ['bioluminescent']) {
+  ids.styleSelect.value = style; ids.styleSelect.dispatch('change');
+  assert.equal(ids.favoritesGroup.hidden, true);
+  modes[1].dispatch('click');
+  for (const [index, id] of sceneIds.entries()) {
+    cards[index].dispatch('click');
+    assert.equal(sceneArt.getAttribute('data-scene'), id);
+    assert.equal(artImages['.scene-background'].src, './assets/scene_' + style + '_' + id + '.png');
+    assert.equal(artImages['.scene-motion'].src, './assets/motion_' + style + '_' + id + '.png');
+  }
+  cards[3].dispatch('click');
+  modes[0].dispatch('click');
+  const minute = Math.floor(Date.UTC(2026, 9, 25) / 86400000) * 1440 + 12 * 60 + 14;
+  assert.equal(sceneArt.getAttribute('data-scene'), sceneIds[(3 + Math.floor(minute / 30)) % sceneIds.length]);
+  const first = sceneArt.getAttribute('data-scene');
+  for (let i = 0; i < sceneIds.length; i++) ids.cycleButton.dispatch('click');
+  assert.equal(sceneArt.getAttribute('data-scene'), first);
+}
+const pixelSceneIds = ['velodrome', 'laundry_kitten', 'ramen', 'pinball', 'airship', 'vinyl'];
+const pixelSceneNames = ['Velodrome', 'Laundry Kitten', 'Ramen Bar', 'Pinball', 'Airship Dock', 'Vinyl Lounge'];
+ids.styleSelect.value = 'pixel_art'; ids.styleSelect.dispatch('change');
+assert.equal(ids.favoritesGroup.hidden, true);
+assert.equal(cards.filter(card => !card.hidden).length, 6);
+assert.equal(cards.filter(card => card.hidden).length, 2);
+assert.deepEqual(cardNames.slice(0, 6).map(name => name.textContent), pixelSceneNames);
+assert.equal(sceneArt.getAttribute('data-scene'), 'velodrome');
+assert.equal(artImages['.scene-background'].src, './assets/scene_pixel_art_velodrome.png');
+assert.equal(artImages['.scene-motion'].src, './assets/motion_pixel_art_velodrome.png');
+assert.equal(artImages['.pinball-flipper-left'].hidden, true);
+assert.equal(artImages['.pinball-flipper-right'].hidden, true);
+cards[3].dispatch('click');
+assert.equal(sceneArt.getAttribute('data-scene'), 'pinball');
+assert.equal(artImages['.scene-motion'].src, './assets/motion_pixel_art_pinball.png');
+assert.equal(artImages['.pinball-flipper-left'].src, './assets/flipper_pixel_art_pinball_left.png');
+assert.equal(artImages['.pinball-flipper-right'].src, './assets/flipper_pixel_art_pinball_right.png');
+assert.equal(artImages['.pinball-flipper-left'].hidden, false);
+assert.equal(artImages['.pinball-flipper-right'].hidden, false);
+cards[4].dispatch('click');
+assert.equal(sceneArt.getAttribute('data-scene'), 'airship');
+assert.equal(artImages['.pinball-flipper-left'].hidden, true);
+assert.equal(artImages['.pinball-flipper-right'].hidden, true);
+const origamiSelection = JSON.parse(saved).scene;
+cards[4].dispatch('click');
+assert.equal(JSON.parse(saved).pixelScene, 4);
+assert.equal(JSON.parse(saved).scene, origamiSelection);
+assert.equal(sceneArt.getAttribute('data-scene'), 'airship');
+assert.equal(cards[4].getAttribute('aria-pressed'), 'true');
+ids.styleSelect.value = 'origami'; ids.styleSelect.dispatch('change');
+assert.equal(sceneArt.getAttribute('data-scene'), sceneIds[origamiSelection]);
+ids.styleSelect.value = 'pixel_art'; ids.styleSelect.dispatch('change');
+assert.equal(sceneArt.getAttribute('data-scene'), 'airship');
+modes[0].dispatch('click');
+const minute = Math.floor(Date.UTC(2026, 9, 25) / 86400000) * 1440 + 12 * 60 + 14;
+const scheduledPixelScene = pixelSceneIds[(4 + Math.floor(minute / 30)) % pixelSceneIds.length];
+assert.equal(sceneArt.getAttribute('data-scene'), scheduledPixelScene);
+ids.cycleButton.dispatch('click');
+assert.equal(JSON.parse(saved).pixelScene, 4);
+const cycledPixelScene = pixelSceneIds[(pixelSceneIds.indexOf(scheduledPixelScene) + 1) % pixelSceneIds.length];
+assert.equal(sceneArt.getAttribute('data-scene'), cycledPixelScene);
 ids.styleSelect.value = 'woodblock'; ids.styleSelect.dispatch('change');
 assert.equal(sceneArt.getAttribute('data-scene'), 'moon_rabbit');
 assert.equal(favoriteToggles.slice(0, 7).every(toggle => toggle.checked), true);
@@ -450,6 +608,18 @@ vm.runInNewContext(previewScript, { window, document, Date: FixedDate });
 assert.equal(sceneArt.getAttribute('data-scene'), 'lanterns');
 assert.equal(JSON.parse(saved).woodScene, 4);
 assert.deepEqual(JSON.parse(saved).woodblockFavorites, [true, false, true, false, true, false, true]);
+saved = JSON.stringify({ style: 'pixel_art', mode: 'manual', scene: 2, pixelScene: 4, rotation: 60 });
+vm.runInNewContext(previewScript, { window, document, Date: FixedDate });
+assert.equal(ids.styleSelect.value, 'pixel_art');
+assert.equal(sceneArt.getAttribute('data-scene'), 'airship');
+assert.equal(cards.filter(card => !card.hidden).length, 6);
+assert.equal(JSON.parse(saved).scene, 2);
+assert.equal(JSON.parse(saved).pixelScene, 4);
+saved = JSON.stringify({ style: 'orrery', mode: 'manual', scene: 4, rotation: 60 });
+vm.runInNewContext(previewScript, { window, document, Date: FixedDate });
+assert.equal(ids.styleSelect.value, 'origami');
+assert.equal(sceneArt.getAttribute('data-style'), 'origami');
+assert.equal(sceneArt.getAttribute('data-scene'), 'landscape');
 '''
         with tempfile.TemporaryDirectory() as folder:
             script_path=Path(folder)/'preview.js'; script_path.write_text(script)

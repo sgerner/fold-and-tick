@@ -7,9 +7,11 @@
     <string name="style_origami">Origami</string>
     <string name="style_woodblock">Woodblock</string>
     <string name="style_risograph">Risograph</string>
+    <string name="style_bioluminescent">Bioluminescent</string>
+    <string name="style_pixel_art">Pixel art</string>
 
-    <string name="scene_setting_title">Origami / Risograph scene</string>
-    <string name="scene_setting_description">Choose a fixed Origami or Risograph scene, or the starting point of automatic rotation.</string>
+    <string name="scene_setting_title">Scene</string>
+    <string name="scene_setting_description">Choose a fixed scene or starting scene for Origami, Risograph, or Bioluminescent rotation.</string>
     <string name="scene_bicycle">Bicycle</string>
     <string name="scene_forest">Forest</string>
     <string name="scene_coding">Coding</string>
@@ -19,8 +21,17 @@
     <string name="scene_ocean">Ocean</string>
     <string name="scene_aurora">Aurora</string>
 
+    <string name="pixel_scene_setting_title">Pixel art scene</string>
+    <string name="pixel_scene_setting_description">Choose a fixed Pixel art scene or starting scene for rotation.</string>
+    <string name="pixel_scene_velodrome">Pixel art: Velodrome</string>
+    <string name="pixel_scene_laundry_kitten">Pixel art: Laundry Kitten</string>
+    <string name="pixel_scene_ramen">Pixel art: Ramen Bar</string>
+    <string name="pixel_scene_pinball">Pixel art: Pinball</string>
+    <string name="pixel_scene_airship">Pixel art: Airship Dock</string>
+    <string name="pixel_scene_vinyl">Pixel art: Vinyl Lounge</string>
+
     <string name="rotation_setting_title">Scene rotation</string>
-    <string name="rotation_setting_description">Set when scenes rotate. Origami and Woodblock use their selected favorites; Risograph rotates through every scene.</string>
+    <string name="rotation_setting_description">Set when scenes rotate. Origami and Woodblock use their favorites. Pixel art rotates through six scenes; Risograph and Bioluminescent use all scenes.</string>
     <string name="motion_setting_title">Scene motion</string>
     <string name="motion_setting_description">Turn scene movement on or off.</string>
     <string name="motion_enabled">On</string>
@@ -60,11 +71,13 @@
     <string name="favorite_woodblock_lanterns_label">Woodblock: Lanterns</string>
     <string name="favorite_woodblock_lanterns_description">Include Lanterns in Woodblock scene rotation.</string>
     <string name="woodblock_scene_sailboat">Woodblock: Sailboat</string>
-    <string name="favorite_woodblock_sailboat_label">Woodblock: Sailboat</string>
-    <string name="favorite_woodblock_sailboat_description">Include Sailboat in Woodblock scene rotation.</string>
     <string name="woodblock_scene_moon_rabbit">Woodblock: Moon Rabbit</string>
-    <string name="favorite_woodblock_moon_rabbit_label">Woodblock: Moon Rabbit</string>
-    <string name="favorite_woodblock_moon_rabbit_description">Include Moon Rabbit in Woodblock scene rotation.</string>
+    <string name="woodblock_lunar_favorites_title">Woodblock: Sailboat and Moon Rabbit</string>
+    <string name="woodblock_lunar_favorites_description">Choose both scenes, Sailboat only, Moon Rabbit only, or neither for Woodblock rotation.</string>
+    <string name="woodblock_lunar_both">Both</string>
+    <string name="woodblock_lunar_sailboat">Sailboat</string>
+    <string name="woodblock_lunar_moon_rabbit">Moon Rabbit</string>
+    <string name="woodblock_lunar_none">Neither</string>
     <string name="rotation_fixed">Keep selected scene</string>
     <string name="rotation_15">Every 15 minutes</string>
     <string name="rotation_30">Every 30 minutes</string>

@@ -1,0 +1,116 @@
+[
+  {
+    "id": "velodrome",
+    "label": "Velodrome",
+    "palette": "cobalt / coral / lemon",
+    "background": "artwork/packs/pixel_art/clean_sources/velodrome-background.png",
+    "actor_placement": [
+      135,
+      310,
+      180,
+      115
+    ],
+    "drift_placement": [
+      45,
+      355,
+      65,
+      30
+    ],
+    "sampling": "nearest-neighbor; no averaging or palette remapping"
+  },
+  {
+    "id": "laundry_kitten",
+    "label": "Laundry Kitten",
+    "palette": "mint / apricot / petrol",
+    "background": "artwork/packs/pixel_art/clean_sources/laundry_kitten-background.png",
+    "actor_placement": [
+      140,
+      320,
+      170,
+      115
+    ],
+    "drift_placement": [
+      300,
+      338,
+      70,
+      65
+    ],
+    "sampling": "nearest-neighbor; no averaging or palette remapping"
+  },
+  {
+    "id": "ramen",
+    "label": "Ramen Bar",
+    "palette": "vermilion / amber / charcoal",
+    "background": "artwork/packs/pixel_art/clean_sources/ramen-background.png",
+    "actor_placement": [
+      145,
+      325,
+      160,
+      120
+    ],
+    "drift_placement": [
+      195,
+      320,
+      60,
+      60
+    ],
+    "sampling": "nearest-neighbor; no averaging or palette remapping"
+  },
+  {
+    "id": "pinball",
+    "label": "Pinball",
+    "palette": "violet / cyan / yellow",
+    "background": "artwork/packs/pixel_art/clean_sources/pinball-playfield.png",
+    "actor_placement": [
+      216,
+      341,
+      18,
+      18
+    ],
+    "drift_placement": [
+      204,
+      329,
+      42,
+      42
+    ],
+    "sampling": "nearest-neighbor; no averaging or palette remapping"
+  },
+  {
+    "id": "airship",
+    "label": "Airship Dock",
+    "palette": "sage / cream / brass",
+    "background": "artwork/packs/pixel_art/clean_sources/airship-background.png",
+    "actor_placement": [
+      105,
+      20,
+      240,
+      95
+    ],
+    "drift_placement": [
+      55,
+      340,
+      85,
+      60
+    ],
+    "sampling": "nearest-neighbor; no averaging or palette remapping"
+  },
+  {
+    "id": "vinyl",
+    "label": "Vinyl Lounge",
+    "palette": "burgundy / ochre / walnut",
+    "background": "artwork/packs/pixel_art/clean_sources/vinyl-background.png",
+    "actor_placement": [
+      125,
+      325,
+      200,
+      110
+    ],
+    "drift_placement": [
+      300,
+      332,
+      65,
+      65
+    ],
+    "sampling": "nearest-neighbor; no averaging or palette remapping"
+  }
+]

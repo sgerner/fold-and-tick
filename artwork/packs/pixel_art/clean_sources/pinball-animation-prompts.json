@@ -1,0 +1,5 @@
+{
+  "background": "Edit target: existing clean pixel-art pinball playfield. Change ONLY the two yellow/orange flipper paddles and red pivot buttons near the bottom: REMOVE both complete flippers including their shadows and pivot circles, replacing the removed areas with the same plain deep-violet playfield surface behind them. Those flippers will be added as separately animated sprites. Keep ALL other pixels/composition as close as possible: three top round red/yellow bumpers, side cyan/yellow rails, violet field, lower rail edges, lighting, palette, pixel size, exact square framing. Do not add anything. No new text, no UI, no ball, no replacement flippers. Preserve crisp clean pixel-art shapes.",
+  "flippers": "Code-drawn pixel polygons; yellow body, orange underside, cream highlight, red pivot.",
+  "reference": "pinball-background.png"
+}

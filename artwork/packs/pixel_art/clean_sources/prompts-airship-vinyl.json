@@ -1,0 +1,30 @@
+{
+  "tool": "Built-in image_gen",
+  "grid": "128x128 pixels; backgrounds and sprite canvases are saved at native grid size; sprite alpha is preserved.",
+  "assets": [
+    {
+      "id": "airship",
+      "prompt": "Use case: stylized-concept. Asset type: square background for an animated round smartwatch pixel-art scene. Primary request: fresh, clean, simple 8-bit game-art scene AIRSHIP DOCK. Scene/backdrop: calm floating dock in daylight. Place a few large mooring towers at the far side edges, a low flat dock along the bottom, and a few bold cloud clusters near the top. Keep a broad quiet dark sage-teal horizontal band from 25% to 67% of image height for clock text. No characters and no airship in the background. Style/medium: artist-made classic 8-bit game art, hard square pixel clusters, legible on an effective 128x128 grid. Deliberately spare composition, bold silhouettes, large flat areas, one or two solid shades per material, crisp square edges. Composition/framing: square full bleed. Towers clipped at far left/right edges, dock confined to lowest 12%, sky at top, calm mostly empty center band. Color palette: sage green, warm cream, muted brass ochre, dark desaturated teal; limited 16-color palette. Constraints: no people, no ship, no tiny clutter, no text or numbers, no UI, no watch frame, no border, no watermark. Avoid: dithering, fine texture, gradients, realistic shading, soft focus, antialiasing, busy decoration, ornate steampunk clutter.",
+      "generated_source": "exec-ed334718-6e41-4830-886e-239c85a71a03.png",
+      "files": {
+        "background": "airship-background.png",
+        "actor": "airship-actor.png",
+        "detail": "airship-detail.png"
+      },
+      "sprite_prompt": "See shared sprite atlas prompt."
+    },
+    {
+      "id": "vinyl",
+      "prompt": "Use case: stylized-concept. Asset type: square background for an animated round smartwatch pixel-art scene. Primary request: fresh, spare classic 8-bit game background called VINYL LOUNGE. Scene/backdrop: a quiet listening room. Put exactly one simple speaker cabinet at each far side, each with one large circular cone. A broad, flat walnut record cabinet runs along the bottom. Near the top, show just a few oversized album spines and two simple pendant-lamp silhouettes. Keep a broad, uninterrupted dark burgundy horizontal band from 25% to 67% of image height for clock text. No people, turntable, records, or music notes in the background. Style/medium: handmade 2D 8-bit videogame pixel art, simple tile-like geometric clusters on an effective 128x128 grid. Strictly flat shapes and hard stair-step edges; large readable pixels, bold silhouettes, no perspective tricks. Use only one or two flat shades per object and about 18 colors total. Composition/framing: square full bleed. Outer edge decorations stay near the top and sides; bottom cabinet only in the lowest 14%; central band stays open and still. Color palette: burgundy, ochre gold, walnut brown, warm cream, tiny dusty-rose accents. Constraints: no labels or lettering on albums, no text or numbers, no UI, no watch frame, no border, no watermark. Avoid: realistic lighting, shadows, gradients, dithering, fine texture, tiny detail, smooth curves, antialiasing, soft focus, ornate furniture.",
+      "generated_source": "exec-dfada0c4-8c5b-4ec0-92f7-3f56a19f9462.png",
+      "files": {
+        "background": "vinyl-background.png",
+        "actor": "vinyl-actor.png",
+        "detail": "vinyl-detail.png"
+      },
+      "sprite_prompt": "See shared sprite atlas prompt."
+    }
+  ],
+  "sprite_atlas_prompt": "Use case: game-art sprite atlas. Asset type: transparent 2-by-2 sprite atlas for two animated 8-bit smartwatch scenes. Primary request: one clean, artist-made classic 8-bit pixel-art atlas with four isolated sprites in exact equal quadrants. Real fully transparent canvas, preserving alpha; no colored backdrop. Style/medium: flat 2D 8-bit game art on a 128x128 design grid per quadrant, big square pixel clusters, strong clean silhouettes, limited 16-20 color palette. Crisp hard square edges; one or two solid shades per material. Composition: square canvas divided into an invisible 2x2 layout. Center exactly one sprite in each quadrant with generous transparent empty margin; no overlap between quadrants. Top-left: a recognizable cream-and-sage dirigible facing right, with one simple dark teal gondola and small brass propeller. Top-right: simple three-quarter top-view walnut turntable, visible black vinyl disc and cream tonearm with a brass pivot. Bottom-left: one small cluster of two cream cloud puffs and a single muted-peach pennant. Bottom-right: exactly two musical notes, one ochre and one dusty rose. Constraints: transparent outside sprites, no shadows beyond sprite shapes, no border or cell lines, no labels, no text, no watermark. Keep the airship and turntable large and readable, details compact. Avoid: gradients, dithering, fine texture, antialiasing, smooth edges, realistic lighting, glossy 3D shading, extra objects or stray pixels.",
+  "sprite_atlas_source": "exec-5ca51802-7997-46b9-93fe-653a0b380201.png"
+}

@@ -279,7 +279,7 @@
     }
 
     .watch-screen:not(.ambient) .ambient-motif,
-    .watch-screen[data-style="risograph"] .ambient-motif { display: none; }
+    .watch-screen:not([data-style="origami"]):not([data-style="woodblock"]) .ambient-motif { display: none; }
 
     .watch-screen.motion-on:not(.ambient) .scene-layer.scheduled-transition {
       animation: scene-arrive .8s linear both;
@@ -295,6 +295,24 @@
       width: 111.111%;
       height: 111.111%;
     }
+
+    .scene-layer[data-style]:not([data-style="origami"]):is([data-style="bioluminescent"], [data-style="pixel_art"]) .scene-background {
+      inset: 0; width: 100%; height: 100%;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style]:not([data-style="origami"]):is([data-style="bioluminescent"], [data-style="pixel_art"]) .scene-background {
+      animation: none;
+    }
+
+    .scene-layer[data-style="pixel_art"] .scene-background,
+    .scene-layer[data-style="pixel_art"] .scene-motion,
+    .scene-layer[data-style="pixel_art"] .scene-drift { image-rendering: pixelated; }
+    .scene-layer[data-style="pixel_art"] .pinball-flipper {
+      z-index: 2;
+      image-rendering: pixelated;
+    }
+    .scene-layer[data-style="pixel_art"][data-scene="pinball"] .scene-drift { opacity: 0; }
+    .scene-layer[data-style="pixel_art"][data-scene="pinball"] .pinball-flipper-left { transform-origin: 13.333% 82.222%; }
+    .scene-layer[data-style="pixel_art"][data-scene="pinball"] .pinball-flipper-right { transform-origin: 86.667% 82.222%; }
 
     .watch-screen.motion-on:not(.ambient) .scene-layer .scene-motion {
       animation: var(--actor-animation) var(--actor-duration) var(--actor-easing) infinite;
@@ -323,6 +341,11 @@
       box-shadow: none;
     }
     .watch-screen[data-style="woodblock"] .complication { color: #fff4e8; }
+
+    .watch-screen:is([data-style="bioluminescent"], [data-style="pixel_art"]) :is(.day-chip, .complication) {
+      background: linear-gradient(rgba(7, 16, 34, .722), rgba(7, 16, 34, .6));
+      box-shadow: none;
+    }
 
     .watch-screen.motion-on:not(.ambient) .scene-layer[data-scene="coding"] .scene-cursor {
       animation: cursor-blink 1.2s steps(2, end) infinite;
@@ -481,6 +504,1088 @@
     .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="risograph"][data-scene="coding"] .scene-drift {
       animation: coding-cursor 1.6s ease-in-out infinite, cursor-blink 1s steps(2, end) infinite;
     }
+
+    /* These packs use the same movement paths as their WFF layers. */
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-choreography="shared"]:is([data-scene="forest"], [data-scene="landscape"], [data-scene="aurora"]) .scene-motion {
+      animation: pack-y12 6s linear infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-choreography="shared"][data-scene="coding"] .scene-motion {
+      animation: pack-y10 6s linear infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-choreography="shared"][data-scene="coding"] .scene-drift {
+      animation: pack-y10 6s linear infinite, pack-blink 1s steps(1, end) infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-choreography="shared"][data-scene="kitten"] .scene-motion-wrap {
+      animation: pack-x18 6s linear infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-choreography="shared"][data-scene="kitten"] .scene-motion {
+      animation: pack-y8 3s linear infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-choreography="shared"][data-scene="bicycle"] .scene-drift,
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-choreography="shared"][data-scene="landscape"] .scene-drift {
+      animation: pack-orbit-15 10s linear infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-choreography="shared"][data-scene="forest"] .scene-drift {
+      animation: pack-orbit-20 10s linear infinite, pack-pulse 1s linear infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-choreography="shared"][data-scene="cosmos"] .scene-drift {
+      animation: cosmos-flight 10s linear infinite, pack-pulse 1s linear infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-choreography="shared"][data-scene="ocean"] .scene-motion {
+      animation: pack-x25 6s linear infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-choreography="shared"][data-scene="ocean"] .scene-drift {
+      animation: pack-y12 6s linear infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-choreography="shared"][data-scene="aurora"] .scene-drift {
+      animation: pack-x20 10s linear infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="pixel_art"][data-scene="velodrome"] .scene-motion {
+      animation: pixel-velodrome 10s linear infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="pixel_art"][data-scene="laundry_kitten"] .scene-motion {
+      animation: pixel-laundry-kitten 3s linear infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="pixel_art"][data-scene="ramen"] .scene-motion {
+      animation: none;
+    }
+    /* PINBALL_MOTION_CSS_START */
+.scene-layer[data-style="pixel_art"][data-scene="pinball"] { --pinball-duration: 10s; }
+.watch-screen.motion-on:not(.ambient) .scene-layer[data-style="pixel_art"][data-scene="pinball"] .scene-motion { animation: pixel-pinball-ball var(--pinball-duration) linear infinite; }
+.watch-screen.motion-on:not(.ambient) .scene-layer[data-style="pixel_art"][data-scene="pinball"] .pinball-flipper-left { animation: pixel-pinball-left var(--pinball-duration) linear infinite; }
+.watch-screen.motion-on:not(.ambient) .scene-layer[data-style="pixel_art"][data-scene="pinball"] .pinball-flipper-right { animation: pixel-pinball-right var(--pinball-duration) linear infinite; }
+.watch-screen.motion-on:not(.ambient) .scene-layer[data-style="pixel_art"][data-scene="pinball"] .scene-drift { animation: pixel-pinball-impact var(--pinball-duration) linear infinite; }
+@keyframes pixel-pinball-ball {
+  0% { transform: translate3d(0cqw, 0cqw, 0); }
+  0.5% { transform: translate3d(-0.775111cqw, -6.486889cqw, 0); }
+  1% { transform: translate3d(-1.549778cqw, -12.706444cqw, 0); }
+  1.5% { transform: translate3d(-2.324444cqw, -18.659556cqw, 0); }
+  2% { transform: translate3d(-3.099333cqw, -24.345556cqw, 0); }
+  2.5% { transform: translate3d(-3.873556cqw, -29.764667cqw, 0); }
+  3% { transform: translate3d(-4.647778cqw, -34.916889cqw, 0); }
+  3.5% { transform: translate3d(-5.421778cqw, -39.802444cqw, 0); }
+  4% { transform: translate3d(-6.195556cqw, -44.420889cqw, 0); }
+  4.5% { transform: translate3d(-6.969111cqw, -48.772667cqw, 0); }
+  5% { transform: translate3d(-7.742889cqw, -52.857333cqw, 0); }
+  5.5% { transform: translate3d(-8.516222cqw, -56.675333cqw, 0); }
+  6% { transform: translate3d(-9.289333cqw, -60.226444cqw, 0); }
+  6.5% { transform: translate3d(-10.062444cqw, -63.510667cqw, 0); }
+  7% { transform: translate3d(-10.835111cqw, -66.528cqw, 0); }
+  7.458% { transform: translate3d(-11.539556cqw, -69.044889cqw, 0); } /* pinball event: rail t=0.7458s source=(173.072,39.298) */
+  7.5% { transform: translate3d(-11.484667cqw, -68.838cqw, 0); }
+  8% { transform: translate3d(-10.826667cqw, -66.210889cqw, 0); }
+  8.5% { transform: translate3d(-10.168444cqw, -63.316667cqw, 0); }
+  9% { transform: translate3d(-9.51cqw, -60.156222cqw, 0); }
+  9.5% { transform: translate3d(-8.851333cqw, -56.728444cqw, 0); }
+  10% { transform: translate3d(-8.192667cqw, -53.033778cqw, 0); }
+  10.5% { transform: translate3d(-7.533778cqw, -49.072444cqw, 0); }
+  11% { transform: translate3d(-6.874889cqw, -44.844222cqw, 0); }
+  11.5% { transform: translate3d(-6.215778cqw, -40.349111cqw, 0); }
+  12% { transform: translate3d(-5.556667cqw, -35.587333cqw, 0); }
+  12.5% { transform: translate3d(-4.897111cqw, -30.558444cqw, 0); }
+  13% { transform: translate3d(-4.237556cqw, -25.262889cqw, 0); }
+  13.5% { transform: translate3d(-3.578cqw, -19.700444cqw, 0); }
+  14% { transform: translate3d(-2.918222cqw, -13.871333cqw, 0); }
+  14.5% { transform: translate3d(-2.258222cqw, -7.775111cqw, 0); }
+  15% { transform: translate3d(-1.598cqw, -1.412222cqw, 0); }
+  15.5% { transform: translate3d(-0.938cqw, 5.217333cqw, 0); }
+  16% { transform: translate3d(-0.277778cqw, 12.114cqw, 0); }
+  16.25% { transform: translate3d(0.052889cqw, 15.204cqw, 0); } /* pinball event: rail t=1.625s source=(225.238,418.418) */
+  16.5% { transform: translate3d(0.388222cqw, 11.959111cqw, 0); }
+  17% { transform: translate3d(1.058667cqw, 5.669556cqw, 0); }
+  17.5% { transform: translate3d(1.729778cqw, -0.353333cqw, 0); }
+  18% { transform: translate3d(2.400667cqw, -6.109333cqw, 0); }
+  18.5% { transform: translate3d(3.071556cqw, -11.598444cqw, 0); }
+  19% { transform: translate3d(3.742889cqw, -16.820889cqw, 0); }
+  19.5% { transform: translate3d(4.414222cqw, -21.776444cqw, 0); }
+  20% { transform: translate3d(5.085556cqw, -26.465333cqw, 0); }
+  20.5% { transform: translate3d(5.757111cqw, -30.887333cqw, 0); }
+  21% { transform: translate3d(6.428667cqw, -35.042444cqw, 0); }
+  21.5% { transform: translate3d(7.100222cqw, -38.930889cqw, 0); }
+  22% { transform: translate3d(7.772222cqw, -42.552667cqw, 0); }
+  22.5% { transform: translate3d(8.444222cqw, -45.907333cqw, 0); }
+  23% { transform: translate3d(9.116cqw, -48.995333cqw, 0); }
+  23.5% { transform: translate3d(9.788222cqw, -51.816667cqw, 0); }
+  24% { transform: translate3d(10.460667cqw, -54.371111cqw, 0); }
+  24.5% { transform: translate3d(11.132667cqw, -56.658667cqw, 0); }
+  25% { transform: translate3d(11.805111cqw, -58.679556cqw, 0); }
+  25.5% { transform: translate3d(12.477778cqw, -60.433778cqw, 0); }
+  26% { transform: translate3d(13.150222cqw, -61.921111cqw, 0); }
+  26.333% { transform: translate3d(13.544222cqw, -62.750444cqw, 0); } /* pinball event: bumper_3 t=2.6333s source=(285.949,67.623) */
+  26.5% { transform: translate3d(13.153778cqw, -62.969333cqw, 0); }
+  27% { transform: translate3d(11.982222cqw, -63.448667cqw, 0); }
+  27.5% { transform: translate3d(10.810889cqw, -63.661111cqw, 0); }
+  28% { transform: translate3d(9.639556cqw, -63.606889cqw, 0); }
+  28.5% { transform: translate3d(8.468444cqw, -63.285778cqw, 0); }
+  29% { transform: translate3d(7.297111cqw, -62.697778cqw, 0); }
+  29.5% { transform: translate3d(6.126222cqw, -61.843333cqw, 0); }
+  30% { transform: translate3d(4.955111cqw, -60.721778cqw, 0); }
+  30.5% { transform: translate3d(3.784444cqw, -59.333778cqw, 0); }
+  31% { transform: translate3d(2.613333cqw, -57.678889cqw, 0); }
+  31.5% { transform: translate3d(1.442667cqw, -55.757333cqw, 0); }
+  32% { transform: translate3d(0.272cqw, -53.568889cqw, 0); }
+  32.5% { transform: translate3d(-0.898667cqw, -51.113778cqw, 0); }
+  33% { transform: translate3d(-2.069333cqw, -48.392cqw, 0); }
+  33.5% { transform: translate3d(-3.239778cqw, -45.403333cqw, 0); }
+  34% { transform: translate3d(-4.410222cqw, -42.148cqw, 0); }
+  34.5% { transform: translate3d(-5.580667cqw, -38.626cqw, 0); }
+  35% { transform: translate3d(-6.751111cqw, -34.837111cqw, 0); }
+  35.5% { transform: translate3d(-7.921333cqw, -30.781556cqw, 0); }
+  36% { transform: translate3d(-9.091556cqw, -26.459333cqw, 0); }
+  36.5% { transform: translate3d(-10.261778cqw, -21.870444cqw, 0); }
+  37% { transform: translate3d(-11.432cqw, -17.014444cqw, 0); }
+  37.5% { transform: translate3d(-12.602cqw, -11.892cqw, 0); }
+  38% { transform: translate3d(-13.772cqw, -6.502889cqw, 0); }
+  38.5% { transform: translate3d(-14.942cqw, -0.846889cqw, 0); }
+  38.875% { transform: translate3d(-15.779111cqw, 3.161333cqw, 0); } /* pinball event: left_flipper t=3.8875s source=(153.994,364.226) */
+  39% { transform: translate3d(-15.400222cqw, -2.109333cqw, 0); }
+  39.5% { transform: translate3d(-13.884444cqw, -23.026cqw, 0); }
+  40% { transform: translate3d(-12.368667cqw, -43.675778cqw, 0); }
+  40.5% { transform: translate3d(-10.852667cqw, -64.058667cqw, 0); }
+  40.625% { transform: translate3d(-10.376667cqw, -68.738889cqw, 0); } /* pinball event: rail t=4.0625s source=(178.305,40.675) */
+  41% { transform: translate3d(-2.279778cqw, -57.084667cqw, 0); }
+  41.5% { transform: translate3d(8.515556cqw, -41.312444cqw, 0); }
+  42% { transform: translate3d(19.311111cqw, -25.273333cqw, 0); }
+  42.5% { transform: translate3d(30.106889cqw, -8.967556cqw, 0); }
+  42.75% { transform: translate3d(34.673333cqw, -1.342889cqw, 0); } /* pinball event: rail t=4.275s source=(381.03,343.957) */
+  43% { transform: translate3d(25.838444cqw, -3.782889cqw, 0); }
+  43.5% { transform: translate3d(8.168889cqw, -8.463333cqw, 0); }
+  44% { transform: translate3d(-9.500889cqw, -12.876667cqw, 0); }
+  44.5% { transform: translate3d(-27.170444cqw, -17.023556cqw, 0); }
+  44.917% { transform: translate3d(-41.816667cqw, -20.288222cqw, 0); } /* pinball event: rail t=4.4917s source=(36.825,258.703) */
+  45% { transform: translate3d(-39.442222cqw, -21.778889cqw, 0); }
+  45.5% { transform: translate3d(-25.196222cqw, -30.569111cqw, 0); }
+  46% { transform: translate3d(-10.950444cqw, -39.092667cqw, 0); }
+  46.5% { transform: translate3d(3.295556cqw, -47.349556cqw, 0); }
+  47% { transform: translate3d(17.541333cqw, -55.339778cqw, 0); }
+  47.125% { transform: translate3d(21.092444cqw, -56.650222cqw, 0); } /* pinball event: bumper_3 t=4.7125s source=(319.916,95.074) */
+  47.5% { transform: translate3d(31.581556cqw, -50.238889cqw, 0); }
+  47.792% { transform: translate3d(39.499778cqw, -45.038222cqw, 0); } /* pinball event: rail t=4.7792s source=(402.749,147.328) */
+  48% { transform: translate3d(38.775778cqw, -38.327556cqw, 0); }
+  48.5% { transform: translate3d(37.038222cqw, -22.032222cqw, 0); }
+  49% { transform: translate3d(35.300667cqw, -5.470444cqw, 0); }
+  49.125% { transform: translate3d(34.856667cqw, -1.295556cqw, 0); } /* pinball event: rail t=4.9125s source=(381.855,344.17) */
+  49.5% { transform: translate3d(23.582444cqw, 3.854889cqw, 0); }
+  50% { transform: translate3d(8.55cqw, 10.955778cqw, 0); }
+  50.333% { transform: translate3d(-1.469333cqw, 15.793556cqw, 0); } /* pinball event: rail t=5.0333s source=(218.388,421.071) */
+  50.5% { transform: translate3d(-6.228889cqw, 13.095556cqw, 0); }
+  50.667% { transform: translate3d(-10.592667cqw, 10.497778cqw, 0); } /* pinball event: left_flipper t=5.0667s source=(177.333,397.24) */
+  51% { transform: translate3d(-0.103111cqw, 8.818444cqw, 0); }
+  51.5% { transform: translate3d(15.631333cqw, 6.521778cqw, 0); }
+  51.875% { transform: translate3d(27.37cqw, 4.804222cqw, 0); } /* pinball event: right_flipper t=5.1875s source=(348.165,371.619) */
+  52% { transform: translate3d(30.720889cqw, 2.720889cqw, 0); }
+  52.083% { transform: translate3d(32.876667cqw, 1.272444cqw, 0); } /* pinball event: rail t=5.2083s source=(372.945,355.726) */
+  52.5% { transform: translate3d(38.495111cqw, -10.382cqw, 0); }
+  53% { transform: translate3d(42.442667cqw, -24.611556cqw, 0); }
+  53.5% { transform: translate3d(41.111778cqw, -39.498222cqw, 0); }
+  53.583% { transform: translate3d(40.841778cqw, -41.935333cqw, 0); } /* pinball event: rail t=5.3583s source=(408.788,161.291) */
+  54% { transform: translate3d(33.902667cqw, -51.927333cqw, 0); }
+  54.375% { transform: translate3d(27.711111cqw, -59.967778cqw, 0); } /* pinball event: bumper_3 t=5.4375s source=(349.7,80.145) */
+  54.5% { transform: translate3d(30.563778cqw, -57.678444cqw, 0); }
+  54.542% { transform: translate3d(31.427333cqw, -56.826667cqw, 0); } /* pinball event: rail t=5.4542s source=(366.423,94.28) */
+  55% { transform: translate3d(38.963778cqw, -45.709778cqw, 0); }
+  55.5% { transform: translate3d(42.899111cqw, -31.460444cqw, 0); }
+  55.75% { transform: translate3d(43.475111cqw, -23.925111cqw, 0); } /* pinball event: rail t=5.575s source=(420.638,242.337) */
+  56% { transform: translate3d(41.930444cqw, -16.471333cqw, 0); }
+  56.5% { transform: translate3d(35.685778cqw, -2.575778cqw, 0); }
+  56.583% { transform: translate3d(34.386889cqw, -0.348222cqw, 0); } /* pinball event: rail t=5.6583s source=(379.741,348.433) */
+  56.792% { transform: translate3d(29.630222cqw, 3.896667cqw, 0); } /* pinball event: right_flipper t=5.6792s source=(358.336,367.535) */
+  57% { transform: translate3d(22.943556cqw, 2.330222cqw, 0); }
+  57.5% { transform: translate3d(6.895111cqw, -1.240222cqw, 0); }
+  58% { transform: translate3d(-9.153111cqw, -4.544cqw, 0); }
+  58.5% { transform: translate3d(-25.201333cqw, -7.581333cqw, 0); }
+  58.958% { transform: translate3d(-38.901111cqw, -10.546889cqw, 0); } /* pinball event: rail t=5.8958s source=(49.945,302.539) */
+  59% { transform: translate3d(-38.191333cqw, -11.608889cqw, 0); }
+  59.5% { transform: translate3d(-29.674889cqw, -24.208444cqw, 0); }
+  60% { transform: translate3d(-21.158222cqw, -36.541111cqw, 0); }
+  60.5% { transform: translate3d(-12.641556cqw, -48.607111cqw, 0); }
+  61% { transform: translate3d(-4.125111cqw, -60.406667cqw, 0); }
+  61.167% { transform: translate3d(-1.657778cqw, -63.196667cqw, 0); } /* pinball event: bumper_2 t=6.1167s source=(217.54,65.615) */
+  61.5% { transform: translate3d(-1.978222cqw, -53.363778cqw, 0); }
+  62% { transform: translate3d(-2.458667cqw, -38.392222cqw, 0); }
+  62.5% { transform: translate3d(-2.939111cqw, -23.154cqw, 0); }
+  63% { transform: translate3d(-3.419556cqw, -7.649333cqw, 0); }
+  63.5% { transform: translate3d(-3.899778cqw, 8.122444cqw, 0); }
+  63.75% { transform: translate3d(-4.109778cqw, 15.846cqw, 0); } /* pinball event: rail t=6.375s source=(206.506,421.307) */
+  64% { transform: translate3d(-2.580667cqw, 8.673333cqw, 0); }
+  64.5% { transform: translate3d(0.477333cqw, -5.472cqw, 0); }
+  65% { transform: translate3d(3.535333cqw, -19.350667cqw, 0); }
+  65.5% { transform: translate3d(6.593333cqw, -32.962667cqw, 0); }
+  66% { transform: translate3d(9.651111cqw, -46.308222cqw, 0); }
+  66.5% { transform: translate3d(12.708889cqw, -59.387111cqw, 0); }
+  66.833% { transform: translate3d(14.537111cqw, -67.331556cqw, 0); } /* pinball event: rail t=6.6833s source=(290.417,47.008) */
+  67% { transform: translate3d(12.889111cqw, -63.628cqw, 0); }
+  67.5% { transform: translate3d(7.944889cqw, -52.339778cqw, 0); }
+  68% { transform: translate3d(3.000667cqw, -40.785111cqw, 0); }
+  68.5% { transform: translate3d(-1.943778cqw, -28.964cqw, 0); }
+  69% { transform: translate3d(-6.888cqw, -16.876cqw, 0); }
+  69.5% { transform: translate3d(-11.832667cqw, -4.521556cqw, 0); }
+  70% { transform: translate3d(-16.777111cqw, 8.099556cqw, 0); }
+  70.042% { transform: translate3d(-16.916667cqw, 8.414444cqw, 0); } /* pinball event: left_flipper t=7.0042s source=(148.875,387.865) */
+  70.5% { transform: translate3d(-13.128222cqw, -2.623333cqw, 0); }
+  71% { transform: translate3d(-8.995556cqw, -14.408889cqw, 0); }
+  71.5% { transform: translate3d(-4.862889cqw, -25.928cqw, 0); }
+  72% { transform: translate3d(-0.730444cqw, -37.180444cqw, 0); }
+  72.5% { transform: translate3d(3.402cqw, -48.166222cqw, 0); }
+  73% { transform: translate3d(7.534222cqw, -58.885778cqw, 0); }
+  73.458% { transform: translate3d(11.252cqw, -68.192667cqw, 0); } /* pinball event: rail t=7.3458s source=(275.634,43.133) */
+  73.5% { transform: translate3d(11.173333cqw, -67.337333cqw, 0); }
+  74% { transform: translate3d(10.228667cqw, -56.928444cqw, 0); }
+  74.5% { transform: translate3d(9.284cqw, -46.253333cqw, 0); }
+  75% { transform: translate3d(8.339333cqw, -35.311556cqw, 0); }
+  75.5% { transform: translate3d(7.394444cqw, -24.103111cqw, 0); }
+  76% { transform: translate3d(6.449333cqw, -12.628222cqw, 0); }
+  76.5% { transform: translate3d(5.504444cqw, -0.886667cqw, 0); }
+  77% { transform: translate3d(4.559333cqw, 11.121111cqw, 0); }
+  77.25% { transform: translate3d(4.020667cqw, 16.275111cqw, 0); } /* pinball event: rail t=7.725s source=(243.093,423.238) */
+  77.5% { transform: translate3d(2.736444cqw, 10.800444cqw, 0); }
+  78% { transform: translate3d(0.168444cqw, 0.051111cqw, 0); }
+  78.5% { transform: translate3d(-2.399778cqw, -10.431778cqw, 0); }
+  79% { transform: translate3d(-4.968cqw, -20.648222cqw, 0); }
+  79.5% { transform: translate3d(-7.536667cqw, -30.598cqw, 0); }
+  80% { transform: translate3d(-10.105333cqw, -40.281333cqw, 0); }
+  80.5% { transform: translate3d(-12.673778cqw, -49.698222cqw, 0); }
+  81% { transform: translate3d(-15.224667cqw, -58.834cqw, 0); } /* pinball event: bumper_1 t=8.1s source=(156.489,85.247) */
+  81.5% { transform: translate3d(-5.718889cqw, -58.076667cqw, 0); }
+  82% { transform: translate3d(3.786667cqw, -57.052667cqw, 0); }
+  82.5% { transform: translate3d(13.291778cqw, -55.762222cqw, 0); }
+  83% { transform: translate3d(22.797333cqw, -54.205111cqw, 0); }
+  83.5% { transform: translate3d(32.302222cqw, -52.381556cqw, 0); }
+  83.708% { transform: translate3d(35.991556cqw, -51.349111cqw, 0); } /* pinball event: rail t=8.3708s source=(386.962,118.929) */
+  84% { transform: translate3d(35.582222cqw, -45.840444cqw, 0); }
+  84.5% { transform: translate3d(34.880889cqw, -36.185778cqw, 0); }
+  85% { transform: translate3d(34.179111cqw, -26.264667cqw, 0); }
+  85.5% { transform: translate3d(33.477333cqw, -16.077111cqw, 0); }
+  86% { transform: translate3d(32.775556cqw, -5.622667cqw, 0); }
+  86.375% { transform: translate3d(32.319556cqw, 1.569111cqw, 0); } /* pinball event: right_flipper t=8.6375s source=(370.438,357.061) */
+  86.5% { transform: translate3d(32.693111cqw, -2.12cqw, 0); }
+  87% { transform: translate3d(34.186444cqw, -16.709333cqw, 0); }
+  87.5% { transform: translate3d(35.679778cqw, -31.032222cqw, 0); }
+  88% { transform: translate3d(37.173111cqw, -45.088667cqw, 0); }
+  88.167% { transform: translate3d(37.274889cqw, -49.461778cqw, 0); } /* pinball event: rail t=8.8167s source=(392.737,127.422) */
+  88.5% { transform: translate3d(28.871111cqw, -52.614889cqw, 0); }
+  89% { transform: translate3d(16.264889cqw, -57.122222cqw, 0); }
+  89.5% { transform: translate3d(3.658667cqw, -61.363333cqw, 0); }
+  89.625% { transform: translate3d(0.505778cqw, -62.366444cqw, 0); } /* pinball event: bumper_2 t=8.9625s source=(227.276,69.351) */
+  90% { transform: translate3d(-9.336444cqw, -60.874cqw, 0); }
+  90.208% { transform: translate3d(-14.442889cqw, -59.779111cqw, 0); } /* pinball event: bumper_1 t=9.0208s source=(160.007,80.994) */
+  90.5% { transform: translate3d(-11.376222cqw, -52.489778cqw, 0); }
+  91% { transform: translate3d(-6.119111cqw, -39.782444cqw, 0); }
+  91.5% { transform: translate3d(-0.862222cqw, -26.808889cqw, 0); }
+  92% { transform: translate3d(4.394444cqw, -13.568667cqw, 0); }
+  92.5% { transform: translate3d(9.651111cqw, -0.062cqw, 0); }
+  92.917% { transform: translate3d(13.884222cqw, 11.291778cqw, 0); } /* pinball event: right_flipper t=9.2917s source=(287.479,400.813) */
+  93% { transform: translate3d(11.517556cqw, 11.285556cqw, 0); }
+  93.5% { transform: translate3d(-2.680667cqw, 11.403556cqw, 0); }
+  93.833% { transform: translate3d(-11.587333cqw, 11.203556cqw, 0); } /* pinball event: left_flipper t=9.3833s source=(172.857,400.416) */
+  94% { transform: translate3d(-10.386cqw, 6.834cqw, 0); }
+  94.5% { transform: translate3d(-6.782cqw, -6.096667cqw, 0); }
+  95% { transform: translate3d(-3.178222cqw, -18.760889cqw, 0); }
+  95.5% { transform: translate3d(0.425333cqw, -31.158444cqw, 0); }
+  96% { transform: translate3d(4.029111cqw, -43.289778cqw, 0); }
+  96.5% { transform: translate3d(7.632444cqw, -55.154667cqw, 0); }
+  97% { transform: translate3d(11.235556cqw, -66.753111cqw, 0); }
+  97.083% { transform: translate3d(11.643556cqw, -67.894cqw, 0); } /* pinball event: rail t=9.7083s source=(277.396,44.477) */
+  97.5% { transform: translate3d(9.980444cqw, -58.749778cqw, 0); }
+  98% { transform: translate3d(7.984889cqw, -47.532889cqw, 0); }
+  98.5% { transform: translate3d(5.988667cqw, -36.049111cqw, 0); }
+  99% { transform: translate3d(3.992667cqw, -24.299333cqw, 0); }
+  99.5% { transform: translate3d(1.996667cqw, -12.282667cqw, 0); }
+  100% { transform: translate3d(0cqw, 0cqw, 0); }
+}
+@keyframes pixel-pinball-left {
+  0% { transform: rotate(0deg); }
+  0.5% { transform: rotate(0deg); }
+  1% { transform: rotate(0deg); }
+  1.5% { transform: rotate(0deg); }
+  2% { transform: rotate(0deg); }
+  2.5% { transform: rotate(0deg); }
+  3% { transform: rotate(0deg); }
+  3.5% { transform: rotate(0deg); }
+  4% { transform: rotate(0deg); }
+  4.5% { transform: rotate(0deg); }
+  5% { transform: rotate(0deg); }
+  5.5% { transform: rotate(0deg); }
+  6% { transform: rotate(0deg); }
+  6.5% { transform: rotate(0deg); }
+  7% { transform: rotate(0deg); }
+  7.458% { transform: rotate(0deg); } /* pinball event: rail t=0.7458s source=(173.072,39.298) */
+  7.5% { transform: rotate(0deg); }
+  8% { transform: rotate(0deg); }
+  8.5% { transform: rotate(0deg); }
+  9% { transform: rotate(0deg); }
+  9.5% { transform: rotate(0deg); }
+  10% { transform: rotate(0deg); }
+  10.5% { transform: rotate(0deg); }
+  11% { transform: rotate(0deg); }
+  11.5% { transform: rotate(0deg); }
+  12% { transform: rotate(0deg); }
+  12.5% { transform: rotate(0deg); }
+  13% { transform: rotate(0deg); }
+  13.5% { transform: rotate(0deg); }
+  14% { transform: rotate(0deg); }
+  14.5% { transform: rotate(0deg); }
+  15% { transform: rotate(0deg); }
+  15.5% { transform: rotate(-0.475deg); }
+  16% { transform: rotate(-16.993deg); }
+  16.25% { transform: rotate(-28.0875deg); } /* pinball event: rail t=1.625s source=(225.238,418.418) */
+  16.5% { transform: rotate(-39.182deg); }
+  17% { transform: rotate(-45deg); }
+  17.5% { transform: rotate(-45deg); }
+  18% { transform: rotate(-40.645deg); }
+  18.5% { transform: rotate(-26.373deg); }
+  19% { transform: rotate(-10.156deg); }
+  19.5% { transform: rotate(-0.431deg); }
+  20% { transform: rotate(0deg); }
+  20.5% { transform: rotate(0deg); }
+  21% { transform: rotate(0deg); }
+  21.5% { transform: rotate(0deg); }
+  22% { transform: rotate(0deg); }
+  22.5% { transform: rotate(0deg); }
+  23% { transform: rotate(0deg); }
+  23.5% { transform: rotate(0deg); }
+  24% { transform: rotate(0deg); }
+  24.5% { transform: rotate(0deg); }
+  25% { transform: rotate(0deg); }
+  25.5% { transform: rotate(0deg); }
+  26% { transform: rotate(0deg); }
+  26.333% { transform: rotate(0deg); } /* pinball event: bumper_3 t=2.6333s source=(285.949,67.623) */
+  26.5% { transform: rotate(0deg); }
+  27% { transform: rotate(0deg); }
+  27.5% { transform: rotate(0deg); }
+  28% { transform: rotate(0deg); }
+  28.5% { transform: rotate(0deg); }
+  29% { transform: rotate(0deg); }
+  29.5% { transform: rotate(0deg); }
+  30% { transform: rotate(0deg); }
+  30.5% { transform: rotate(0deg); }
+  31% { transform: rotate(0deg); }
+  31.5% { transform: rotate(0deg); }
+  32% { transform: rotate(0deg); }
+  32.5% { transform: rotate(0deg); }
+  33% { transform: rotate(0deg); }
+  33.5% { transform: rotate(0deg); }
+  34% { transform: rotate(0deg); }
+  34.5% { transform: rotate(0deg); }
+  35% { transform: rotate(0deg); }
+  35.5% { transform: rotate(0deg); }
+  36% { transform: rotate(0deg); }
+  36.5% { transform: rotate(0deg); }
+  37% { transform: rotate(0deg); }
+  37.5% { transform: rotate(0deg); }
+  38% { transform: rotate(0deg); }
+  38.5% { transform: rotate(-1.481deg); }
+  38.875% { transform: rotate(-15.5225deg); } /* pinball event: left_flipper t=3.8875s source=(153.994,364.226) */
+  39% { transform: rotate(-20.203deg); }
+  39.5% { transform: rotate(-41.272deg); }
+  40% { transform: rotate(-45deg); }
+  40.5% { transform: rotate(-45deg); }
+  40.625% { transform: rotate(-43.53425deg); } /* pinball event: rail t=4.0625s source=(178.305,40.675) */
+  41% { transform: rotate(-39.137deg); }
+  41.5% { transform: rotate(-24.109deg); }
+  42% { transform: rotate(-8.276deg); }
+  42.5% { transform: rotate(-0.076deg); }
+  42.75% { transform: rotate(-0.038deg); } /* pinball event: rail t=4.275s source=(381.03,343.957) */
+  43% { transform: rotate(0deg); }
+  43.5% { transform: rotate(0deg); }
+  44% { transform: rotate(0deg); }
+  44.5% { transform: rotate(0deg); }
+  44.917% { transform: rotate(0deg); } /* pinball event: rail t=4.4917s source=(36.825,258.703) */
+  45% { transform: rotate(0deg); }
+  45.5% { transform: rotate(0deg); }
+  46% { transform: rotate(0deg); }
+  46.5% { transform: rotate(0deg); }
+  47% { transform: rotate(0deg); }
+  47.125% { transform: rotate(0deg); } /* pinball event: bumper_3 t=4.7125s source=(319.916,95.074) */
+  47.5% { transform: rotate(0deg); }
+  47.792% { transform: rotate(0deg); } /* pinball event: rail t=4.7792s source=(402.749,147.328) */
+  48% { transform: rotate(0deg); }
+  48.5% { transform: rotate(0deg); }
+  49% { transform: rotate(0deg); }
+  49.125% { transform: rotate(0deg); } /* pinball event: rail t=4.9125s source=(381.855,344.17) */
+  49.5% { transform: rotate(0deg); }
+  50% { transform: rotate(0deg); }
+  50.333% { transform: rotate(-1.793538deg); } /* pinball event: rail t=5.0333s source=(218.388,421.071) */
+  50.5% { transform: rotate(-2.693deg); }
+  50.667% { transform: rotate(-9.442806deg); } /* pinball event: left_flipper t=5.0667s source=(177.333,397.24) */
+  51% { transform: rotate(-22.902deg); }
+  51.5% { transform: rotate(-42.701deg); }
+  51.875% { transform: rotate(-44.42525deg); } /* pinball event: right_flipper t=5.1875s source=(348.165,371.619) */
+  52% { transform: rotate(-45deg); }
+  52.083% { transform: rotate(-44.999668deg); } /* pinball event: rail t=5.2083s source=(372.945,355.726) */
+  52.5% { transform: rotate(-44.998deg); }
+  53% { transform: rotate(-37.757deg); }
+  53.5% { transform: rotate(-22.219deg); }
+  53.583% { transform: rotate(-19.662932deg); } /* pinball event: rail t=5.3583s source=(408.788,161.291) */
+  54% { transform: rotate(-6.821deg); }
+  54.375% { transform: rotate(-1.70525deg); } /* pinball event: bumper_3 t=5.4375s source=(349.7,80.145) */
+  54.5% { transform: rotate(0deg); }
+  54.542% { transform: rotate(0deg); } /* pinball event: rail t=5.4542s source=(366.423,94.28) */
+  55% { transform: rotate(0deg); }
+  55.5% { transform: rotate(0deg); }
+  55.75% { transform: rotate(0deg); } /* pinball event: rail t=5.575s source=(420.638,242.337) */
+  56% { transform: rotate(0deg); }
+  56.5% { transform: rotate(0deg); }
+  56.583% { transform: rotate(0deg); } /* pinball event: rail t=5.6583s source=(379.741,348.433) */
+  56.792% { transform: rotate(0deg); } /* pinball event: right_flipper t=5.6792s source=(358.336,367.535) */
+  57% { transform: rotate(0deg); }
+  57.5% { transform: rotate(0deg); }
+  58% { transform: rotate(0deg); }
+  58.5% { transform: rotate(0deg); }
+  58.958% { transform: rotate(0deg); } /* pinball event: rail t=5.8958s source=(49.945,302.539) */
+  59% { transform: rotate(0deg); }
+  59.5% { transform: rotate(0deg); }
+  60% { transform: rotate(0deg); }
+  60.5% { transform: rotate(0deg); }
+  61% { transform: rotate(0deg); }
+  61.167% { transform: rotate(0deg); } /* pinball event: bumper_2 t=6.1167s source=(217.54,65.615) */
+  61.5% { transform: rotate(0deg); }
+  62% { transform: rotate(0deg); }
+  62.5% { transform: rotate(0deg); }
+  63% { transform: rotate(-1.012deg); }
+  63.5% { transform: rotate(-18.898deg); }
+  63.75% { transform: rotate(-29.6855deg); } /* pinball event: rail t=6.375s source=(206.506,421.307) */
+  64% { transform: rotate(-40.473deg); }
+  64.5% { transform: rotate(-45deg); }
+  65% { transform: rotate(-45deg); }
+  65.5% { transform: rotate(-39.768deg); }
+  66% { transform: rotate(-25.027deg); }
+  66.5% { transform: rotate(-9.02deg); }
+  66.833% { transform: rotate(-3.13589deg); } /* pinball event: rail t=6.6833s source=(290.417,47.008) */
+  67% { transform: rotate(-0.185deg); }
+  67.5% { transform: rotate(0deg); }
+  68% { transform: rotate(0deg); }
+  68.5% { transform: rotate(0deg); }
+  69% { transform: rotate(0deg); }
+  69.5% { transform: rotate(0deg); }
+  70% { transform: rotate(0deg); }
+  70.042% { transform: rotate(0deg); } /* pinball event: left_flipper t=7.0042s source=(148.875,387.865) */
+  70.5% { transform: rotate(0deg); }
+  71% { transform: rotate(0deg); }
+  71.5% { transform: rotate(0deg); }
+  72% { transform: rotate(0deg); }
+  72.5% { transform: rotate(0deg); }
+  73% { transform: rotate(0deg); }
+  73.458% { transform: rotate(0deg); } /* pinball event: rail t=7.3458s source=(275.634,43.133) */
+  73.5% { transform: rotate(0deg); }
+  74% { transform: rotate(0deg); }
+  74.5% { transform: rotate(0deg); }
+  75% { transform: rotate(0deg); }
+  75.5% { transform: rotate(0deg); }
+  76% { transform: rotate(0deg); }
+  76.5% { transform: rotate(0deg); }
+  77% { transform: rotate(0deg); }
+  77.25% { transform: rotate(0deg); } /* pinball event: rail t=7.725s source=(243.093,423.238) */
+  77.5% { transform: rotate(0deg); }
+  78% { transform: rotate(0deg); }
+  78.5% { transform: rotate(0deg); }
+  79% { transform: rotate(0deg); }
+  79.5% { transform: rotate(0deg); }
+  80% { transform: rotate(0deg); }
+  80.5% { transform: rotate(0deg); }
+  81% { transform: rotate(0deg); } /* pinball event: bumper_1 t=8.1s source=(156.489,85.247) */
+  81.5% { transform: rotate(0deg); }
+  82% { transform: rotate(0deg); }
+  82.5% { transform: rotate(0deg); }
+  83% { transform: rotate(0deg); }
+  83.5% { transform: rotate(0deg); }
+  83.708% { transform: rotate(0deg); } /* pinball event: rail t=8.3708s source=(386.962,118.929) */
+  84% { transform: rotate(0deg); }
+  84.5% { transform: rotate(0deg); }
+  85% { transform: rotate(0deg); }
+  85.5% { transform: rotate(0deg); }
+  86% { transform: rotate(0deg); }
+  86.375% { transform: rotate(0deg); } /* pinball event: right_flipper t=8.6375s source=(370.438,357.061) */
+  86.5% { transform: rotate(0deg); }
+  87% { transform: rotate(0deg); }
+  87.5% { transform: rotate(0deg); }
+  88% { transform: rotate(0deg); }
+  88.167% { transform: rotate(0deg); } /* pinball event: rail t=8.8167s source=(392.737,127.422) */
+  88.5% { transform: rotate(0deg); }
+  89% { transform: rotate(0deg); }
+  89.5% { transform: rotate(0deg); }
+  89.625% { transform: rotate(0deg); } /* pinball event: bumper_2 t=8.9625s source=(227.276,69.351) */
+  90% { transform: rotate(0deg); }
+  90.208% { transform: rotate(0deg); } /* pinball event: bumper_1 t=9.0208s source=(160.007,80.994) */
+  90.5% { transform: rotate(0deg); }
+  91% { transform: rotate(0deg); }
+  91.5% { transform: rotate(0deg); }
+  92% { transform: rotate(0deg); }
+  92.5% { transform: rotate(0deg); }
+  92.917% { transform: rotate(0deg); } /* pinball event: right_flipper t=9.2917s source=(287.479,400.813) */
+  93% { transform: rotate(0deg); }
+  93.5% { transform: rotate(0deg); }
+  93.833% { transform: rotate(0deg); } /* pinball event: left_flipper t=9.3833s source=(172.857,400.416) */
+  94% { transform: rotate(0deg); }
+  94.5% { transform: rotate(0deg); }
+  95% { transform: rotate(0deg); }
+  95.5% { transform: rotate(0deg); }
+  96% { transform: rotate(0deg); }
+  96.5% { transform: rotate(0deg); }
+  97% { transform: rotate(0deg); }
+  97.083% { transform: rotate(0deg); } /* pinball event: rail t=9.7083s source=(277.396,44.477) */
+  97.5% { transform: rotate(0deg); }
+  98% { transform: rotate(0deg); }
+  98.5% { transform: rotate(0deg); }
+  99% { transform: rotate(0deg); }
+  99.5% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+@keyframes pixel-pinball-right {
+  0% { transform: rotate(0deg); }
+  0.5% { transform: rotate(0deg); }
+  1% { transform: rotate(0deg); }
+  1.5% { transform: rotate(0deg); }
+  2% { transform: rotate(0deg); }
+  2.5% { transform: rotate(0deg); }
+  3% { transform: rotate(0deg); }
+  3.5% { transform: rotate(0deg); }
+  4% { transform: rotate(0deg); }
+  4.5% { transform: rotate(0deg); }
+  5% { transform: rotate(0deg); }
+  5.5% { transform: rotate(0deg); }
+  6% { transform: rotate(0deg); }
+  6.5% { transform: rotate(0deg); }
+  7% { transform: rotate(0deg); }
+  7.458% { transform: rotate(0deg); } /* pinball event: rail t=0.7458s source=(173.072,39.298) */
+  7.5% { transform: rotate(0deg); }
+  8% { transform: rotate(0deg); }
+  8.5% { transform: rotate(0deg); }
+  9% { transform: rotate(0deg); }
+  9.5% { transform: rotate(0deg); }
+  10% { transform: rotate(0deg); }
+  10.5% { transform: rotate(0deg); }
+  11% { transform: rotate(0deg); }
+  11.5% { transform: rotate(0deg); }
+  12% { transform: rotate(0deg); }
+  12.5% { transform: rotate(0deg); }
+  13% { transform: rotate(0deg); }
+  13.5% { transform: rotate(0deg); }
+  14% { transform: rotate(0deg); }
+  14.5% { transform: rotate(0deg); }
+  15% { transform: rotate(0deg); }
+  15.5% { transform: rotate(0deg); }
+  16% { transform: rotate(0deg); }
+  16.25% { transform: rotate(0deg); } /* pinball event: rail t=1.625s source=(225.238,418.418) */
+  16.5% { transform: rotate(0deg); }
+  17% { transform: rotate(0deg); }
+  17.5% { transform: rotate(0deg); }
+  18% { transform: rotate(0deg); }
+  18.5% { transform: rotate(0deg); }
+  19% { transform: rotate(0deg); }
+  19.5% { transform: rotate(0deg); }
+  20% { transform: rotate(0deg); }
+  20.5% { transform: rotate(0deg); }
+  21% { transform: rotate(0deg); }
+  21.5% { transform: rotate(0deg); }
+  22% { transform: rotate(0deg); }
+  22.5% { transform: rotate(0deg); }
+  23% { transform: rotate(0deg); }
+  23.5% { transform: rotate(0deg); }
+  24% { transform: rotate(0deg); }
+  24.5% { transform: rotate(0deg); }
+  25% { transform: rotate(0deg); }
+  25.5% { transform: rotate(0deg); }
+  26% { transform: rotate(0deg); }
+  26.333% { transform: rotate(0deg); } /* pinball event: bumper_3 t=2.6333s source=(285.949,67.623) */
+  26.5% { transform: rotate(0deg); }
+  27% { transform: rotate(0deg); }
+  27.5% { transform: rotate(0deg); }
+  28% { transform: rotate(0deg); }
+  28.5% { transform: rotate(0deg); }
+  29% { transform: rotate(0deg); }
+  29.5% { transform: rotate(0deg); }
+  30% { transform: rotate(0deg); }
+  30.5% { transform: rotate(0deg); }
+  31% { transform: rotate(0deg); }
+  31.5% { transform: rotate(0deg); }
+  32% { transform: rotate(0deg); }
+  32.5% { transform: rotate(0deg); }
+  33% { transform: rotate(0deg); }
+  33.5% { transform: rotate(0deg); }
+  34% { transform: rotate(0deg); }
+  34.5% { transform: rotate(0deg); }
+  35% { transform: rotate(0deg); }
+  35.5% { transform: rotate(0deg); }
+  36% { transform: rotate(0deg); }
+  36.5% { transform: rotate(0deg); }
+  37% { transform: rotate(0deg); }
+  37.5% { transform: rotate(0deg); }
+  38% { transform: rotate(0deg); }
+  38.5% { transform: rotate(0deg); }
+  38.875% { transform: rotate(0deg); } /* pinball event: left_flipper t=3.8875s source=(153.994,364.226) */
+  39% { transform: rotate(0deg); }
+  39.5% { transform: rotate(0deg); }
+  40% { transform: rotate(0deg); }
+  40.5% { transform: rotate(0deg); }
+  40.625% { transform: rotate(0deg); } /* pinball event: rail t=4.0625s source=(178.305,40.675) */
+  41% { transform: rotate(0deg); }
+  41.5% { transform: rotate(0deg); }
+  42% { transform: rotate(0deg); }
+  42.5% { transform: rotate(1.761deg); }
+  42.75% { transform: rotate(11.3275deg); } /* pinball event: rail t=4.275s source=(381.03,343.957) */
+  43% { transform: rotate(20.894deg); }
+  43.5% { transform: rotate(41.667deg); }
+  44% { transform: rotate(45deg); }
+  44.5% { transform: rotate(45deg); }
+  44.917% { transform: rotate(39.823362deg); } /* pinball event: rail t=4.4917s source=(36.825,258.703) */
+  45% { transform: rotate(38.793deg); }
+  45.5% { transform: rotate(23.625deg); }
+  46% { transform: rotate(7.893deg); }
+  46.5% { transform: rotate(0.037deg); }
+  47% { transform: rotate(0deg); }
+  47.125% { transform: rotate(0deg); } /* pinball event: bumper_3 t=4.7125s source=(319.916,95.074) */
+  47.5% { transform: rotate(0deg); }
+  47.792% { transform: rotate(0deg); } /* pinball event: rail t=4.7792s source=(402.749,147.328) */
+  48% { transform: rotate(0deg); }
+  48.5% { transform: rotate(0deg); }
+  49% { transform: rotate(0deg); }
+  49.125% { transform: rotate(0deg); } /* pinball event: rail t=4.9125s source=(381.855,344.17) */
+  49.5% { transform: rotate(0deg); }
+  50% { transform: rotate(0deg); }
+  50.333% { transform: rotate(0deg); } /* pinball event: rail t=5.0333s source=(218.388,421.071) */
+  50.5% { transform: rotate(0deg); }
+  50.667% { transform: rotate(0deg); } /* pinball event: left_flipper t=5.0667s source=(177.333,397.24) */
+  51% { transform: rotate(0deg); }
+  51.5% { transform: rotate(0deg); }
+  51.875% { transform: rotate(0deg); } /* pinball event: right_flipper t=5.1875s source=(348.165,371.619) */
+  52% { transform: rotate(0deg); }
+  52.083% { transform: rotate(0deg); } /* pinball event: rail t=5.2083s source=(372.945,355.726) */
+  52.5% { transform: rotate(0deg); }
+  53% { transform: rotate(0deg); }
+  53.5% { transform: rotate(0deg); }
+  53.583% { transform: rotate(0deg); } /* pinball event: rail t=5.3583s source=(408.788,161.291) */
+  54% { transform: rotate(0deg); }
+  54.375% { transform: rotate(0deg); } /* pinball event: bumper_3 t=5.4375s source=(349.7,80.145) */
+  54.5% { transform: rotate(0deg); }
+  54.542% { transform: rotate(0deg); } /* pinball event: rail t=5.4542s source=(366.423,94.28) */
+  55% { transform: rotate(0deg); }
+  55.5% { transform: rotate(0deg); }
+  55.75% { transform: rotate(0deg); } /* pinball event: rail t=5.575s source=(420.638,242.337) */
+  56% { transform: rotate(0deg); }
+  56.5% { transform: rotate(0deg); }
+  56.583% { transform: rotate(1.320696deg); } /* pinball event: rail t=5.6583s source=(379.741,348.433) */
+  56.792% { transform: rotate(4.646304deg); } /* pinball event: right_flipper t=5.6792s source=(358.336,367.535) */
+  57% { transform: rotate(7.956deg); }
+  57.5% { transform: rotate(30.762deg); }
+  58% { transform: rotate(44.957deg); }
+  58.5% { transform: rotate(45deg); }
+  58.958% { transform: rotate(44.108732deg); } /* pinball event: rail t=5.8958s source=(49.945,302.539) */
+  59% { transform: rotate(44.027deg); }
+  59.5% { transform: rotate(33.083deg); }
+  60% { transform: rotate(16.654deg); }
+  60.5% { transform: rotate(3.179deg); }
+  61% { transform: rotate(0deg); }
+  61.167% { transform: rotate(0deg); } /* pinball event: bumper_2 t=6.1167s source=(217.54,65.615) */
+  61.5% { transform: rotate(0deg); }
+  62% { transform: rotate(0deg); }
+  62.5% { transform: rotate(0deg); }
+  63% { transform: rotate(0deg); }
+  63.5% { transform: rotate(0deg); }
+  63.75% { transform: rotate(0deg); } /* pinball event: rail t=6.375s source=(206.506,421.307) */
+  64% { transform: rotate(0deg); }
+  64.5% { transform: rotate(0deg); }
+  65% { transform: rotate(0deg); }
+  65.5% { transform: rotate(0deg); }
+  66% { transform: rotate(0deg); }
+  66.5% { transform: rotate(0deg); }
+  66.833% { transform: rotate(0deg); } /* pinball event: rail t=6.6833s source=(290.417,47.008) */
+  67% { transform: rotate(0deg); }
+  67.5% { transform: rotate(0deg); }
+  68% { transform: rotate(0deg); }
+  68.5% { transform: rotate(0deg); }
+  69% { transform: rotate(0deg); }
+  69.5% { transform: rotate(0deg); }
+  70% { transform: rotate(0deg); }
+  70.042% { transform: rotate(0deg); } /* pinball event: left_flipper t=7.0042s source=(148.875,387.865) */
+  70.5% { transform: rotate(0deg); }
+  71% { transform: rotate(0deg); }
+  71.5% { transform: rotate(0deg); }
+  72% { transform: rotate(0deg); }
+  72.5% { transform: rotate(0deg); }
+  73% { transform: rotate(0deg); }
+  73.458% { transform: rotate(0deg); } /* pinball event: rail t=7.3458s source=(275.634,43.133) */
+  73.5% { transform: rotate(0deg); }
+  74% { transform: rotate(0deg); }
+  74.5% { transform: rotate(0deg); }
+  75% { transform: rotate(0deg); }
+  75.5% { transform: rotate(0deg); }
+  76% { transform: rotate(0deg); }
+  76.5% { transform: rotate(10.257deg); }
+  77% { transform: rotate(33.325deg); }
+  77.25% { transform: rotate(39.1625deg); } /* pinball event: rail t=7.725s source=(243.093,423.238) */
+  77.5% { transform: rotate(45deg); }
+  78% { transform: rotate(45deg); }
+  78.5% { transform: rotate(43.308deg); }
+  79% { transform: rotate(31.293deg); }
+  79.5% { transform: rotate(14.774deg); }
+  80% { transform: rotate(2.19deg); }
+  80.5% { transform: rotate(0deg); }
+  81% { transform: rotate(0deg); } /* pinball event: bumper_1 t=8.1s source=(156.489,85.247) */
+  81.5% { transform: rotate(0deg); }
+  82% { transform: rotate(0deg); }
+  82.5% { transform: rotate(0deg); }
+  83% { transform: rotate(0deg); }
+  83.5% { transform: rotate(0deg); }
+  83.708% { transform: rotate(0deg); } /* pinball event: rail t=8.3708s source=(386.962,118.929) */
+  84% { transform: rotate(0deg); }
+  84.5% { transform: rotate(0deg); }
+  85% { transform: rotate(0deg); }
+  85.5% { transform: rotate(0deg); }
+  86% { transform: rotate(7.956deg); }
+  86.375% { transform: rotate(25.0605deg); } /* pinball event: right_flipper t=8.6375s source=(370.438,357.061) */
+  86.5% { transform: rotate(30.762deg); }
+  87% { transform: rotate(44.957deg); }
+  87.5% { transform: rotate(45deg); }
+  88% { transform: rotate(44.027deg); }
+  88.167% { transform: rotate(40.371704deg); } /* pinball event: rail t=8.8167s source=(392.737,127.422) */
+  88.5% { transform: rotate(33.083deg); }
+  89% { transform: rotate(16.654deg); }
+  89.5% { transform: rotate(3.179deg); }
+  89.625% { transform: rotate(2.38425deg); } /* pinball event: bumper_2 t=8.9625s source=(227.276,69.351) */
+  90% { transform: rotate(0deg); }
+  90.208% { transform: rotate(0deg); } /* pinball event: bumper_1 t=9.0208s source=(160.007,80.994) */
+  90.5% { transform: rotate(0deg); }
+  91% { transform: rotate(0deg); }
+  91.5% { transform: rotate(0deg); }
+  92% { transform: rotate(0deg); }
+  92.5% { transform: rotate(0deg); }
+  92.917% { transform: rotate(0deg); } /* pinball event: right_flipper t=9.2917s source=(287.479,400.813) */
+  93% { transform: rotate(0deg); }
+  93.5% { transform: rotate(0deg); }
+  93.833% { transform: rotate(0deg); } /* pinball event: left_flipper t=9.3833s source=(172.857,400.416) */
+  94% { transform: rotate(0deg); }
+  94.5% { transform: rotate(0deg); }
+  95% { transform: rotate(0deg); }
+  95.5% { transform: rotate(0deg); }
+  96% { transform: rotate(0deg); }
+  96.5% { transform: rotate(0deg); }
+  97% { transform: rotate(0deg); }
+  97.083% { transform: rotate(0deg); } /* pinball event: rail t=9.7083s source=(277.396,44.477) */
+  97.5% { transform: rotate(0deg); }
+  98% { transform: rotate(0deg); }
+  98.5% { transform: rotate(0deg); }
+  99% { transform: rotate(0deg); }
+  99.5% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+@keyframes pixel-pinball-impact {
+  0% { transform: translate3d(0cqw, 0cqw, 0); opacity: 0; }
+  0.5% { transform: translate3d(-0.775111cqw, -6.486889cqw, 0); opacity: 0; }
+  1% { transform: translate3d(-1.549778cqw, -12.706444cqw, 0); opacity: 0; }
+  1.5% { transform: translate3d(-2.324444cqw, -18.659556cqw, 0); opacity: 0; }
+  2% { transform: translate3d(-3.099333cqw, -24.345556cqw, 0); opacity: 0; }
+  2.5% { transform: translate3d(-3.873556cqw, -29.764667cqw, 0); opacity: 0; }
+  3% { transform: translate3d(-4.647778cqw, -34.916889cqw, 0); opacity: 0; }
+  3.5% { transform: translate3d(-5.421778cqw, -39.802444cqw, 0); opacity: 0; }
+  4% { transform: translate3d(-6.195556cqw, -44.420889cqw, 0); opacity: 0; }
+  4.5% { transform: translate3d(-6.969111cqw, -48.772667cqw, 0); opacity: 0; }
+  5% { transform: translate3d(-7.742889cqw, -52.857333cqw, 0); opacity: 0; }
+  5.5% { transform: translate3d(-8.516222cqw, -56.675333cqw, 0); opacity: 0; }
+  6% { transform: translate3d(-9.289333cqw, -60.226444cqw, 0); opacity: 0; }
+  6.5% { transform: translate3d(-10.062444cqw, -63.510667cqw, 0); opacity: 0; }
+  7% { transform: translate3d(-10.835111cqw, -66.528cqw, 0); opacity: 0; }
+  7.458% { transform: translate3d(-11.539556cqw, -69.044889cqw, 0); opacity: 1; } /* pinball event: rail t=0.7458s source=(173.072,39.298) */
+  7.5% { transform: translate3d(-11.484667cqw, -68.838cqw, 0); opacity: 0.958; }
+  8% { transform: translate3d(-10.826667cqw, -66.210889cqw, 0); opacity: 0.458; }
+  8.458% { transform: translate3d(-10.223735cqw, -63.559781cqw, 0); opacity: 0; } /* pinball flash end: rail start=0.7458s after=0.1s */
+  8.5% { transform: translate3d(-10.168444cqw, -63.316667cqw, 0); opacity: 0; }
+  9% { transform: translate3d(-9.51cqw, -60.156222cqw, 0); opacity: 0; }
+  9.5% { transform: translate3d(-8.851333cqw, -56.728444cqw, 0); opacity: 0; }
+  10% { transform: translate3d(-8.192667cqw, -53.033778cqw, 0); opacity: 0; }
+  10.5% { transform: translate3d(-7.533778cqw, -49.072444cqw, 0); opacity: 0; }
+  11% { transform: translate3d(-6.874889cqw, -44.844222cqw, 0); opacity: 0; }
+  11.5% { transform: translate3d(-6.215778cqw, -40.349111cqw, 0); opacity: 0; }
+  12% { transform: translate3d(-5.556667cqw, -35.587333cqw, 0); opacity: 0; }
+  12.5% { transform: translate3d(-4.897111cqw, -30.558444cqw, 0); opacity: 0; }
+  13% { transform: translate3d(-4.237556cqw, -25.262889cqw, 0); opacity: 0; }
+  13.5% { transform: translate3d(-3.578cqw, -19.700444cqw, 0); opacity: 0; }
+  14% { transform: translate3d(-2.918222cqw, -13.871333cqw, 0); opacity: 0; }
+  14.5% { transform: translate3d(-2.258222cqw, -7.775111cqw, 0); opacity: 0; }
+  15% { transform: translate3d(-1.598cqw, -1.412222cqw, 0); opacity: 0; }
+  15.5% { transform: translate3d(-0.938cqw, 5.217333cqw, 0); opacity: 0; }
+  16% { transform: translate3d(-0.277778cqw, 12.114cqw, 0); opacity: 0; }
+  16.25% { transform: translate3d(0.052889cqw, 15.204cqw, 0); opacity: 1; } /* pinball event: rail t=1.625s source=(225.238,418.418) */
+  16.5% { transform: translate3d(0.388222cqw, 11.959111cqw, 0); opacity: 0.75; }
+  17% { transform: translate3d(1.058667cqw, 5.669556cqw, 0); opacity: 0.25; }
+  17.25% { transform: translate3d(1.394222cqw, 2.658111cqw, 0); opacity: 0; } /* pinball flash end: rail start=1.625s after=0.1s */
+  17.5% { transform: translate3d(1.729778cqw, -0.353333cqw, 0); opacity: 0; }
+  18% { transform: translate3d(2.400667cqw, -6.109333cqw, 0); opacity: 0; }
+  18.5% { transform: translate3d(3.071556cqw, -11.598444cqw, 0); opacity: 0; }
+  19% { transform: translate3d(3.742889cqw, -16.820889cqw, 0); opacity: 0; }
+  19.5% { transform: translate3d(4.414222cqw, -21.776444cqw, 0); opacity: 0; }
+  20% { transform: translate3d(5.085556cqw, -26.465333cqw, 0); opacity: 0; }
+  20.5% { transform: translate3d(5.757111cqw, -30.887333cqw, 0); opacity: 0; }
+  21% { transform: translate3d(6.428667cqw, -35.042444cqw, 0); opacity: 0; }
+  21.5% { transform: translate3d(7.100222cqw, -38.930889cqw, 0); opacity: 0; }
+  22% { transform: translate3d(7.772222cqw, -42.552667cqw, 0); opacity: 0; }
+  22.5% { transform: translate3d(8.444222cqw, -45.907333cqw, 0); opacity: 0; }
+  23% { transform: translate3d(9.116cqw, -48.995333cqw, 0); opacity: 0; }
+  23.5% { transform: translate3d(9.788222cqw, -51.816667cqw, 0); opacity: 0; }
+  24% { transform: translate3d(10.460667cqw, -54.371111cqw, 0); opacity: 0; }
+  24.5% { transform: translate3d(11.132667cqw, -56.658667cqw, 0); opacity: 0; }
+  25% { transform: translate3d(11.805111cqw, -58.679556cqw, 0); opacity: 0; }
+  25.5% { transform: translate3d(12.477778cqw, -60.433778cqw, 0); opacity: 0; }
+  26% { transform: translate3d(13.150222cqw, -61.921111cqw, 0); opacity: 0; }
+  26.333% { transform: translate3d(13.544222cqw, -62.750444cqw, 0); opacity: 1; } /* pinball event: bumper_3 t=2.6333s source=(285.949,67.623) */
+  26.5% { transform: translate3d(13.153778cqw, -62.969333cqw, 0); opacity: 0.833; }
+  27% { transform: translate3d(11.982222cqw, -63.448667cqw, 0); opacity: 0.333; }
+  27.333% { transform: translate3d(11.202114cqw, -63.590155cqw, 0); opacity: 0; } /* pinball flash end: bumper_3 start=2.6333s after=0.1s */
+  27.5% { transform: translate3d(10.810889cqw, -63.661111cqw, 0); opacity: 0; }
+  28% { transform: translate3d(9.639556cqw, -63.606889cqw, 0); opacity: 0; }
+  28.5% { transform: translate3d(8.468444cqw, -63.285778cqw, 0); opacity: 0; }
+  29% { transform: translate3d(7.297111cqw, -62.697778cqw, 0); opacity: 0; }
+  29.5% { transform: translate3d(6.126222cqw, -61.843333cqw, 0); opacity: 0; }
+  30% { transform: translate3d(4.955111cqw, -60.721778cqw, 0); opacity: 0; }
+  30.5% { transform: translate3d(3.784444cqw, -59.333778cqw, 0); opacity: 0; }
+  31% { transform: translate3d(2.613333cqw, -57.678889cqw, 0); opacity: 0; }
+  31.5% { transform: translate3d(1.442667cqw, -55.757333cqw, 0); opacity: 0; }
+  32% { transform: translate3d(0.272cqw, -53.568889cqw, 0); opacity: 0; }
+  32.5% { transform: translate3d(-0.898667cqw, -51.113778cqw, 0); opacity: 0; }
+  33% { transform: translate3d(-2.069333cqw, -48.392cqw, 0); opacity: 0; }
+  33.5% { transform: translate3d(-3.239778cqw, -45.403333cqw, 0); opacity: 0; }
+  34% { transform: translate3d(-4.410222cqw, -42.148cqw, 0); opacity: 0; }
+  34.5% { transform: translate3d(-5.580667cqw, -38.626cqw, 0); opacity: 0; }
+  35% { transform: translate3d(-6.751111cqw, -34.837111cqw, 0); opacity: 0; }
+  35.5% { transform: translate3d(-7.921333cqw, -30.781556cqw, 0); opacity: 0; }
+  36% { transform: translate3d(-9.091556cqw, -26.459333cqw, 0); opacity: 0; }
+  36.5% { transform: translate3d(-10.261778cqw, -21.870444cqw, 0); opacity: 0; }
+  37% { transform: translate3d(-11.432cqw, -17.014444cqw, 0); opacity: 0; }
+  37.5% { transform: translate3d(-12.602cqw, -11.892cqw, 0); opacity: 0; }
+  38% { transform: translate3d(-13.772cqw, -6.502889cqw, 0); opacity: 0; }
+  38.5% { transform: translate3d(-14.942cqw, -0.846889cqw, 0); opacity: 0; }
+  38.875% { transform: translate3d(-15.779111cqw, 3.161333cqw, 0); opacity: 1; } /* pinball event: left_flipper t=3.8875s source=(153.994,364.226) */
+  39% { transform: translate3d(-15.400222cqw, -2.109333cqw, 0); opacity: 0.875; }
+  39.5% { transform: translate3d(-13.884444cqw, -23.026cqw, 0); opacity: 0.375; }
+  39.875% { transform: translate3d(-12.747611cqw, -38.513333cqw, 0); opacity: 0; } /* pinball flash end: left_flipper start=3.8875s after=0.1s */
+  40% { transform: translate3d(-12.368667cqw, -43.675778cqw, 0); opacity: 0; }
+  40.5% { transform: translate3d(-10.852667cqw, -64.058667cqw, 0); opacity: 0; }
+  40.625% { transform: translate3d(-10.376667cqw, -68.738889cqw, 0); opacity: 1; } /* pinball event: rail t=4.0625s source=(178.305,40.675) */
+  41% { transform: translate3d(-2.279778cqw, -57.084667cqw, 0); opacity: 0.625; }
+  41.5% { transform: translate3d(8.515556cqw, -41.312444cqw, 0); opacity: 0.125; }
+  41.625% { transform: translate3d(11.214444cqw, -37.302667cqw, 0); opacity: 0; } /* pinball flash end: rail start=4.0625s after=0.1s */
+  42% { transform: translate3d(19.311111cqw, -25.273333cqw, 0); opacity: 0; }
+  42.5% { transform: translate3d(30.106889cqw, -8.967556cqw, 0); opacity: 0; }
+  42.75% { transform: translate3d(34.673333cqw, -1.342889cqw, 0); opacity: 1; } /* pinball event: rail t=4.275s source=(381.03,343.957) */
+  43% { transform: translate3d(25.838444cqw, -3.782889cqw, 0); opacity: 0.75; }
+  43.5% { transform: translate3d(8.168889cqw, -8.463333cqw, 0); opacity: 0.25; }
+  43.75% { transform: translate3d(-0.666cqw, -10.67cqw, 0); opacity: 0; } /* pinball flash end: rail start=4.275s after=0.1s */
+  44% { transform: translate3d(-9.500889cqw, -12.876667cqw, 0); opacity: 0; }
+  44.5% { transform: translate3d(-27.170444cqw, -17.023556cqw, 0); opacity: 0; }
+  44.917% { transform: translate3d(-41.816667cqw, -20.288222cqw, 0); opacity: 1; } /* pinball event: rail t=4.4917s source=(36.825,258.703) */
+  45% { transform: translate3d(-39.442222cqw, -21.778889cqw, 0); opacity: 0.917; }
+  45.5% { transform: translate3d(-25.196222cqw, -30.569111cqw, 0); opacity: 0.417; }
+  45.917% { transform: translate3d(-13.315244cqw, -37.677756cqw, 0); opacity: 0; } /* pinball flash end: rail start=4.4917s after=0.1s */
+  46% { transform: translate3d(-10.950444cqw, -39.092667cqw, 0); opacity: 0; }
+  46.5% { transform: translate3d(3.295556cqw, -47.349556cqw, 0); opacity: 0; }
+  47% { transform: translate3d(17.541333cqw, -55.339778cqw, 0); opacity: 0; }
+  47.125% { transform: translate3d(21.092444cqw, -56.650222cqw, 0); opacity: 1; } /* pinball event: bumper_3 t=4.7125s source=(319.916,95.074) */
+  47.5% { transform: translate3d(31.581556cqw, -50.238889cqw, 0); opacity: 0.625; }
+  47.792% { transform: translate3d(39.499778cqw, -45.038222cqw, 0); opacity: 1; } /* pinball event: rail t=4.7792s source=(402.749,147.328) */
+  48% { transform: translate3d(38.775778cqw, -38.327556cqw, 0); opacity: 0.792; }
+  48.125% { transform: translate3d(38.341389cqw, -34.253722cqw, 0); opacity: 0.667; } /* pinball flash end: bumper_3 start=4.7125s after=0.1s */
+  48.5% { transform: translate3d(37.038222cqw, -22.032222cqw, 0); opacity: 0.292; }
+  48.792% { transform: translate3d(36.02349cqw, -12.360144cqw, 0); opacity: 0; } /* pinball flash end: rail start=4.7792s after=0.1s */
+  49% { transform: translate3d(35.300667cqw, -5.470444cqw, 0); opacity: 0; }
+  49.125% { transform: translate3d(34.856667cqw, -1.295556cqw, 0); opacity: 1; } /* pinball event: rail t=4.9125s source=(381.855,344.17) */
+  49.5% { transform: translate3d(23.582444cqw, 3.854889cqw, 0); opacity: 0.625; }
+  50% { transform: translate3d(8.55cqw, 10.955778cqw, 0); opacity: 0.125; }
+  50.125% { transform: translate3d(4.788989cqw, 12.77176cqw, 0); opacity: 0; } /* pinball flash end: rail start=4.9125s after=0.1s */
+  50.333% { transform: translate3d(-1.469333cqw, 15.793556cqw, 0); opacity: 1; } /* pinball event: rail t=5.0333s source=(218.388,421.071) */
+  50.5% { transform: translate3d(-6.228889cqw, 13.095556cqw, 0); opacity: 0.833; }
+  50.667% { transform: translate3d(-10.592667cqw, 10.497778cqw, 0); opacity: 1; } /* pinball event: left_flipper t=5.0667s source=(177.333,397.24) */
+  51% { transform: translate3d(-0.103111cqw, 8.818444cqw, 0); opacity: 0.667; }
+  51.333% { transform: translate3d(10.376029cqw, 7.288864cqw, 0); opacity: 0.334; } /* pinball flash end: rail start=5.0333s after=0.1s */
+  51.5% { transform: translate3d(15.631333cqw, 6.521778cqw, 0); opacity: 0.167; }
+  51.667% { transform: translate3d(20.858953cqw, 5.756893cqw, 0); opacity: 0; } /* pinball flash end: left_flipper start=5.0667s after=0.1s */
+  51.875% { transform: translate3d(27.37cqw, 4.804222cqw, 0); opacity: 1; } /* pinball event: right_flipper t=5.1875s source=(348.165,371.619) */
+  52% { transform: translate3d(30.720889cqw, 2.720889cqw, 0); opacity: 0.875; }
+  52.083% { transform: translate3d(32.876667cqw, 1.272444cqw, 0); opacity: 1; } /* pinball event: rail t=5.2083s source=(372.945,355.726) */
+  52.5% { transform: translate3d(38.495111cqw, -10.382cqw, 0); opacity: 0.583; }
+  52.875% { transform: translate3d(41.455778cqw, -21.054167cqw, 0); opacity: 0.208; } /* pinball flash end: right_flipper start=5.1875s after=0.1s */
+  53% { transform: translate3d(42.442667cqw, -24.611556cqw, 0); opacity: 0.083; }
+  53.083% { transform: translate3d(42.221739cqw, -27.082742cqw, 0); opacity: 0; } /* pinball flash end: rail start=5.2083s after=0.1s */
+  53.5% { transform: translate3d(41.111778cqw, -39.498222cqw, 0); opacity: 0; }
+  53.583% { transform: translate3d(40.841778cqw, -41.935333cqw, 0); opacity: 1; } /* pinball event: rail t=5.3583s source=(408.788,161.291) */
+  54% { transform: translate3d(33.902667cqw, -51.927333cqw, 0); opacity: 0.583; }
+  54.375% { transform: translate3d(27.711111cqw, -59.967778cqw, 0); opacity: 1; } /* pinball event: bumper_3 t=5.4375s source=(349.7,80.145) */
+  54.5% { transform: translate3d(30.563778cqw, -57.678444cqw, 0); opacity: 0.875; }
+  54.542% { transform: translate3d(31.427333cqw, -56.826667cqw, 0); opacity: 1; } /* pinball event: rail t=5.4542s source=(366.423,94.28) */
+  54.583% { transform: translate3d(32.101993cqw, -55.831487cqw, 0); opacity: 0.959; } /* pinball flash end: rail start=5.3583s after=0.1s */
+  55% { transform: translate3d(38.963778cqw, -45.709778cqw, 0); opacity: 0.542; }
+  55.375% { transform: translate3d(41.915278cqw, -35.022778cqw, 0); opacity: 0.167; } /* pinball flash end: bumper_3 start=5.4375s after=0.1s */
+  55.5% { transform: translate3d(42.899111cqw, -31.460444cqw, 0); opacity: 0.042; }
+  55.542% { transform: translate3d(42.995879cqw, -30.194508cqw, 0); opacity: 0; } /* pinball flash end: rail start=5.4542s after=0.1s */
+  55.75% { transform: translate3d(43.475111cqw, -23.925111cqw, 0); opacity: 1; } /* pinball event: rail t=5.575s source=(420.638,242.337) */
+  56% { transform: translate3d(41.930444cqw, -16.471333cqw, 0); opacity: 0.75; }
+  56.5% { transform: translate3d(35.685778cqw, -2.575778cqw, 0); opacity: 0.25; }
+  56.583% { transform: translate3d(34.386889cqw, -0.348222cqw, 0); opacity: 1; } /* pinball event: rail t=5.6583s source=(379.741,348.433) */
+  56.75% { transform: translate3d(30.586107cqw, 3.043627cqw, 0); opacity: 0.833; } /* pinball flash end: rail start=5.575s after=0.1s */
+  56.792% { transform: translate3d(29.630222cqw, 3.896667cqw, 0); opacity: 1; } /* pinball event: right_flipper t=5.6792s source=(358.336,367.535) */
+  57% { transform: translate3d(22.943556cqw, 2.330222cqw, 0); opacity: 0.792; }
+  57.5% { transform: translate3d(6.895111cqw, -1.240222cqw, 0); opacity: 0.292; }
+  57.583% { transform: translate3d(4.231106cqw, -1.788649cqw, 0); opacity: 0.209; } /* pinball flash end: rail start=5.6583s after=0.1s */
+  57.792% { transform: translate3d(-2.477051cqw, -3.169628cqw, 0); opacity: 0; } /* pinball flash end: right_flipper start=5.6792s after=0.1s */
+  58% { transform: translate3d(-9.153111cqw, -4.544cqw, 0); opacity: 0; }
+  58.5% { transform: translate3d(-25.201333cqw, -7.581333cqw, 0); opacity: 0; }
+  58.958% { transform: translate3d(-38.901111cqw, -10.546889cqw, 0); opacity: 1; } /* pinball event: rail t=5.8958s source=(49.945,302.539) */
+  59% { transform: translate3d(-38.191333cqw, -11.608889cqw, 0); opacity: 0.958; }
+  59.5% { transform: translate3d(-29.674889cqw, -24.208444cqw, 0); opacity: 0.458; }
+  59.958% { transform: translate3d(-21.873622cqw, -35.505167cqw, 0); opacity: 0; } /* pinball flash end: rail start=5.8958s after=0.1s */
+  60% { transform: translate3d(-21.158222cqw, -36.541111cqw, 0); opacity: 0; }
+  60.5% { transform: translate3d(-12.641556cqw, -48.607111cqw, 0); opacity: 0; }
+  61% { transform: translate3d(-4.125111cqw, -60.406667cqw, 0); opacity: 0; }
+  61.167% { transform: translate3d(-1.657778cqw, -63.196667cqw, 0); opacity: 1; } /* pinball event: bumper_2 t=6.1167s source=(217.54,65.615) */
+  61.5% { transform: translate3d(-1.978222cqw, -53.363778cqw, 0); opacity: 0.667; }
+  62% { transform: translate3d(-2.458667cqw, -38.392222cqw, 0); opacity: 0.167; }
+  62.167% { transform: translate3d(-2.619135cqw, -33.302656cqw, 0); opacity: 0; } /* pinball flash end: bumper_2 start=6.1167s after=0.1s */
+  62.5% { transform: translate3d(-2.939111cqw, -23.154cqw, 0); opacity: 0; }
+  63% { transform: translate3d(-3.419556cqw, -7.649333cqw, 0); opacity: 0; }
+  63.5% { transform: translate3d(-3.899778cqw, 8.122444cqw, 0); opacity: 0; }
+  63.75% { transform: translate3d(-4.109778cqw, 15.846cqw, 0); opacity: 1; } /* pinball event: rail t=6.375s source=(206.506,421.307) */
+  64% { transform: translate3d(-2.580667cqw, 8.673333cqw, 0); opacity: 0.75; }
+  64.5% { transform: translate3d(0.477333cqw, -5.472cqw, 0); opacity: 0.25; }
+  64.75% { transform: translate3d(2.006333cqw, -12.411333cqw, 0); opacity: 0; } /* pinball flash end: rail start=6.375s after=0.1s */
+  65% { transform: translate3d(3.535333cqw, -19.350667cqw, 0); opacity: 0; }
+  65.5% { transform: translate3d(6.593333cqw, -32.962667cqw, 0); opacity: 0; }
+  66% { transform: translate3d(9.651111cqw, -46.308222cqw, 0); opacity: 0; }
+  66.5% { transform: translate3d(12.708889cqw, -59.387111cqw, 0); opacity: 0; }
+  66.833% { transform: translate3d(14.537111cqw, -67.331556cqw, 0); opacity: 1; } /* pinball event: rail t=6.6833s source=(290.417,47.008) */
+  67% { transform: translate3d(12.889111cqw, -63.628cqw, 0); opacity: 0.833; }
+  67.5% { transform: translate3d(7.944889cqw, -52.339778cqw, 0); opacity: 0.333; }
+  67.833% { transform: translate3d(4.652037cqw, -44.64437cqw, 0); opacity: 0; } /* pinball flash end: rail start=6.6833s after=0.1s */
+  68% { transform: translate3d(3.000667cqw, -40.785111cqw, 0); opacity: 0; }
+  68.5% { transform: translate3d(-1.943778cqw, -28.964cqw, 0); opacity: 0; }
+  69% { transform: translate3d(-6.888cqw, -16.876cqw, 0); opacity: 0; }
+  69.5% { transform: translate3d(-11.832667cqw, -4.521556cqw, 0); opacity: 0; }
+  70% { transform: translate3d(-16.777111cqw, 8.099556cqw, 0); opacity: 0; }
+  70.042% { transform: translate3d(-16.916667cqw, 8.414444cqw, 0); opacity: 1; } /* pinball event: left_flipper t=7.0042s source=(148.875,387.865) */
+  70.5% { transform: translate3d(-13.128222cqw, -2.623333cqw, 0); opacity: 0.542; }
+  71% { transform: translate3d(-8.995556cqw, -14.408889cqw, 0); opacity: 0.042; }
+  71.042% { transform: translate3d(-8.648412cqw, -15.376494cqw, 0); opacity: 0; } /* pinball flash end: left_flipper start=7.0042s after=0.1s */
+  71.5% { transform: translate3d(-4.862889cqw, -25.928cqw, 0); opacity: 0; }
+  72% { transform: translate3d(-0.730444cqw, -37.180444cqw, 0); opacity: 0; }
+  72.5% { transform: translate3d(3.402cqw, -48.166222cqw, 0); opacity: 0; }
+  73% { transform: translate3d(7.534222cqw, -58.885778cqw, 0); opacity: 0; }
+  73.458% { transform: translate3d(11.252cqw, -68.192667cqw, 0); opacity: 1; } /* pinball event: rail t=7.3458s source=(275.634,43.133) */
+  73.5% { transform: translate3d(11.173333cqw, -67.337333cqw, 0); opacity: 0.958; }
+  74% { transform: translate3d(10.228667cqw, -56.928444cqw, 0); opacity: 0.458; }
+  74.458% { transform: translate3d(9.363352cqw, -47.150043cqw, 0); opacity: 0; } /* pinball flash end: rail start=7.3458s after=0.1s */
+  74.5% { transform: translate3d(9.284cqw, -46.253333cqw, 0); opacity: 0; }
+  75% { transform: translate3d(8.339333cqw, -35.311556cqw, 0); opacity: 0; }
+  75.5% { transform: translate3d(7.394444cqw, -24.103111cqw, 0); opacity: 0; }
+  76% { transform: translate3d(6.449333cqw, -12.628222cqw, 0); opacity: 0; }
+  76.5% { transform: translate3d(5.504444cqw, -0.886667cqw, 0); opacity: 0; }
+  77% { transform: translate3d(4.559333cqw, 11.121111cqw, 0); opacity: 0; }
+  77.25% { transform: translate3d(4.020667cqw, 16.275111cqw, 0); opacity: 1; } /* pinball event: rail t=7.725s source=(243.093,423.238) */
+  77.5% { transform: translate3d(2.736444cqw, 10.800444cqw, 0); opacity: 0.75; }
+  78% { transform: translate3d(0.168444cqw, 0.051111cqw, 0); opacity: 0.25; }
+  78.25% { transform: translate3d(-1.115667cqw, -5.190333cqw, 0); opacity: 0; } /* pinball flash end: rail start=7.725s after=0.1s */
+  78.5% { transform: translate3d(-2.399778cqw, -10.431778cqw, 0); opacity: 0; }
+  79% { transform: translate3d(-4.968cqw, -20.648222cqw, 0); opacity: 0; }
+  79.5% { transform: translate3d(-7.536667cqw, -30.598cqw, 0); opacity: 0; }
+  80% { transform: translate3d(-10.105333cqw, -40.281333cqw, 0); opacity: 0; }
+  80.5% { transform: translate3d(-12.673778cqw, -49.698222cqw, 0); opacity: 0; }
+  81% { transform: translate3d(-15.224667cqw, -58.834cqw, 0); opacity: 1; } /* pinball event: bumper_1 t=8.1s source=(156.489,85.247) */
+  81.5% { transform: translate3d(-5.718889cqw, -58.076667cqw, 0); opacity: 0.5; }
+  82% { transform: translate3d(3.786667cqw, -57.052667cqw, 0); opacity: 0; } /* pinball flash end: bumper_1 start=8.1s after=0.1s */
+  82.5% { transform: translate3d(13.291778cqw, -55.762222cqw, 0); opacity: 0; }
+  83% { transform: translate3d(22.797333cqw, -54.205111cqw, 0); opacity: 0; }
+  83.5% { transform: translate3d(32.302222cqw, -52.381556cqw, 0); opacity: 0; }
+  83.708% { transform: translate3d(35.991556cqw, -51.349111cqw, 0); opacity: 1; } /* pinball event: rail t=8.3708s source=(386.962,118.929) */
+  84% { transform: translate3d(35.582222cqw, -45.840444cqw, 0); opacity: 0.708; }
+  84.5% { transform: translate3d(34.880889cqw, -36.185778cqw, 0); opacity: 0.208; }
+  84.708% { transform: translate3d(34.588949cqw, -32.058596cqw, 0); opacity: 0; } /* pinball flash end: rail start=8.3708s after=0.1s */
+  85% { transform: translate3d(34.179111cqw, -26.264667cqw, 0); opacity: 0; }
+  85.5% { transform: translate3d(33.477333cqw, -16.077111cqw, 0); opacity: 0; }
+  86% { transform: translate3d(32.775556cqw, -5.622667cqw, 0); opacity: 0; }
+  86.375% { transform: translate3d(32.319556cqw, 1.569111cqw, 0); opacity: 1; } /* pinball event: right_flipper t=8.6375s source=(370.438,357.061) */
+  86.5% { transform: translate3d(32.693111cqw, -2.12cqw, 0); opacity: 0.875; }
+  87% { transform: translate3d(34.186444cqw, -16.709333cqw, 0); opacity: 0.375; }
+  87.375% { transform: translate3d(35.306444cqw, -27.4515cqw, 0); opacity: 0; } /* pinball flash end: right_flipper start=8.6375s after=0.1s */
+  87.5% { transform: translate3d(35.679778cqw, -31.032222cqw, 0); opacity: 0; }
+  88% { transform: translate3d(37.173111cqw, -45.088667cqw, 0); opacity: 0; }
+  88.167% { transform: translate3d(37.274889cqw, -49.461778cqw, 0); opacity: 1; } /* pinball event: rail t=8.8167s source=(392.737,127.422) */
+  88.5% { transform: translate3d(28.871111cqw, -52.614889cqw, 0); opacity: 0.667; }
+  89% { transform: translate3d(16.264889cqw, -57.122222cqw, 0); opacity: 0.167; }
+  89.167% { transform: translate3d(12.054411cqw, -58.538753cqw, 0); opacity: 0; } /* pinball flash end: rail start=8.8167s after=0.1s */
+  89.5% { transform: translate3d(3.658667cqw, -61.363333cqw, 0); opacity: 0; }
+  89.625% { transform: translate3d(0.505778cqw, -62.366444cqw, 0); opacity: 1; } /* pinball event: bumper_2 t=8.9625s source=(227.276,69.351) */
+  90% { transform: translate3d(-9.336444cqw, -60.874cqw, 0); opacity: 0.625; }
+  90.208% { transform: translate3d(-14.442889cqw, -59.779111cqw, 0); opacity: 1; } /* pinball event: bumper_1 t=9.0208s source=(160.007,80.994) */
+  90.5% { transform: translate3d(-11.376222cqw, -52.489778cqw, 0); opacity: 0.708; }
+  90.625% { transform: translate3d(-10.061944cqw, -49.312944cqw, 0); opacity: 0.583; } /* pinball flash end: bumper_2 start=8.9625s after=0.1s */
+  91% { transform: translate3d(-6.119111cqw, -39.782444cqw, 0); opacity: 0.208; }
+  91.208% { transform: translate3d(-3.932245cqw, -34.385445cqw, 0); opacity: 0; } /* pinball flash end: bumper_1 start=9.0208s after=0.1s */
+  91.5% { transform: translate3d(-0.862222cqw, -26.808889cqw, 0); opacity: 0; }
+  92% { transform: translate3d(4.394444cqw, -13.568667cqw, 0); opacity: 0; }
+  92.5% { transform: translate3d(9.651111cqw, -0.062cqw, 0); opacity: 0; }
+  92.917% { transform: translate3d(13.884222cqw, 11.291778cqw, 0); opacity: 1; } /* pinball event: right_flipper t=9.2917s source=(287.479,400.813) */
+  93% { transform: translate3d(11.517556cqw, 11.285556cqw, 0); opacity: 0.917; }
+  93.5% { transform: translate3d(-2.680667cqw, 11.403556cqw, 0); opacity: 0.417; }
+  93.833% { transform: translate3d(-11.587333cqw, 11.203556cqw, 0); opacity: 1; } /* pinball event: left_flipper t=9.3833s source=(172.857,400.416) */
+  93.917% { transform: translate3d(-10.98307cqw, 9.005695cqw, 0); opacity: 0.916; } /* pinball flash end: right_flipper start=9.2917s after=0.1s */
+  94% { transform: translate3d(-10.386cqw, 6.834cqw, 0); opacity: 0.833; }
+  94.5% { transform: translate3d(-6.782cqw, -6.096667cqw, 0); opacity: 0.333; }
+  94.833% { transform: translate3d(-4.381884cqw, -14.531039cqw, 0); opacity: 0; } /* pinball flash end: left_flipper start=9.3833s after=0.1s */
+  95% { transform: translate3d(-3.178222cqw, -18.760889cqw, 0); opacity: 0; }
+  95.5% { transform: translate3d(0.425333cqw, -31.158444cqw, 0); opacity: 0; }
+  96% { transform: translate3d(4.029111cqw, -43.289778cqw, 0); opacity: 0; }
+  96.5% { transform: translate3d(7.632444cqw, -55.154667cqw, 0); opacity: 0; }
+  97% { transform: translate3d(11.235556cqw, -66.753111cqw, 0); opacity: 0; }
+  97.083% { transform: translate3d(11.643556cqw, -67.894cqw, 0); opacity: 1; } /* pinball event: rail t=9.7083s source=(277.396,44.477) */
+  97.5% { transform: translate3d(9.980444cqw, -58.749778cqw, 0); opacity: 0.583; }
+  98% { transform: translate3d(7.984889cqw, -47.532889cqw, 0); opacity: 0.083; }
+  98.083% { transform: translate3d(7.653516cqw, -45.626582cqw, 0); opacity: 0; } /* pinball flash end: rail start=9.7083s after=0.1s */
+  98.5% { transform: translate3d(5.988667cqw, -36.049111cqw, 0); opacity: 0; }
+  99% { transform: translate3d(3.992667cqw, -24.299333cqw, 0); opacity: 0; }
+  99.5% { transform: translate3d(1.996667cqw, -12.282667cqw, 0); opacity: 0; }
+  100% { transform: translate3d(0cqw, 0cqw, 0); opacity: 0; }
+}
+    /* PINBALL_MOTION_CSS_END */
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="pixel_art"][data-scene="airship"] .scene-motion {
+      animation: pixel-airship 12s linear infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="pixel_art"][data-scene="vinyl"] .scene-motion {
+      animation: none;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="pixel_art"] .scene-drift {
+      animation: pixel-detail 6s linear infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="pixel_art"][data-scene="ramen"] .scene-drift {
+      animation: pixel-ramen 5s linear infinite;
+    }
+    .watch-screen.motion-on:not(.ambient) .scene-layer[data-style="pixel_art"][data-scene="vinyl"] .scene-drift {
+      animation: pixel-vinyl 4s linear infinite;
+    }
+    @keyframes pixel-detail { 0%, 100% { transform: translate3d(0, 1.333cqw, 0); } 25% { transform: translate3d(2cqw, 0, 0); } 50% { transform: translate3d(0, -1.333cqw, 0); } 75% { transform: translate3d(-2cqw, 0, 0); } }
+    @keyframes pixel-velodrome { from { transform: translateX(-73.333cqw); } to { transform: translateX(73.333cqw); } }
+    @keyframes pixel-laundry-kitten {
+      0% { transform: translateY(0); animation-timing-function: ease-in-out; }
+      25% { transform: translateY(-6.667cqw); animation-timing-function: ease-in-out; }
+      50% { transform: translateY(0); animation-timing-function: ease-in-out; }
+      75% { transform: translateY(-6.667cqw); animation-timing-function: ease-in-out; }
+      100% { transform: translateY(0); }
+    }
+    @keyframes pixel-ramen { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-8.444cqw); opacity: 0; } }
+    @keyframes pixel-airship { from { transform: translateX(-73.333cqw); } to { transform: translateX(73.333cqw); } }
+    @keyframes pixel-vinyl {
+      0% { transform: translate3d(0, 0, 0); opacity: 1; }
+      25% { transform: translate3d(2.667cqw, -2.222cqw, 0); opacity: .75; }
+      50% { transform: translate3d(0, -4.444cqw, 0); opacity: .5; }
+      75% { transform: translate3d(-2.667cqw, -6.667cqw, 0); opacity: .25; }
+      100% { transform: translate3d(0, -8.889cqw, 0); opacity: 0; }
+    }
+    @keyframes pack-y12 { 0%, 50%, 100% { transform: translateY(0); } 25% { transform: translateY(2.667cqw); } 75% { transform: translateY(-2.667cqw); } }
+    @keyframes pack-y10 { 0%, 50%, 100% { transform: translateY(0); } 25% { transform: translateY(2.222cqw); } 75% { transform: translateY(-2.222cqw); } }
+    @keyframes pack-y8 { 0%, 50%, 100% { transform: translateY(0); } 25% { transform: translateY(1.778cqw); } 75% { transform: translateY(-1.778cqw); } }
+    @keyframes pack-x18 { 0%, 50%, 100% { transform: translateX(0); } 25% { transform: translateX(4cqw); } 75% { transform: translateX(-4cqw); } }
+    @keyframes pack-x20 { 0%, 50%, 100% { transform: translateX(0); } 25% { transform: translateX(4.444cqw); } 75% { transform: translateX(-4.444cqw); } }
+    @keyframes pack-x25 { 0%, 50%, 100% { transform: translateX(0); } 25% { transform: translateX(5.556cqw); } 75% { transform: translateX(-5.556cqw); } }
+    @keyframes pack-orbit-15 { 0%, 100% { transform: translate3d(0, 2.222cqw, 0); } 25% { transform: translate3d(3.333cqw, 0, 0); } 50% { transform: translate3d(0, -2.222cqw, 0); } 75% { transform: translate3d(-3.333cqw, 0, 0); } }
+    @keyframes pack-orbit-20 { 0%, 100% { transform: translate3d(0, 2.667cqw, 0); } 25% { transform: translate3d(4.444cqw, 0, 0); } 50% { transform: translate3d(0, -2.667cqw, 0); } 75% { transform: translate3d(-4.444cqw, 0, 0); } }
+    @keyframes pack-pulse { 0%, 50%, 100% { opacity: .578; } 25% { opacity: 1; } 75% { opacity: .157; } }
+    @keyframes pack-blink { 0% { opacity: 0; } 50% { opacity: 1; } }
 
     @keyframes actor-float {
       from { transform: translate3d(0, -2.667cqw, 0); }
@@ -1326,6 +2431,8 @@
       object-fit: cover;
     }
 
+    .scene-grid[data-style="pixel_art"] .scene-thumb img { image-rendering: pixelated; }
+
     .scene-name {
       min-width: 0;
       font-size: 10px;
@@ -1347,6 +2454,12 @@
     .scene-card[data-scene="lanterns"] .scene-thumb { --scene-light: #d0a85e; --scene-dark: #303345; }
     .scene-card[data-scene="sailboat"] .scene-thumb { --scene-light: #81aaa0; --scene-dark: #29435a; }
     .scene-card[data-scene="moon_rabbit"] .scene-thumb { --scene-light: #bdadbb; --scene-dark: #27354f; }
+    .scene-card[data-scene="velodrome"] .scene-thumb { --scene-light: #f5b95c; --scene-dark: #663853; }
+    .scene-card[data-scene="laundry_kitten"] .scene-thumb { --scene-light: #f0b5d0; --scene-dark: #69507b; }
+    .scene-card[data-scene="ramen"] .scene-thumb { --scene-light: #f5c76c; --scene-dark: #a84f48; }
+    .scene-card[data-scene="pinball"] .scene-thumb { --scene-light: #f18054; --scene-dark: #42437c; }
+    .scene-card[data-scene="airship"] .scene-thumb { --scene-light: #8ed4dd; --scene-dark: #425990; }
+    .scene-card[data-scene="vinyl"] .scene-thumb { --scene-light: #c39de9; --scene-dark: #34375b; }
 
     .favorite-grid {
       display: grid;
@@ -1581,6 +2694,8 @@
               <div class="scene-layer" data-style="origami" data-scene="bicycle" id="sceneArt" aria-hidden="true">
                 <img class="scene-background" src="./assets/scene_bicycle.png" alt="">
                 <div class="scene-motion-wrap"><img class="scene-motion" src="./assets/motion_bicycle.png" alt=""></div>
+                <img class="pinball-flipper pinball-flipper-left" src="./assets/flipper_pixel_art_pinball_left.png" alt="" hidden>
+                <img class="pinball-flipper pinball-flipper-right" src="./assets/flipper_pixel_art_pinball_right.png" alt="" hidden>
                 <img class="scene-cursor" src="./assets/blink_coding.png" alt="" hidden>
                 <img class="scene-drift" src="./assets/drift_bicycle.png" alt="">
                 <img class="scene-glass" src="./assets/glass_bicycle.png" alt="">
@@ -1628,6 +2743,8 @@
             <option value="origami">Origami</option>
             <option value="woodblock">Woodblock</option>
             <option value="risograph">Risograph</option>
+            <option value="bioluminescent">Bioluminescent</option>
+            <option value="pixel_art">Pixel art</option>
           </select>
           <p class="style-description" id="styleDescription" aria-live="polite">Folded paper worlds, warm colors, and playful character motion.</p>
         </div>
@@ -1802,15 +2919,27 @@
         { id: "sailboat", label: "Sailboat" },
         { id: "moon_rabbit", label: "Moon rabbit" }
       ];
+      var pixelArtScenes = [
+        { id: "velodrome", label: "Velodrome" },
+        { id: "laundry_kitten", label: "Laundry Kitten" },
+        { id: "ramen", label: "Ramen Bar" },
+        { id: "pinball", label: "Pinball" },
+        { id: "airship", label: "Airship Dock" },
+        { id: "vinyl", label: "Vinyl Lounge" }
+      ];
       var sceneCatalogs = {
         origami: origamiScenes,
         woodblock: woodblockScenes,
-        risograph: origamiScenes
+        risograph: origamiScenes,
+        bioluminescent: origamiScenes,
+        pixel_art: pixelArtScenes
       };
       var artStyles = {
         origami: { label: "Origami", description: "Folded paper worlds, warm colors, and playful character motion." },
         woodblock: { label: "Woodblock", description: "Bold carved lines, flat color, and visible print texture." },
-        risograph: { label: "Risograph", description: "Fresh graphic worlds in bold spot inks, halftone, and playful geometric shapes." }
+        risograph: { label: "Risograph", description: "Fresh graphic worlds in bold spot inks, halftone, and playful geometric shapes." },
+        bioluminescent: { label: "Bioluminescent", description: "Luminous creatures and glowing worlds against deep, colorful darkness." },
+        pixel_art: { label: "Pixel art", description: "Six original pixel worlds with small, lively scene details." }
       };
       var standardClockGlyphPaths = {
         "0": "./assets/clock_0.png", "1": "./assets/clock_1.png",
@@ -1837,7 +2966,9 @@
           "8": "./assets/clock_woodblock_8.png", "9": "./assets/clock_woodblock_9.png",
           ":": "./assets/clock_woodblock_colon.png"
         },
-        risograph: standardClockGlyphPaths
+        risograph: standardClockGlyphPaths,
+        bioluminescent: standardClockGlyphPaths,
+        pixel_art: standardClockGlyphPaths
       };
 
       var sceneAssetPaths = Object.create(null);
@@ -1857,6 +2988,7 @@
       var defaults = {
         mode: "auto",
         scene: 0,
+        pixelScene: 0,
         style: "origami",
         woodScene: 0,
         rotation: 60,
@@ -1885,7 +3017,9 @@
       }
 
       function getCurrentSceneIndex() {
-        return state.style === "woodblock" ? state.woodScene : state.scene;
+        if (state.style === "woodblock") return state.woodScene;
+        if (state.style === "pixel_art") return state.pixelScene;
+        return state.scene;
       }
 
       function getCurrentFavorites() {
@@ -1903,6 +3037,10 @@
       var watchCase = document.getElementById("watchCase");
       var watchScreen = document.getElementById("watchScreen");
       var sceneArt = document.getElementById("sceneArt");
+      var pinballFlippers = [
+        sceneArt.querySelector(".pinball-flipper-left"),
+        sceneArt.querySelector(".pinball-flipper-right")
+      ];
       var ambientMotif = document.getElementById("ambientMotif");
       var timeText = document.getElementById("timeText");
       var dateText = document.getElementById("dateText");
@@ -1943,6 +3081,12 @@
               ? saved.woodScene - 1
               : saved.woodScene;
             if (savedWoodScene < woodblockScenes.length) next.woodScene = savedWoodScene;
+          }
+          if (Number.isInteger(saved.pixelScene) && saved.pixelScene >= 0 && saved.pixelScene < pixelArtScenes.length) {
+            next.pixelScene = saved.pixelScene;
+          } else if (typeof saved.pixelScene === "string") {
+            var savedPixelSceneIndex = pixelArtScenes.findIndex(function (scene) { return scene.id === saved.pixelScene; });
+            if (savedPixelSceneIndex !== -1) next.pixelScene = savedPixelSceneIndex;
           }
           if ([15, 30, 60, 180, 360, 1440].indexOf(Number(saved.rotation)) !== -1) next.rotation = Number(saved.rotation);
           if (typeof saved.ambient === "boolean") next.ambient = saved.ambient;
@@ -1996,7 +3140,7 @@
 
       function getRotationSequence() {
         var scenes = getCurrentScenes();
-        if (state.style === "risograph") return scenes.map(function (scene, index) { return index; });
+        if (state.style !== "origami" && state.style !== "woodblock") return scenes.map(function (scene, index) { return (getCurrentSceneIndex() + index) % scenes.length; });
         var enabled = [];
         getCurrentFavorites().forEach(function (favorite, index) {
           if (favorite) enabled.push(index);
@@ -2029,7 +3173,9 @@
       function setSceneArt(sceneId, scheduledTransition) {
         var artKey = state.style + ":" + sceneId;
         var supportsAmbientMotif = state.style === "origami" || state.style === "woodblock";
+        var isPixelPinball = state.style === "pixel_art" && sceneId === "pinball";
         var motionWrap = sceneArt.querySelector(".scene-motion-wrap");
+        pinballFlippers.forEach(function (flipper) { flipper.hidden = !isPixelPinball; });
         watchScreen.setAttribute("data-style", state.style);
         ambientMotif.src = state.style === "woodblock" ? "./assets/woodblock_ambient.png" : "./assets/origami_ambient.png";
         ambientMotif.hidden = !(supportsAmbientMotif && state.ambient);
@@ -2042,6 +3188,7 @@
         }
         activeSceneArtKey = artKey;
         sceneArt.setAttribute("data-style", state.style);
+        sceneArt.setAttribute("data-choreography", state.style === "bioluminescent" ? "shared" : "");
         sceneArt.setAttribute("data-scene", sceneId);
         sceneArt.classList.remove("asset-missing");
         [
@@ -2141,7 +3288,8 @@
         styleSelect.value = state.style;
         styleDescription.textContent = artStyles[state.style].description;
         document.querySelector(".scene-grid").setAttribute("aria-label", "Choose a " + artStyles[state.style].label + " scene");
-        favoritesGroup.hidden = state.style === "risograph";
+        document.querySelector(".scene-grid").setAttribute("data-style", state.style);
+        favoritesGroup.hidden = state.style !== "origami" && state.style !== "woodblock";
         document.getElementById("favoritesTitle").textContent = artStyles[state.style].label + " rotation";
         document.getElementById("favoritesHint").textContent = "Scenes included in auto mode";
         var currentFavorites = getCurrentFavorites();
@@ -2162,11 +3310,11 @@
         modeBadge.style.color = state.mode === "auto" ? "#687fcc" : "#cd7259";
         if (state.mode === "manual") {
           modeNote.textContent = "Fixed on the selected scene.";
-        } else if (state.style !== "risograph" && currentFavorites.every(function (favorite) { return !favorite; })) {
+        } else if ((state.style === "origami" || state.style === "woodblock") && currentFavorites.every(function (favorite) { return !favorite; })) {
           modeNote.textContent = "No " + artStyles[state.style].label + " scenes are included, so the selected scene stays fixed.";
-        } else if (state.style !== "risograph" && currentFavorites.filter(Boolean).length === 1) {
+        } else if ((state.style === "origami" || state.style === "woodblock") && currentFavorites.filter(Boolean).length === 1) {
           modeNote.textContent = "One " + artStyles[state.style].label + " scene is included, so the scene stays fixed.";
-        } else if (state.style !== "risograph") {
+        } else if (state.style === "origami" || state.style === "woodblock") {
           modeNote.textContent = "Rotates through included scenes, starting from the selected scene.";
         } else {
           modeNote.textContent = "Automatic rotation follows your local calendar, including midnight.";
@@ -2217,6 +3365,7 @@
         state.mode = "manual";
         if (index < 0 || index >= getCurrentScenes().length) return;
         if (state.style === "woodblock") state.woodScene = index;
+        else if (state.style === "pixel_art") state.pixelScene = index;
         else state.scene = index;
         previewOffset = 0;
         saveState();
@@ -2268,6 +3417,7 @@
         if (state.mode === "manual") {
           var nextIndex = (getCurrentSceneIndex() + 1) % getCurrentScenes().length;
           if (state.style === "woodblock") state.woodScene = nextIndex;
+          else if (state.style === "pixel_art") state.pixelScene = nextIndex;
           else state.scene = nextIndex;
         } else {
           var sequence = getRotationSequence();
