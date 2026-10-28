@@ -1,0 +1,72 @@
+{
+  "tool": "Built-in image_gen",
+  "style": "bioluminescent",
+  "scene_ids": [
+    "bicycle",
+    "forest",
+    "coding",
+    "kitten",
+    "landscape",
+    "cosmos",
+    "ocean",
+    "aurora"
+  ],
+  "scenes": [
+    {
+      "scene": "bicycle",
+      "source": "sources/bicycle-background.png",
+      "generated_source": "/home/steven/.codex/generated_images/01a17f7b-06fb-7762-9aaf-2420aa46a9e6/exec-3ad9b5dd-0b0c-41ac-b009-44dc98935594.png",
+      "prompt": "Use case: stylized-concept. Create one production-ready square full-bleed background illustration for a round smartwatch dial. Style: luminous bioluminescent night illustration, richly layered glowing organic shapes, soft bloom controlled by crisp silhouettes and delicate stippled light; refined and readable at 450px. Bicycle scene, dominant palette deep emerald, jade and cyan with small warm amber accents. A winding forest cycle path crosses the lower third, glowing ferns and luminous flowers framing the edges, distant dark pines and fireflies. Leave the central horizontal clock band dark, quiet, and low-detail so white time digits remain readable. No bicycle, rider, people, animals, clock, numbers, text, letters, UI, logo, watermark, border, or circular mask. Fill all four corners with seamless scene artwork; composed to crop safely into a circle. Avoid an empty rectangular cutout; maintain a cohesive complete nighttime scene."
+    },
+    {
+      "scene": "forest",
+      "source": "sources/forest-background.png",
+      "generated_source": "/home/steven/.codex/generated_images/01a17f7b-06fb-7762-9aaf-2420aa46a9e6/exec-7e7d94c0-685b-48cd-8bf0-0b4bdd9e2ef9.png",
+      "prompt": "Use case: stylized-concept. Square full-bleed illustration background for a round smartwatch. Visually distinct from a realistic photograph: refined luminous fantasy illustration with graphic layered plant shapes, painted textures, crisp silhouettes, and restrained glow. Scene: enchanted forest at midnight, dominant palette violet, indigo and electric fuchsia with cool cyan accents. Giant bioluminescent mushrooms and curled ferns frame the perimeter; a dim winding trail and glowing spores lead into a deep shadowy grove. Leave a broad dark low-detail central horizontal band for white watch digits, while keeping the scene cohesive and detailed around the whole dial. No hero mushroom cluster, no animals, no people, no text, lettering, clock, UI, logo, watermark, border, or circular mask. Fill corners with artwork, no empty rectangular hole, crop-safe for a round dial."
+    },
+    {
+      "scene": "coding",
+      "source": "sources/coding-background.png",
+      "generated_source": "/home/steven/.codex/generated_images/01a17f7b-06fb-7762-9aaf-2420aa46a9e6/exec-6eeb085f-8e98-4c4f-ba93-3718ed0bef75.png",
+      "prompt": "Use case: stylized-concept. Square full-bleed illustrated background for a round smartwatch dial, refined bioluminescent fantasy art with luminous ink-like edges, layered forms, subtle grain and controlled glow; not photorealistic. Coding scene in a striking dominant palette of deep sapphire blue and turquoise with small warm amber-orange accents. A cozy night coding nook suggested by abstract circuit traces, glowing plant leaves, scattered light motes, and a broad low desk silhouette along the bottom edge; make a few circuit traces resemble gentle branching vines. Reserve a wide quiet, dark central horizontal band for white time digits; frame it with detail mostly near the outer edge. Leave a clear lower-center area for a separate animated laptop. No laptop, computer, keyboard, person, text, letters, numbers, clock, UI, logo, watermark, border, or circular mask. Full artwork in all four corners, crop-safe for a circular watch."
+    },
+    {
+      "scene": "kitten",
+      "source": "sources/kitten-background.png",
+      "generated_source": "/home/steven/.codex/generated_images/01a17f7b-06fb-7762-9aaf-2420aa46a9e6/exec-82c60722-ff29-401f-b4e8-165703b4ca63.png",
+      "prompt": "Use case: stylized-concept. Square full-bleed background illustration for a round smartwatch, clearly fantastical and luminous rather than photorealistic. Scene: a magical kitten's play garden in a strong dominant palette of orchid violet, hot rose-pink and soft electric lilac, with little turquoise glints. Large glowing yarn loops and trailing threads frame the lower corners; oversized luminous blossoms and soft shadowed leaves border the rim, giving a cozy magical nocturne. Leave the kitten completely out because it will be animated separately; keep a broad calm dark plum horizontal band across center for white time digits. Leave a clear lower middle pocket for the kitten actor. Rich saturated color, clean painterly forms, visible glow, crop-safe for circular watch. No cats, animals, people, text, letters, clock, numbers, UI, logo, watermark, border, or circle mask. Full artwork extends to all corners; no blank rectangular patch."
+    },
+    {
+      "scene": "landscape",
+      "source": "sources/landscape-background.png",
+      "generated_source": "/home/steven/.codex/generated_images/01a17f7b-06fb-7762-9aaf-2420aa46a9e6/exec-96c74303-efe0-4f5e-aa4a-4b1bba306291.png",
+      "prompt": "Use case: stylized-concept. Square full-bleed illustrated background for a circular smartwatch dial. A luminous otherworldly desert at night, rendered in a distinctive bioluminescent illustration style with clean layered shapes, glowing contours, painterly stipple, and visible saturated colors. Dominant palette hot coral, molten amber and rust orange against deep indigo; sparse turquoise cactus blooms. Broad dunes sweep across the lower half, with a glowing canyon arch and giant amber moon near the rim; small luminous desert plants frame the edges. Leave a broad low-detail dark indigo band across the center for white clock digits, with scene details continuing around the outer dial. Leave a clear upper-right pocket for a separately animated hot-air balloon. No balloon, people, animals, text, letters, clock, numbers, UI, logo, watermark, border, or circular mask. Not photorealistic. Full artwork in all corners, crop-safe for circular watch."
+    },
+    {
+      "scene": "cosmos",
+      "source": "sources/cosmos-background.png",
+      "generated_source": "/home/steven/.codex/generated_images/01a17f7b-06fb-7762-9aaf-2420aa46a9e6/exec-31ff3213-874e-4566-81b4-6872d7f62f0b.png",
+      "prompt": "Use case: stylized-concept. Square full-bleed fantasy illustration for a round smartwatch dial: luminous cosmic bioluminescence with layered translucent nebula shapes, sharp starbursts and soft controlled glow, not photorealistic. Cosmos scene dominated by royal ultramarine, indigo and luminous magenta with pale aqua and gold sparks. One enormous elegant ringed planet arcs along the upper-left outer edge, with jewel-like star clusters and flowing nebula ribbons around the dial. Keep a wide dark low-detail central horizontal band for legible white watch digits, with faint stars through it. Leave a clear lower-right diagonal corridor for a separate rocket actor. No rocket, spacecraft, text, letters, clock, numbers, UI, logo, watermark, border, or circular mask. Fill all four corners with cosmic art, crop-safe for a circular watch."
+    },
+    {
+      "scene": "ocean",
+      "source": "sources/ocean-background.png",
+      "generated_source": "/home/steven/.codex/generated_images/01a17f7b-06fb-7762-9aaf-2420aa46a9e6/exec-bd2b5505-8ec7-4cc7-b0f3-92c557d8bd16.png",
+      "prompt": "Use case: stylized-concept. Square full-bleed illustrated background for a round smartwatch dial. Dreamlike bioluminescent reef at night, saturated and unmistakably illustrated with broad fluid shapes, delicate luminous edges and soft painterly glow. Dominant palette aqua, teal and bright sea-glass green with electric lime accents. Tall luminous kelp fronds and coral fans frame the left and right edges; glowing reef gardens and small distant bubbles along the bottom; deep blue open water fades toward the center. Keep a broad dark, uncluttered horizontal band across the middle for white watch digits. Leave an open central-lower water pocket for a separate animated jellyfish. No jellyfish, whales, fish, animals, people, words, letters, clock, numbers, UI, logo, watermark, border, or circular mask. Avoid beach or sky. Fill corners with artwork; crop-safe circular composition."
+    },
+    {
+      "scene": "aurora",
+      "source": "sources/aurora-background.png",
+      "generated_source": "/home/steven/.codex/generated_images/01a17f7b-06fb-7762-9aaf-2420aa46a9e6/exec-089245b2-0cab-418e-ae11-f76834ee392a.png",
+      "prompt": "Use case: stylized-concept. Square full-bleed illustration for a round smartwatch dial, magical northern lights in a luminous bioluminescent night style with layered color ribbons, bold silhouettes, and gentle glow; clearly illustrated, not a photograph. Scene palette dominated by emerald green, arctic cyan, and deep indigo, with subtle violet shadow accents. Flowing aurora curtains sweep from the upper edge over dark pine ridges and a still lake; tiny glowing reeds and flowers trace the shore. Keep a wide quiet dark central horizontal band for white watch digits while retaining a complete cohesive scene around it. Leave an open lower-right shoreline pocket for a separate animated fox. No fox, animals, people, text, letters, numbers, clock, UI, logo, watermark, border, or circular mask. Fill all corners with artwork; crop-safe for circular watch."
+    }
+  ],
+  "sprites": {
+    "source": "sources/sprites.png",
+    "generated_source": "/home/steven/.codex/generated_images/01a17f7b-06fb-7762-9aaf-2420aa46a9e6/exec-61d86409-d48e-48f7-b590-988ae02c9ae0.png",
+    "grid": [4, 4],
+    "scene_actors_row_major": ["bicycle", "forest", "coding", "kitten", "landscape", "cosmos", "ocean", "aurora"],
+    "scene_drift_row_major": ["bicycle", "forest", "coding", "kitten", "landscape", "cosmos", "ocean", "aurora"],
+    "prompt": "Use case: illustration-story. Generate a production-ready transparent PNG sprite atlas for the eight bioluminescent smartwatch scenes. Exact square canvas divided into an EXACTLY aligned 4-column by 4-row grid, 16 equal square cells. Put exactly one isolated complete sprite in the center of each cell, row-major map below. Broad transparent gutters: keep every glow, silhouette, and particle entirely within its cell, with an empty outer 18% safety margin. Grid lines invisible; no backgrounds, cell fills, labels, text, letters, numbers, logos, watermark, shadows spilling outside cells. Genuine alpha transparency outside artwork. Cohesive luminous fantasy illustration style with clean graphic silhouettes and controlled glow; each sprite must be distinctive, saturated, and readable at 225px watch scale. Palette changes by scene: emerald/cyan/amber, violet/fuchsia, sapphire/turquoise/amber, rose/orchid, coral/amber/indigo, ultramarine/magenta/gold, aqua/lime/teal, emerald/cyan/violet. NOT paper, origami, woodblock, flat printing, photorealism, or 3D. Exact 16-cell map left-to-right, top-to-bottom: row1: (1) complete side-view bicycle with small rider, wheels glowing emerald and amber, facing right; (2) graceful glowing mushroom cluster with violet caps and cyan gills; (3) open compact laptop with sapphire shell, luminous turquoise screen and tiny abstract non-letter strokes; (4) fluffy small kitten with orchid coat and bright rose eyes, one paw reaching right. Row2: (5) small ornate hot-air balloon with coral-and-amber glowing envelope; (6) sleek retro space rocket angled 45 degrees pointing upper-right, ultramarine with magenta fins and gold flame; (7) delicate floating translucent aqua jellyfish with lime highlights and flowing tentacles; (8) small friendly luminous arctic fox standing in profile facing right, emerald and cyan fur with violet highlights. Row3: (9) a few amber and green firefly motes; (10) a few violet glowing spores; (11) one turquoise blinking cursor-like square with tiny glints, absolutely no letters; (12) tiny rose-gold moth with translucent wings. Row4: (13) a small amber dust-and-seed sparkle trail; (14) a cluster of gold and magenta star sparks; (15) three distinct round sea-glass bubbles; (16) a short flowing emerald-and-cyan aurora ribbon with two tiny glints. Keep each sprite centered within its own cell and fully separated. No extra objects."
+  }
+}

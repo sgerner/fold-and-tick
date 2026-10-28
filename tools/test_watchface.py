@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from math import floor, sin, cos, radians
 from functools import lru_cache
+import json
 import re
 import struct
 import unittest
@@ -16,10 +17,12 @@ ROOT = Path(__file__).resolve().parents[1]
 FACE = ET.parse(ROOT / 'watchface/src/main/res/raw/watchface.xml')
 EXPRESSIONS = [e.text for e in FACE.findall('./Scene/Condition/Expressions/Expression')[:8]]
 PERIODS = (15, 30, 60, 180, 360, 1440)
-STYLES = ('origami', 'woodblock', 'risograph')
+STYLES = ('origami', 'woodblock', 'risograph', 'bioluminescent', 'pixel_art')
 SCENES = ('bicycle', 'forest', 'coding', 'kitten', 'landscape', 'cosmos', 'ocean', 'aurora')
 WOODBLOCK_SCENES = ('bicycle', 'crane', 'kitten', 'torii', 'lanterns', 'sailboat', 'moon_rabbit')
 WOODBLOCK_SHOW_IDS = ('bicycle', 'forest', 'kitten', 'landscape', 'cosmos', 'ocean', 'aurora')
+PIXEL_SCENES = ('velodrome', 'laundry_kitten', 'ramen', 'pinball', 'airship', 'vinyl')
+PIXEL_SHOW_IDS = ('bicycle', 'forest', 'coding', 'kitten', 'landscape', 'cosmos')
 
 
 def _complication_plate(complication, branch='Default'):
@@ -145,29 +148,42 @@ def evaluate_expression(expression, values):
 
 
 def config_values(now, period, selected, style='origami', favorites=SCENES,
-                  woodblock_favorites=WOODBLOCK_SCENES, second=0.0):
+                  woodblock_favorites=WOODBLOCK_SCENES, second=0.0,
+                  pixel_scene='velodrome'):
+    lunar_favorites = set(woodblock_favorites) & {'sailboat', 'moon_rabbit'}
+    lunar_choice = ({'sailboat': 'SAILBOAT', 'moon_rabbit': 'MOON_RABBIT'}[next(iter(lunar_favorites))]
+                    if len(lunar_favorites) == 1 else 'BOTH' if len(lunar_favorites) == 2 else 'NONE')
     values = {'YEAR': now.year, 'DAY_OF_YEAR': now.timetuple().tm_yday,
               'HOUR_0_23': now.hour, 'MINUTE': now.minute,
               'SECOND_MILLISECOND': second,
               'CONFIGURATION.rotation_period': period,
               'CONFIGURATION.scene': str(selected),
               'CONFIGURATION.woodblock_scene': str(selected),
+              'CONFIGURATION.pixel_scene': pixel_scene,
+              'CONFIGURATION.woodblock_lunar_favorites': lunar_choice,
               'CONFIGURATION.art_style': style,
               'CONFIGURATION.motion_enabled': 'TRUE'}
     for scene in SCENES:
         values[f'CONFIGURATION.favorite_{scene}'] = 'TRUE' if scene in favorites else 'FALSE'
     for scene in WOODBLOCK_SCENES:
-        values[f'CONFIGURATION.favorite_woodblock_{scene}'] = (
-            'TRUE' if scene in woodblock_favorites else 'FALSE')
+        if scene not in {'sailboat', 'moon_rabbit'}:
+            values[f'CONFIGURATION.favorite_woodblock_{scene}'] = (
+                'TRUE' if scene in woodblock_favorites else 'FALSE')
     return values
 
 
 def expected_scene_for_config(now, period, selected, style, favorites,
                               woodblock_favorites=WOODBLOCK_SCENES):
+    if style == 'pixel_art':
+        selected_index = PIXEL_SCENES.index(selected) if isinstance(selected, str) else selected
+        if period == 'FIXED':
+            return selected_index
+        absolute_minutes = int((now - datetime(1970, 1, 1)) // timedelta(minutes=1))
+        return (absolute_minutes // period + selected_index) % len(PIXEL_SCENES)
     if period == 'FIXED':
         return selected
     absolute_minutes = int((now - datetime(1970, 1, 1)) // timedelta(minutes=1))
-    if style == 'risograph':
+    if style not in ('origami', 'woodblock'):
         return (absolute_minutes // period + selected) % len(SCENES)
     scenes, favorites = (SCENES, favorites) if style == 'origami' else (WOODBLOCK_SCENES, woodblock_favorites)
     enabled = [index for index, scene in enumerate(scenes) if scene in favorites]
@@ -262,6 +278,103 @@ class RotationTest(unittest.TestCase):
                     self.assertAlmostEqual(float(stopped), float(part.attrib[transform.attrib['target']]))
                     self.assertEqual(part.find('Variant[@mode="AMBIENT"]').attrib['value'], '0')
             self.assertGreaterEqual(max(ranges), 20, scene.attrib['expression'])
+
+    def test_pixel_scene_motion_stays_inside_its_scene_story(self):
+        routes = {
+            'velodrome': [('x', -330, 323.4)],
+            'laundry_kitten': [('y', -29.7, 0)],
+            'pinball': [('x', -177.5, 193.1), ('y', -309.8, 58.9)],
+            'airship': [('x', -330, 324.5)],
+        }
+        for pixel_scene, show_id in zip(PIXEL_SCENES, PIXEL_SHOW_IDS):
+            branch = FACE.find(f'./Scene/Condition/Compare[@expression="show_{show_id}"]'
+                               '/Condition/Compare[@expression="style_pixel_art"]')
+            parts = {part.find('Image').attrib['resource']: part for part in branch.findall('PartImage')}
+            actor = parts[f'motion_pixel_art_{pixel_scene}']
+            if pixel_scene in {'ramen', 'vinyl'}:
+                self.assertFalse(actor.findall('Transform'), pixel_scene)
+                drift = parts[f'drift_pixel_art_{pixel_scene}']
+                targets = {transform.attrib['target'] for transform in drift.findall('Transform')}
+                expected_targets = {'y', 'alpha'} if pixel_scene == 'ramen' else {'x', 'y', 'alpha'}
+                self.assertEqual(targets, expected_targets, pixel_scene)
+                sample_count = 50 if pixel_scene == 'ramen' else 40
+                values = {}
+                for target in expected_targets:
+                    expression = drift.find(f'Transform[@target="{target}"]').attrib['value']
+                    values[target] = [evaluate_expression(expression, {
+                        'CONFIGURATION.motion_enabled': 'TRUE',
+                        'SECOND_MILLISECOND': sample / 10,
+                    }) for sample in range(sample_count)]
+                    stopped = evaluate_expression(expression, {
+                        'CONFIGURATION.motion_enabled': 'FALSE',
+                        'SECOND_MILLISECOND': 0.6,
+                    })
+                    self.assertEqual(stopped, 255 if target == 'alpha' else 0, (pixel_scene, target))
+                if pixel_scene == 'ramen':
+                    self.assertAlmostEqual(min(values['y']), -37.24, delta=0.01)
+                    self.assertAlmostEqual(max(values['y']), 0)
+                    self.assertAlmostEqual(min(values['alpha']), 5.1, delta=0.01)
+                    self.assertAlmostEqual(max(values['alpha']), 255)
+                else:
+                    self.assertAlmostEqual(min(values['y']), -39)
+                    self.assertAlmostEqual(max(values['y']), 0)
+                    self.assertAlmostEqual(min(values['x']), -12)
+                    self.assertAlmostEqual(max(values['x']), 12)
+                    self.assertAlmostEqual(min(values['alpha']), 6.375)
+                    self.assertAlmostEqual(max(values['alpha']), 255)
+                continue
+            for target, minimum, maximum in routes[pixel_scene]:
+                expression = actor.find(f'Transform[@target="{target}"]').attrib['value']
+                positions = [evaluate_expression(expression, {
+                    'CONFIGURATION.motion_enabled': 'TRUE',
+                    'SECOND_MILLISECOND': sample / 10,
+                }) for sample in range(120)]
+                self.assertAlmostEqual(min(positions), minimum, delta=12.0 if pixel_scene == 'pinball' else 1.2, msg=pixel_scene)
+                self.assertAlmostEqual(max(positions), maximum, delta=12.0 if pixel_scene == 'pinball' else 1.2, msg=pixel_scene)
+                self.assertEqual(evaluate_expression(expression, {
+                    'CONFIGURATION.motion_enabled': 'FALSE',
+                    'SECOND_MILLISECOND': 0.6,
+                }), 0)
+
+    def test_pinball_flippers_follow_impacts_and_pause_together(self):
+        branch = FACE.find('./Scene/Condition/Compare[@expression="show_kitten"]'
+                           '/Condition/Compare[@expression="style_pixel_art"]')
+        parts = {part.find('Image').attrib['resource']: part for part in branch.findall('PartImage')}
+        for side, rest in (('left', 20), ('right', 160)):
+            part = parts[f'flipper_pixel_art_pinball_{side}']
+            transform = part.find('Transform[@target="angle"]')
+            self.assertIsNotNone(transform)
+            expression = transform.attrib['value']
+            angles = [evaluate_expression(expression, {
+                'CONFIGURATION.motion_enabled': 'TRUE',
+                'SECOND_MILLISECOND': tick / 20,
+            }) for tick in range(200)]
+            self.assertGreater(max(angles) - min(angles), 40)
+            self.assertAlmostEqual(evaluate_expression(expression, {
+                'CONFIGURATION.motion_enabled': 'TRUE', 'SECOND_MILLISECOND': 0,
+            }), 0)
+            self.assertEqual(evaluate_expression(expression, {
+                'CONFIGURATION.motion_enabled': 'FALSE', 'SECOND_MILLISECOND': 4.5,
+            }), 0)
+            self.assertEqual(part.find('Variant[@mode="AMBIENT"]').attrib['value'], '0')
+
+        ball = parts['motion_pixel_art_pinball']
+        spark = parts['drift_pixel_art_pinball']
+        for target in ('x', 'y'):
+            self.assertEqual(ball.find(f'Transform[@target="{target}"]').attrib['value'],
+                             spark.find(f'Transform[@target="{target}"]').attrib['value'])
+        events = json.loads((ROOT / 'artwork/packs/pixel_art/pinball-motion.json').read_text())['events']
+        first = next(event for i, event in enumerate(events)
+                     if i + 1 < len(events) and events[i + 1]['t'] - event['t'] > 0.3)
+        flash = spark.find('Transform[@target="alpha"]').attrib['value']
+        visible = evaluate_expression(flash, {
+            'CONFIGURATION.motion_enabled': 'TRUE', 'SECOND_MILLISECOND': first['t'] + 0.05,
+        })
+        ended = evaluate_expression(flash, {
+            'CONFIGURATION.motion_enabled': 'TRUE', 'SECOND_MILLISECOND': first['t'] + 0.11,
+        })
+        self.assertGreater(visible, 100)
+        self.assertEqual(ended, 0)
 
     def test_bike_and_rocket_cross_both_dial_edges(self):
         for scene_id in ('bicycle', 'cosmos'):
@@ -370,22 +483,23 @@ class RotationTest(unittest.TestCase):
 
     def test_style_selector_precedes_scene_and_keeps_all_scene_ids(self):
         self.assertEqual([configuration.attrib['id'] for configuration in FACE.find('./UserConfigurations')],
-                         ['art_style', 'scene', 'woodblock_scene', 'rotation_period', 'motion_enabled',
+                         ['art_style', 'scene', 'woodblock_scene', 'pixel_scene', 'rotation_period', 'motion_enabled',
                           *[f'favorite_{scene}' for scene in SCENES],
                           'favorite_woodblock_bicycle', 'favorite_woodblock_crane',
                           'favorite_woodblock_kitten',
                           'favorite_woodblock_torii', 'favorite_woodblock_lanterns',
-                          'favorite_woodblock_sailboat', 'favorite_woodblock_moon_rabbit'])
+                          'woodblock_lunar_favorites'])
         configurations = FACE.findall('./UserConfigurations/ListConfiguration')
-        self.assertEqual([configuration.attrib['id'] for configuration in configurations[:2]],
-                         ['art_style', 'scene'])
+        self.assertEqual([configuration.attrib['id'] for configuration in configurations[:4]],
+                         ['art_style', 'scene', 'woodblock_scene', 'pixel_scene'])
 
         style = configurations[0]
         self.assertEqual(style.attrib['defaultValue'], 'origami')
         self.assertEqual([option.attrib['id'] for option in style], list(STYLES))
         self.assertEqual([option.attrib['icon'] for option in style],
                          ['icon_scene_cosmos', 'icon_scene_woodblock_bicycle',
-                          'icon_scene_risograph_cosmos'])
+                          'icon_scene_risograph_cosmos', 'icon_scene_bioluminescent_bicycle',
+                          'icon_scene_pixel_art_velodrome'])
         for option in style:
             icon_path = ROOT / 'watchface/src/main/res/drawable-nodpi' / f"{option.attrib['icon']}.png"
             width, height = struct.unpack('>II', icon_path.read_bytes()[16:24])
@@ -393,6 +507,23 @@ class RotationTest(unittest.TestCase):
 
         scene = configurations[1]
         self.assertEqual([option.attrib['id'] for option in scene], [str(i) for i in range(8)])
+
+        pixel_scene = configurations[3]
+        self.assertEqual(pixel_scene.attrib['defaultValue'], 'velodrome')
+        self.assertEqual([option.attrib['id'] for option in pixel_scene], list(PIXEL_SCENES))
+        self.assertEqual([option.attrib['displayName'] for option in pixel_scene],
+                         [f'pixel_scene_{name}' for name in PIXEL_SCENES])
+        self.assertEqual([option.attrib['icon'] for option in pixel_scene],
+                         [f'icon_scene_pixel_art_{name}' for name in PIXEL_SCENES])
+        strings = {string.attrib['name']: string.text
+                   for string in ET.parse(ROOT / 'watchface/src/main/res/values/strings.xml').getroot()}
+        self.assertEqual([strings[f'pixel_scene_{name}'] for name in PIXEL_SCENES],
+                         ['Pixel art: Velodrome', 'Pixel art: Laundry Kitten', 'Pixel art: Ramen Bar',
+                          'Pixel art: Pinball', 'Pixel art: Airship Dock', 'Pixel art: Vinyl Lounge'])
+        for option in pixel_scene:
+            icon_path = ROOT / 'watchface/src/main/res/drawable-nodpi' / f"{option.attrib['icon']}.png"
+            width, height = struct.unpack('>II', icon_path.read_bytes()[16:24])
+            self.assertEqual((width, height), (160, 160), option.attrib['icon'])
 
     def test_origami_favorite_toggles_default_on_and_are_accessibly_labeled(self):
         favorite_ids = [f'favorite_{scene}' for scene in SCENES]
@@ -425,28 +556,37 @@ class RotationTest(unittest.TestCase):
 
         wood_favorites = [config for config in configurations.findall('BooleanConfiguration')
                           if config.attrib['id'].startswith('favorite_woodblock_')]
-        expected_ids = [f'favorite_woodblock_{name}' for name in WOODBLOCK_SCENES]
+        expected_ids = [f'favorite_woodblock_{name}' for name in WOODBLOCK_SCENES
+                        if name not in {'sailboat', 'moon_rabbit'}]
         self.assertEqual([favorite.attrib['id'] for favorite in wood_favorites], expected_ids)
         self.assertTrue(all(favorite.attrib['defaultValue'] == 'TRUE' for favorite in wood_favorites))
+
+        lunar = configurations.find('ListConfiguration[@id="woodblock_lunar_favorites"]')
+        self.assertEqual(lunar.attrib['defaultValue'], 'BOTH')
+        self.assertEqual([option.attrib['id'] for option in lunar],
+                         ['BOTH', 'SAILBOAT', 'MOON_RABBIT', 'NONE'])
 
         strings = {string.attrib['name']: string.text
                    for string in ET.parse(ROOT / 'watchface/src/main/res/values/strings.xml').getroot()}
         for scene in WOODBLOCK_SCENES:
             self.assertIn('Woodblock', strings[f'woodblock_scene_{scene}'])
-            favorite = configurations.find(f'BooleanConfiguration[@id="favorite_woodblock_{scene}"]')
-            self.assertEqual(favorite.attrib['displayName'], f'favorite_woodblock_{scene}_label')
-            self.assertEqual(favorite.attrib['screenReaderText'],
-                             f'favorite_woodblock_{scene}_description')
-            self.assertIn('Woodblock', strings[f'favorite_woodblock_{scene}_label'])
-            self.assertIn('Woodblock', strings[f'favorite_woodblock_{scene}_description'])
-            self.assertIn('Woodblock', strings[f'favorite_woodblock_{scene}_label'])
-            self.assertIn('Woodblock', strings[f'favorite_woodblock_{scene}_description'])
+            if scene not in {'sailboat', 'moon_rabbit'}:
+                favorite = configurations.find(f'BooleanConfiguration[@id="favorite_woodblock_{scene}"]')
+                self.assertEqual(favorite.attrib['displayName'], f'favorite_woodblock_{scene}_label')
+                self.assertEqual(favorite.attrib['screenReaderText'],
+                                 f'favorite_woodblock_{scene}_description')
+                self.assertIn('Woodblock', strings[f'favorite_woodblock_{scene}_label'])
+                self.assertIn('Woodblock', strings[f'favorite_woodblock_{scene}_description'])
+        self.assertIn('Woodblock', strings['woodblock_lunar_favorites_title'])
+        self.assertIn('Woodblock', strings['woodblock_lunar_favorites_description'])
+        self.assertEqual([strings[option.attrib['displayName']] for option in lunar],
+                         ['Both', 'Sailboat', 'Moon Rabbit', 'Neither'])
         self.assertNotIn('koi', '\n'.join(f'{key}:{value}' for key, value in strings.items()).lower())
         self.assertNotIn('koi', (ROOT / 'watchface/src/main/res/raw/watchface.xml')
                          .read_text().lower())
-        self.assertNotIn('favorite_woodblock_crane_koi',
-                         '\n'.join(config.attrib.get('id', '') for config in configurations))
-        self.assertNotIn('favorite_woodblock_crane_koi_title', strings)
+        self.assertNotIn('orrery', (ROOT / 'watchface/src/main/res/raw/watchface.xml')
+                         .read_text().lower())
+        self.assertNotIn('orrery', '\n'.join(strings.values()).lower())
 
     def test_woodblock_rotation_uses_each_favorite_subset_and_selected_fallback(self):
         now = datetime(2026, 10, 25, 16, 0)
@@ -501,22 +641,34 @@ class RotationTest(unittest.TestCase):
         for selected_style in STYLES:
             for period in ('FIXED', 15, 60, 1440):
                 for date in dates:
-                    scene_count = len(WOODBLOCK_SCENES) if selected_style == 'woodblock' else len(SCENES)
+                    scene_count = (len(WOODBLOCK_SCENES) if selected_style == 'woodblock' else
+                                   len(PIXEL_SCENES) if selected_style == 'pixel_art' else len(SCENES))
                     for selected_scene in range(scene_count):
                         now = date + timedelta(minutes=period if period != 'FIXED' else 0)
-                        values = config_values(now, period, selected_scene, selected_style)
+                        pixel_scene = PIXEL_SCENES[selected_scene] if selected_style == 'pixel_art' else 'velodrome'
+                        values = config_values(now, period, selected_scene, selected_style,
+                                               pixel_scene=pixel_scene)
                         active_scenes = [i for i, expression in enumerate(EXPRESSIONS)
                                          if evaluate_expression(expression, values)]
-                        expected = expected_scene_for_config(now, period, selected_scene,
+                        selected_for_expectation = pixel_scene if selected_style == 'pixel_art' else selected_scene
+                        expected = expected_scene_for_config(now, period, selected_for_expectation,
                                                              selected_style, SCENES, WOODBLOCK_SCENES)
-                        expected_slot = WOODBLOCK_SHOW_IDS[expected] if selected_style == 'woodblock' else expected
-                        self.assertEqual(active_scenes, [SCENES.index(expected_slot)
-                                                         if selected_style == 'woodblock' else expected])
+                        if selected_style == 'woodblock':
+                            expected_slot = WOODBLOCK_SHOW_IDS[expected]
+                            expected_active_index = SCENES.index(expected_slot)
+                            scene_id = WOODBLOCK_SCENES[expected]
+                        elif selected_style == 'pixel_art':
+                            expected_slot = PIXEL_SHOW_IDS[expected]
+                            expected_active_index = expected
+                            scene_id = PIXEL_SCENES[expected]
+                        else:
+                            expected_slot = SCENES[expected]
+                            expected_active_index = expected
+                            scene_id = SCENES[expected]
+                        self.assertEqual(active_scenes, [expected_active_index])
 
-                        scene = scene_compares[SCENES.index(expected_slot)
-                                               if selected_style == 'woodblock' else expected]
-                        self.assertEqual(scene.attrib['expression'], f'show_{expected_slot}'
-                                         if selected_style == 'woodblock' else f'show_{SCENES[expected]}')
+                        scene = scene_compares[expected_active_index]
+                        self.assertEqual(scene.attrib['expression'], f'show_{expected_slot}')
                         style_condition = scene.find('Condition')
                         style_expressions = {expression.attrib['name']: expression.text
                                              for expression in style_condition.findall('./Expressions/Expression')}
@@ -530,7 +682,6 @@ class RotationTest(unittest.TestCase):
                         branch = style_condition.find(f'Compare[@expression="style_{selected_style}"]')
                         resources = [part.find('Image').attrib['resource']
                                      for part in branch.findall('.//PartImage')]
-                        scene_id = WOODBLOCK_SCENES[expected] if selected_style == 'woodblock' else SCENES[expected]
                         if selected_style == 'origami':
                             self.assertIn(f'scene_{scene_id}', resources)
                             self.assertIn(f'glass_{scene_id}', resources)
@@ -538,9 +689,22 @@ class RotationTest(unittest.TestCase):
                         else:
                             if selected_style == 'woodblock':
                                 resources.remove('woodblock_ambient')
-                            if selected_style == 'woodblock':
                                 expected_resources = [f'{kind}_woodblock_{scene_id}'
                                                       for kind in ('scene', 'motion', 'drift', 'glass')]
+                            elif selected_style == 'pixel_art':
+                                expected_resources = ([f'scene_pixel_art_{scene_id}',
+                                                      'flipper_pixel_art_pinball_left',
+                                                      'flipper_pixel_art_pinball_right',
+                                                      'drift_pixel_art_pinball',
+                                                      'motion_pixel_art_pinball',
+                                                      'glass_pixel_art_pinball']
+                                                     if scene_id == 'pinball' else
+                                                     [f'{kind}_pixel_art_{scene_id}'
+                                                      for kind in ('scene', 'motion', 'drift', 'glass')])
+                                self.assertEqual(set(resources), set(expected_resources))
+                                self.assertEqual(resources[0], expected_resources[0])
+                                self.assertEqual(resources[-1], expected_resources[-1])
+                                continue
                             else:
                                 origami = scene.find('./Condition/Compare[@expression="style_origami"]')
                                 overlay_order = [part.find('Image').attrib['resource'].split('_', 1)[0]
@@ -551,6 +715,37 @@ class RotationTest(unittest.TestCase):
                                                           for kind in overlay_order)
                                 expected_resources.append(f'glass_{selected_style}_{scene_id}')
                             self.assertEqual(resources, expected_resources)
+
+    def test_new_packs_have_animated_ambient_safe_layers(self):
+        assets = ROOT / 'watchface/src/main/res/drawable-nodpi'
+        packs = [('bioluminescent', SCENES, SCENES), ('pixel_art', PIXEL_SCENES, PIXEL_SHOW_IDS)]
+        for style, scene_ids, show_ids in packs:
+            for scene_id, show_id in zip(scene_ids, show_ids):
+                branch = FACE.find(f'./Scene/Condition/Compare[@expression="show_{show_id}"]'
+                                   f'/Condition/Compare[@expression="style_{style}"]')
+                self.assertIsNotNone(branch, (style, scene_id))
+                parts = {p.find('Image').attrib['resource']: p for p in branch.findall('.//PartImage')}
+                background = parts[f'scene_{style}_{scene_id}']
+                self.assertEqual([background.attrib[k] for k in ('x', 'y', 'width', 'height')],
+                                 ['0', '0', '450', '450'])
+                self.assertFalse(background.findall('Transform'))
+                for layer in ('scene', 'motion', 'drift', 'glass'):
+                    name = f'{layer}_{style}_{scene_id}'
+                    self.assertIn(name, parts)
+                    self.assertTrue((assets / f'{name}.png').is_file(), name)
+                    self.assertIsNotNone(parts[name].find('Variant[@mode="AMBIENT"]'), name)
+                for layer in ('motion', 'drift'):
+                    part = parts[f'{layer}_{style}_{scene_id}']
+                    if style == 'pixel_art' and scene_id in {'ramen', 'vinyl'} and layer == 'motion':
+                        self.assertFalse(part.findall('Transform'), (style, scene_id, layer))
+                        continue
+                    self.assertTrue(part.findall('Transform'), (style, scene_id, layer))
+                    self.assertTrue(all('motion_enabled' in t.attrib['value'] for t in part.findall('Transform')))
+                self.assertTrue((assets / f'icon_scene_{style}_{scene_id}.png').is_file())
+
+        for show_id in set(SCENES) - set(PIXEL_SHOW_IDS):
+            self.assertIsNone(FACE.find(f'./Scene/Condition/Compare[@expression="show_{show_id}"]'
+                                        '/Condition/Compare[@expression="style_pixel_art"]'))
 
     def test_new_style_art_pans_as_one_ambient_safe_canvas(self):
         for scene_id in SCENES:
@@ -666,6 +861,7 @@ class RotationTest(unittest.TestCase):
     def test_new_style_assets_use_expected_texture_resolutions(self):
         resources = [('risograph', scene) for scene in SCENES]
         resources += [('woodblock', scene) for scene in WOODBLOCK_SCENES]
+        resources += [('pixel_art', scene) for scene in PIXEL_SCENES]
         for style, scene_id in resources:
             for kind in ('scene', 'motion', 'drift', 'glass'):
                 resource = f'{kind}_{style}_{scene_id}'
@@ -673,11 +869,24 @@ class RotationTest(unittest.TestCase):
                 data = image_path.read_bytes()
                 self.assertEqual(data[:8], b'\x89PNG\r\n\x1a\n', resource)
                 width, height = struct.unpack('>II', data[16:24])
-                size = 225 if kind in ('drift', 'glass') else 450
+                if style == 'pixel_art':
+                    size = 112 if kind == 'glass' else 225
+                else:
+                    size = 225 if kind in ('drift', 'glass') else 450
                 self.assertEqual((width, height), (size, size), resource)
 
         ambient = ROOT / 'watchface/src/main/res/drawable-nodpi/woodblock_ambient.png'
         self.assertEqual(struct.unpack('>II', ambient.read_bytes()[16:24]), (450, 450))
+
+    def test_pixel_art_sprites_keep_solid_edges(self):
+        from PIL import Image
+        folder = ROOT / 'watchface/src/main/res/drawable-nodpi'
+        for scene in PIXEL_SCENES:
+            for kind in ('motion', 'drift'):
+                with Image.open(folder / f'{kind}_pixel_art_{scene}.png') as image:
+                    alpha = image.convert('RGBA').getchannel('A')
+                    self.assertLessEqual({value for _, value in alpha.getcolors()}, {0, 255})
+                    self.assertIsNotNone(alpha.getbbox(), (scene, kind))
 
     def test_woodblock_clock_keeps_base_glyph_geometry_and_alpha(self):
         from PIL import Image, ImageChops
@@ -803,12 +1012,15 @@ class RotationTest(unittest.TestCase):
             origami = _complication_plate(complication, 'Compare[@expression="origami_glass_style"]')
             woodblock = _complication_plate(complication, 'Compare[@expression="woodblock_glass_style"]')
             other_styles = _complication_plate(complication)
+            new_styles = _complication_plate(complication, 'Compare[@expression="new_glass_style"]')
             self.assertIsNotNone(origami)
             self.assertIsNotNone(woodblock)
             self.assertIsNotNone(other_styles)
+            self.assertIsNotNone(new_styles)
             for plate, fill_color, gradient_colors in (
                     (origami, '#FFFFFFFF', '#38FFE9BF #24E8BC95'),
                     (woodblock, '#FFFFFFFF', '#38E9DFC0 #24A3BCBE'),
+                    (new_styles, '#FFFFFFFF', '#B8071022 #99071022'),
                     (other_styles, '#30DFEBF7', '#38DFEBF7 #24B8CCE4')):
                 self.assertIsNone(plate.find('Stroke'))
                 fill = plate.find('Fill')
@@ -817,12 +1029,15 @@ class RotationTest(unittest.TestCase):
                 self.assertEqual(gradient.attrib['colors'], gradient_colors)
             self.assertEqual(origami.attrib, woodblock.attrib)
             self.assertEqual(origami.attrib, other_styles.attrib)
+            self.assertEqual(origami.attrib, new_styles.attrib)
             transforms = [(node.attrib['target'], node.attrib['value'])
                           for node in origami.findall('Transform')]
             self.assertEqual(transforms, [(node.attrib['target'], node.attrib['value'])
                                           for node in woodblock.findall('Transform')])
             self.assertEqual(transforms, [(node.attrib['target'], node.attrib['value'])
                                           for node in other_styles.findall('Transform')])
+            self.assertEqual(transforms, [(node.attrib['target'], node.attrib['value'])
+                                          for node in new_styles.findall('Transform')])
 
     def test_date_glass_stays_centered_and_caps_long_provider_text(self):
         for kind in ('SHORT_TEXT', 'LONG_TEXT'):

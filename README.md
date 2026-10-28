@@ -4,7 +4,7 @@
 [![Release](https://img.shields.io/github/v/release/sgerner/fold-and-tick)](https://github.com/sgerner/fold-and-tick/releases/latest)
 [![License: 0BSD](https://img.shields.io/badge/license-0BSD-brightgreen.svg)](LICENSE)
 
-**Tiny art worlds. Big, readable time.** An animated watch face with three art styles for **Pixel Watch 3 (41 mm and 45 mm)** and other **Wear OS 5+** watches.
+**Tiny art worlds. Big, readable time.** An animated watch face with five art styles for **Pixel Watch 3 (41 mm and 45 mm)** and other **Wear OS 5+** watches.
 
 [**Download the latest APK**](https://github.com/sgerner/fold-and-tick/releases/latest/download/Fold-and-Tick.apk) · [**Try the live preview**](https://sgerner.github.io/fold-and-tick/) · [**Install on your watch**](#install-on-your-watch)
 
@@ -12,27 +12,38 @@
 
 ## A little world for every mood
 
-Choose **Art style** first, then select a scene and rotation interval. Origami and Risograph each have eight designs, and Woodblock has seven; every style includes bicycle and kitten scenes. Origami and Risograph also have coding scenes. Automatic rotation stays within your chosen style; it never switches packs. Origami remains the default, preserving existing settings.
+Choose **Art style** first, then select a scene and rotation interval. Woodblock has seven designs; Origami, Risograph, and Bioluminescent each have eight. Pixel art has six original scenes: Velodrome, Laundry Kitten, Ramen Bar, Pinball, Airship Dock, and Vinyl Lounge. Every style includes bicycle and kitten themes. Automatic rotation stays within your chosen style; it never switches packs. Origami remains the default, preserving existing settings.
 
 Origami has a warm folded-paper clock, matching cream glass, and compositions that leave room for the time and complications.
 
-In the watch face editor, the **Origami: Bicycle**, **Woodblock: Crane**, and other style-labeled switches choose which scenes participate in automatic rotation. Woodblock has its own scene selection and rotation controls. The selected scene anchors each style's rotation order; if it is excluded, its place goes to the next included scene. Automatic changes follow the clock schedule. Turn every favorite off to keep the selected scene. A fixed scene always respects your selection.
+In the watch face editor, the **Origami: Bicycle**, **Woodblock: Crane**, and other style-labeled switches choose which Origami or Woodblock scenes participate in automatic rotation. Woodblock and Pixel art have their own scene selectors and thumbnails. Origami, Risograph, and Bioluminescent share a selector with Origami thumbnails in the watch editor; the browser preview shows each style’s own thumbnails. Risograph, Bioluminescent, and Pixel art rotate through all their scenes on the selected schedule. Woodblock’s Sailboat and Moon Rabbit favorites share one selector with Both, Sailboat, Moon Rabbit, and Neither choices. A fixed scene always respects your selection.
 
 | Art style | Character | Scenes |
 | --- | --- | --- |
 | Origami | Bright folded paper and faceted shapes | [Original pack](preview/contact-sheet.png) |
 | Woodblock | Carved ink lines, washi grain, indigo, vermilion, and a parchment clock | [Woodblock pack](preview/styles/woodblock.png) |
 | Risograph | Bright spot colors, grainy ink, print overlap | [Risograph pack](preview/styles/risograph.png) |
+| Bioluminescent | Luminous creatures and colorful light in the dark | [Bioluminescent pack](preview/styles/bioluminescent.png) |
+| Pixel art | Clean, simplified 8-bit illustrations with crisp silhouettes and arcade-inspired scenes | [Pixel art pack](preview/styles/pixel_art.png) |
 
 | **Woodblock · 7 scenes** | **Risograph · 8 scenes** |
 | --- | --- |
 | ![Woodblock watch-face previews: bicycle, crane, kitten, torii gate, lantern festival, sailboat, and moon rabbit](preview/styles/woodblock.png) | ![Risograph watch-face previews: city bicycle, mushroom forest, retro terminal, kitten among houseplants, desert landscape, orbital transit, jellyfish ocean, and neon aurora](preview/styles/risograph.png) |
 
-[View both packs together](preview/styles/all-packs.png)
+[View Woodblock and Risograph together](preview/styles/all-packs.png)
+
+![Eight Bioluminescent watch-face scenes](preview/styles/bioluminescent.png)
+
+![Six original Pixel art watch-face scenes](preview/styles/pixel_art.png)
+
+
+Pinball uses a shared ten-second physics-based animation: hinged flippers launch the ball into gravity-driven arcs and rebounds off rails and bumpers, with brief collision flashes. The watch and preview use the same trajectory; motion-off freezes the scene and ambient mode hides it. ![A ten-second preview of the Pixel art pinball animation](preview/styles/pinball-motion.gif)
+
+[See Bioluminescent and Pixel art in motion](preview/styles/new-packs-motion.gif) · Render the proof with `tools/.venv/bin/python tools/render_new_pack_motion.py`.
 
 Every style uses independent character and detail layers, with scenes tailored to its visual language. In Woodblock, a cyclist travels a road, a crane flies among bamboo, a kitten plays with a butterfly, mist drifts around a torii gate, festival lanterns sway, a sailboat rides the waves, and a rabbit watches the moon. Origami's kitten and mouse move independently, and its rocket flies diagonally with sparks. Risograph has graphic scenes including a city ride, mushroom forest, retro terminal, houseplant kitten, desert city, orbital transit, jellyfish aquarium, and neon weather. All motion can be paused, and always-on mode hides the full-color scenes.
 
-[Compare the new packs in motion](preview/styles/motion.gif) · Render the same proof with `tools/.venv/bin/python tools/render_style_motion.py`.
+[Compare Woodblock and Risograph in motion](preview/styles/motion.gif) · Render the same proof with `tools/.venv/bin/python tools/render_style_motion.py`.
 
 The original Origami pack includes:
 
@@ -119,7 +130,7 @@ adb install Fold-and-Tick.apk
 
 ## Build and contribute
 
-This is a resource-only **Watch Face Format 2** package. Wear OS renders the XML and images; the APK contains no application bytecode. Origami artwork uses deterministic polygon geometry. The two additional packs use original AI-generated paintings and transparent actor artwork, with checked-in sources and prompts under [`artwork/packs`](artwork/packs).
+This is a resource-only **Watch Face Format 2** package. Wear OS renders the XML and images; the APK contains no application bytecode. Origami artwork uses deterministic polygon geometry. Woodblock, Risograph, and Bioluminescent use saved artwork and transparent actor layers; Pixel art uses original generated environments and transparent animated sprites. Source artwork and prompts are kept under [`artwork/packs`](artwork/packs).
 
 Requirements: **Java 21**, **Android SDK platform 36/build tools 36.0.0**, and Python 3. The Gradle wrapper is included. Point `ANDROID_HOME` at your SDK, or create an ignored `local.properties` with `sdk.dir=/path/to/Android/Sdk`.
 
@@ -140,12 +151,16 @@ uv pip install --python tools/.venv/bin/python -r tools/requirements.txt
 tools/.venv/bin/python tools/generate_clock.py
 tools/.venv/bin/python tools/generate_art.py
 tools/.venv/bin/python tools/import_style_packs.py
+tools/.venv/bin/python tools/import_bioluminescent.py
+tools/.venv/bin/python tools/import_pixel_art.py
+python3 tools/pinball_motion.py
+python3 tools/embed_pinball_watchface.py
 python3 tools/build_preview.py --output preview
 python3 -m http.server 8080
 # http://localhost:8080/preview/
 ```
 
-`import_style_packs.py` deterministically resizes saved artwork, extracts actors from sprite sheets or individual transparent files, and builds background, actor, detail, glass, and thumbnail resources plus labeled pack proofs. It does not call an image service; ordinary builds work offline. Each pack retains the original sources, generation prompts, and actor-free backgrounds. New creative artwork was produced with the built-in image generation tool.
+`import_style_packs.py` deterministically resizes saved artwork, extracts actors from sprite sheets or individual transparent files, and builds background, actor, detail, glass, and thumbnail resources plus labeled pack proofs. It does not call an image service; ordinary builds work offline. The image-based packs retain their sources and generation prompts. The Bioluminescent and Pixel art importers also rebuild their resources offline from saved environments and sprite atlases. Pixel art source illustrations and generation prompts are in `artwork/packs/pixel_art/clean_sources`; placement metadata is in its scene catalog. The importer uses nearest-neighbor sampling without averaging or automatic palette remapping.
 
 `generate_clock.py --font /path/to/DejaVuSans-Bold.ttf` supports other font locations. Building a standalone preview for any static host is just:
 
@@ -171,4 +186,4 @@ To cut a release, update Android `versionName`/`versionCode`, regenerate changed
 
 Original code and scene artwork use **[0BSD](LICENSE)**: use, modify, and redistribute them for any purpose, with or without a fee. See [NOTICE.md](NOTICE.md) for the DejaVu glyph and Gradle wrapper notices.
 
-The original Origami face has been exercised in a round Wear OS 5 emulator and on a physical Pixel Watch 3, including date formatting, provider icons, complication spacing, adaptive glass, visible motion, and always-on mode. The Origami review update has also been installed and its larger text and warm glass checked in a physical Pixel Watch 3 screenshot; automated checks cover all 256 favorite subsets and eight selected scenes. The additional art packs have passed WFF validation, build/lint, scene/style selection and motion tests, and active/ambient memory checks; their new artwork has been reviewed in the browser and labeled proofs. They have not yet been visually checked on a physical watch. The browser demo uses sample battery/step data; it does not read or configure your watch.
+The original Origami face has been exercised in a round Wear OS 5 emulator and on a physical Pixel Watch 3, including date formatting, provider icons, complication spacing, adaptive glass, visible motion, and always-on mode. The Origami review update has also been installed and its larger text and warm glass checked in a physical Pixel Watch 3 screenshot; automated checks cover all 256 favorite subsets and eight selected scenes. The additional art packs have been reviewed in the browser and labeled proofs. They have not yet been visually checked on a physical watch. The browser demo uses sample battery/step data; it does not read or configure your watch.

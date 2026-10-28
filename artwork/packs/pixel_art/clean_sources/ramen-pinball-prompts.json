@@ -1,0 +1,37 @@
+{
+  "tool": "Built-in image_gen",
+  "group": "clean_pixel_ramen_pinball",
+  "generated_sources": {
+    "ramen_background": "/home/steven/.codex/generated_images/01a18007-0c10-7040-9b12-870dfb57efef/exec-16b4317f-1b6c-44c5-b18f-0f7ff8f1d2e2.png",
+    "pinball_background": "/home/steven/.codex/generated_images/01a18007-0c10-7040-9b12-870dfb57efef/exec-07523405-47d9-4d80-882d-5adb52a3e958.png",
+    "atlas": "/home/steven/.codex/generated_images/01a18007-0c10-7040-9b12-870dfb57efef/exec-d9141c92-96d1-40ba-bacc-650cda4fd1ff.png"
+  },
+  "sprite_atlas": "sprites-atlas-clean.png",
+  "assets": [
+    {
+      "id": "ramen",
+      "label": "Ramen Bar",
+      "palette": "vermilion / cream / charcoal",
+      "background": "ramen-background.png",
+      "actor": "ramen-actor.png",
+      "detail": "ramen-detail.png",
+      "background_prompt": "Use case: stylized-concept. Asset type: square full-bleed 8-bit pixel-art background for a smartwatch scene. Primary request: create a simple, clean ramen bar scene with deliberate large pixel clusters that remain legible at small scale. Scene/backdrop: a tiny Japanese ramen counter at night. Composition: two simple vermilion paper lanterns clipped by the upper left and upper right corners; a few large quiet wood shelf and ceramic bowl shapes pushed to the far sides; one broad warm wooden counter spans the bottom edge. Keep the center from 25% to 67% of image height dark charcoal and quiet for a large clock overlay. Keep the lower center from 72% to 96% open for a separate animated bowl sprite. Style/medium: intentionally artist-made 8-bit videogame pixel art on an effective 128x128 grid, hard square edges, clear chunky silhouettes, each material shaded with only one or two flat tones. Palette: restrained vermilion, warm cream, charcoal, and a little amber, about 16 colors total. Mood cozy and calm. Constraints: actor-free background only, no bowl of ramen, no food, no steam, no people, no text, no UI, no border, no watermark. Avoid: fine texture, dithering, gradients, tiny repeated details, glossy realism, antialiasing, smoothing, excessive props, clutter in clock-safe center.",
+      "actor_atlas_cell": "top-left",
+      "detail_atlas_cell": "bottom-left"
+    },
+    {
+      "id": "pinball",
+      "label": "Pinball",
+      "palette": "violet / cyan / yellow",
+      "background": "pinball-background.png",
+      "actor": "pinball-actor.png",
+      "detail": "pinball-detail.png",
+      "background_prompt": "Use case: stylized-concept. Asset type: square full-bleed 8-bit pixel-art background for a smartwatch scene. Primary request: make a clean, spare top-down pinball playfield with bold block shapes and clear gameplay silhouettes. Composition: deep violet enamel board; just a few large round bumpers near the top edge, simple cyan and yellow rails running down the far left and right, and two chunky flippers near the bottom corners. Keep a broad deep-violet quiet central field from 25% to 67% of image height for a large clock overlay. Leave the lower center from 72% to 96% open for a separate moving silver ball sprite. Style/medium: intentionally artist-made 8-bit videogame pixel art on an effective 128x128 grid, hard square edges, clean chunky clusters, flat color blocks, materials shaded with only one or two tones. Palette: restrained violet, cyan, yellow, a little silver and scarlet, about 16 colors total. Mood playful arcade, not flashy. Constraints: actor-free background only, no ball, no text, no scores, no people, no UI, no border, no watermark. Avoid: fine texture, dither, gradients, tiny repeated details, glossy realism, antialiasing, smoothing, extra clutter, intricate machinery, bright effects in clock-safe center.",
+      "actor_atlas_cell": "top-right",
+      "detail_atlas_cell": "bottom-right"
+    }
+  ],
+  "sprite_atlas_prompt": "Use case: stylized-concept. Asset type: production 8-bit pixel-art sprite sheet for a smartwatch. One square image with a strict, invisible 2-by-2 grid and four equally sized square cells. Real transparent alpha in all blank space; no colored backgrounds, shadows, glow, cell lines, borders, captions, text, or watermark. There is exactly one simple sprite in each cell, centered and fully contained, occupying about 42% of the cell with a wide empty moat. Read left-to-right, top-to-bottom: 1) a clean side/top view red ramen bowl with a cream rim, three large golden noodle loops, one clear half egg, and two simple dark chopsticks laid across it; 2) one silver pinball drawn as a plain round sphere with only three large blocky white/cyan highlight pixels and a dark violet lower half; 3) exactly three broad separate cream steam curls, each a single stepped chunky shape with no sparks, dots, wisps, bowl, or other marks; 4) one compact four-point cyan/yellow 8-bit impact star with a small red center, no fragments. Style: true artist-made classic 8-bit game sprites, hard square pixel blocks, clean silhouette, flat colors, at most one shadow tone and one highlight tone per material, no smoothing or antialiasing. Do not add any other marks or detail.",
+  "sprite_atlas_original": "sprites-atlas.png",
+  "alpha_cleanup": "For sprite cells, alpha below 128 was cleared and remaining pixels were made fully opaque to remove soft fringes and isolated low-alpha specks; sprite RGB colors were preserved."
+}

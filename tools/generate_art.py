@@ -840,6 +840,8 @@ def proof_glass_color(style):
     return {
         "origami": (255, 226, 186, 54),
         "woodblock": (213, 214, 191, 48),
+        "bioluminescent": (7, 16, 34, 168),
+        "pixel_art": (7, 16, 34, 168),
     }.get(style, (223, 235, 247, 48))
 
 
