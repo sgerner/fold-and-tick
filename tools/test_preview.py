@@ -134,7 +134,7 @@ class PreviewTest(unittest.TestCase):
         controls=PreviewControls(); controls.feed(html)
         self.assertEqual(controls.styles, [
             ('origami', 'Origami'), ('woodblock', 'Woodblock'), ('risograph', 'Risograph'),
-            ('bioluminescent', 'Bioluminescent'), ('pixel_art', 'Pixel art')
+            ('bioluminescent', 'Bioluminescent'), ('pixel_art', 'Pixel art'), ('all', 'Shuffle all styles')
         ])
         self.assertEqual(controls.scenes, [
             'bicycle', 'forest', 'coding', 'kitten', 'landscape', 'cosmos', 'ocean', 'aurora'
@@ -179,8 +179,8 @@ class PreviewTest(unittest.TestCase):
         self.assertIn('enabled.findIndex(function (index) { return index >= getCurrentSceneIndex(); })', html)
         self.assertIn('var scheduledIndex = sequence.indexOf(getScheduledScene(now));', html)
         self.assertIn('state.woodScene = nextIndex;', html)
-        self.assertIn('clockGlyphPaths[state.style][character]', html)
-        self.assertIn('var clockKey = state.style + ":" + timeValue;', html)
+        self.assertIn('clockGlyphPaths[displayStyle][character]', html)
+        self.assertIn('var clockKey = displayStyle + ":" + timeValue;', html)
         self.assertIn('clock_origami_9.png', html)
         self.assertIn('clock_woodblock_9.png', html)
         self.assertIn('clock_woodblock_colon.png', html)
@@ -620,6 +620,27 @@ vm.runInNewContext(previewScript, { window, document, Date: FixedDate });
 assert.equal(ids.styleSelect.value, 'origami');
 assert.equal(sceneArt.getAttribute('data-style'), 'origami');
 assert.equal(sceneArt.getAttribute('data-scene'), 'landscape');
+saved = JSON.stringify({ style: 'all', mode: 'manual', rotation: 15,
+  favorites: Array(8).fill(false), woodblockFavorites: Array(7).fill(false) });
+vm.runInNewContext(previewScript, { window, document, Date: FixedDate });
+assert.equal(ids.styleSelect.value, 'all');
+assert.equal(modes[1].disabled, true);
+assert.equal(sceneGrid.hidden, true);
+assert.equal(ids.favoritesGroup.hidden, true);
+assert.equal(ids.rotationSelect.disabled, false);
+const shuffled = JSON.parse(previewScript.match(/var allStyleScenes = (.*?);/)[1]);
+const localMinute = Math.floor(Date.UTC(fixedNow.getFullYear(), fixedNow.getMonth(), fixedNow.getDate()) / 86400000) * 1440 + fixedNow.getHours() * 60 + fixedNow.getMinutes();
+const startSlot = Math.floor(localMinute / 15);
+for (let offset = 0; offset < 37; offset++) {
+  const slot = startSlot + offset;
+  const expected = shuffled[(slot * 17 + Math.floor(slot / 37) * 13) % 37];
+  assert.equal(sceneArt.getAttribute('data-style'), expected.style);
+  assert.equal(sceneArt.getAttribute('data-scene'), expected.scene);
+  assert.equal(ids.watchScreen.getAttribute('data-style'), expected.style);
+  const clockPrefix = ['origami', 'woodblock'].includes(expected.style) ? `clock_${expected.style}_` : 'clock_';
+  assert.ok(ids.timeText.children[0].src.includes(clockPrefix));
+  if (offset < 36) ids.cycleButton.dispatch('click');
+}
 '''
         with tempfile.TemporaryDirectory() as folder:
             script_path=Path(folder)/'preview.js'; script_path.write_text(script)

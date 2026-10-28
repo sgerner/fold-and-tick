@@ -2400,6 +2400,7 @@
       transition: border-color .15s ease, background .15s ease, transform .15s ease, box-shadow .15s ease;
     }
 
+    .scene-grid[hidden] { display: none !important; }
     .scene-card[hidden], .favorite-option[hidden] { display: none !important; }
 
     .scene-card:hover { border-color: #c5ccdc; background: #fffdf8; transform: translateY(-1px); }
@@ -2745,6 +2746,7 @@
             <option value="risograph">Risograph</option>
             <option value="bioluminescent">Bioluminescent</option>
             <option value="pixel_art">Pixel art</option>
+            <option value="all">Shuffle all styles</option>
           </select>
           <p class="style-description" id="styleDescription" aria-live="polite">Folded paper worlds, warm colors, and playful character motion.</p>
         </div>
@@ -2939,8 +2941,11 @@
         woodblock: { label: "Woodblock", description: "Bold carved lines, flat color, and visible print texture." },
         risograph: { label: "Risograph", description: "Fresh graphic worlds in bold spot inks, halftone, and playful geometric shapes." },
         bioluminescent: { label: "Bioluminescent", description: "Luminous creatures and glowing worlds against deep, colorful darkness." },
-        pixel_art: { label: "Pixel art", description: "Six original pixel worlds with small, lively scene details." }
+        pixel_art: { label: "Pixel art", description: "Six original pixel worlds with small, lively scene details." },
+        all: { label: "Shuffle all styles", description: "All 37 scenes across five styles, shuffled on your chosen schedule." }
       };
+      var allStyleScenes = [{"style":"pixel_art","scene":"ramen","slot":"coding"},{"style":"origami","scene":"landscape","slot":"landscape"},{"style":"risograph","scene":"cosmos","slot":"cosmos"},{"style":"bioluminescent","scene":"ocean","slot":"ocean"},{"style":"pixel_art","scene":"laundry_kitten","slot":"forest"},{"style":"risograph","scene":"forest","slot":"forest"},{"style":"origami","scene":"cosmos","slot":"cosmos"},{"style":"bioluminescent","scene":"coding","slot":"coding"},{"style":"risograph","scene":"bicycle","slot":"bicycle"},{"style":"risograph","scene":"aurora","slot":"aurora"},{"style":"bioluminescent","scene":"aurora","slot":"aurora"},{"style":"woodblock","scene":"lanterns","slot":"cosmos"},{"style":"origami","scene":"kitten","slot":"kitten"},{"style":"risograph","scene":"coding","slot":"coding"},{"style":"woodblock","scene":"kitten","slot":"kitten"},{"style":"woodblock","scene":"torii","slot":"landscape"},{"style":"pixel_art","scene":"pinball","slot":"kitten"},{"style":"bioluminescent","scene":"landscape","slot":"landscape"},{"style":"bioluminescent","scene":"forest","slot":"forest"},{"style":"bioluminescent","scene":"cosmos","slot":"cosmos"},{"style":"bioluminescent","scene":"bicycle","slot":"bicycle"},{"style":"origami","scene":"forest","slot":"forest"},{"style":"risograph","scene":"ocean","slot":"ocean"},{"style":"risograph","scene":"kitten","slot":"kitten"},{"style":"origami","scene":"ocean","slot":"ocean"},{"style":"risograph","scene":"landscape","slot":"landscape"},{"style":"origami","scene":"aurora","slot":"aurora"},{"style":"woodblock","scene":"moon_rabbit","slot":"aurora"},{"style":"origami","scene":"bicycle","slot":"bicycle"},{"style":"woodblock","scene":"bicycle","slot":"bicycle"},{"style":"bioluminescent","scene":"kitten","slot":"kitten"},{"style":"woodblock","scene":"crane","slot":"forest"},{"style":"pixel_art","scene":"velodrome","slot":"bicycle"},{"style":"pixel_art","scene":"vinyl","slot":"cosmos"},{"style":"woodblock","scene":"sailboat","slot":"ocean"},{"style":"origami","scene":"coding","slot":"coding"},{"style":"pixel_art","scene":"airship","slot":"landscape"}];
+
       var standardClockGlyphPaths = {
         "0": "./assets/clock_0.png", "1": "./assets/clock_1.png",
         "2": "./assets/clock_2.png", "3": "./assets/clock_3.png",
@@ -2972,7 +2977,7 @@
       };
 
       var sceneAssetPaths = Object.create(null);
-      Object.keys(artStyles).forEach(function (style) {
+      Object.keys(sceneCatalogs).forEach(function (style) {
         getScenesForStyle(style).forEach(function (scene) {
           ["scene", "glass", "motion", "drift", "icon_scene"].forEach(function (kind) {
             var name = style === "origami"
@@ -3027,6 +3032,8 @@
       }
 
       var state = readState();
+      if (state.style === "all") state.mode = "auto";
+      var displayStyle = state.style === "all" ? "origami" : state.style;
       if (needsWoodblockMigration) saveState();
       if (motionPreference.matches) state.motion = false;
       var autoSlot = getRotationSlot(new Date());
@@ -3126,6 +3133,12 @@
         return Math.floor(getAbsoluteLocalMinute(now) / Number(state.rotation));
       }
 
+      function getAllStyleScene(now) {
+        var slot = getRotationSlot(now) + previewOffset;
+        var rank = (slot * 17 + Math.floor(slot / 37) * 13) % 37;
+        return allStyleScenes[rank];
+      }
+
       function getScheduledScene(now) {
         var sequence = getRotationSequence();
         return sequence[getRotationSlot(now) % sequence.length];
@@ -3139,6 +3152,7 @@
       }
 
       function getRotationSequence() {
+        if (state.style === "all") return allStyleScenes.map(function (scene, index) { return index; });
         var scenes = getCurrentScenes();
         if (state.style !== "origami" && state.style !== "woodblock") return scenes.map(function (scene, index) { return (getCurrentSceneIndex() + index) % scenes.length; });
         var enabled = [];
@@ -3171,24 +3185,24 @@
       }
 
       function setSceneArt(sceneId, scheduledTransition) {
-        var artKey = state.style + ":" + sceneId;
-        var supportsAmbientMotif = state.style === "origami" || state.style === "woodblock";
-        var isPixelPinball = state.style === "pixel_art" && sceneId === "pinball";
+        var artKey = displayStyle + ":" + sceneId;
+        var supportsAmbientMotif = displayStyle === "origami" || displayStyle === "woodblock";
+        var isPixelPinball = displayStyle === "pixel_art" && sceneId === "pinball";
         var motionWrap = sceneArt.querySelector(".scene-motion-wrap");
         pinballFlippers.forEach(function (flipper) { flipper.hidden = !isPixelPinball; });
-        watchScreen.setAttribute("data-style", state.style);
-        ambientMotif.src = state.style === "woodblock" ? "./assets/woodblock_ambient.png" : "./assets/origami_ambient.png";
+        watchScreen.setAttribute("data-style", displayStyle);
+        ambientMotif.src = displayStyle === "woodblock" ? "./assets/woodblock_ambient.png" : "./assets/origami_ambient.png";
         ambientMotif.hidden = !(supportsAmbientMotif && state.ambient);
         motionWrap.setAttribute("data-static-offset", String(
-          state.style === "woodblock" && sceneId === "sailboat" && (!state.motion || motionPreference.matches)
+          displayStyle === "woodblock" && sceneId === "sailboat" && (!state.motion || motionPreference.matches)
         ));
         if (activeSceneArtKey === artKey) {
           if (scheduledTransition) animateScheduledTransition();
           return;
         }
         activeSceneArtKey = artKey;
-        sceneArt.setAttribute("data-style", state.style);
-        sceneArt.setAttribute("data-choreography", state.style === "bioluminescent" ? "shared" : "");
+        sceneArt.setAttribute("data-style", displayStyle);
+        sceneArt.setAttribute("data-choreography", displayStyle === "bioluminescent" ? "shared" : "");
         sceneArt.setAttribute("data-scene", sceneId);
         sceneArt.classList.remove("asset-missing");
         [
@@ -3197,18 +3211,18 @@
         ].forEach(function (asset) {
           var image = sceneArt.querySelector(asset[0]);
           image.hidden = false;
-          image.src = getSceneAssetPath(asset[1], state.style, sceneId);
+          image.src = getSceneAssetPath(asset[1], displayStyle, sceneId);
         });
         var motion = sceneArt.querySelector(".scene-motion");
         var drift = sceneArt.querySelector(".scene-drift");
         motionWrap.hidden = false;
         motion.hidden = false;
         drift.hidden = false;
-        motion.src = getSceneAssetPath("motion", state.style, sceneId);
-        drift.src = getSceneAssetPath("drift", state.style, sceneId);
+        motion.src = getSceneAssetPath("motion", displayStyle, sceneId);
+        drift.src = getSceneAssetPath("drift", displayStyle, sceneId);
         var cursor = sceneArt.querySelector(".scene-cursor");
-        cursor.hidden = state.style !== "origami" || sceneId !== "coding";
-        if (state.style === "origami" && sceneId === "coding") {
+        cursor.hidden = displayStyle !== "origami" || sceneId !== "coding";
+        if (displayStyle === "origami" && sceneId === "coding") {
           cursor.hidden = false;
           cursor.src = "./assets/blink_coding.png";
         }
@@ -3226,14 +3240,14 @@
         var hour = String(displayHour).padStart(2, "0");
         var minute = String(now.getMinutes()).padStart(2, "0");
         var timeValue = hour + ":" + minute;
-        var clockKey = state.style + ":" + timeValue;
+        var clockKey = displayStyle + ":" + timeValue;
         if (clockKey !== renderedClock) {
           timeText.replaceChildren();
           timeValue.split("").forEach(function (character) {
             var glyph = document.createElement("img");
             glyph.alt = "";
             if (character === ":") glyph.className = "clock-colon";
-            glyph.src = clockGlyphPaths[state.style][character];
+            glyph.src = clockGlyphPaths[displayStyle][character];
             timeText.appendChild(glyph);
           });
           renderedClock = clockKey;
@@ -3256,6 +3270,7 @@
 
       function updateControls() {
         document.querySelectorAll(".mode-option").forEach(function (button) {
+          button.disabled = state.style === "all" && button.getAttribute("data-mode") === "manual";
           button.setAttribute("aria-pressed", String(button.getAttribute("data-mode") === state.mode));
         });
         document.querySelectorAll(".hour-option").forEach(function (button) {
@@ -3279,12 +3294,13 @@
           button.setAttribute("aria-pressed", String(selected));
           button.querySelector(".scene-name").textContent = scene.label;
           var thumbnail = button.querySelector(".scene-thumb img");
-          var thumbnailPath = getSceneAssetPath("icon_scene", state.style, scene.id);
+          var thumbnailPath = getSceneAssetPath("icon_scene", state.style === "all" ? "origami" : state.style, scene.id);
           if (thumbnail.getAttribute("src") !== thumbnailPath) {
             thumbnail.hidden = false;
             thumbnail.src = thumbnailPath;
           }
         });
+        document.querySelector(".scene-grid").hidden = state.style === "all";
         styleSelect.value = state.style;
         styleDescription.textContent = artStyles[state.style].description;
         document.querySelector(".scene-grid").setAttribute("aria-label", "Choose a " + artStyles[state.style].label + " scene");
@@ -3308,7 +3324,9 @@
         rotationSelect.disabled = state.mode !== "auto";
         modeBadge.textContent = state.mode === "auto" ? "Automatic" : "Manual";
         modeBadge.style.color = state.mode === "auto" ? "#687fcc" : "#cd7259";
-        if (state.mode === "manual") {
+        if (state.style === "all") {
+          modeNote.textContent = "Shuffles every scene across all five styles. Favorites do not limit this mode.";
+        } else if (state.mode === "manual") {
           modeNote.textContent = "Fixed on the selected scene.";
         } else if ((state.style === "origami" || state.style === "woodblock") && currentFavorites.every(function (favorite) { return !favorite; })) {
           modeNote.textContent = "No " + artStyles[state.style].label + " scenes are included, so the selected scene stays fixed.";
@@ -3337,10 +3355,11 @@
       }
 
       function updateScene(now, scheduledTransition) {
-        var active = getActiveScene(now);
-        var scene = getCurrentScenes()[active];
+        var shuffled = state.style === "all" ? getAllStyleScene(now) : null;
+        var active = shuffled ? 0 : getActiveScene(now);
+        var scene = shuffled ? getScenesForStyle(shuffled.style).find(function (item) { return item.id === shuffled.scene; }) : getCurrentScenes()[active];
         setSceneArt(scene.id, scheduledTransition);
-        activeSceneLabel.textContent = scene.label;
+        activeSceneLabel.textContent = (shuffled ? artStyles[shuffled.style].label + " · " : "") + scene.label;
         if (state.mode === "auto") {
           rotationStatus.textContent = "AUTO · EVERY " + (Number(state.rotation) === 1440 ? "DAY" : state.rotation + " MIN");
         } else {
@@ -3356,6 +3375,7 @@
           getRotationSequence().length > 1;
         if (state.mode === "auto" && nextSlot !== autoSlot) previewOffset = 0;
         autoSlot = nextSlot;
+        displayStyle = state.style === "all" ? getAllStyleScene(now).style : state.style;
         updateClock(now);
         updateControls();
         updateScene(now, scheduledTransition);
@@ -3375,6 +3395,7 @@
       styleSelect.addEventListener("change", function () {
         if (!Object.prototype.hasOwnProperty.call(artStyles, styleSelect.value)) return;
         state.style = styleSelect.value;
+        if (state.style === "all") state.mode = "auto";
         previewOffset = 0;
         saveState();
         render();
@@ -3397,6 +3418,7 @@
 
       document.querySelectorAll(".mode-option").forEach(function (button) {
         button.addEventListener("click", function () {
+          if (state.style === "all" && button.getAttribute("data-mode") === "manual") return;
           state.mode = button.getAttribute("data-mode");
           previewOffset = 0;
           autoSlot = getRotationSlot(new Date());

@@ -92,4 +92,6 @@
     <string name="date_screen_reader">Date complication: %1$s %2$s</string>
     <string name="left_screen_reader">Left complication: %1$s %2$s</string>
     <string name="right_screen_reader">Right complication: %1$s %2$s</string>
+    <string name="style_all">Shuffle all styles</string>
+    <string name="style_all_description">Shuffle every scene across all art styles at the selected interval. Fixed uses an hourly shuffle. Includes all scenes regardless of favorites.</string>
 </resources>
